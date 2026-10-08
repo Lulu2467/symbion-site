@@ -74,6 +74,7 @@ html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: calc(var(-
 }
 body[data-page="home"] .nav-links .chr-flip .ch-flip-top,
 body[data-page="home"] .foot-col .chr-flip .ch-flip-top { color: var(--snow); }
+.chr-flip.is-current .ch-flip-top { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .word { opacity: 1 !important; filter: none !important; }
 }

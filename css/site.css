@@ -2379,7 +2379,6 @@ body[data-page="download"] main.page {
 }
 .dl-tile .dl-btn svg { width: 16px; height: 16px; flex: none; }
 .dl-stage > .dl-tile { position: relative; isolation: isolate; overflow: hidden; }
-@property --dl-spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 .dl-tile::before,
 .dl-tile::after {
   content: "";
@@ -2390,26 +2389,23 @@ body[data-page="download"] main.page {
   pointer-events: none;
 }
 #macos::before {
-  top: -46%;
-  right: -34%;
-  width: 92%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: conic-gradient(from var(--dl-spin),
-    rgba(255, 176, 140, .95), rgba(255, 214, 128, .95), rgba(176, 228, 176, .9),
-    rgba(132, 200, 242, .95), rgba(214, 182, 238, .85), rgba(255, 168, 188, .9), rgba(255, 176, 140, .95));
-  -webkit-mask: radial-gradient(closest-side, transparent 54%, #000 66%, #000 78%, transparent 100%);
-  mask: radial-gradient(closest-side, transparent 54%, #000 66%, #000 78%, transparent 100%);
-  filter: blur(14px);
+  inset: -20%;
+  background: radial-gradient(circle at 100% 0%,
+    transparent 22%, rgba(238, 176, 214, .5) 29%, rgba(255, 182, 152, .7) 34%,
+    rgba(255, 222, 142, .7) 39%, rgba(162, 226, 198, .6) 44%, rgba(134, 200, 242, .6) 49%, transparent 57%);
+  -webkit-mask: linear-gradient(215deg, #000 30%, transparent 68%);
+  mask: linear-gradient(215deg, #000 30%, transparent 68%);
+  filter: blur(18px);
+  transform-origin: 100% 0%;
 }
 #macos::after {
-  top: -30%;
-  right: -18%;
-  width: 60%;
-  aspect-ratio: 1;
+  top: -34%;
+  right: -22%;
+  width: 62%;
+  height: 72%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 250, 242, .95), rgba(255, 236, 214, .5) 50%, transparent 100%);
-  filter: blur(10px);
+  background: radial-gradient(closest-side, rgba(255, 250, 242, .9), rgba(255, 238, 220, .4) 55%, transparent 100%);
+  filter: blur(12px);
 }
 #windows::before {
   inset: -10% -20%;
@@ -2434,10 +2430,10 @@ body[data-page="download"] main.page {
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   .dl-tile:hover::before,
   .dl-tile:hover::after { opacity: 1; }
-  #macos:hover::before { animation: dl-halo 14s linear infinite; }
+  #macos:hover::before { animation: dl-halo 9s ease-in-out infinite alternate; }
   #windows:hover::before { animation: dl-prism 7s ease-in-out infinite alternate; }
 }
-@keyframes dl-halo { to { --dl-spin: 360deg; } }
+@keyframes dl-halo { to { transform: translate(-4%, 3%) scale(1.07); } }
 @keyframes dl-prism { to { background-position: 80% 0; } }
 @media (prefers-reduced-motion: reduce) {
   #macos:hover::before,

@@ -2311,88 +2311,72 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   color: var(--ice-mute);
   border-top-color: rgba(220, 238, 247, .07);
 }
-.dl-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  max-width: 760px;
-  margin: 56px 0 0;
-  padding: 0;
-}
-.dl-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-height: 248px;
-  padding: 28px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
+.dl-panel {
+  max-width: 640px;
+  margin: 48px 0 0;
+  overflow: hidden;
   background: var(--white);
-  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 16px;
 }
-.dl-os {
-  width: 28px;
-  height: 28px;
-  margin-bottom: 36px;
-  color: var(--ink);
+.dl-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
 }
-.dl-card h2 {
+.dl-row + .dl-row { border-top: 1px solid var(--line); }
+.dl-row h2 {
   margin: 0;
   max-width: none;
-  font-size: 28px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: -.03em;
-  line-height: 1.1;
+  letter-spacing: 0;
+  line-height: 1.3;
+  word-break: keep-all;
 }
-.dl-card p {
-  margin: 8px 0 0;
+.dl-row p {
+  margin: 2px 0 0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.4;
 }
-.dl-go {
+main a.dl-action,
+main a.dl-action:hover,
+main a.dl-action:active,
+main a.dl-action:focus,
+main a.dl-action:focus-visible,
+main a.dl-action:visited {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  height: 40px;
-  padding: 0 16px 0 14px;
+  justify-content: center;
+  flex: none;
+  gap: 6px;
+  height: 36px;
+  margin: 0;
+  padding: 0 14px;
+  border: 0;
   border-radius: 980px;
   background: var(--ink);
-  font-size: 14px;
+  color: #fff;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1;
-}
-.dl-go svg { width: 16px; height: 16px; }
-main a.dl-card,
-main a.dl-card:hover,
-main a.dl-card:focus-visible {
-  color: var(--ink);
   text-decoration: none;
+  transform: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 }
-main a.dl-card .dl-go,
-main a.dl-card:hover .dl-go,
-main a.dl-card:focus-visible .dl-go {
-  color: #fff;
-  text-decoration: none;
-}
-.dl-card:focus-visible {
+main a.dl-action svg { width: 15px; height: 15px; }
+main a.dl-action:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
-  .dl-card:hover { border-color: #d4d4d8; }
-  .dl-card:hover .dl-go { background: #18181b; }
-}
-.dl-web {
-  margin: 22px 0 0;
-  font-size: 15px;
-  line-height: 1.5;
-}
-.dl-web a { color: var(--ink-2); text-decoration: none; }
-@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
-  .dl-web a:hover { color: var(--ink); }
+  .dl-row:hover { background: #fafafa; }
+  main a.dl-action:hover { background: #27272a; }
 }
 .form { display: grid; gap: 12px; max-width: 420px; margin-top: 28px; }
 .form label { font-size: 13px; font-weight: 600; }
@@ -2707,7 +2691,7 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     gap: 28px;
   }
   body:not([data-page="home"]) .foot-legal { margin-top: 32px; }
-  .dl-list { grid-template-columns: 1fr; gap: 12px; }
+  .dl-panel { margin-top: 36px; }
   .foot-card {
     position: static;
     order: 2;
@@ -3341,22 +3325,18 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     font-size: 11px;
     letter-spacing: .16em;
   }
-  .dl-list { margin: 40px 0 0; max-width: none; }
-  .dl-card {
-    min-height: 0;
-    padding: 22px;
-    border-radius: 16px;
+  .dl-panel { margin-top: 36px; max-width: none; }
+  .dl-row { gap: 12px; padding: 16px; }
+  .dl-row:hover { background: transparent; border-radius: 0; }
+  main a.dl-action:hover,
+  main a.dl-action:active,
+  main a.dl-action:focus,
+  main a.dl-action:visited {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 980px;
+    transform: none;
   }
-  .dl-os { width: 24px; height: 24px; margin-bottom: 28px; }
-  .dl-card h2 { font-size: 26px; }
-  .dl-go {
-    width: 100%;
-    justify-content: center;
-    height: 44px;
-    margin-top: 28px;
-  }
-  .dl-card:hover { border-color: var(--line); }
-  .dl-card:hover .dl-go { background: var(--ink); }
   .form {
     max-width: none;
     margin-top: 28px;

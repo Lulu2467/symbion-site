@@ -3105,10 +3105,18 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     box-shadow: none;
     color: inherit;
   }
+  body[data-page="home"].nav-dark .nav {
+    --nav-ink: 1;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #0b1014;
+  }
   .nav.open .nav-links {
     top: calc(var(--header) + env(safe-area-inset-top));
     bottom: 0;
+    height: auto;
     max-height: none;
+    overflow: auto;
     background: #fff;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;

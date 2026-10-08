@@ -2358,6 +2358,43 @@ body[data-page="download"] main.page {
 }
 .dl-tile .dl-btn { margin-top: 28px; }
 .dl-tile .dl-btn:active { transform: none; }
+.dl-stage > .dl-tile { position: relative; isolation: isolate; overflow: hidden; }
+.dl-tile::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  opacity: 0;
+  background:
+    radial-gradient(38% 42% at 30% 35%, rgba(116, 193, 230, .55), transparent 70%),
+    radial-gradient(34% 40% at 72% 62%, rgba(220, 238, 247, .95), transparent 70%),
+    radial-gradient(30% 36% at 55% 20%, rgba(168, 216, 239, .6), transparent 70%),
+    radial-gradient(40% 44% at 20% 80%, rgba(244, 228, 212, .7), transparent 70%);
+  filter: blur(24px);
+  transition: opacity .6s var(--ease);
+  pointer-events: none;
+}
+#windows::before {
+  background:
+    radial-gradient(38% 42% at 68% 30%, rgba(116, 193, 230, .55), transparent 70%),
+    radial-gradient(34% 40% at 30% 65%, rgba(220, 238, 247, .95), transparent 70%),
+    radial-gradient(30% 36% at 45% 18%, rgba(100, 167, 204, .45), transparent 70%),
+    radial-gradient(40% 44% at 82% 82%, rgba(214, 232, 226, .75), transparent 70%);
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
+  .dl-tile:hover::before {
+    opacity: 1;
+    animation: dl-flow 9s ease-in-out infinite alternate;
+  }
+}
+@keyframes dl-flow {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate(6%, -4%) rotate(40deg) scale(1.08); }
+  100% { transform: translate(-5%, 5%) rotate(-30deg) scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dl-tile:hover::before { animation: none; }
+}
 .form { display: grid; gap: 12px; max-width: 420px; margin-top: 28px; }
 .form label { font-size: 13px; font-weight: 600; }
 .form input, .form textarea, .form select {

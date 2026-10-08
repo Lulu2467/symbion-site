@@ -1387,6 +1387,7 @@ body[data-page="home"] main a.home-index-item {
   z-index: 1;
   display: block;
 }
+.home-index-note { display: none; }
 body[data-page="home"] main a.home-index-item.is-on,
 body[data-page="home"] main a.home-index-item:focus-visible {
   color: var(--ink);
@@ -2797,6 +2798,108 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
   .hero-line {
     bottom: calc(var(--home-edge, 2rem) + var(--header));
   }
+}
+
+/* Phone is its own page, not a squeezed desktop. No hover, so nothing that
+   only appears under a pointer is allowed to be the way you read the page. */
+@media (max-width: 720px) {
+  html.is-phone .intro-bg,
+  html.is-phone .reveal-image-wrap,
+  html.is-phone .creation,
+  html.is-phone .home-reel,
+  html.is-phone .hero-line { display: none; }
+  html.is-phone .scroll-wrap { height: auto; }
+  html.is-phone .home-hero {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: calc(var(--header) + 20px) 0 4px;
+  }
+  html.is-phone .hero-wash { min-height: 100%; }
+  html.is-phone .name-layer {
+    position: relative;
+    z-index: 2;
+    height: auto;
+    min-height: 22vh;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 12px 0 8px;
+  }
+  html.is-phone .preloader-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+  }
+  html.is-phone .name-gong,
+  html.is-phone .name-sym {
+    opacity: 1;
+    font-size: clamp(3.2rem, 16vw, 4.6rem);
+  }
+  html.is-phone .hero-tagline {
+    position: relative;
+    top: auto;
+    left: auto;
+    max-width: none;
+    padding: 0 var(--pad);
+    font-size: 15px;
+    clip-path: none;
+    opacity: 1;
+  }
+  html.is-phone .home-index {
+    min-height: 0;
+    padding: 8px 0 56px;
+  }
+  body[data-page="home"] .foot-cols {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .home-index-item {
+    font-size: clamp(40px, 12vw, 56px);
+    padding: 20px var(--pad) 18px;
+  }
+  .home-index-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 8px;
+    font-family: "Noto Sans SC", var(--ui);
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    line-height: 1.45;
+    color: var(--ice-body);
+  }
+  .home-index-note::after {
+    content: "→";
+    flex: none;
+    font-family: var(--latin);
+    color: var(--ice-mute);
+  }
+  .page { display: flex; flex-direction: column; }
+  .page > .media-slot { order: 8; }
+  .citta-now,
+  .citta-live .note,
+  .cosmo-now,
+  .cosmo-now-note { display: none; }
+  .citta-live { padding: 22px 18px 8px; }
+  .step.on::after {
+    content: attr(data-note);
+    grid-column: 2;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .cosmo-layer .layer-en { font-size: 1.75rem; }
+  .cosmo-layer { padding: 16px 0 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

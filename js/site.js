@@ -201,6 +201,7 @@
   function playSteps() {
     window.clearInterval(stepTimer);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(max-width: 720px)").matches) return;
     stepTimer = window.setInterval(() => {
       stepIndex = (stepIndex + 1) % steps.length;
       setStep(stepIndex);
@@ -242,6 +243,7 @@
   function playLayers() {
     window.clearInterval(layerTimer);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(max-width: 720px)").matches) return;
     layerTimer = window.setInterval(() => {
       layerIndex = (layerIndex + 1) % layers.length;
       setLayer(layerIndex);
@@ -288,6 +290,11 @@
 
   if (page === "home") {
     document.body.classList.add("nav-dark");
+    const phoneQ = window.matchMedia("(max-width: 720px)");
+    let phoneNow = phoneQ.matches;
+    phoneQ.addEventListener("change", () => {
+      if (phoneQ.matches !== phoneNow) window.location.reload();
+    });
   }
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -770,7 +777,7 @@
   // Lenis drives the scroll position; ScrollTrigger reads from it instead of
   // the native scroll event, so pinned/scrubbed timelines stay in sync.
   let lenis = null;
-  if (window.Lenis && !reduce.matches) {
+  if (window.Lenis && !reduce.matches && window.matchMedia("(min-width: 721px)").matches) {
     lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9 });
     // Must not contain the substring "lenis": Lenis rewrites the root
     // className with a plain string replace and would corrupt the token.
@@ -1350,6 +1357,34 @@
       });
       return true;
     };
+
+    const phoneHome = page === "home" && window.matchMedia("(max-width: 720px)").matches;
+    if (phoneHome) {
+      document.documentElement.classList.add("is-phone");
+      document.body.classList.add("is-phone");
+      document.getElementById("intro-bg")?.remove();
+      document.body.classList.remove("is-intro");
+      document.documentElement.style.overflow = "";
+      const hero = document.getElementById("hero");
+      const nameLayer = document.getElementById("name-layer");
+      const tagline = document.getElementById("hero-tagline");
+      if (hero && nameLayer && tagline) hero.insertBefore(nameLayer, tagline.nextSibling);
+      const nav = document.getElementById("site-nav");
+      if (nav) {
+        nav.classList.add("is-ready", "is-docked");
+        nav.style.top = "0px";
+        gsap.set(nav, { autoAlpha: 1 });
+      }
+      ["name-gong", "name-sym"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.opacity = "1";
+      });
+      if (tagline) {
+        tagline.style.opacity = "1";
+        tagline.style.clipPath = "none";
+      }
+      return;
+    }
 
     let introStarted = false;
     const startIntro = () => {

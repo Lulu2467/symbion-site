@@ -2311,107 +2311,52 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   color: var(--ice-mute);
   border-top-color: rgba(220, 238, 247, .07);
 }
-body[data-page="download"] main.page { padding: 0; }
-.dl-layout {
+body[data-page="download"] main.page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 56px;
   min-height: calc(100svh - var(--header));
-  padding: 48px 0 64px;
-  text-align: center;
+  padding-bottom: 56px;
 }
-body:not([data-page="home"]) .dl-copy h1 { max-width: none; margin: 0 auto; }
-body:not([data-page="home"]) .dl-copy .lead { max-width: none; margin: 16px auto 0; }
-.dl-grid {
+.dl-stage {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  width: 100%;
-  max-width: 760px;
-  margin: 0;
-  text-align: left;
+  min-height: 360px;
+  margin-top: 64px;
+  border-radius: 28px;
+  background: #ececee;
+  overflow: hidden;
 }
-.dl-card {
+.dl-tile {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  min-height: 280px;
-  padding: 28px 28px 24px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--white);
+  justify-content: space-between;
+  gap: 48px;
+  padding: 44px 48px 48px;
 }
+.dl-tile + .dl-tile { border-left: 1px solid rgba(9, 9, 11, .07); }
 .dl-os {
-  width: 26px;
-  height: 26px;
-  margin-bottom: 56px;
+  width: 30px;
+  height: 30px;
   color: var(--ink);
 }
-.dl-card h2 {
+.dl-tile h2 {
   margin: 0;
   max-width: none;
-  font-size: 32px;
+  font-family: var(--latin);
+  font-size: clamp(36px, 3.4vw, 48px);
   font-weight: 500;
-  letter-spacing: -.03em;
+  letter-spacing: -.035em;
   line-height: 1.05;
-  word-break: keep-all;
 }
-.dl-card p {
-  margin: 8px 0 0;
+.dl-tile p {
+  margin: 10px 0 0;
   color: var(--muted);
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.5;
 }
-.dl-go {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  height: 40px;
-  padding: 0 16px 0 14px;
-  border-radius: 980px;
-  background: var(--ink);
-  font-family: var(--ui);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1;
-}
-.dl-go svg { width: 16px; height: 16px; }
-main a.dl-card,
-main a.dl-card:hover,
-main a.dl-card:active,
-main a.dl-card:focus,
-main a.dl-card:focus-visible,
-main a.dl-card:visited {
-  color: var(--ink);
-  background: var(--white);
-  text-decoration: none;
-  transform: none;
-}
-main a.dl-card .dl-go,
-main a.dl-card:hover .dl-go,
-main a.dl-card:active .dl-go,
-main a.dl-card:focus .dl-go,
-main a.dl-card:focus-visible .dl-go,
-main a.dl-card:visited .dl-go {
-  border-radius: 980px;
-  background: var(--ink);
-  color: #fff;
-  text-decoration: none;
-  transform: none;
-  box-shadow: none;
-}
-main a.dl-card:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
-}
-@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
-  main a.dl-card:hover { border-color: #d4d4d8; }
-  main a.dl-card:hover .dl-go { background: #27272a; }
-}
+.dl-tile .dl-btn { margin-top: 28px; }
+.dl-tile .dl-btn:active { transform: none; }
 .form { display: grid; gap: 12px; max-width: 420px; margin-top: 28px; }
 .form label { font-size: 13px; font-weight: 600; }
 .form input, .form textarea, .form select {
@@ -2731,7 +2676,8 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     gap: 28px;
   }
   body:not([data-page="home"]) .foot-legal { margin-top: 32px; }
-  .dl-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 0; }
+  .dl-stage { grid-template-columns: 1fr; }
+  .dl-tile + .dl-tile { border-left: 0; border-top: 1px solid rgba(9, 9, 11, .07); }
   .foot-card {
     position: static;
     order: 2;
@@ -3366,43 +3312,14 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     font-size: 11px;
     letter-spacing: .16em;
   }
-  .dl-layout {
-    align-items: stretch;
-    gap: 36px;
-    min-height: 0;
-    padding: 40px 0 72px;
-    text-align: left;
-  }
-  body:not([data-page="home"]) .dl-copy h1,
-  body:not([data-page="home"]) .dl-copy .lead { margin-left: 0; }
-  .dl-grid { margin-top: 0; max-width: none; }
-  .dl-card { min-height: 0; padding: 22px; border-radius: 16px; }
-  .dl-os { width: 24px; height: 24px; margin-bottom: 32px; }
-  .dl-card h2 { font-size: 28px; }
-  .dl-go {
-    width: 100%;
-    justify-content: center;
-    height: 44px;
-    margin-top: 28px;
-    border-radius: 980px;
-  }
-  main a.dl-card:hover,
-  main a.dl-card:active,
-  main a.dl-card:focus,
-  main a.dl-card:visited {
-    background: var(--white);
-    color: var(--ink);
-    transform: none;
-  }
-  main a.dl-card:hover .dl-go,
-  main a.dl-card:active .dl-go,
-  main a.dl-card:focus .dl-go,
-  main a.dl-card:visited .dl-go {
-    background: var(--ink);
-    color: #fff;
-    border-radius: 980px;
-    transform: none;
-  }
+  body[data-page="download"] main.page { min-height: 0; padding-bottom: 72px; }
+  .dl-stage { margin-top: 36px; min-height: 0; border-radius: 20px; }
+  .dl-tile { gap: 32px; padding: 28px 24px 28px; }
+  .dl-os { width: 26px; height: 26px; }
+  .dl-tile h2 { font-size: 34px; }
+  .dl-tile .dl-btn { width: 100%; height: 48px; }
+  .dl-tile .dl-btn:hover,
+  .dl-tile .dl-btn:active { background: var(--ink); transform: none; }
   .form {
     max-width: none;
     margin-top: 28px;

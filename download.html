@@ -14,7 +14,7 @@
   <meta property="og:description" content="下载 Symbion 桌面端：macOS .dmg 与 Windows .zip。也可先使用网页版。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/site.css?v=ice92">
+  <link rel="stylesheet" href="css/site.css?v=ice93">
 </head>
 <body data-root="." data-page="download">
   <header class="nav" id="site-nav"></header>
@@ -22,43 +22,35 @@
     <h1>下载 Symbion。</h1>
     <p class="lead">桌面端用于 Mac 与 Windows。<br>也可以先在浏览器里打开。</p>
 
-    <div class="dl-panel">
-      <div class="dl-row">
-        <div>
-          <h2>网页版</h2>
-          <p>在浏览器里打开</p>
-        </div>
-        <a class="dl-action" href="login.html" data-no-veil>使用网页版</a>
-      </div>
-      <div class="dl-row" id="macos">
-        <div>
-          <h2>macOS</h2>
-          <p>通用安装包 · 已签名 .dmg</p>
-        </div>
-        <a class="dl-action" href="https://app.symbioncosmo.com/downloads/Symbion.dmg">
+    <div class="dl-grid">
+      <a class="dl-card" id="macos" href="https://app.symbioncosmo.com/downloads/Symbion.dmg">
+        <svg class="dl-os" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M16.4 3.2c.1 1.1-.3 2.2-1 3-.8.8-2 1.4-3.1 1.3-.1-1.1.4-2.2 1.1-2.9.8-.8 2.1-1.4 3-1.4zm3.2 14c-.5 1.2-.8 1.7-1.5 2.7-1 1.5-2.3 3.3-4 3.3-1.5 0-1.9-1-3.8-1s-2.3 1-3.8 1c-1.6.1-2.9-1.6-3.9-3.1C1 17.6.4 13.2 2 10.7c1.1-1.8 2.8-2.9 4.5-2.9 1.7 0 2.7 1 4.1 1s2.3-1.2 4.2-1c.6 0 2.5.2 3.7 1.9-.1.1-2.2 1.3-2.2 3.8 0 3 2.6 4.1 2.7 4.1z"/>
+        </svg>
+        <h2>macOS</h2>
+        <p>通用安装包 · 已签名 .dmg</p>
+        <span class="dl-go">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 4v11"/>
-            <path d="m7 11 5 5 5-5"/>
-            <path d="M5 20h14"/>
+            <path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/>
           </svg>
           下载
-        </a>
-      </div>
-      <div class="dl-row" id="windows">
-        <div>
-          <h2>Windows</h2>
-          <p>Windows 10 / 11 · 64 位 · .zip</p>
-        </div>
-        <a class="dl-action" href="https://app.symbioncosmo.com/downloads/Symbion-win32-x64.zip">
+        </span>
+      </a>
+      <a class="dl-card" id="windows" href="https://app.symbioncosmo.com/downloads/Symbion-win32-x64.zip">
+        <svg class="dl-os" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3 5.2 10.4 4.2v7.1H3V5.2zm8.2-1.2L21 2.4v8.9h-9.8V4zm-8.2 9.1h7.4V20L3 18.9v-5.8zm8.2.1H21v8.2l-9.8-1.4v-6.8z"/>
+        </svg>
+        <h2>Windows</h2>
+        <p>Windows 10 / 11 · 64 位 · .zip</p>
+        <span class="dl-go">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 4v11"/>
-            <path d="m7 11 5 5 5-5"/>
-            <path d="M5 20h14"/>
+            <path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/>
           </svg>
           下载
-        </a>
-      </div>
+        </span>
+      </a>
     </div>
+    <p class="dl-web"><a href="login.html" data-no-veil>使用网页版</a></p>
   </main>
   <footer class="site-foot" id="site-foot"></footer>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>

@@ -2859,12 +2859,60 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     min-height: 0;
     padding: 28px 0 80px;
   }
-  body[data-page="home"] .foot-cols {
-    grid-template-columns: 1fr;
-    gap: 28px;
+  .site-foot,
+  body[data-page="home"] .site-foot {
+    min-height: 0;
   }
-  body[data-page="home"] .foot-inner { padding-top: 96px; }
+  body[data-page="home"] .foot-wash,
+  .site-foot::before { display: none; }
+  .foot-inner,
+  body[data-page="home"] .foot-inner,
+  body:not([data-page="home"]) .foot-inner {
+    padding: 36px 0 24px;
+  }
+  .foot-top { gap: 0; }
+  .foot-wordmark,
+  body[data-page="home"] .foot-wordmark,
   body[data-page="home"] .foot-card { display: none; }
+  .foot-cols,
+  body[data-page="home"] .foot-cols,
+  body:not([data-page="home"]) .foot-cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 28px;
+    max-width: none;
+  }
+  .foot-col h4,
+  body[data-page="home"] .foot-col h4,
+  body:not([data-page="home"]) .foot-col h4 {
+    margin: 0 0 6px;
+    padding: 0;
+    border: 0;
+    font-family: var(--ui);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .foot-col a,
+  body[data-page="home"] .foot-col a,
+  body:not([data-page="home"]) .foot-col a {
+    padding: 5px 0;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .foot-legal,
+  body[data-page="home"] .foot-legal,
+  body:not([data-page="home"]) .foot-legal {
+    margin: 22px 0 0;
+    padding: 14px var(--pad) 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--ui);
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+  body[data-page="home"] .foot-legal {
+    border-top-color: rgba(220, 238, 247, .16);
+  }
   .home-index-item {
     font-size: clamp(52px, 18vw, 76px);
     font-weight: 400;

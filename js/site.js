@@ -147,7 +147,7 @@
     d.addEventListener("toggle", () => {
       if (d.open) document.querySelectorAll(".drop").forEach((x) => { if (x !== d) x.removeAttribute("open"); });
     });
-    if (window.matchMedia("(pointer: fine)").matches) {
+    if (window.matchMedia("(pointer: fine) and (min-width: 721px)").matches) {
       let leaveTimer = 0;
       d.addEventListener("mouseenter", () => {
         window.clearTimeout(leaveTimer);
@@ -274,7 +274,7 @@
       layerIndex = i;
       setLayer(i);
     });
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    if (window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches) {
       el.addEventListener("mouseenter", () => {
         window.clearInterval(layerTimer);
         layerIndex = i;
@@ -442,7 +442,7 @@
       return { text: lines.join("\n"), poolGrid };
     }
     function setupHover(preEl, poolGrid, accent) {
-      if (!fine.matches || reduce.matches) return;
+      if (!fine.matches || reduce.matches || window.innerWidth <= 720) return;
       const mark = accent || "#74c1e6";
       let origLines = null;
       let origGrid = null;
@@ -553,7 +553,7 @@
     const tracer = root.querySelector(".orbit-tracer");
     if (!nodes.length || !en || !zh) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches;
     let i = -1;
     let timer = 0;
     let len = 0;
@@ -630,8 +630,10 @@
       node.addEventListener("click", () => go(idx, true));
       if (fine) node.addEventListener("mouseenter", () => go(idx, true));
     });
-    root.addEventListener("mouseenter", () => clearInterval(timer));
-    root.addEventListener("mouseleave", restart);
+    if (fine) {
+      root.addEventListener("mouseenter", () => clearInterval(timer));
+      root.addEventListener("mouseleave", restart);
+    }
     go(0, false);
     restart();
   }
@@ -718,7 +720,7 @@
     if (!index || !window.gsap) return;
     const items = gsap.utils.toArray(".home-index-item");
     if (!items.length) return;
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const OPEN = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
     const closed = (fromLeft) => fromLeft
@@ -742,8 +744,14 @@
         });
       };
       // Keyboard gets the same sweep as the pointer, coarse devices included.
-      item.addEventListener("focus", () => paint(true, true));
-      item.addEventListener("blur", () => paint(false, true));
+      item.addEventListener("focus", () => {
+        if (window.innerWidth <= 720) return;
+        paint(true, true);
+      });
+      item.addEventListener("blur", () => {
+        if (window.innerWidth <= 720) return;
+        paint(false, true);
+      });
       if (!fine) return;
       item.addEventListener("mouseenter", (e) => paint(true, sideOf(item, e)));
       item.addEventListener("mouseleave", (e) => paint(false, sideOf(item, e)));
@@ -888,7 +896,7 @@
   // Each character carries a second copy of itself; hovering wipes the copy up
   // over the original, so the label re-types itself left to right.
   const mountCharFlip = () => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches) return;
     const targets = document.querySelectorAll(".nav-links a, .foot-col a, .nav-end a.btn-ghost");
     targets.forEach((el) => {
       if (el.dataset.flip || el.children.length) return;
@@ -922,10 +930,22 @@
       tops.forEach((top, i) => {
         tl.to(top, { clipPath: "inset(0% 0 0 0)", duration: 0.45, ease: "power3.out" }, i * 0.028);
       });
-      el.addEventListener("mouseenter", () => tl.play());
-      el.addEventListener("mouseleave", () => tl.reverse());
-      el.addEventListener("focus", () => tl.play());
-      el.addEventListener("blur", () => tl.reverse());
+      el.addEventListener("mouseenter", () => {
+        if (window.innerWidth <= 720) return;
+        tl.play();
+      });
+      el.addEventListener("mouseleave", () => {
+        if (window.innerWidth <= 720) return;
+        tl.reverse();
+      });
+      el.addEventListener("focus", () => {
+        if (window.innerWidth <= 720) return;
+        tl.play();
+      });
+      el.addEventListener("blur", () => {
+        if (window.innerWidth <= 720) return;
+        tl.reverse();
+      });
     });
   };
 

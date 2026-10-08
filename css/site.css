@@ -2938,7 +2938,7 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   z-index: 1;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, calc(-50% - 5vh));
   width: min(420px, calc(100vw - 40px));
   max-height: calc(100dvh - 32px);
   margin: 0;
@@ -3092,6 +3092,12 @@ body.auth .hero-flow-bg::after {
 @media (max-width: 900px) {
   body.auth { padding: 32px 16px; }
   .auth-frame { padding: 32px 22px 24px; }
+}
+@media (max-height: 680px) {
+  .auth-frame {
+    top: 16px;
+    transform: translate(-50%, 0);
+  }
 }
 
 .page-veil {

@@ -2864,6 +2864,7 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     gap: 28px;
   }
   body[data-page="home"] .foot-inner { padding-top: 96px; }
+  body[data-page="home"] .foot-card { display: none; }
   .home-index-item {
     font-size: clamp(52px, 18vw, 76px);
     font-weight: 400;

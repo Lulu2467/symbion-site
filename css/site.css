@@ -2376,6 +2376,30 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .form textarea { min-height: 120px; resize: vertical; }
 .ok { padding: 16px 18px; background: var(--blue-soft); border-radius: var(--r); color: var(--blue); }
 
+.iso-stage { display: none; }
+.iso-scene { display: block; width: 100%; height: auto; }
+.iso-caption {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: 0 var(--pad) 8px;
+  font-family: var(--latin);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ice-mute);
+}
+.iso-block { transform-box: fill-box; transform-origin: center bottom; }
+@media (prefers-reduced-motion: no-preference) {
+  .iso-block { animation: iso-rise 8.5s ease-in-out infinite; }
+  .iso-block.is-tall { animation-delay: -2.8s; }
+  .iso-block.is-front { animation-delay: -5.2s; }
+}
+@keyframes iso-rise {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 /* Inner pages: light paper footer continuous with the page. Homepage keeps
    the dark void + ice wash via body[data-page="home"] overrides below. */
 .site-foot {
@@ -2858,6 +2882,11 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
   html.is-phone .home-index {
     min-height: 0;
     padding: 28px 0 80px;
+  }
+  .iso-stage {
+    display: block;
+    background: var(--void);
+    padding: 12px 0 28px;
   }
   .site-foot,
   body[data-page="home"] .site-foot {

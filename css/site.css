@@ -3594,6 +3594,45 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   line-height: 0;
 }
 .auth-mark img { display: block; width: 36px; height: 25px; }
+.auth-back {
+  position: fixed;
+  z-index: 2;
+  top: max(20px, env(safe-area-inset-top));
+  left: max(22px, env(safe-area-inset-left));
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ink-2);
+  font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+}
+.auth-back svg { width: 16px; height: 16px; }
+.auth-error {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  color: #9f3a3a;
+}
+.page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 28px;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+}
+.page-back svg { width: 16px; height: 16px; }
+main a.page-back,
+main a.page-back:hover,
+main a.page-back:focus-visible {
+  color: var(--ink-2);
+  text-decoration: none;
+}
 .auth-frame h1 {
   margin: 0;
   font-size: 28px;
@@ -3736,8 +3775,9 @@ body.auth .hero-flow-bg::after {
   .form select { font-size: 16px; }
 }
 @media (max-height: 680px) {
+  .auth-back { top: 12px; }
   .auth-frame {
-    top: 16px;
+    top: 48px;
     transform: translate(-50%, 0);
   }
 }

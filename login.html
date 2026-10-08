@@ -11,9 +11,13 @@
   <meta property="og:locale" content="zh_CN">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/site.css?v=ice90">
+  <link rel="stylesheet" href="css/site.css?v=ice91">
 </head>
 <body class="auth" data-root=".">
+  <a class="auth-back" id="auth-back" data-back href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 9 12l6 6"/></svg>
+    返回
+  </a>
   <div class="auth-field" aria-hidden="true"><i></i><i></i><i></i></div>
 
   <main class="auth-frame">
@@ -29,6 +33,7 @@
       <label for="auth-pass">密码</label>
       <input id="auth-pass" type="password" name="password" autocomplete="current-password" required placeholder="••••••••••••">
       <button class="auth-go" id="auth-email-btn" type="submit">继续</button>
+      <p class="auth-error" id="auth-error" hidden>请填写有效邮箱。</p>
     </form>
 
     <p class="auth-or">或</p>
@@ -51,6 +56,6 @@
 
     <p class="auth-fine">继续即表示同意 <a href="legal/terms.html">条款</a> 与 <a href="legal/privacy.html">隐私</a>。</p>
   </main>
-  <script src="js/site.js?v=ice53"></script>
+  <script src="js/site.js?v=ice54"></script>
 </body>
 </html>

@@ -168,11 +168,30 @@
   });
 
   const authEmail = document.getElementById("auth-email");
+  const authError = document.getElementById("auth-error");
   document.getElementById("auth-form")?.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (authEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(authEmail.value)) return;
+    const emailOk = authEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(authEmail.value);
+    if (authError) authError.hidden = emailOk;
+    if (!emailOk) {
+      authEmail?.focus();
+      return;
+    }
     sessionStorage.setItem("sb-veil", "1");
     window.location.href = `${root}/index.html`;
+  });
+  authEmail?.addEventListener("input", () => {
+    if (authError) authError.hidden = true;
+  });
+  document.querySelectorAll("[data-back]").forEach((link) => {
+    try {
+      const ref = document.referrer;
+      if (!ref) return;
+      const from = new URL(ref);
+      if (from.origin !== location.origin) return;
+      if (from.pathname === location.pathname) return;
+      link.href = ref;
+    } catch { /* keep the fallback href */ }
   });
   document.querySelectorAll("[data-sso]").forEach((btn) => {
     btn.addEventListener("click", () => {

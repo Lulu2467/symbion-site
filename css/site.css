@@ -2312,62 +2312,81 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   border-top-color: rgba(220, 238, 247, .07);
 }
 .dl-list {
-  list-style: none;
-  margin: 72px 0 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-}
-.dl-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 24px;
-  align-items: center;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--line);
-  background: transparent;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 760px;
+  margin: 56px 0 0;
+  padding: 0;
 }
-.dl-row h2 {
-  margin: 0 0 6px;
-  max-width: none;
-  font-size: clamp(32px, 3vw, 44px);
-  font-weight: 500;
-  letter-spacing: -.035em;
-  line-height: 1.05;
+.dl-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 248px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  text-decoration: none;
 }
-.dl-row p {
+.dl-os {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 36px;
+  color: var(--ink);
+}
+.dl-card h2 {
   margin: 0;
+  max-width: none;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+.dl-card p {
+  margin: 8px 0 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
 }
 .dl-go {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  height: 40px;
+  padding: 0 16px 0 14px;
+  border-radius: 980px;
   background: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.dl-go svg { width: 16px; height: 16px; }
+main a.dl-card,
+main a.dl-card:hover,
+main a.dl-card:focus-visible {
+  color: var(--ink);
+  text-decoration: none;
+}
+main a.dl-card .dl-go,
+main a.dl-card:hover .dl-go,
+main a.dl-card:focus-visible .dl-go {
   color: #fff;
   text-decoration: none;
 }
-main a.dl-go,
-main a.dl-go:hover,
-main a.dl-go:focus-visible {
-  color: #fff;
-  text-decoration: none;
-}
-.dl-go svg { width: 20px; height: 20px; }
-.dl-go:hover,
-.dl-go:focus-visible { text-decoration: none; }
-.dl-go:focus-visible {
+.dl-card:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
-  .dl-go:hover { background: #18181b; }
+  .dl-card:hover { border-color: #d4d4d8; }
+  .dl-card:hover .dl-go { background: #18181b; }
 }
 .dl-web {
-  margin: 28px 0 0;
+  margin: 22px 0 0;
   font-size: 15px;
   line-height: 1.5;
 }
@@ -2688,11 +2707,7 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     gap: 28px;
   }
   body:not([data-page="home"]) .foot-legal { margin-top: 32px; }
-  .dl-row {
-    grid-template-columns: minmax(0, 1fr) auto;
-    padding: 22px 0;
-  }
-  .dl-go { justify-self: end; }
+  .dl-list { grid-template-columns: 1fr; gap: 12px; }
   .foot-card {
     position: static;
     order: 2;
@@ -3326,27 +3341,22 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     font-size: 11px;
     letter-spacing: .16em;
   }
-  .dl-list { margin: 48px 0 0; }
-  .dl-row {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 16px;
-    align-items: center;
-    padding: 22px 0;
+  .dl-list { margin: 40px 0 0; max-width: none; }
+  .dl-card {
+    min-height: 0;
+    padding: 22px;
+    border-radius: 16px;
   }
-  .dl-row h2 {
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: -.03em;
-  }
+  .dl-os { width: 24px; height: 24px; margin-bottom: 28px; }
+  .dl-card h2 { font-size: 26px; }
   .dl-go {
-    width: 44px;
+    width: 100%;
+    justify-content: center;
     height: 44px;
-    margin: 0;
-    border-radius: 50%;
-    justify-self: end;
-    letter-spacing: 0;
+    margin-top: 28px;
   }
-  .dl-go:hover { background: var(--ink); }
+  .dl-card:hover { border-color: var(--line); }
+  .dl-card:hover .dl-go { background: var(--ink); }
   .form {
     max-width: none;
     margin-top: 28px;

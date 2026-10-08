@@ -2311,12 +2311,19 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   color: var(--ice-mute);
   border-top-color: rgba(220, 238, 247, .07);
 }
+.dl-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(560px, 760px);
+  gap: 48px 64px;
+  align-items: center;
+}
+.dl-copy .lead { max-width: 18em; }
 .dl-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  max-width: 760px;
-  margin: 56px 0 0;
+  max-width: none;
+  margin: 0;
 }
 .dl-card {
   display: flex;
@@ -2353,7 +2360,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 36px;
+  margin-top: auto;
   height: 40px;
   padding: 0 16px 0 14px;
   border-radius: 980px;
@@ -2396,22 +2403,6 @@ main a.dl-card:focus-visible {
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   main a.dl-card:hover { border-color: #d4d4d8; }
   main a.dl-card:hover .dl-go { background: #27272a; }
-}
-.dl-web {
-  margin: 22px 0 0;
-  font-size: 14px;
-  line-height: 1.5;
-}
-main a.dl-web,
-main p.dl-web a,
-main p.dl-web a:hover,
-main p.dl-web a:focus-visible,
-main p.dl-web a:visited {
-  color: var(--ink-2);
-  text-decoration: none;
-}
-@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
-  main p.dl-web a:hover { text-decoration: underline; }
 }
 .form { display: grid; gap: 12px; max-width: 420px; margin-top: 28px; }
 .form label { font-size: 13px; font-weight: 600; }
@@ -2671,9 +2662,16 @@ body:not([data-page="home"]) .foot-col a {
   color: var(--ink-2);
 }
 body:not([data-page="home"]) .foot-col a:hover { color: var(--ink); }
+body:not([data-page="home"]) .foot-top,
+body:not([data-page="home"]) .foot-legal {
+  padding-left: max(var(--pad), calc((100% - var(--max)) / 2));
+  padding-right: max(var(--pad), calc((100% - var(--max)) / 2));
+}
+body[data-page="download"] .page { padding-bottom: 72px; }
 body:not([data-page="home"]) .foot-legal {
   margin: 48px 0 0;
-  padding: 20px var(--pad) 0;
+  padding-top: 20px;
+  padding-bottom: 0;
   border-top: 1px solid var(--line);
   font-family: var(--ui);
   font-size: 12px;
@@ -2726,7 +2724,7 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     gap: 28px;
   }
   body:not([data-page="home"]) .foot-legal { margin-top: 32px; }
-  .dl-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 36px; }
+  .dl-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 0; }
   .foot-card {
     position: static;
     order: 2;
@@ -2740,10 +2738,15 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
   }
   .foot-wordmark { order: 4; }
 }
+
+@media (max-width: 1080px) {
+  .dl-layout { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+}
 @media (max-width: 980px) {
   .hero, .split, .citta-demo, .cosmo-map, .roles, .os, .cases, .head-split, .studio-split {
     grid-template-columns: 1fr;
   }
+  .dl-layout { grid-template-columns: 1fr; gap: 40px; align-items: start; }
   .citta-live { border-right: 0; border-bottom: 1px solid var(--line); }
   /* min-height plus a wide aspect-ratio otherwise forces the stage to ~560px
      and the page scrolls sideways on a phone. */
@@ -3360,7 +3363,7 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     font-size: 11px;
     letter-spacing: .16em;
   }
-  .dl-grid { margin-top: 40px; max-width: none; }
+  .dl-grid { margin-top: 0; max-width: none; }
   .dl-card { min-height: 0; padding: 22px; border-radius: 16px; }
   .dl-os { width: 24px; height: 24px; margin-bottom: 32px; }
   .dl-card h2 { font-size: 28px; }

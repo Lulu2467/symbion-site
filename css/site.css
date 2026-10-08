@@ -2389,23 +2389,30 @@ body[data-page="download"] main.page {
   pointer-events: none;
 }
 #macos::before {
-  inset: -20%;
-  background: radial-gradient(circle at 100% 0%,
-    transparent 22%, rgba(238, 176, 214, .5) 29%, rgba(255, 182, 152, .7) 34%,
-    rgba(255, 222, 142, .7) 39%, rgba(162, 226, 198, .6) 44%, rgba(134, 200, 242, .6) 49%, transparent 57%);
-  -webkit-mask: linear-gradient(215deg, #000 30%, transparent 68%);
-  mask: linear-gradient(215deg, #000 30%, transparent 68%);
-  filter: blur(18px);
-  transform-origin: 100% 0%;
+  top: 10%;
+  right: 9%;
+  width: 44%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(38% 34% at 30% 30%, rgba(122, 206, 232, .95), rgba(150, 218, 236, .5) 55%, transparent 80%),
+    radial-gradient(circle at 42% 42%, rgba(255, 249, 216, .85) 0 36%, rgba(255, 236, 198, .6) 58%, rgba(255, 226, 200, .25) 72%, transparent 74%);
+  box-shadow:
+    inset 5px 6px 4px -2px rgba(246, 128, 92, .85),
+    inset 10px 12px 12px -4px rgba(255, 206, 108, .8),
+    -6px -6px 22px -6px rgba(246, 150, 110, .45);
+  -webkit-mask: radial-gradient(circle at 30% 28%, #000 46%, rgba(0,0,0,.35) 66%, transparent 82%);
+  mask: radial-gradient(circle at 30% 28%, #000 46%, rgba(0,0,0,.35) 66%, transparent 82%);
+  filter: blur(1.5px);
 }
 #macos::after {
-  top: -34%;
-  right: -22%;
-  width: 62%;
-  height: 72%;
+  top: 22%;
+  right: -2%;
+  width: 58%;
+  aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 250, 242, .9), rgba(255, 238, 220, .4) 55%, transparent 100%);
-  filter: blur(12px);
+  background: radial-gradient(closest-side, rgba(255, 196, 176, .55), rgba(255, 214, 196, .25) 55%, transparent 100%);
+  filter: blur(28px);
 }
 #windows::before {
   inset: -10% -20%;
@@ -2433,7 +2440,10 @@ body[data-page="download"] main.page {
   #macos:hover::before { animation: dl-halo 9s ease-in-out infinite alternate; }
   #windows:hover::before { animation: dl-prism 7s ease-in-out infinite alternate; }
 }
-@keyframes dl-halo { to { transform: translate(-4%, 3%) scale(1.07); } }
+@keyframes dl-halo {
+  0%   { transform: translate(0, 0) rotate(-8deg); }
+  100% { transform: translate(-6%, 5%) rotate(14deg) scale(1.04); }
+}
 @keyframes dl-prism { to { background-position: 80% 0; } }
 @media (prefers-reduced-motion: reduce) {
   #macos:hover::before,

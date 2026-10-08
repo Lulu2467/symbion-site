@@ -2768,11 +2768,59 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
 body.auth {
   position: relative;
   min-height: 100vh;
-  background: var(--white);
+  background: #e8f4f8;
   color: var(--ink);
   display: block;
+  overflow-x: hidden;
 }
 body.auth::before { display: none; }
+.auth-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(255, 255, 255, .7), transparent 68%);
+}
+.auth-field i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(48px);
+  will-change: transform;
+}
+.auth-field i:nth-child(1) {
+  width: 46vw;
+  height: 46vw;
+  left: -12%;
+  top: -18%;
+  background: #8ecae6;
+  animation: authDrift 26s ease-in-out infinite;
+}
+.auth-field i:nth-child(2) {
+  width: 38vw;
+  height: 42vw;
+  right: -10%;
+  top: 18%;
+  background: #d7f1fb;
+  animation: authDrift 32s ease-in-out infinite reverse;
+}
+.auth-field i:nth-child(3) {
+  width: 34vw;
+  height: 34vw;
+  left: 28%;
+  bottom: -16%;
+  background: #b7e0f2;
+  animation: authDrift 22s ease-in-out infinite;
+  animation-delay: -8s;
+}
+@keyframes authDrift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  40% { transform: translate3d(6%, -8%, 0) scale(1.12); }
+  70% { transform: translate3d(-5%, 6%, 0) scale(.94); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
 body.auth button { appearance: none; -webkit-appearance: none; }
 .auth-split {
   display: grid;
@@ -2852,9 +2900,11 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .auth-frame {
+  position: relative;
+  z-index: 1;
   width: min(400px, calc(100% - 48px));
-  margin: 0 auto;
-  padding: clamp(88px, 14vh, 148px) 0 72px;
+  margin: clamp(72px, 12vh, 120px) auto 48px;
+  padding: 36px 0 8px;
 }
 .auth-mark {
   display: block;
@@ -2981,6 +3031,7 @@ body.auth .hero-flow-bg::after {
 }
 @media (prefers-reduced-motion: reduce) {
   .orbit-node.is-on i { animation: none; }
+  .auth-field i { animation: none; }
   body.auth .hero-flow-bg::before,
   body.auth .hero-flow-bg::after { animation: none; }
   .creation-hand.is-left,
@@ -2988,7 +3039,7 @@ body.auth .hero-flow-bg::after {
   .auth-glow i { animation: none; }
 }
 .auth-mode {
-  position: absolute; top: 22px; right: 28px; z-index: 3;
+  position: fixed; top: 22px; right: 28px; z-index: 3;
   display: inline-flex; align-items: center; gap: 8px;
   height: 32px; padding: 0 12px;
   border: 1px solid #e6e6e6; border-radius: 999px;
@@ -3000,9 +3051,16 @@ body.auth .hero-flow-bg::after {
 body.auth.dark .auth-mode-sun { display: none; }
 body.auth.dark .auth-mode-moon { display: block; }
 body.auth.dark {
-  background: #0c0c0e;
+  background: #071018;
   color: #fafafa;
 }
+body.auth.dark .auth-field {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 110%, rgba(8, 18, 28, .35), transparent 68%);
+}
+body.auth.dark .auth-field i:nth-child(1) { background: #1a4d6e; }
+body.auth.dark .auth-field i:nth-child(2) { background: #0e2c3d; }
+body.auth.dark .auth-field i:nth-child(3) { background: #163e58; }
 body.auth.dark .auth-frame h1 { color: #fff; }
 body.auth.dark .auth-lead { color: #a1a1aa; }
 body.auth.dark .sso-btn,

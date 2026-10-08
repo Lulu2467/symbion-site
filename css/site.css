@@ -2379,25 +2379,21 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .iso-stage { display: none; }
 .iso-scene { display: block; width: 100%; height: auto; }
 .iso-caption {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 0;
-  padding: 0 var(--pad) 8px;
+  margin: 8px 0 0;
+  padding: 0 var(--pad);
+  text-align: center;
   font-family: var(--latin);
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: .16em;
   color: var(--ice-mute);
 }
-.iso-block { transform-box: fill-box; transform-origin: center bottom; }
+.iso-float { transform-box: fill-box; transform-origin: center; }
 @media (prefers-reduced-motion: no-preference) {
-  .iso-block { animation: iso-rise 8.5s ease-in-out infinite; }
-  .iso-block.is-tall { animation-delay: -2.8s; }
-  .iso-block.is-front { animation-delay: -5.2s; }
+  .iso-float { animation: iso-rise 9s ease-in-out infinite; }
 }
 @keyframes iso-rise {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
 }
 
 /* Inner pages: light paper footer continuous with the page. Homepage keeps
@@ -2881,13 +2877,22 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
   }
   html.is-phone .home-index {
     min-height: 0;
-    padding: 28px 0 80px;
+    padding: 0;
+    counter-reset: phone-chapter;
   }
   .iso-stage {
-    display: block;
-    background: var(--void);
-    padding: 12px 0 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100svh;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 78% 52% at 50% 44%, rgba(126, 178, 204, .24), transparent 70%),
+      var(--void);
+    padding: calc(var(--header) + 8px) 0 28px;
   }
+  .iso-scene { width: 102%; max-width: none; }
   .site-foot,
   body[data-page="home"] .site-foot {
     min-height: 0;
@@ -2943,11 +2948,26 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     border-top-color: rgba(220, 238, 247, .16);
   }
   .home-index-item {
-    font-size: clamp(52px, 18vw, 76px);
+    counter-increment: phone-chapter;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100svh;
+    font-size: clamp(72px, 24vw, 104px);
     font-weight: 400;
-    letter-spacing: -.05em;
-    padding: 64px var(--pad) 56px;
+    letter-spacing: -.055em;
+    padding: calc(var(--header) + 12px) var(--pad) 24px;
     border-bottom: 0;
+  }
+  .home-index-item::before {
+    content: counter(phone-chapter, decimal-leading-zero);
+    margin-bottom: 16px;
+    font-family: var(--latin);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .2em;
+    line-height: 1;
+    color: var(--ice-mute);
   }
   .home-index-note {
     display: block;

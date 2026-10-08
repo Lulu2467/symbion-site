@@ -180,13 +180,6 @@
       window.location.href = `${root}/index.html`;
     });
   });
-  const mode = document.getElementById("auth-mode");
-  mode?.addEventListener("click", () => {
-    const dark = document.body.classList.toggle("dark");
-    const label = document.getElementById("auth-mode-label");
-    if (label) label.textContent = dark ? "DARK" : "LIGHT";
-    mode.setAttribute("aria-pressed", dark ? "true" : "false");
-  });
 
   const steps = [...document.querySelectorAll(".step")];
   const nowTitle = document.getElementById("citta-now-title");

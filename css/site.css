@@ -2296,38 +2296,64 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 @keyframes cosmo-tick { to { transform: scaleX(1); } }
 .cosmo-visual { display: grid; justify-items: center; gap: 20px; }
 .cosmo-stack {
+  --cx: 38%;
+  --half: 141px;
   position: relative;
   width: min(100%, 440px);
-  height: 400px;
+  height: 420px;
 }
+.cosmo-stack::before,
+.cosmo-stack::after {
+  content: "";
+  position: absolute;
+  top: 120px;
+  height: 168px;
+  width: 1px;
+  background: repeating-linear-gradient(to bottom, rgba(9, 9, 11, .2) 0 3px, transparent 3px 7px);
+}
+.cosmo-stack::before { left: calc(var(--cx) - var(--half)); }
+.cosmo-stack::after { left: calc(var(--cx) + var(--half)); }
 .cosmo-stack .plate {
   position: absolute;
   left: 0;
   right: 0;
   top: var(--y);
   height: 0;
-  transition: transform .6s var(--ease);
+  transition: transform .7s var(--ease);
 }
-.cosmo-stack .p0 { --y: 120px; z-index: 3; }
-.cosmo-stack .p1 { --y: 200px; z-index: 2; }
-.cosmo-stack .p2 { --y: 280px; z-index: 1; }
-.cosmo-stack .plate i {
+.cosmo-stack .p0 { --y: 130px; z-index: 3; }
+.cosmo-stack .p1 { --y: 210px; z-index: 2; }
+.cosmo-stack .p2 { --y: 290px; z-index: 1; }
+.cosmo-stack .plate i,
+.cosmo-stack .plate b {
   position: absolute;
-  left: 38%;
+  left: var(--cx);
   top: 0;
   width: 200px;
   height: 200px;
   margin: -100px 0 0 -100px;
-  border: 1px solid rgba(9, 9, 11, .16);
   border-radius: 6px;
-  background-color: rgba(246, 246, 247, .6);
+}
+.cosmo-stack .plate b {
+  transform: translateY(7px) rotateX(60deg) rotateZ(45deg);
+  border: 1px solid rgba(9, 9, 11, .14);
+  background: #dcdce0;
+  box-shadow: 18px 18px 36px rgba(9, 9, 11, .08);
+  transition: background-color .5s var(--ease), border-color .5s var(--ease), box-shadow .7s var(--ease);
+}
+.cosmo-stack .plate i {
   transform: rotateX(60deg) rotateZ(45deg);
+  border: 1px solid rgba(9, 9, 11, .14);
+  background-color: rgba(250, 250, 251, .62);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 70%);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   transition: border-color .5s var(--ease), background-color .5s var(--ease);
 }
 .cosmo-stack .plate span {
   position: absolute;
-  left: calc(38% + 150px);
-  top: 0;
+  left: calc(var(--cx) + var(--half) + 16px);
+  top: 3px;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -2344,28 +2370,39 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 }
 .cosmo-stack .plate span::before {
   content: "";
-  width: 28px;
+  width: 24px;
   height: 1px;
   background: currentColor;
   opacity: .6;
+  transition: width .5s var(--ease), opacity .5s var(--ease);
 }
 .cosmo-stage[data-layer="0"] .p0,
 .cosmo-stage[data-layer="1"] .p1,
-.cosmo-stage[data-layer="2"] .p2 { transform: translateY(-14px); }
+.cosmo-stage[data-layer="2"] .p2 { transform: translateY(-20px); }
+.cosmo-stage[data-layer="0"] .p0 b,
+.cosmo-stage[data-layer="1"] .p1 b,
+.cosmo-stage[data-layer="2"] .p2 b {
+  border-color: var(--ink);
+  background: #c9dfeb;
+  box-shadow: 30px 30px 50px rgba(9, 9, 11, .14);
+}
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,
 .cosmo-stage[data-layer="2"] .p2 i {
   border-color: var(--ink);
-  background-color: #fafafa;
+  background-color: #fbfbfc;
   background-image:
-    linear-gradient(rgba(116, 193, 230, .45) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 193, 230, .45) 1px, transparent 1px);
+    linear-gradient(rgba(116, 193, 230, .42) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 193, 230, .42) 1px, transparent 1px);
   background-size: 20px 20px;
   background-position: -1px -1px;
 }
 .cosmo-stage[data-layer="0"] .p0 span,
 .cosmo-stage[data-layer="1"] .p1 span,
 .cosmo-stage[data-layer="2"] .p2 span { color: var(--ink); }
+.cosmo-stage[data-layer="0"] .p0 span::before,
+.cosmo-stage[data-layer="1"] .p1 span::before,
+.cosmo-stage[data-layer="2"] .p2 span::before { width: 40px; opacity: 1; }
 .cosmo-stage .cosmo-now-note {
   margin: 0;
   max-width: 30em;
@@ -2378,7 +2415,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 @media (prefers-reduced-motion: reduce) {
   .cosmo-stack .plate,
   .cosmo-stack .plate i,
-  .cosmo-stack .plate span { transition: none; }
+  .cosmo-stack .plate b,
+  .cosmo-stack .plate span,
+  .cosmo-stack .plate span::before { transition: none; }
 }
 .page-actions {
   display: flex;

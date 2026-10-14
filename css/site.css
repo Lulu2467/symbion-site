@@ -1375,11 +1375,14 @@ body[data-page="home"] main a.home-index-item {
 .home-index-fill {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
+  padding: inherit;
   background: #fafafa;
+  color: var(--ink);
   pointer-events: none;
   clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
 }
+.home-index-fill-label { display: block; }
 .home-index:not(.is-live) .home-index-fill {
   transition: clip-path .5s cubic-bezier(.77, 0, .175, 1);
 }
@@ -1391,12 +1394,10 @@ body[data-page="home"] main a.home-index-item {
 .home-index-note { display: none; }
 body[data-page="home"] main a.home-index-item.is-on,
 body[data-page="home"] main a.home-index-item:focus-visible {
-  color: var(--ink);
   text-decoration: none;
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   body[data-page="home"] main .home-index:not(.is-live) a.home-index-item:hover {
-    color: var(--ink);
     text-decoration: none;
   }
   .home-index:not(.is-live) .home-index-item:hover .home-index-fill {

@@ -376,6 +376,7 @@ body[data-page="home"].nav-dark .nav-end .btn-ghost {
   color: var(--nav-color);
   border-color: rgba(255, 255, 255, .42);
 }
+body[data-page="home"] .nav-end .btn-ghost { transition: background .2s ease, border-color .2s ease; }
 body[data-page="home"].nav-dark .nav-end .btn-ghost:hover {
   background: #fafafa;
   color: var(--ink);

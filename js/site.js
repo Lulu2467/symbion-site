@@ -925,7 +925,7 @@
   // over the original, so the label re-types itself left to right.
   const mountCharFlip = () => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 721px)").matches) return;
-    const targets = document.querySelectorAll(".nav-links a, .foot-col a, .nav-end a.btn-ghost");
+    const targets = document.querySelectorAll(".nav-links a, .foot-col a");
     targets.forEach((el) => {
       if (el.dataset.flip || el.children.length) return;
       const raw = el.textContent;

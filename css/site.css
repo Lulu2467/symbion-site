@@ -3890,11 +3890,13 @@ main a.page-back:focus-visible {
   border: 1px solid rgba(9, 9, 11, .08); border-radius: 12px;
   background: rgba(255, 255, 255, .55); color: var(--ink);
   padding: 0 14px; font-size: 15px;
+  transition: border-color .2s var(--ease), background-color .2s var(--ease);
 }
 .auth-frame input:focus {
   outline: none;
-  border-color: rgba(9, 9, 11, .4);
-  box-shadow: 0 0 0 3px rgba(9, 9, 11, .08);
+  border-color: rgba(9, 9, 11, .28);
+  background: #fff;
+  box-shadow: none;
 }
 .auth-frame input::placeholder { color: #a1a1aa; }
 .auth-go {

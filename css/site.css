@@ -2077,18 +2077,40 @@ a.more .ico { width: 15px; height: 15px; }
    paragraph, the action, then the picture. The homepage sequence is separate. */
 body:not([data-page="home"]) .page { padding: 104px 0 120px; }
 body:not([data-page="home"]) .page h1 {
-  max-width: 11em;
+  max-width: none;
+  text-wrap: balance;
   font-weight: 500;
   font-size: clamp(40px, 4.4vw, 64px);
   letter-spacing: -.03em;
   line-height: 1.08;
 }
 body:not([data-page="home"]) .page .lead {
-  margin-top: 20px;
-  max-width: 32em;
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--ink-2);
+  margin-top: 24px;
+  max-width: 40em;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: .005em;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.page-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 28px;
+  font-family: var(--latin);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #a1a1aa;
+}
+.page-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
 }
 body:not([data-page="home"]) .page-actions { margin-top: 28px; }
 body:not([data-page="home"]) .page .media-slot,
@@ -4073,4 +4095,9 @@ html.veil-in.veil-settle .page-veil {
   .cosmo-col b { margin-top: 6px; font-size: 24px; }
   .cosmo-cols.is-flow .cosmo-col::before,
   .cosmo-cols.is-flow .cosmo-col + .cosmo-col::before { display: none; }
+}
+
+@media (max-width: 720px) {
+  .page-eyebrow { margin-bottom: 20px; font-size: 11px; }
+  body:not([data-page="home"]) .page .lead br { display: none; }
 }

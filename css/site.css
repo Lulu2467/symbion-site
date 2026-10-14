@@ -2093,25 +2093,6 @@ body:not([data-page="home"]) .page .lead {
   color: var(--muted);
   text-wrap: pretty;
 }
-.page-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 28px;
-  font-family: var(--latin);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  line-height: 1;
-  color: #a1a1aa;
-}
-.page-eyebrow::before {
-  content: "";
-  width: 28px;
-  height: 1px;
-  background: currentColor;
-}
 body:not([data-page="home"]) .page-actions { margin-top: 28px; }
 body:not([data-page="home"]) .page .media-slot,
 body:not([data-page="home"]) .page .product-frame { margin-top: 64px; }
@@ -4103,6 +4084,5 @@ html.veil-in.veil-settle .page-veil {
 }
 
 @media (max-width: 720px) {
-  .page-eyebrow { margin-bottom: 20px; font-size: 11px; }
   body:not([data-page="home"]) .page .lead br { display: none; }
 }

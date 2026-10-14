@@ -236,6 +236,40 @@
     playSteps();
   }
 
+  const flow = document.querySelector(".cosmos-flow");
+  const flowSteps = flow ? [...flow.children] : [];
+  let flowIndex = 0;
+  let flowTimer = 0;
+  function setFlow(i) {
+    flowIndex = i;
+    flow.dataset.step = String(i);
+    flowSteps.forEach((el, n) => {
+      el.classList.toggle("is-on", n === i);
+      el.classList.toggle("is-done", n < i);
+    });
+  }
+  function playFlow() {
+    window.clearInterval(flowTimer);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    flowTimer = window.setInterval(() => setFlow((flowIndex + 1) % flowSteps.length), 2600);
+  }
+  // Phones show all three steps at full strength; the stepped story is desktop only.
+  if (flow && !window.matchMedia("(max-width: 720px)").matches) {
+    flow.classList.add("is-live");
+    setFlow(0);
+    flowSteps.forEach((el, i) => el.addEventListener("click", () => { setFlow(i); playFlow(); }));
+    flow.addEventListener("mouseenter", () => window.clearInterval(flowTimer));
+    flow.addEventListener("mouseleave", playFlow);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) { setFlow(0); playFlow(); }
+        else window.clearInterval(flowTimer);
+      }, { threshold: 0.4 }).observe(flow);
+    } else {
+      playFlow();
+    }
+  }
+
   const layers = [...document.querySelectorAll(".cosmo-layer")];
   const layerTitle = document.getElementById("cosmo-now-title");
   const layerNote = document.getElementById("cosmo-now-note");

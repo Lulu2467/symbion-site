@@ -2512,7 +2512,8 @@ body[data-page="download"] main.page {
   min-height: 360px;
   margin-top: 64px;
   border-radius: 28px;
-  background: #ececee;
+  background: #f8f8f9;
+  box-shadow: inset 0 0 0 1px rgba(9, 9, 11, .05);
   overflow: hidden;
 }
 .dl-tile {
@@ -2598,7 +2599,7 @@ body[data-page="download"] main.page {
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   .dl-tile:hover::before,
   .dl-tile:hover::after { opacity: 1; }
-  .dl-stage > .dl-tile:hover { background-color: rgba(255, 255, 255, .72); }
+  .dl-stage > .dl-tile:hover { background-color: rgba(255, 255, 255, .9); }
   .dl-tile:hover::before { animation: dl-prism 7s ease-in-out infinite alternate; }
 }
 @keyframes dl-prism { to { background-position: 80% 0; } }

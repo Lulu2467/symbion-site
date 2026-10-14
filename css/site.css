@@ -2298,8 +2298,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 }
 .cosmo-layers.is-playing .cosmo-layer.is-on::after { animation: cosmo-tick 2.8s linear forwards; }
 @keyframes cosmo-tick { to { transform: scaleX(1); } }
-@property --side-l { syntax: "<color>"; inherits: true; initial-value: #e4e4e8; }
-@property --side-r { syntax: "<color>"; inherits: true; initial-value: #d2d2d8; }
+@property --side-l { syntax: "<color>"; inherits: true; initial-value: #ededf0; }
+@property --side-r { syntax: "<color>"; inherits: true; initial-value: #e1e1e6; }
 .cosmo-visual { display: grid; justify-items: center; gap: 20px; }
 .cosmo-stack {
   --cx: 38%;
@@ -2312,11 +2312,16 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmo-stack::after {
   content: "";
   position: absolute;
-  top: 120px;
-  height: 168px;
+  top: 130px;
+  height: 166px;
   width: 1px;
-  background: repeating-linear-gradient(to bottom, rgba(9, 9, 11, .2) 0 3px, transparent 3px 7px);
+  background: repeating-linear-gradient(to bottom, rgba(9, 9, 11, .16) 0 3px, transparent 3px 7px);
+  transition: top .7s var(--ease), height .7s var(--ease);
 }
+.cosmo-stage[data-layer="0"] .cosmo-stack::before,
+.cosmo-stage[data-layer="0"] .cosmo-stack::after { top: 116px; height: 180px; }
+.cosmo-stage[data-layer="2"] .cosmo-stack::before,
+.cosmo-stage[data-layer="2"] .cosmo-stack::after { height: 152px; }
 .cosmo-stack::before { left: calc(var(--cx) - var(--half)); }
 .cosmo-stack::after { left: calc(var(--cx) + var(--half)); }
 .cosmo-stack .plate {
@@ -2338,9 +2343,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   height: 200px;
   margin: -100px 0 0 -100px;
   border-radius: 2px;
-  box-shadow: 22px 22px 40px rgba(9, 9, 11, .08);
+  box-shadow: 18px 18px 36px rgba(9, 9, 11, .06);
   transform: rotateX(60deg) rotateZ(45deg);
-  border: 1px solid rgba(9, 9, 11, .14);
+  border: 1px solid rgba(9, 9, 11, .1);
   background-color: rgba(250, 250, 251, .62);
   background-image: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 70%);
   -webkit-backdrop-filter: blur(6px);
@@ -2348,14 +2353,14 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   transition: border-color .5s var(--ease), background-color .5s var(--ease), box-shadow .7s var(--ease);
 }
 .cosmo-stack .plate b {
-  --t: 9px;
+  --t: 6px;
   position: absolute;
   z-index: 1;
   left: calc(var(--cx) - 141.42px);
   top: 0;
   width: 282.84px;
   height: calc(70.71px + var(--t));
-  background: linear-gradient(90deg, var(--side-l, #e4e4e8) 50%, var(--side-r, #d2d2d8) 50%);
+  background: linear-gradient(90deg, var(--side-l, #ededf0) 50%, var(--side-r, #e1e1e6) 50%);
   clip-path: polygon(0 0, 50% 70.71px, 100% 0, 100% var(--t), 50% calc(70.71px + var(--t)), 0 var(--t));
   transition: --side-l .5s var(--ease), --side-r .5s var(--ease);
 }
@@ -2387,23 +2392,23 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 }
 .cosmo-stage[data-layer="0"] .p0,
 .cosmo-stage[data-layer="1"] .p1,
-.cosmo-stage[data-layer="2"] .p2 { transform: translateY(-20px); }
+.cosmo-stage[data-layer="2"] .p2 { transform: translateY(-14px); }
 .cosmo-stage[data-layer="0"] .p0 b,
 .cosmo-stage[data-layer="1"] .p1 b,
 .cosmo-stage[data-layer="2"] .p2 b {
-  --side-l: #3f3f46;
-  --side-r: #18181b;
+  --side-l: #d4d4d8;
+  --side-r: #a1a1aa;
 }
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,
 .cosmo-stage[data-layer="2"] .p2 i {
-  border-color: var(--ink);
-  background-color: #fbfbfc;
-  box-shadow: 34px 34px 54px rgba(9, 9, 11, .14);
+  border-color: rgba(9, 9, 11, .32);
+  background-color: #fdfdfd;
+  box-shadow: 26px 26px 48px rgba(9, 9, 11, .09);
   background-image:
-    linear-gradient(rgba(116, 193, 230, .42) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 193, 230, .42) 1px, transparent 1px);
-  background-size: 20px 20px;
+    linear-gradient(rgba(116, 193, 230, .26) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 193, 230, .26) 1px, transparent 1px);
+  background-size: 25px 25px;
   background-position: -1px -1px;
 }
 .cosmo-stage[data-layer="0"] .p0 span,
@@ -2426,7 +2431,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   .cosmo-stack .plate i,
   .cosmo-stack .plate b,
   .cosmo-stack .plate span,
-  .cosmo-stack .plate span::before { transition: none; }
+  .cosmo-stack .plate span::before,
+  .cosmo-stack::before,
+  .cosmo-stack::after { transition: none; }
 }
 .page-actions {
   display: flex;

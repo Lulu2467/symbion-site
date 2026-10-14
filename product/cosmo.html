@@ -14,7 +14,7 @@
   <meta property="og:description" content="Cosmo 承载身份、知识与能力。众多 Cosmo 聚合成 Cosmos，别人可以通过 Citta 订阅、询问、调用。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/site.css?v=ice108">
+  <link rel="stylesheet" href="../css/site.css?v=ice109">
 </head>
 <body data-root=".." data-page="cosmo">
   <header class="nav" id="site-nav"></header>
@@ -29,25 +29,40 @@
       <div class="media-slot-stage" data-label="影像位"></div>
       <figcaption>Cosmo 影像</figcaption>
     </figure>
-    <p class="cosmo-now"><em>这一层</em><b id="cosmo-now-title">Identity</b></p>
-    <p class="cosmo-now-note" id="cosmo-now-note">可被识别的智能身份。别人看见的是你定义过的 Cosmo。</p>
-    <div class="cosmo-layers" id="cosmo-layers">
-      <button class="cosmo-layer is-on" type="button" data-note="可被识别的智能身份。别人看见的是你定义过的 Cosmo。">
-        <span class="n">01</span>
-        <span class="layer-en">Identity</span>
-        <span class="layer-zh">我是谁。可被识别的智能身份</span>
-      </button>
-      <button class="cosmo-layer" type="button" data-note="经验、研究与判断收在这一层，知识仍由本人定义。">
-        <span class="n">02</span>
-        <span class="layer-en">Knowledge</span>
-        <span class="layer-zh">我知道什么。经验、研究与判断</span>
-      </button>
-      <button class="cosmo-layer" type="button" data-note="别人可以通过 Citta 订阅、询问、调用的工作能力。">
-        <span class="n">03</span>
-        <span class="layer-en">Capability</span>
-        <span class="layer-zh">我能做什么。可被调用的工作能力</span>
-      </button>
-    </div>
+    <section class="cosmo-anatomy">
+      <div class="cosmo-anatomy-head">
+        <h2>一个 Cosmo，由三层组成。</h2>
+        <p>身份让别人认出你，知识装着你的判断，能力让别人可以调用。</p>
+      </div>
+      <div class="cosmo-stage" data-layer="0">
+        <div class="cosmo-layers" id="cosmo-layers">
+          <button class="cosmo-layer is-on" type="button" data-note="可被识别的智能身份。别人看见的是你定义过的 Cosmo。">
+            <span class="n">01</span>
+            <span class="layer-en">Identity</span>
+            <span class="layer-zh">我是谁。可被识别的智能身份</span>
+          </button>
+          <button class="cosmo-layer" type="button" data-note="经验、研究与判断收在这一层，知识仍由本人定义。">
+            <span class="n">02</span>
+            <span class="layer-en">Knowledge</span>
+            <span class="layer-zh">我知道什么。经验、研究与判断</span>
+          </button>
+          <button class="cosmo-layer" type="button" data-note="别人可以通过 Citta 订阅、询问、调用的工作能力。">
+            <span class="n">03</span>
+            <span class="layer-en">Capability</span>
+            <span class="layer-zh">我能做什么。可被调用的工作能力</span>
+          </button>
+        </div>
+        <div class="cosmo-visual">
+          <div class="cosmo-orbit" aria-hidden="true">
+            <span class="ring r3"><em>Capability</em></span>
+            <span class="ring r2"><em>Knowledge</em></span>
+            <span class="ring r1"><em>Identity</em></span>
+            <span class="cosmo-core">你</span>
+          </div>
+          <p class="cosmo-now-note" id="cosmo-now-note" aria-live="polite">可被识别的智能身份。别人看见的是你定义过的 Cosmo。</p>
+        </div>
+      </div>
+    </section>
     <div class="prose">
       <h2>它可以代表谁</h2>
       <p>学者、创作者、专业人士都可以把智能做成 Cosmo。知识仍由本人定义，在许可范围内被调用。</p>
@@ -66,6 +81,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="../js/site.js?v=ice54"></script>
+  <script src="../js/site.js?v=ice55"></script>
 </body>
 </html>

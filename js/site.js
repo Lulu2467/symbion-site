@@ -241,9 +241,15 @@
   const layerNote = document.getElementById("cosmo-now-note");
   const layerStage = document.querySelector("[data-page='cosmo'] .media-slot-stage");
   const layerCap = document.querySelector("[data-page='cosmo'] .media-slot figcaption");
+  const layerStageEl = document.querySelector(".cosmo-stage");
   function setLayer(i) {
+    if (layerStageEl) layerStageEl.dataset.layer = String(i);
     layers.forEach((el, n) => {
       const on = n === i;
+      if (on && el.classList.contains("is-on")) {
+        el.classList.remove("is-on");
+        void el.offsetWidth;
+      }
       el.classList.toggle("is-on", on);
       el.setAttribute("aria-selected", on ? "true" : "false");
       el.setAttribute("tabindex", on ? "0" : "-1");
@@ -261,8 +267,11 @@
   let layerTimer = 0;
   function playLayers() {
     window.clearInterval(layerTimer);
+    const list = layers[0]?.parentElement;
+    list?.classList.remove("is-playing");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (window.matchMedia("(max-width: 720px)").matches) return;
+    list?.classList.add("is-playing");
     layerTimer = window.setInterval(() => {
       layerIndex = (layerIndex + 1) % layers.length;
       setLayer(layerIndex);

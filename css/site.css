@@ -2151,10 +2151,72 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 }
 .cosmo-anatomy-head p {
   margin: 12px 0 0;
-  max-width: 34em;
+  max-width: 44em;
   font-size: 16px;
   line-height: 1.6;
   color: var(--muted);
+}
+.cosmo-block { margin-top: 120px; }
+.cosmo-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(9, 9, 11, .12);
+}
+.cosmo-col {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 28px 40px 8px 0;
+}
+.cosmo-col + .cosmo-col {
+  padding-left: 32px;
+  border-left: 1px solid rgba(9, 9, 11, .08);
+}
+.cosmo-col .k {
+  font-family: var(--latin);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #a1a1aa;
+}
+.cosmo-col b {
+  margin-top: 14px;
+  font-size: clamp(26px, 2.4vw, 32px);
+  font-weight: 500;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.cosmo-col .d {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.cosmo-cols.is-flow .cosmo-col + .cosmo-col::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.cosmo-cols.is-flow .cosmo-col:first-child::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
 }
 .cosmo-stage {
   display: grid;
@@ -3958,4 +4020,18 @@ html.veil-in.veil-settle .page-veil {
   .cosmo-layer,
   .cosmo-layer:first-child { border-top: 0; border-bottom: 1px solid var(--line); }
   .cosmo-layer::after { content: none; }
+}
+
+@media (max-width: 720px) {
+  .cosmo-block { margin-top: 64px; }
+  .cosmo-cols { grid-template-columns: 1fr; margin-top: 24px; }
+  .cosmo-col,
+  .cosmo-col + .cosmo-col {
+    padding: 22px 0;
+    border-left: 0;
+    border-bottom: 1px solid rgba(9, 9, 11, .08);
+  }
+  .cosmo-col b { margin-top: 6px; font-size: 24px; }
+  .cosmo-cols.is-flow .cosmo-col::before,
+  .cosmo-cols.is-flow .cosmo-col + .cosmo-col::before { display: none; }
 }

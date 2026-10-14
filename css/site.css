@@ -2316,6 +2316,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 }
 .cosmo-layers.is-playing .cosmo-layer.is-on::after { animation: cosmo-tick 2.8s linear forwards; }
 @keyframes cosmo-tick { to { transform: scaleX(1); } }
+@property --side-l { syntax: "<color>"; inherits: true; initial-value: #e4e4e8; }
+@property --side-r { syntax: "<color>"; inherits: true; initial-value: #d2d2d8; }
 .cosmo-visual { display: grid; justify-items: center; gap: 20px; }
 .cosmo-stack {
   --cx: 38%;
@@ -2346,31 +2348,34 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmo-stack .p0 { --y: 130px; z-index: 3; }
 .cosmo-stack .p1 { --y: 210px; z-index: 2; }
 .cosmo-stack .p2 { --y: 290px; z-index: 1; }
-.cosmo-stack .plate i,
-.cosmo-stack .plate b {
+.cosmo-stack .plate i {
   position: absolute;
   left: var(--cx);
   top: 0;
   width: 200px;
   height: 200px;
   margin: -100px 0 0 -100px;
-  border-radius: 6px;
-}
-.cosmo-stack .plate b {
-  transform: translateY(7px) rotateX(60deg) rotateZ(45deg);
-  border: 1px solid rgba(9, 9, 11, .14);
-  background: #dcdce0;
-  box-shadow: 18px 18px 36px rgba(9, 9, 11, .08);
-  transition: background-color .5s var(--ease), border-color .5s var(--ease), box-shadow .7s var(--ease);
-}
-.cosmo-stack .plate i {
+  border-radius: 2px;
+  box-shadow: 22px 22px 40px rgba(9, 9, 11, .08);
   transform: rotateX(60deg) rotateZ(45deg);
   border: 1px solid rgba(9, 9, 11, .14);
   background-color: rgba(250, 250, 251, .62);
   background-image: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 70%);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  transition: border-color .5s var(--ease), background-color .5s var(--ease);
+  transition: border-color .5s var(--ease), background-color .5s var(--ease), box-shadow .7s var(--ease);
+}
+.cosmo-stack .plate b {
+  --t: 9px;
+  position: absolute;
+  z-index: 1;
+  left: calc(var(--cx) - 141.42px);
+  top: 0;
+  width: 282.84px;
+  height: calc(70.71px + var(--t));
+  background: linear-gradient(90deg, var(--side-l, #e4e4e8) 50%, var(--side-r, #d2d2d8) 50%);
+  clip-path: polygon(0 0, 50% 70.71px, 100% 0, 100% var(--t), 50% calc(70.71px + var(--t)), 0 var(--t));
+  transition: --side-l .5s var(--ease), --side-r .5s var(--ease);
 }
 .cosmo-stack .plate span {
   position: absolute;
@@ -2404,15 +2409,15 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmo-stage[data-layer="0"] .p0 b,
 .cosmo-stage[data-layer="1"] .p1 b,
 .cosmo-stage[data-layer="2"] .p2 b {
-  border-color: var(--ink);
-  background: #c9dfeb;
-  box-shadow: 30px 30px 50px rgba(9, 9, 11, .14);
+  --side-l: #3f3f46;
+  --side-r: #18181b;
 }
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,
 .cosmo-stage[data-layer="2"] .p2 i {
   border-color: var(--ink);
   background-color: #fbfbfc;
+  box-shadow: 34px 34px 54px rgba(9, 9, 11, .14);
   background-image:
     linear-gradient(rgba(116, 193, 230, .42) 1px, transparent 1px),
     linear-gradient(90deg, rgba(116, 193, 230, .42) 1px, transparent 1px);

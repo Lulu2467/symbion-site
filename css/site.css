@@ -2565,7 +2565,7 @@ body[data-page="download"] main.page {
   transform: none;
 }
 .dl-tile .dl-btn svg { width: 16px; height: 16px; flex: none; }
-.dl-stage > .dl-tile { position: relative; isolation: isolate; overflow: hidden; }
+.dl-stage > .dl-tile { position: relative; isolation: isolate; overflow: hidden; background-color: rgba(255, 255, 255, 0); transition: background-color .5s var(--ease); }
 .dl-tile::before,
 .dl-tile::after {
   content: "";
@@ -2598,6 +2598,7 @@ body[data-page="download"] main.page {
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   .dl-tile:hover::before,
   .dl-tile:hover::after { opacity: 1; }
+  .dl-stage > .dl-tile:hover { background-color: rgba(255, 255, 255, .72); }
   .dl-tile:hover::before { animation: dl-prism 7s ease-in-out infinite alternate; }
 }
 @keyframes dl-prism { to { background-position: 80% 0; } }

@@ -4,41 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>联系 — Symbion 中国区</title>
-  <meta name="description" content="开始构建你的 Symbion。">
+  <meta name="description" content="留下联系方式，了解 Symbion 中国区开放与 Cosmo 共建。">
   <link rel="canonical" href="https://www.symbionspace.com/company/contact.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="Symbion">
   <meta property="og:url" content="https://www.symbionspace.com/company/contact.html">
   <meta property="og:title" content="联系 — Symbion 中国区">
-  <meta property="og:description" content="开始构建你的 Symbion。">
+  <meta property="og:description" content="留下联系方式，了解 Symbion 中国区开放与 Cosmo 共建。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/site.css?v=ice120">
+  <link rel="stylesheet" href="../css/site.css?v=ice121">
 </head>
 <body data-root=".." data-page="contact">
   <header class="nav" id="site-nav"></header>
   <main class="page wrap">
 
     <h1>你的 AI，<br>可以从这里开始。</h1>
-    <p class="lead">留下工作邮箱，或写信到 <a href="mailto:hello@symbionspace.com">hello@symbionspace.com</a>。<br>我们会联系中国区开放与 Cosmo 探索。</p>
-    <form class="form" id="start-form">
-      <label for="name">姓名</label>
-      <input id="name" name="name" required autocomplete="name">
-      <label for="email">工作邮箱</label>
-      <input id="email" name="email" type="email" required autocomplete="email">
-      <label for="role">你更接近</label>
-      <select id="role" name="role">
-        <option>个人研究者 / 创作者</option>
-        <option>专业人士</option>
-        <option>团队</option>
-        <option>合作与媒体</option>
-      </select>
-      <label for="note">你希望 Citta 先帮你完成什么</label>
-      <textarea id="note" name="note" placeholder="例如：中国 AI Agent 市场分析"></textarea>
-      <button class="btn btn-blue" type="submit">立即开始</button>
-    </form>
-    <p class="ok" id="form-ok" hidden>已记下。没有自动发送任何内容到外部——这是站点演示回执。</p>
+    <p class="lead">留下联系方式，我们会联系你，<br>聊聊中国区开放与 Cosmo 探索。</p>
+    <section class="contact-stage">
+      <div class="contact-side">
+        <ol class="contact-points">
+          <li><span class="k">01 Mail</span><b>写信给我们</b><a href="mailto:hello@symbionspace.com">hello@symbionspace.com</a></li>
+          <li><span class="k">02 Early access</span><b>中国区内测</b><span class="d">个人与团队，优先开放给有真实任务的人。</span></li>
+          <li><span class="k">03 Partnership</span><b>共建与合作</b><span class="d">Cosmo 共建、机构合作与媒体。</span></li>
+        </ol>
+      </div>
+      <div class="contact-main">
+        <form class="contact-form" id="start-form">
+          <div class="cf-row">
+            <div class="cf-field"><label for="name">姓名</label><input id="name" name="name" required autocomplete="name" placeholder="怎么称呼你"></div>
+            <div class="cf-field"><label for="email">工作邮箱</label><input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com"></div>
+          </div>
+          <fieldset class="cf-field cf-roles">
+            <legend>你更接近</legend>
+            <div class="cf-chips">
+              <label><input type="radio" name="role" value="个人研究者 / 创作者" checked><span>个人研究者 / 创作者</span></label>
+              <label><input type="radio" name="role" value="专业人士"><span>专业人士</span></label>
+              <label><input type="radio" name="role" value="团队"><span>团队</span></label>
+              <label><input type="radio" name="role" value="合作与媒体"><span>合作与媒体</span></label>
+            </div>
+          </fieldset>
+          <div class="cf-field"><label for="note">你希望 Citta 先帮你完成什么</label><textarea id="note" name="note" rows="4" placeholder="例如：中国 AI Agent 市场分析"></textarea></div>
+          <div class="cf-foot">
+            <p class="cf-legal">提交即表示同意<a href="../legal/privacy.html">隐私说明</a>。</p>
+            <button class="btn btn-ink cf-submit" type="submit">提交<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button>
+          </div>
+        </form>
+        <div class="contact-ok" id="form-ok" hidden>
+          <span class="cf-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <b>已收到。</b>
+          <p>这是站点演示，信息不会发送到外部。<br>也可以直接写信到 <a href="mailto:hello@symbionspace.com">hello@symbionspace.com</a>。</p>
+        </div>
+      </div>
+    </section>
     
   </main>
   <footer class="site-foot" id="site-foot"></footer>

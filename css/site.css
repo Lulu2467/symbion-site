@@ -2160,67 +2160,91 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   line-height: 1.6;
   color: var(--muted);
 }
-.cosmo-block { margin-top: 120px; }
-.cosmo-cols {
+.cosmo-block { margin-top: 140px; }
+.cosmo-who {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 40px 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid rgba(9, 9, 11, .12);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 64px;
+  align-items: start;
 }
-.cosmo-col {
-  position: relative;
+.cosmo-who .cosmo-anatomy-head p { max-width: 24em; margin-top: 16px; text-wrap: pretty; }
+.who-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(9, 9, 11, .12); }
+.who-list li {
   display: grid;
-  align-content: start;
-  gap: 10px;
-  padding: 28px 40px 8px 0;
+  grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1.25fr);
+  align-items: baseline;
+  gap: 24px;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(9, 9, 11, .08);
 }
-.cosmo-col + .cosmo-col {
-  padding-left: 32px;
-  border-left: 1px solid rgba(9, 9, 11, .08);
-}
-.cosmo-col .k {
+.who-list .n,
+.who-list .k,
+.cosmos-flow .k {
   font-family: var(--latin);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: .14em;
   text-transform: uppercase;
-  line-height: 1;
   color: #a1a1aa;
 }
-.cosmo-col b {
-  margin-top: 14px;
-  font-size: clamp(26px, 2.4vw, 32px);
+.who-t { display: flex; align-items: baseline; gap: 12px; }
+.who-list b,
+.cosmos-flow b {
+  font-size: clamp(24px, 2.2vw, 30px);
   font-weight: 500;
   letter-spacing: -.01em;
   line-height: 1.2;
   color: var(--ink);
 }
-.cosmo-col .d {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
+.who-list .d,
+.cosmos-flow .d { font-size: 15px; line-height: 1.6; color: var(--muted); }
+.who-list li > * { transition: color .3s var(--ease); }
+.cosmos-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 48px 0 0;
+  padding: 48px 48px 52px;
+  list-style: none;
+  border-radius: 28px;
+  background: #f8f8f9;
+  box-shadow: inset 0 0 0 1px rgba(9, 9, 11, .05);
 }
-.cosmo-cols.is-flow .cosmo-col + .cosmo-col::before {
+.cosmos-flow::before {
   content: "";
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--ink);
+  top: 53px;
+  left: 48px;
+  right: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(9, 9, 11, .28), rgba(9, 9, 11, .1));
 }
-.cosmo-cols.is-flow .cosmo-col:first-child::before {
+.cosmos-flow::after {
   content: "";
   position: absolute;
-  top: -4px;
-  left: 0;
-  width: 7px;
-  height: 7px;
+  top: 50px;
+  right: 48px;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid rgba(9, 9, 11, .3);
+  border-right: 1px solid rgba(9, 9, 11, .3);
+  transform: rotate(45deg);
+}
+.cosmos-flow li { position: relative; display: grid; align-content: start; gap: 10px; }
+.cosmos-flow .node {
+  width: 11px;
+  height: 11px;
+  margin-bottom: 26px;
   border-radius: 50%;
-  background: var(--ink);
+  background: #f8f8f9;
+  box-shadow: 0 0 0 1px var(--ink), 0 0 0 5px #f8f8f9;
+}
+.cosmos-flow li:first-child .node { background: var(--ink); }
+.cosmos-flow b { margin-top: 4px; }
+@media (hover: hover) and (pointer: fine) and (min-width: 721px) {
+  .who-list li:hover .n,
+  .who-list li:hover .d { color: var(--ink); }
 }
 .cosmo-stage {
   display: grid;
@@ -4040,17 +4064,16 @@ html.veil-in.veil-settle .page-veil {
 }
 
 @media (max-width: 720px) {
-  .cosmo-block { margin-top: 64px; }
-  .cosmo-cols { grid-template-columns: 1fr; margin-top: 24px; }
-  .cosmo-col,
-  .cosmo-col + .cosmo-col {
-    padding: 22px 0;
-    border-left: 0;
-    border-bottom: 1px solid rgba(9, 9, 11, .08);
-  }
-  .cosmo-col b { margin-top: 6px; font-size: 24px; }
-  .cosmo-cols.is-flow .cosmo-col::before,
-  .cosmo-cols.is-flow .cosmo-col + .cosmo-col::before { display: none; }
+  .cosmo-block { margin-top: 72px; }
+  .cosmo-who { grid-template-columns: 1fr; gap: 28px; }
+  .who-list li { grid-template-columns: 32px minmax(0, 1fr); gap: 6px 12px; padding: 22px 0; }
+  .who-list .d { grid-column: 2; }
+  .who-list b,
+  .cosmos-flow b { font-size: 22px; }
+  .cosmos-flow { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; padding: 28px 24px 28px 52px; border-radius: 20px; }
+  .cosmos-flow::before { top: 34px; bottom: 40px; left: 29px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, rgba(9, 9, 11, .28), rgba(9, 9, 11, .1)); }
+  .cosmos-flow::after { content: none; }
+  .cosmos-flow .node { position: absolute; left: -28px; top: 1px; margin: 0; }
 }
 
 @media (max-width: 720px) {

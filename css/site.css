@@ -2575,19 +2575,19 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   margin: -100px 0 0 -100px;
   border-radius: 3px;
   transform: rotateX(60deg) rotateZ(45deg);
-  /* Idle = see-through glass over the gray stage (not milky white). */
-  border: 1px solid rgba(255, 255, 255, .7);
-  background-color: rgba(255, 255, 255, .1);
+  /* Idle = liquid glass face — denser than foil so it still reads as a slab. */
+  border: 1px solid rgba(255, 255, 255, .75);
+  background-color: rgba(255, 255, 255, .22);
   background-image:
-    linear-gradient(128deg, rgba(255, 255, 255, .72) 0%, rgba(255, 255, 255, .12) 34%, rgba(255, 255, 255, 0) 62%),
-    linear-gradient(310deg, rgba(255, 255, 255, .35) 0%, transparent 38%);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  backdrop-filter: blur(18px) saturate(1.5);
+    linear-gradient(128deg, rgba(255, 255, 255, .78) 0%, rgba(255, 255, 255, .18) 34%, rgba(255, 255, 255, .04) 62%),
+    linear-gradient(310deg, rgba(255, 255, 255, .4) 0%, transparent 38%);
+  -webkit-backdrop-filter: blur(16px) saturate(1.45);
+  backdrop-filter: blur(16px) saturate(1.45);
   box-shadow:
-    12px 16px 26px rgba(9, 9, 11, .03),
-    inset 0 1px 0 rgba(255, 255, 255, .9),
-    inset 0 -1px 0 rgba(255, 255, 255, .25),
-    inset 1px 0 0 rgba(255, 255, 255, .35);
+    14px 18px 30px rgba(9, 9, 11, .045),
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    inset 0 -1px 0 rgba(255, 255, 255, .28),
+    inset 1px 0 0 rgba(255, 255, 255, .4);
   transition:
     border-color .5s var(--ease),
     background-color .5s var(--ease),
@@ -2597,16 +2597,17 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
     -webkit-backdrop-filter .5s var(--ease);
 }
 .cosmo-stack .plate b {
-  --t: 3px;
+  /* Side thickness — was 3px / .38 and read as paper-thin glass. */
+  --t: 9px;
   position: absolute;
   z-index: 1;
   left: calc(var(--cx) - 141.42px);
   top: 0;
   width: 282.84px;
   height: calc(70.71px + var(--t));
-  background: linear-gradient(90deg, var(--side-l, #e2e2e8) 50%, var(--side-r, #d0d0d8) 50%);
+  background: linear-gradient(90deg, var(--side-l, #e8e8ee) 50%, var(--side-r, #c8c8d0) 50%);
   clip-path: polygon(0 0, 50% 70.71px, 100% 0, 100% var(--t), 50% calc(70.71px + var(--t)), 0 var(--t));
-  opacity: .38;
+  opacity: .72;
   transition: --side-l .5s var(--ease), --side-r .5s var(--ease), opacity .5s var(--ease);
 }
 .cosmo-stack .plate span {
@@ -2641,9 +2642,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmo-stage[data-layer="0"] .p0 b,
 .cosmo-stage[data-layer="1"] .p1 b,
 .cosmo-stage[data-layer="2"] .p2 b {
-  --side-l: #ebebee;
-  --side-r: #d8d8de;
-  opacity: .92;
+  --side-l: #f0f0f3;
+  --side-r: #d2d2da;
+  opacity: 1;
 }
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,

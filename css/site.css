@@ -2389,8 +2389,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   32% { opacity: .22; }
   40% { opacity: .12; }
 }
+/* Thinking: spiral matrix replaces the blue pulse; status copy stays. */
 .cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-dmx { display: grid; }
-.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-reply,
 .cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-pulse { display: none; }
 .fu-reply { animation: fu-in .3s var(--ease); }
 @keyframes fu-in { from { opacity: 0; } }

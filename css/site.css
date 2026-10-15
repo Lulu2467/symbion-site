@@ -2210,98 +2210,40 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmos-flow .d { font-size: 15px; line-height: 1.6; color: var(--muted); }
 .who-list li > * { transition: color .3s var(--ease); }
 .cosmos-flow {
-  --rail-t: .1667;
-  --rail-ease: cubic-bezier(.22, 1, .36, 1);
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
   margin: 48px 0 0;
-  padding: 48px 48px 52px;
+  padding: 40px 40px 44px;
   list-style: none;
   border-radius: 28px;
   background: #f8f8f9;
   box-shadow: inset 0 0 0 1px rgba(9, 9, 11, .05);
 }
-@property --rail-t { syntax: "<number>"; inherits: true; initial-value: 0.1667; }
-/* Static hairline track — progress no longer ends mid-gap. */
-.cosmos-flow::before {
-  content: "";
-  position: absolute;
-  top: 54px;
-  left: 48px;
-  right: 48px;
-  height: 1px;
-  background: rgba(9, 9, 11, .1);
-  pointer-events: none;
+/* Desktop: no progress bar / rings — step state lives in type. */
+.cosmos-flow::before,
+.cosmos-flow::after { content: none; display: none; }
+.cosmos-flow li { position: relative; display: grid; align-content: start; gap: 8px; }
+.cosmos-flow .node { display: none; }
+.cosmos-flow .k {
+  margin: 0 0 2px;
+  transition: color .35s var(--ease);
 }
-/* Ink trail + end-cap that land on each column’s centered node. */
-.cosmos-flow::after {
-  content: "";
-  position: absolute;
-  top: 53px;
-  left: 48px;
-  width: calc((100% - 96px) * var(--rail-t));
-  height: 3px;
-  border-radius: 999px;
-  background: var(--ink);
-  box-shadow: 0 0 0 1px #f8f8f9;
-  transform-origin: left center;
-  pointer-events: none;
-  opacity: 0;
-}
-.cosmos-flow.is-live::after {
-  opacity: 1;
-  transition: width .75s var(--rail-ease);
-}
-.cosmos-flow[data-step="0"] { --rail-t: .1667; }
-.cosmos-flow[data-step="1"] { --rail-t: .5; }
-.cosmos-flow[data-step="2"] { --rail-t: .8333; }
-.cosmos-flow li { position: relative; display: grid; align-content: start; gap: 10px; }
-.cosmos-flow .node {
-  width: 10px;
-  height: 10px;
-  margin: 0 auto 28px;
-  border-radius: 50%;
-  background: transparent;
-  box-shadow: inset 0 0 0 1.5px rgba(9, 9, 11, .22);
-  transition:
-    background-color .45s var(--rail-ease),
-    box-shadow .45s var(--rail-ease),
-    transform .55s var(--rail-ease);
-}
-.cosmos-flow li:first-child .node {
-  background: var(--ink);
-  box-shadow: 0 0 0 4px rgba(9, 9, 11, .06);
-}
-.cosmos-flow .k,
-.cosmos-flow b,
-.cosmos-flow .d { text-align: center; }
-.cosmos-flow b { margin-top: 4px; }
+.cosmos-flow b { margin-top: 0; transition: color .35s var(--ease); }
+.cosmos-flow .d { transition: color .35s var(--ease); }
 .cosmos-flow .flow-ui { text-align: left; }
 .cosmos-flow.is-live li { cursor: pointer; }
-.cosmos-flow.is-live li .node {
-  background: transparent;
-  box-shadow: inset 0 0 0 1.5px rgba(9, 9, 11, .2);
-  transform: scale(1);
-}
-.cosmos-flow.is-live li.is-done .node {
-  background: var(--ink);
-  box-shadow: none;
-  transform: scale(.88);
-}
-.cosmos-flow.is-live li.is-on .node {
-  background: var(--ink);
-  box-shadow:
-    0 0 0 5px #f8f8f9,
-    0 0 0 6px var(--ink),
-    0 0 0 12px rgba(9, 9, 11, .05);
-  transform: scale(1.08);
-}
-.cosmos-flow.is-live b,
-.cosmos-flow.is-live .d { transition: color .4s var(--ease); }
+.cosmos-flow.is-live li.is-on .k { color: var(--ink); }
+.cosmos-flow.is-live li:not(.is-on) .k { color: #c4c4cc; }
 .cosmos-flow.is-live li:not(.is-on) b { color: #a1a1aa; }
-.cosmos-flow.is-live li:not(.is-on) .d { color: #a1a1aa; }
+.cosmos-flow.is-live li:not(.is-on) .d { color: #b4b4bb; }
+.cosmos-flow.is-live li.is-on b {
+  color: var(--ink);
+  box-shadow: inset 0 -1.5px 0 0 var(--ink);
+  padding-bottom: 2px;
+  width: fit-content;
+}
 .flow-ui {
   display: grid;
   gap: 8px;
@@ -2388,9 +2330,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   transform-origin: 0 100%;
   transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
 }
-.flow-ui.fu-chat { gap: 18px; padding: 16px 16px 14px; }
-.fu-thread { display: grid; gap: 12px; min-height: 100px; padding-bottom: 4px; align-content: end; }
-.fu-chat .fu-input { margin-top: 2px; }
+/* Match other flow cards: content from the top, same padding rhythm. */
+.flow-ui.fu-chat { gap: 14px; padding: 14px; }
+.fu-thread { display: grid; gap: 10px; min-height: 0; align-content: start; }
 .fu-msg.is-me { transform-origin: 100% 100%; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
@@ -2486,9 +2428,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   .flow-ui,
   .fu-toggle,
   .fu-toggle i,
-  .cosmos-flow.is-live::before,
-  .cosmos-flow.is-live::after,
-  .cosmos-flow .node { transition: none; }
+  .cosmos-flow .k,
+  .cosmos-flow b,
+  .cosmos-flow .d { transition: none; }
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   .who-list li:hover .n,
@@ -4329,6 +4271,9 @@ html.veil-in.veil-settle .page-veil {
   .cosmos-flow b { font-size: 22px; }
   .cosmos-flow { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; padding: 28px 24px 28px 52px; border-radius: 20px; }
   .cosmos-flow::before {
+    content: "";
+    display: block;
+    position: absolute;
     top: 34px;
     bottom: 40px;
     left: 29px;
@@ -4336,17 +4281,21 @@ html.veil-in.veil-settle .page-veil {
     width: 1px;
     height: auto;
     background: rgba(9, 9, 11, .1);
+    pointer-events: none;
   }
-  .cosmos-flow::after { display: none; }
-  .cosmos-flow .k,
-  .cosmos-flow b,
-  .cosmos-flow .d { text-align: left; }
   .cosmos-flow .node {
+    display: block;
     position: absolute;
     left: -28px;
-    top: 1px;
+    top: 4px;
+    width: 8px;
+    height: 8px;
     margin: 0;
+    border-radius: 50%;
+    background: var(--ink);
+    box-shadow: 0 0 0 4px #f8f8f9;
   }
+  .cosmos-flow.is-live li.is-on b { box-shadow: none; padding-bottom: 0; }
   .flow-ui { margin-top: 14px; }
 }
 

@@ -53,7 +53,14 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: clip; scroll-padding-top: calc(var(--header) + 12px); }
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  scroll-padding-top: calc(var(--header) + 12px);
+  /* Short pages (关于) often have no scrollbar; long pages do. Reserve the
+     gutter so the centered nav does not shift when switching between them. */
+  scrollbar-gutter: stable;
+}
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -246,7 +253,10 @@ body:not([data-page="home"]) .nav::after {
 .nav-links > a.is-current {
   background: var(--ink);
   color: #fff;
-  font-weight: 500;
+  /* Keep the same weight as idle links. Bolding Spaces/Citta/Cosmo changes
+     their width by ~1px and re-centers the whole nav group; 关于 is Chinese
+     and does not grow the same way, so the bar appears to jump. */
+  font-weight: 400;
 }
 .nav-links > a.is-current:hover {
   background: var(--ink);

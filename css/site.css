@@ -2335,17 +2335,64 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-pulse { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #74c1e6; }
 .cosmos-flow li.is-on .fu-pulse { animation: fu-pulse 1.4s var(--ease) infinite; }
 @keyframes fu-pulse { 50% { opacity: .3; transform: scale(.7); } }
-.fu-msg { transition: opacity .35s var(--ease), transform .35s var(--ease); }
-.fu-msg:has(> .is-pending) { opacity: 0; transform: translateY(4px); }
-.fu-msg .is-caret::after {
+.fu-chat { gap: 10px; }
+.fu-thread { display: grid; gap: 8px; min-height: 84px; align-content: end; }
+.fu-msg.is-me { transform-origin: 100% 100%; }
+.fu-msg.is-ai { transform-origin: 0 100%; }
+.fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
+.cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
+.cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-msg.is-ai { opacity: 0; transform: translateY(10px) scale(.94); }
+.fu-dots { display: none; align-items: center; gap: 3px; height: 1.4em; }
+.fu-dots i { width: 4px; height: 4px; border-radius: 50%; background: #a1a1aa; animation: fu-dot 1s var(--ease) infinite; }
+.fu-dots i:nth-child(2) { animation-delay: .15s; }
+.fu-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes fu-dot { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-3px); opacity: 1; } }
+.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-dots { display: inline-flex; }
+.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-reply,
+.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-pulse { display: none; }
+.fu-reply { animation: fu-in .3s var(--ease); }
+@keyframes fu-in { from { opacity: 0; } }
+.fu-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 5px 0 12px;
+  border: 1px solid rgba(9, 9, 11, .08);
+  border-radius: 12px;
+  background: #fafafa;
+}
+.fu-field { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; color: var(--ink); }
+.fu-field:empty:not(.is-caret)::before { content: attr(data-placeholder); color: #a1a1aa; }
+.fu-field.is-caret::after {
   content: "";
   display: inline-block;
   width: 1px;
   height: 1em;
-  margin-left: 2px;
+  margin-left: 1px;
   vertical-align: -.15em;
-  background: currentColor;
+  background: var(--ink);
   animation: fu-blink 1s steps(1) infinite;
+}
+.fu-send {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: #e4e4e7;
+  color: #fff;
+  transition: background-color .25s var(--ease), transform .2s var(--ease);
+}
+.fu-send svg { width: 14px; height: 14px; }
+.fu-input:has(.fu-field:not(:empty)) .fu-send { background: var(--ink); }
+.cosmos-flow li.is-sending .fu-send { transform: scale(.86); }
+@media (prefers-reduced-motion: reduce) {
+  .fu-dots i,
+  .fu-reply { animation: none; }
+  .fu-msg,
+  .fu-send { transition: none; }
 }
 .fu-row { transition: opacity .4s var(--ease), transform .4s var(--ease); }
 .cosmos-flow.is-live li.is-on:not(.is-typed) .fu-row { opacity: 0; transform: translateY(4px); }

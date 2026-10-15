@@ -245,6 +245,14 @@
   let flowTimer = 0;
   let flowDwell = 2600;
   let typeTimers = [];
+  const chatFields = flow ? [...flow.querySelectorAll(".fu-field")] : [];
+  const chatStates = ["is-typed", "is-sending", "is-sent", "is-thinking", "is-replied"];
+  function later(fn, ms) { typeTimers.push(window.setTimeout(fn, ms)); }
+  function typeInto(el, text, at, speed) {
+    const chars = [...text];
+    chars.forEach((_, k) => later(() => { el.textContent = chars.slice(0, k + 1).join(""); }, at + (k + 1) * speed));
+    return at + chars.length * speed;
+  }
   function typeStep(li) {
     typeTimers.forEach((id) => window.clearTimeout(id));
     typeTimers = [];
@@ -252,25 +260,40 @@
       t.textContent = t.dataset.full;
       t.classList.remove("is-pending", "is-caret");
     });
-    flowSteps.forEach((el) => el.classList.remove("is-typed"));
+    chatFields.forEach((f) => { f.textContent = ""; f.classList.remove("is-caret"); });
+    flowSteps.forEach((el) => el.classList.remove(...chatStates));
+    const field = li.querySelector(".fu-field");
     const targets = [...li.querySelectorAll("[data-type]")];
-    if (flowReduce.matches || !targets.length) {
-      li.classList.add("is-typed");
+    if (flowReduce.matches || (!field && !targets.length)) {
+      li.classList.add(...chatStates.filter((c) => c !== "is-sending"));
       return 0;
     }
+    if (field) {
+      let at = 320;
+      later(() => field.classList.add("is-caret"), at);
+      at = typeInto(field, field.dataset.text, at, 55) + 280;
+      later(() => li.classList.add("is-sending"), at);
+      at += 200;
+      later(() => {
+        field.textContent = "";
+        field.classList.remove("is-caret");
+        li.classList.remove("is-sending");
+        li.classList.add("is-sent");
+      }, at);
+      at += 520;
+      later(() => li.classList.add("is-thinking"), at);
+      at += 1100;
+      later(() => li.classList.add("is-replied", "is-typed"), at);
+      return at;
+    }
     targets.forEach((t) => { t.textContent = ""; t.classList.add("is-pending"); });
-    const speed = 60;
     let at = 280;
     targets.forEach((t) => {
-      const full = [...t.dataset.full];
-      typeTimers.push(window.setTimeout(() => t.classList.replace("is-pending", "is-caret"), at));
-      full.forEach((_, k) => {
-        typeTimers.push(window.setTimeout(() => { t.textContent = full.slice(0, k + 1).join(""); }, at + (k + 1) * speed));
-      });
-      at += full.length * speed + 320;
-      typeTimers.push(window.setTimeout(() => t.classList.remove("is-caret"), at - 160));
+      later(() => t.classList.replace("is-pending", "is-caret"), at);
+      at = typeInto(t, t.dataset.full, at, 60) + 320;
+      later(() => t.classList.remove("is-caret"), at - 160);
     });
-    typeTimers.push(window.setTimeout(() => li.classList.add("is-typed"), at));
+    later(() => li.classList.add("is-typed"), at);
     return at;
   }
   function setFlow(i) {

@@ -2597,17 +2597,17 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
     -webkit-backdrop-filter .5s var(--ease);
 }
 .cosmo-stack .plate b {
-  /* Side thickness — was 3px / .38 and read as paper-thin glass. */
-  --t: 9px;
+  /* Side thickness — isometric foreshortening needs ~12px to read as a slab. */
+  --t: 12px;
   position: absolute;
   z-index: 1;
   left: calc(var(--cx) - 141.42px);
   top: 0;
   width: 282.84px;
   height: calc(70.71px + var(--t));
-  background: linear-gradient(90deg, var(--side-l, #e8e8ee) 50%, var(--side-r, #c8c8d0) 50%);
+  background: linear-gradient(90deg, var(--side-l, #ececf0) 50%, var(--side-r, #c4c4ce) 50%);
   clip-path: polygon(0 0, 50% 70.71px, 100% 0, 100% var(--t), 50% calc(70.71px + var(--t)), 0 var(--t));
-  opacity: .72;
+  opacity: .88;
   transition: --side-l .5s var(--ease), --side-r .5s var(--ease), opacity .5s var(--ease);
 }
 .cosmo-stack .plate span {

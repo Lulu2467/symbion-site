@@ -2496,8 +2496,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 }
 .cosmo-layers.is-playing .cosmo-layer.is-on::after { animation: cosmo-tick 2.8s linear forwards; }
 @keyframes cosmo-tick { to { transform: scaleX(1); } }
-@property --side-l { syntax: "<color>"; inherits: true; initial-value: #ededf0; }
-@property --side-r { syntax: "<color>"; inherits: true; initial-value: #e1e1e6; }
+@property --side-l { syntax: "<color>"; inherits: true; initial-value: #f0f0f2; }
+@property --side-r { syntax: "<color>"; inherits: true; initial-value: #e6e6ea; }
 .cosmo-visual { display: grid; justify-items: center; gap: 20px; }
 .cosmo-stack {
   --cx: 38%;
@@ -2541,24 +2541,24 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   height: 200px;
   margin: -100px 0 0 -100px;
   border-radius: 2px;
-  box-shadow: 18px 18px 36px rgba(9, 9, 11, .06);
+  box-shadow: 16px 20px 36px rgba(9, 9, 11, .045);
   transform: rotateX(60deg) rotateZ(45deg);
-  border: 1px solid rgba(9, 9, 11, .1);
-  background-color: rgba(250, 250, 251, .62);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 70%);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  transition: border-color .5s var(--ease), background-color .5s var(--ease), box-shadow .7s var(--ease);
+  border: 1px solid rgba(9, 9, 11, .08);
+  background-color: rgba(252, 252, 253, .7);
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 62%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: border-color .5s var(--ease), background-color .5s var(--ease), box-shadow .7s var(--ease), background-image .5s var(--ease);
 }
 .cosmo-stack .plate b {
-  --t: 6px;
+  --t: 4px;
   position: absolute;
   z-index: 1;
   left: calc(var(--cx) - 141.42px);
   top: 0;
   width: 282.84px;
   height: calc(70.71px + var(--t));
-  background: linear-gradient(90deg, var(--side-l, #ededf0) 50%, var(--side-r, #e1e1e6) 50%);
+  background: linear-gradient(90deg, var(--side-l, #f0f0f2) 50%, var(--side-r, #e6e6ea) 50%);
   clip-path: polygon(0 0, 50% 70.71px, 100% 0, 100% var(--t), 50% calc(70.71px + var(--t)), 0 var(--t));
   transition: --side-l .5s var(--ease), --side-r .5s var(--ease);
 }
@@ -2594,20 +2594,23 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmo-stage[data-layer="0"] .p0 b,
 .cosmo-stage[data-layer="1"] .p1 b,
 .cosmo-stage[data-layer="2"] .p2 b {
-  --side-l: #d4d4d8;
-  --side-r: #a1a1aa;
+  --side-l: #ebebee;
+  --side-r: #dddde2;
 }
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,
 .cosmo-stage[data-layer="2"] .p2 i {
-  border-color: rgba(9, 9, 11, .32);
-  background-color: #fdfdfd;
-  box-shadow: 26px 26px 48px rgba(9, 9, 11, .09);
+  border-color: rgba(9, 9, 11, .16);
+  background-color: #ffffff;
+  box-shadow:
+    18px 22px 40px rgba(9, 9, 11, .06),
+    0 1px 0 rgba(255, 255, 255, .9);
   background-image:
-    linear-gradient(rgba(116, 193, 230, .26) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 193, 230, .26) 1px, transparent 1px);
-  background-size: 25px 25px;
-  background-position: -1px -1px;
+    linear-gradient(rgba(9, 9, 11, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(9, 9, 11, .055) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(248, 249, 250, .4) 55%, transparent 80%);
+  background-size: 28px 28px, 28px 28px, auto;
+  background-position: -1px -1px, -1px -1px, 0 0;
 }
 .cosmo-stage[data-layer="0"] .p0 span,
 .cosmo-stage[data-layer="1"] .p1 span,

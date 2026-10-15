@@ -2580,8 +2580,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
     -webkit-backdrop-filter .5s var(--ease);
 }
 .cosmo-stack .plate b {
-  /* Idle sides stay faint; selected rules bump opacity + tone. */
-  --t: 12px;
+  /* Idle sides stay faint; selected rules bump opacity + tone. Keep --t thin so the plate reads as a sheet, not a block. */
+  --t: 5px;
   position: absolute;
   z-index: 1;
   left: calc(var(--cx) - 141.42px);
@@ -2639,7 +2639,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   box-shadow:
-    18px 24px 40px rgba(9, 9, 11, .08),
+    12px 16px 28px rgba(9, 9, 11, .06),
     0 1px 0 rgba(255, 255, 255, 1);
 }
 @media (prefers-reduced-motion: reduce) {

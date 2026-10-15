@@ -2328,12 +2328,12 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-ai {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   max-width: 100%;
-  padding: 2px 0;
+  padding: 0;
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.35;
+  line-height: 1;
   transform-origin: 0 100%;
   transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
 }
@@ -2344,21 +2344,21 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
 .cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-/* Dot Matrix — continuous soft spiral (no freeze / no dead keyframe gap). */
+/* Dot Matrix — sized to 1em so it sits flush with the status text. */
 .fu-dmx {
   display: grid;
   flex: none;
-  grid-template-columns: repeat(5, 2.5px);
-  grid-template-rows: repeat(5, 2.5px);
-  gap: 1.5px;
-  width: 18.5px;
-  height: 18.5px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: .12em;
+  width: 1em;
+  height: 1em;
   color: var(--ink);
 }
 .fu-dmx i {
   display: block;
-  width: 2.5px;
-  height: 2.5px;
+  width: 100%;
+  height: 100%;
   margin: 0;
   border-radius: 999px;
   background: currentColor;
@@ -2379,7 +2379,10 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   animation-duration: 2.6s;
   animation-delay: calc(var(--o, 0) * -0.104s);
 }
-.fu-reply { animation: fu-in .45s var(--ease); }
+.fu-reply {
+  line-height: 1;
+  animation: fu-in .45s var(--ease);
+}
 @keyframes fu-in { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 .fu-input {
   display: flex;

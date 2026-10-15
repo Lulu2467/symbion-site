@@ -2251,6 +2251,12 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   padding-bottom: 2px;
   width: fit-content;
 }
+/*
+  Flow-card type scale (nested mock, quieter than page titles):
+  13px / 500 ink  — primary (name, search, message, input)
+  12px / 400 muted — secondary (invoke status)
+  11px / 400 faint — tertiary (tags, subtitle, helper note)
+*/
 .flow-ui {
   display: grid;
   gap: 8px;
@@ -2269,31 +2275,62 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-row,
 .fu-card,
 .fu-msg { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.fu-search { height: 36px; padding: 0 12px; border-radius: 10px; background: #f4f4f5; color: var(--ink); }
+.fu-search {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: #f4f4f5;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+}
 .fu-search svg { width: 14px; height: 14px; flex: none; color: var(--faint); }
 .fu-caret { width: 1px; height: 14px; margin-left: -8px; background: var(--ink); opacity: 0; }
 .cosmos-flow li.is-on .fu-caret,
 .cosmos-flow:not(.is-live) .fu-caret { animation: fu-blink 1s steps(1) infinite; }
 @keyframes fu-blink { 50% { opacity: 1; } }
-.fu-row { padding: 6px 4px; }
+.fu-row { padding: 7px 4px; }
 .fu-row + .fu-row { border-top: 1px solid rgba(9, 9, 11, .06); }
 .fu-av {
   display: grid;
   place-items: center;
   flex: none;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #eef6fa;
   box-shadow: inset 0 0 0 1px rgba(116, 193, 230, .45);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
   color: var(--ink);
 }
-.fu-name { overflow: hidden; color: var(--ink); white-space: nowrap; text-overflow: ellipsis; }
-.fu-row em { margin-left: auto; font-style: normal; font-size: 11px; color: var(--faint); }
+.fu-name {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fu-row em {
+  margin-left: auto;
+  padding-left: 8px;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--faint);
+}
 .fu-card { padding: 4px; }
-.fu-meta { display: grid; gap: 2px; min-width: 0; }
-.fu-sub { font-size: 11px; color: var(--faint); }
+.fu-meta { display: grid; gap: 3px; min-width: 0; }
+.fu-sub {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--faint);
+}
 .fu-toggle {
   position: relative;
   flex: none;
@@ -2321,18 +2358,34 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmos-flow li.is-on .fu-toggle i,
 .cosmos-flow li.is-done .fu-toggle i,
 .cosmos-flow:not(.is-live) .fu-toggle i { transform: translateX(14px); }
-.fu-note { padding: 8px 4px 0; border-top: 1px solid rgba(9, 9, 11, .06); font-size: 11px; color: var(--faint); }
-.fu-msg { width: fit-content; max-width: 100%; padding: 9px 13px; border-radius: 12px; font-size: 13px; }
+.fu-note {
+  padding: 8px 4px 0;
+  border-top: 1px solid rgba(9, 9, 11, .06);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--faint);
+}
+.fu-msg {
+  width: fit-content;
+  max-width: 100%;
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+}
 .fu-msg.is-me { margin-left: auto; background: var(--ink); color: #fff; }
-/* AI status is a light line — not a filled bubble (matrix felt heavy inside one). */
+/* Status is secondary to the user message — quieter type, matrix = 1em of that line. */
 .fu-ai {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   max-width: 100%;
   padding: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 400;
   line-height: 1.2;
   transform-origin: 0 100%;
   transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
@@ -2344,15 +2397,14 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
 .cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-/* Dot Matrix — a touch larger than the text so it reads as the status mark. */
 .fu-dmx {
   display: grid;
   flex: none;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
-  gap: .11em;
-  width: 1.15em;
-  height: 1.15em;
+  gap: .12em;
+  width: 1em;
+  height: 1em;
   color: var(--ink);
 }
 .fu-dmx i {
@@ -2393,8 +2445,18 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   border: 1px solid rgba(9, 9, 11, .08);
   border-radius: 12px;
   background: #fafafa;
+  font-size: 13px;
 }
-.fu-field { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; color: var(--ink); }
+.fu-field {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--ink);
+}
 .fu-field:empty:not(.is-caret)::before { content: attr(data-placeholder); color: #a1a1aa; }
 .fu-field.is-caret::after {
   content: "";
@@ -2568,29 +2630,30 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   margin: -100px 0 0 -100px;
   border-radius: 3px;
   transform: rotateX(60deg) rotateZ(45deg);
-  /* Idle = clear glass over gray stage — must not read as milky white. */
-  border: 1px solid rgba(255, 255, 255, .7);
-  background-color: rgba(255, 255, 255, .1);
+  /* Idle = quieter glass so the active plate can read clearly. */
+  border: 1px solid rgba(255, 255, 255, .4);
+  background-color: rgba(255, 255, 255, .05);
   background-image:
-    linear-gradient(128deg, rgba(255, 255, 255, .72) 0%, rgba(255, 255, 255, .12) 34%, rgba(255, 255, 255, 0) 62%),
-    linear-gradient(310deg, rgba(255, 255, 255, .35) 0%, transparent 38%);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  backdrop-filter: blur(18px) saturate(1.5);
+    linear-gradient(128deg, rgba(255, 255, 255, .45) 0%, rgba(255, 255, 255, .08) 34%, rgba(255, 255, 255, 0) 62%),
+    linear-gradient(310deg, rgba(255, 255, 255, .2) 0%, transparent 38%);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  backdrop-filter: blur(14px) saturate(1.35);
   box-shadow:
-    12px 16px 26px rgba(9, 9, 11, .03),
-    inset 0 1px 0 rgba(255, 255, 255, .9),
-    inset 0 -1px 0 rgba(255, 255, 255, .25),
-    inset 1px 0 0 rgba(255, 255, 255, .35);
+    8px 12px 20px rgba(9, 9, 11, .02),
+    inset 0 1px 0 rgba(255, 255, 255, .55),
+    inset 0 -1px 0 rgba(255, 255, 255, .12);
+  opacity: .78;
   transition:
     border-color .5s var(--ease),
     background-color .5s var(--ease),
     background-image .5s var(--ease),
     box-shadow .7s var(--ease),
+    opacity .5s var(--ease),
     backdrop-filter .5s var(--ease),
     -webkit-backdrop-filter .5s var(--ease);
 }
 .cosmo-stack .plate b {
-  /* Idle sides stay faint; selected rules bump opacity + tone. Keep --t thin so the plate reads as a sheet, not a block. */
+  /* Keep --t thin; selection is color + opacity, not a thick slab. */
   --t: 5px;
   position: absolute;
   z-index: 1;
@@ -2600,7 +2663,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   height: calc(70.71px + var(--t));
   background: linear-gradient(90deg, var(--side-l, #e2e2e8) 50%, var(--side-r, #c8c8d2) 50%);
   clip-path: polygon(0 0, 50% 70.71px, 100% 0, 100% var(--t), 50% calc(70.71px + var(--t)), 0 var(--t));
-  opacity: .34;
+  opacity: .16;
   transition: --side-l .5s var(--ease), --side-r .5s var(--ease), opacity .5s var(--ease);
 }
 .cosmo-stack .plate span {
@@ -2618,7 +2681,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
-  color: #a1a1aa;
+  color: #c4c4cc;
   transition: color .5s var(--ease);
 }
 .cosmo-stack .plate span::before {
@@ -2626,30 +2689,41 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   width: 24px;
   height: 1px;
   background: currentColor;
-  opacity: .6;
+  opacity: .45;
   transition: width .5s var(--ease), opacity .5s var(--ease);
 }
+.cosmo-stage[data-layer="0"] .p1 i,
+.cosmo-stage[data-layer="0"] .p2 i,
+.cosmo-stage[data-layer="1"] .p0 i,
+.cosmo-stage[data-layer="1"] .p2 i,
+.cosmo-stage[data-layer="2"] .p0 i,
+.cosmo-stage[data-layer="2"] .p1 i { opacity: .42; }
 .cosmo-stage[data-layer="0"] .p0,
 .cosmo-stage[data-layer="1"] .p1,
-.cosmo-stage[data-layer="2"] .p2 { transform: translateY(-14px); }
+.cosmo-stage[data-layer="2"] .p2 { transform: translateY(-18px); }
 .cosmo-stage[data-layer="0"] .p0 b,
 .cosmo-stage[data-layer="1"] .p1 b,
 .cosmo-stage[data-layer="2"] .p2 b {
-  --side-l: #f0f0f3;
-  --side-r: #d2d2da;
+  /* Cool ice sides from site --ice-blue; only on the active layer. */
+  --side-l: #e4f1f8;
+  --side-r: #b7d4e6;
   opacity: 1;
 }
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,
 .cosmo-stage[data-layer="2"] .p2 i {
-  /* Selected = solid porcelain white against glassy siblings. */
-  border-color: rgba(9, 9, 11, .1);
-  background-color: #ffffff;
-  background-image: linear-gradient(145deg, #ffffff 0%, #f7f7f8 72%, #f0f0f2 100%);
+  /* Selected = opaque sheet + light ice wash (not a rainbow stack). */
+  opacity: 1;
+  border-color: rgba(116, 193, 230, .42);
+  background-color: #f5fafd;
+  background-image:
+    linear-gradient(145deg, #ffffff 0%, #eef6fa 58%, #e2f0f7 100%),
+    linear-gradient(310deg, rgba(116, 193, 230, .22) 0%, transparent 44%);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   box-shadow:
-    12px 16px 28px rgba(9, 9, 11, .06),
+    14px 20px 34px rgba(9, 9, 11, .08),
+    0 0 0 1px rgba(116, 193, 230, .14),
     0 1px 0 rgba(255, 255, 255, 1);
 }
 @media (prefers-reduced-motion: reduce) {

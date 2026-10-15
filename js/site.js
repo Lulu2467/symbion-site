@@ -238,8 +238,41 @@
 
   const flow = document.querySelector(".cosmos-flow");
   const flowSteps = flow ? [...flow.children] : [];
+  const flowReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const typeTargets = flow ? [...flow.querySelectorAll("[data-type]")] : [];
+  typeTargets.forEach((t) => { t.dataset.full = t.textContent; });
   let flowIndex = 0;
   let flowTimer = 0;
+  let flowDwell = 2600;
+  let typeTimers = [];
+  function typeStep(li) {
+    typeTimers.forEach((id) => window.clearTimeout(id));
+    typeTimers = [];
+    typeTargets.forEach((t) => {
+      t.textContent = t.dataset.full;
+      t.classList.remove("is-pending", "is-caret");
+    });
+    flowSteps.forEach((el) => el.classList.remove("is-typed"));
+    const targets = [...li.querySelectorAll("[data-type]")];
+    if (flowReduce.matches || !targets.length) {
+      li.classList.add("is-typed");
+      return 0;
+    }
+    targets.forEach((t) => { t.textContent = ""; t.classList.add("is-pending"); });
+    const speed = 60;
+    let at = 280;
+    targets.forEach((t) => {
+      const full = [...t.dataset.full];
+      typeTimers.push(window.setTimeout(() => t.classList.replace("is-pending", "is-caret"), at));
+      full.forEach((_, k) => {
+        typeTimers.push(window.setTimeout(() => { t.textContent = full.slice(0, k + 1).join(""); }, at + (k + 1) * speed));
+      });
+      at += full.length * speed + 320;
+      typeTimers.push(window.setTimeout(() => t.classList.remove("is-caret"), at - 160));
+    });
+    typeTimers.push(window.setTimeout(() => li.classList.add("is-typed"), at));
+    return at;
+  }
   function setFlow(i) {
     flowIndex = i;
     flow.dataset.step = String(i);
@@ -247,23 +280,28 @@
       el.classList.toggle("is-on", n === i);
       el.classList.toggle("is-done", n < i);
     });
+    flowDwell = Math.max(2600, typeStep(flowSteps[i]) + 1600);
   }
+  function stopFlow() { window.clearTimeout(flowTimer); }
   function playFlow() {
-    window.clearInterval(flowTimer);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    flowTimer = window.setInterval(() => setFlow((flowIndex + 1) % flowSteps.length), 2600);
+    stopFlow();
+    if (flowReduce.matches) return;
+    flowTimer = window.setTimeout(() => {
+      setFlow((flowIndex + 1) % flowSteps.length);
+      playFlow();
+    }, flowDwell);
   }
   // Phones show all three steps at full strength; the stepped story is desktop only.
   if (flow && !window.matchMedia("(max-width: 720px)").matches) {
     flow.classList.add("is-live");
     setFlow(0);
     flowSteps.forEach((el, i) => el.addEventListener("click", () => { setFlow(i); playFlow(); }));
-    flow.addEventListener("mouseenter", () => window.clearInterval(flowTimer));
+    flow.addEventListener("mouseenter", stopFlow);
     flow.addEventListener("mouseleave", playFlow);
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) { setFlow(0); playFlow(); }
-        else window.clearInterval(flowTimer);
+        else stopFlow();
       }, { threshold: 0.4 }).observe(flow);
     } else {
       playFlow();

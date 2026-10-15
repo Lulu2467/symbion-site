@@ -2335,6 +2335,22 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-pulse { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #74c1e6; }
 .cosmos-flow li.is-on .fu-pulse { animation: fu-pulse 1.4s var(--ease) infinite; }
 @keyframes fu-pulse { 50% { opacity: .3; transform: scale(.7); } }
+.fu-msg { transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.fu-msg:has(> .is-pending) { opacity: 0; transform: translateY(4px); }
+.fu-msg .is-caret::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -.15em;
+  background: currentColor;
+  animation: fu-blink 1s steps(1) infinite;
+}
+.fu-row { transition: opacity .4s var(--ease), transform .4s var(--ease); }
+.cosmos-flow.is-live li.is-on:not(.is-typed) .fu-row { opacity: 0; transform: translateY(4px); }
+.cosmos-flow.is-live li.is-on:not(.is-typed) .fu-row + .fu-row { transition-delay: 0s; }
+.cosmos-flow.is-live li.is-on.is-typed .fu-row + .fu-row { transition-delay: .08s; }
 @media (prefers-reduced-motion: reduce) {
   .fu-caret,
   .fu-pulse { animation: none !important; }

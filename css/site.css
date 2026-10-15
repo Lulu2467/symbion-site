@@ -2545,37 +2545,10 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   transform: rotateX(60deg) rotateZ(45deg);
   border: 1px solid rgba(9, 9, 11, .08);
   background-color: rgba(252, 252, 253, .72);
-  background-repeat: no-repeat;
+  background-image: linear-gradient(145deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 62%);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  transition: border-color .5s var(--ease), background-color .5s var(--ease), box-shadow .7s var(--ease), opacity .5s var(--ease);
-}
-/* Identity: a quiet seal in the center — “可被认出”. */
-.cosmo-stack .p0 i {
-  background-image:
-    radial-gradient(circle at 50% 50%, transparent 22%, rgba(9, 9, 11, .08) 23%, rgba(9, 9, 11, .08) 26%, transparent 27%),
-    radial-gradient(circle at 50% 50%, rgba(9, 9, 11, .07) 0 3.5%, transparent 4%),
-    linear-gradient(145deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 62%);
-}
-/* Knowledge: dense ruled lines — “装着判断”. */
-.cosmo-stack .p1 i {
-  background-image:
-    repeating-linear-gradient(0deg, transparent 0 8px, rgba(9, 9, 11, .07) 8px 9px),
-    linear-gradient(145deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 62%);
-}
-/* Capability: open mesh + corner nodes — “接得出去”. */
-.cosmo-stack .p2 i {
-  background-image:
-    radial-gradient(circle at 14% 14%, rgba(9, 9, 11, .14) 0 2.5px, transparent 3px),
-    radial-gradient(circle at 86% 14%, rgba(9, 9, 11, .14) 0 2.5px, transparent 3px),
-    radial-gradient(circle at 14% 86%, rgba(9, 9, 11, .14) 0 2.5px, transparent 3px),
-    radial-gradient(circle at 86% 86%, rgba(9, 9, 11, .14) 0 2.5px, transparent 3px),
-    linear-gradient(rgba(9, 9, 11, .045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(9, 9, 11, .045) 1px, transparent 1px),
-    linear-gradient(145deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 62%);
-  background-size: auto, auto, auto, auto, 34px 34px, 34px 34px, auto;
-  background-position: 0 0, 0 0, 0 0, 0 0, -1px -1px, -1px -1px, 0 0;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
+  transition: border-color .5s var(--ease), background-color .5s var(--ease), box-shadow .7s var(--ease);
 }
 .cosmo-stack .plate b {
   --t: 4px;
@@ -2627,35 +2600,12 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmo-stage[data-layer="0"] .p0 i,
 .cosmo-stage[data-layer="1"] .p1 i,
 .cosmo-stage[data-layer="2"] .p2 i {
-  border-color: rgba(9, 9, 11, .18);
+  border-color: rgba(9, 9, 11, .16);
   background-color: #ffffff;
+  background-image: linear-gradient(145deg, #fff, rgba(248, 249, 250, .35) 55%, transparent 80%);
   box-shadow:
     18px 22px 40px rgba(9, 9, 11, .06),
     0 1px 0 rgba(255, 255, 255, .9);
-}
-.cosmo-stage[data-layer="0"] .p0 i {
-  background-image:
-    radial-gradient(circle at 50% 50%, transparent 20%, rgba(9, 9, 11, .16) 21.5%, rgba(9, 9, 11, .16) 25.5%, transparent 27%),
-    radial-gradient(circle at 50% 50%, rgba(9, 9, 11, .12) 0 4.5%, transparent 5%),
-    linear-gradient(145deg, #fff, rgba(248, 249, 250, .35) 55%, transparent 80%);
-}
-.cosmo-stage[data-layer="1"] .p1 i {
-  background-image:
-    repeating-linear-gradient(0deg, transparent 0 6px, rgba(9, 9, 11, .11) 6px 7px),
-    linear-gradient(145deg, #fff, rgba(248, 249, 250, .35) 55%, transparent 80%);
-}
-.cosmo-stage[data-layer="2"] .p2 i {
-  background-image:
-    radial-gradient(circle at 14% 14%, rgba(9, 9, 11, .28) 0 3px, transparent 3.5px),
-    radial-gradient(circle at 86% 14%, rgba(9, 9, 11, .28) 0 3px, transparent 3.5px),
-    radial-gradient(circle at 14% 86%, rgba(9, 9, 11, .28) 0 3px, transparent 3.5px),
-    radial-gradient(circle at 86% 86%, rgba(9, 9, 11, .28) 0 3px, transparent 3.5px),
-    linear-gradient(rgba(9, 9, 11, .08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(9, 9, 11, .08) 1px, transparent 1px),
-    linear-gradient(145deg, #fff, rgba(248, 249, 250, .35) 55%, transparent 80%);
-  background-size: auto, auto, auto, auto, 34px 34px, 34px 34px, auto;
-  background-position: 0 0, 0 0, 0 0, 0 0, -1px -1px, -1px -1px, 0 0;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat, no-repeat;
 }
 .cosmo-stage[data-layer="0"] .p0 span,
 .cosmo-stage[data-layer="1"] .p1 span,

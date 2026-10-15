@@ -2388,8 +2388,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   transform-origin: 0 100%;
   transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
 }
-.fu-chat { gap: 10px; }
-.fu-thread { display: grid; gap: 8px; min-height: 84px; align-content: end; }
+.flow-ui.fu-chat { gap: 18px; padding: 16px 16px 14px; }
+.fu-thread { display: grid; gap: 12px; min-height: 100px; padding-bottom: 4px; align-content: end; }
+.fu-chat .fu-input { margin-top: 2px; }
 .fu-msg.is-me { transform-origin: 100% 100%; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,

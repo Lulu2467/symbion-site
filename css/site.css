@@ -2341,12 +2341,18 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-note { padding: 8px 4px 0; border-top: 1px solid rgba(9, 9, 11, .06); font-size: 11px; color: var(--faint); }
 .fu-msg { width: fit-content; max-width: 100%; padding: 8px 12px; border-radius: 12px; }
 .fu-msg.is-me { margin-left: auto; background: var(--ink); color: #fff; }
-.fu-msg.is-ai {
+/* AI status is a light line — not a filled bubble (matrix felt heavy inside one). */
+.fu-ai {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f4f4f5;
+  max-width: 100%;
+  padding: 2px 0;
   color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+  transform-origin: 0 100%;
+  transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
 }
 .fu-pulse { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #74c1e6; }
 .cosmos-flow li.is-on .fu-pulse { animation: fu-pulse 1.4s var(--ease) infinite; }
@@ -2354,11 +2360,10 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-chat { gap: 10px; }
 .fu-thread { display: grid; gap: 8px; min-height: 84px; align-content: end; }
 .fu-msg.is-me { transform-origin: 100% 100%; }
-.fu-msg.is-ai { transform-origin: 0 100%; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
-.cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-msg.is-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-/* Dot Matrix–style Core Spiral for invoke thinking (dotmatrix.zzzzshawn.cloud). */
+.cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-ai { opacity: 0; transform: translateY(10px) scale(.94); }
+/* Dot Matrix Core Spiral — sits beside status text, no bubble chrome. */
 .fu-dmx {
   display: none;
   flex: none;
@@ -2389,7 +2394,6 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   32% { opacity: .22; }
   40% { opacity: .12; }
 }
-/* Thinking: spiral matrix replaces the blue pulse; status copy stays. */
 .cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-dmx { display: grid; }
 .cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-pulse { display: none; }
 .fu-reply { animation: fu-in .3s var(--ease); }

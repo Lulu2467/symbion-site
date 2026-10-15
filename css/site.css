@@ -2341,7 +2341,13 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-note { padding: 8px 4px 0; border-top: 1px solid rgba(9, 9, 11, .06); font-size: 11px; color: var(--faint); }
 .fu-msg { width: fit-content; max-width: 100%; padding: 8px 12px; border-radius: 12px; }
 .fu-msg.is-me { margin-left: auto; background: var(--ink); color: #fff; }
-.fu-msg.is-ai { background: #f4f4f5; color: var(--muted); }
+.fu-msg.is-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f4f5;
+  color: var(--muted);
+}
 .fu-pulse { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #74c1e6; }
 .cosmos-flow li.is-on .fu-pulse { animation: fu-pulse 1.4s var(--ease) infinite; }
 @keyframes fu-pulse { 50% { opacity: .3; transform: scale(.7); } }
@@ -2352,12 +2358,38 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
 .cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-msg.is-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-.fu-dots { display: none; align-items: center; gap: 3px; height: 1.4em; }
-.fu-dots i { width: 4px; height: 4px; border-radius: 50%; background: #a1a1aa; animation: fu-dot 1s var(--ease) infinite; }
-.fu-dots i:nth-child(2) { animation-delay: .15s; }
-.fu-dots i:nth-child(3) { animation-delay: .3s; }
-@keyframes fu-dot { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-3px); opacity: 1; } }
-.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-dots { display: inline-flex; }
+/* Dot Matrix–style Core Spiral for invoke thinking (dotmatrix.zzzzshawn.cloud). */
+.fu-dmx {
+  display: none;
+  flex: none;
+  grid-template-columns: repeat(5, 2.5px);
+  grid-template-rows: repeat(5, 2.5px);
+  gap: 1.5px;
+  width: 18.5px;
+  height: 18.5px;
+  color: var(--ink);
+}
+.fu-dmx i {
+  display: block;
+  width: 2.5px;
+  height: 2.5px;
+  margin: 0;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: .12;
+  font-style: normal;
+  animation: fu-dmx-spiral 1.5s linear infinite;
+  animation-delay: calc(var(--o, 0) * .06s);
+}
+@keyframes fu-dmx-spiral {
+  0%, 100% { opacity: .1; }
+  8% { opacity: 1; }
+  16% { opacity: .72; }
+  24% { opacity: .42; }
+  32% { opacity: .22; }
+  40% { opacity: .12; }
+}
+.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-dmx { display: grid; }
 .cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-reply,
 .cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-pulse { display: none; }
 .fu-reply { animation: fu-in .3s var(--ease); }
@@ -2399,8 +2431,9 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-input:has(.fu-field:not(:empty)) .fu-send { background: var(--ink); }
 .cosmos-flow li.is-sending .fu-send { transform: scale(.86); }
 @media (prefers-reduced-motion: reduce) {
-  .fu-dots i,
+  .fu-dmx i,
   .fu-reply { animation: none; }
+  .fu-dmx i { opacity: .45; }
   .fu-msg,
   .fu-send { transition: none; }
 }

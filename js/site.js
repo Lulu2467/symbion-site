@@ -282,7 +282,7 @@
       }, at);
       at += 520;
       later(() => li.classList.add("is-thinking"), at);
-      at += 1100;
+      at += 1800;
       later(() => li.classList.add("is-replied", "is-typed"), at);
       return at;
     }

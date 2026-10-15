@@ -14,7 +14,7 @@
   <meta property="og:description" content="Cosmo 承载身份、知识与能力。众多 Cosmo 聚合成 Cosmos，别人可以通过 Citta 订阅、询问、调用。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/site.css?v=ice135">
+  <link rel="stylesheet" href="../css/site.css?v=ice136">
 </head>
 <body data-root=".." data-page="cosmo">
   <header class="nav" id="site-nav"></header>
@@ -99,7 +99,18 @@
           <div class="flow-ui fu-chat" aria-hidden="true">
             <div class="fu-thread">
               <div class="fu-msg is-me">@产业分析 帮我判断这个赛道</div>
-              <div class="fu-msg is-ai"><i class="fu-pulse"></i><span class="fu-dots"><i></i><i></i><i></i></span><span class="fu-reply">Citta 正在调用产业分析 Cosmo</span></div>
+              <div class="fu-msg is-ai">
+                <i class="fu-pulse"></i>
+                <!-- Thinking loader: Dot Matrix Core Spiral (https://dotmatrix.zzzzshawn.cloud/) -->
+                <span class="fu-dmx" aria-hidden="true">
+                  <i style="--o:0"></i><i style="--o:1"></i><i style="--o:2"></i><i style="--o:3"></i><i style="--o:4"></i>
+                  <i style="--o:15"></i><i style="--o:16"></i><i style="--o:17"></i><i style="--o:18"></i><i style="--o:5"></i>
+                  <i style="--o:14"></i><i style="--o:23"></i><i style="--o:24"></i><i style="--o:19"></i><i style="--o:6"></i>
+                  <i style="--o:13"></i><i style="--o:22"></i><i style="--o:21"></i><i style="--o:20"></i><i style="--o:7"></i>
+                  <i style="--o:12"></i><i style="--o:11"></i><i style="--o:10"></i><i style="--o:9"></i><i style="--o:8"></i>
+                </span>
+                <span class="fu-reply">Citta 正在调用产业分析 Cosmo</span>
+              </div>
             </div>
             <div class="fu-input"><span class="fu-field" data-text="@产业分析 帮我判断这个赛道" data-placeholder="给 Citta 发消息"></span><span class="fu-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg></span></div>
           </div>
@@ -111,6 +122,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="../js/site.js?v=ice59"></script>
+  <script src="../js/site.js?v=ice60"></script>
 </body>
 </html>

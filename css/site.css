@@ -2210,6 +2210,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmos-flow .d { font-size: 15px; line-height: 1.6; color: var(--muted); }
 .who-list li > * { transition: color .3s var(--ease); }
 .cosmos-flow {
+  --rail-t: .1667;
+  --rail-ease: cubic-bezier(.22, 1, .36, 1);
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2221,40 +2223,81 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   background: #f8f8f9;
   box-shadow: inset 0 0 0 1px rgba(9, 9, 11, .05);
 }
-@property --flow-p { syntax: "<length-percentage>"; inherits: true; initial-value: 0%; }
+@property --rail-t { syntax: "<number>"; inherits: true; initial-value: 0.1667; }
+/* Static hairline track — progress no longer ends mid-gap. */
 .cosmos-flow::before {
+  content: "";
+  position: absolute;
+  top: 54px;
+  left: 48px;
+  right: 48px;
+  height: 1px;
+  background: rgba(9, 9, 11, .1);
+  pointer-events: none;
+}
+/* Ink trail + end-cap that land on each column’s centered node. */
+.cosmos-flow::after {
   content: "";
   position: absolute;
   top: 53px;
   left: 48px;
-  right: 48px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(9, 9, 11, .28), rgba(9, 9, 11, .1));
+  width: calc((100% - 96px) * var(--rail-t));
+  height: 3px;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px #f8f8f9;
+  transform-origin: left center;
+  pointer-events: none;
+  opacity: 0;
 }
-.cosmos-flow.is-live::before {
-  background: linear-gradient(90deg, var(--ink) 0 var(--flow-p), rgba(9, 9, 11, .12) var(--flow-p) 100%);
-  transition: --flow-p .9s var(--ease);
+.cosmos-flow.is-live::after {
+  opacity: 1;
+  transition: width .75s var(--rail-ease);
 }
-/* Progress to each node; step 3 fills through the end (no leftover gray rail). */
-.cosmos-flow[data-step="0"] { --flow-p: 16.667%; }
-.cosmos-flow[data-step="1"] { --flow-p: 50%; }
-.cosmos-flow[data-step="2"] { --flow-p: 100%; }
+.cosmos-flow[data-step="0"] { --rail-t: .1667; }
+.cosmos-flow[data-step="1"] { --rail-t: .5; }
+.cosmos-flow[data-step="2"] { --rail-t: .8333; }
 .cosmos-flow li { position: relative; display: grid; align-content: start; gap: 10px; }
 .cosmos-flow .node {
-  width: 11px;
-  height: 11px;
-  margin-bottom: 26px;
+  width: 10px;
+  height: 10px;
+  margin: 0 auto 28px;
   border-radius: 50%;
-  background: #f8f8f9;
-  box-shadow: 0 0 0 1px var(--ink), 0 0 0 5px #f8f8f9;
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgba(9, 9, 11, .22);
+  transition:
+    background-color .45s var(--rail-ease),
+    box-shadow .45s var(--rail-ease),
+    transform .55s var(--rail-ease);
 }
-.cosmos-flow li:first-child .node { background: var(--ink); }
+.cosmos-flow li:first-child .node {
+  background: var(--ink);
+  box-shadow: 0 0 0 4px rgba(9, 9, 11, .06);
+}
+.cosmos-flow .k,
+.cosmos-flow b,
+.cosmos-flow .d { text-align: center; }
 .cosmos-flow b { margin-top: 4px; }
-.cosmos-flow .node { transition: background-color .4s var(--ease); }
+.cosmos-flow .flow-ui { text-align: left; }
 .cosmos-flow.is-live li { cursor: pointer; }
-.cosmos-flow.is-live li .node { background: #f8f8f9; }
-.cosmos-flow.is-live li.is-on .node,
-.cosmos-flow.is-live li.is-done .node { background: var(--ink); }
+.cosmos-flow.is-live li .node {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px rgba(9, 9, 11, .2);
+  transform: scale(1);
+}
+.cosmos-flow.is-live li.is-done .node {
+  background: var(--ink);
+  box-shadow: none;
+  transform: scale(.88);
+}
+.cosmos-flow.is-live li.is-on .node {
+  background: var(--ink);
+  box-shadow:
+    0 0 0 5px #f8f8f9,
+    0 0 0 6px var(--ink),
+    0 0 0 12px rgba(9, 9, 11, .05);
+  transform: scale(1.08);
+}
 .cosmos-flow.is-live b,
 .cosmos-flow.is-live .d { transition: color .4s var(--ease); }
 .cosmos-flow.is-live li:not(.is-on) b { color: #a1a1aa; }
@@ -2351,7 +2394,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
 .cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-/* Dot Matrix Core Spiral — sole status indicator (no blue pulse). */
+/* Dot Matrix — continuous soft spiral (no freeze / no dead keyframe gap). */
 .fu-dmx {
   display: grid;
   flex: none;
@@ -2369,26 +2412,25 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   margin: 0;
   border-radius: 999px;
   background: currentColor;
-  opacity: .12;
+  opacity: .2;
   font-style: normal;
-  animation: fu-dmx-spiral 1.5s linear infinite;
-  animation-delay: calc(var(--o, 0) * .06s);
+  /* Negative delay phases each dot so the highlight travels without stalls. */
+  animation: fu-dmx-spiral 1.8s cubic-bezier(.4, 0, .2, 1) infinite;
+  animation-delay: calc(var(--o, 0) * -0.072s);
+  will-change: opacity;
 }
 @keyframes fu-dmx-spiral {
-  0%, 100% { opacity: .1; }
-  8% { opacity: 1; }
-  16% { opacity: .72; }
-  24% { opacity: .42; }
-  32% { opacity: .22; }
-  40% { opacity: .12; }
+  0%, 100% { opacity: .16; }
+  35% { opacity: 1; }
+  70% { opacity: .28; }
 }
-/* After reply settles, hold a quiet mid brightness instead of a second motion. */
+/* Replied: same motion, slightly slower — never hard-stop (reads as stuck). */
 .cosmos-flow.is-live li.is-on.is-replied .fu-dmx i {
-  animation: none;
-  opacity: .35;
+  animation-duration: 2.6s;
+  animation-delay: calc(var(--o, 0) * -0.104s);
 }
-.fu-reply { animation: fu-in .3s var(--ease); }
-@keyframes fu-in { from { opacity: 0; } }
+.fu-reply { animation: fu-in .45s var(--ease); }
+@keyframes fu-in { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 .fu-input {
   display: flex;
   align-items: center;
@@ -2438,11 +2480,14 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmos-flow.is-live li.is-on.is-typed .fu-row + .fu-row { transition-delay: .08s; }
 @media (prefers-reduced-motion: reduce) {
   .fu-caret { animation: none !important; }
-  .fu-dmx i { animation: none !important; opacity: .35; }
+  .fu-dmx i { animation: none !important; opacity: .4; will-change: auto; }
+  .fu-reply { animation: none; }
   .flow-ui,
   .fu-toggle,
   .fu-toggle i,
-  .cosmos-flow.is-live::before { transition: none; }
+  .cosmos-flow.is-live::before,
+  .cosmos-flow.is-live::after,
+  .cosmos-flow .node { transition: none; }
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 721px) {
   .who-list li:hover .n,
@@ -4282,11 +4327,25 @@ html.veil-in.veil-settle .page-veil {
   .who-list b,
   .cosmos-flow b { font-size: 22px; }
   .cosmos-flow { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; padding: 28px 24px 28px 52px; border-radius: 20px; }
-  .cosmos-flow::before { top: 34px; bottom: 40px; left: 29px; right: auto; width: 1px; height: auto; background: linear-gradient(180deg, rgba(9, 9, 11, .28), rgba(9, 9, 11, .1)); }
-  .cosmos-flow.is-live::before {
-    background: linear-gradient(180deg, var(--ink) 0 var(--flow-p), rgba(9, 9, 11, .12) var(--flow-p) 100%);
+  .cosmos-flow::before {
+    top: 34px;
+    bottom: 40px;
+    left: 29px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: rgba(9, 9, 11, .1);
   }
-  .cosmos-flow .node { position: absolute; left: -28px; top: 1px; margin: 0; }
+  .cosmos-flow::after { display: none; }
+  .cosmos-flow .k,
+  .cosmos-flow b,
+  .cosmos-flow .d { text-align: left; }
+  .cosmos-flow .node {
+    position: absolute;
+    left: -28px;
+    top: 1px;
+    margin: 0;
+  }
   .flow-ui { margin-top: 14px; }
 }
 

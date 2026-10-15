@@ -2345,18 +2345,15 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   transform-origin: 0 100%;
   transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
 }
-.fu-pulse { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #74c1e6; }
-.cosmos-flow li.is-on .fu-pulse { animation: fu-pulse 1.4s var(--ease) infinite; }
-@keyframes fu-pulse { 50% { opacity: .3; transform: scale(.7); } }
 .fu-chat { gap: 10px; }
 .fu-thread { display: grid; gap: 8px; min-height: 84px; align-content: end; }
 .fu-msg.is-me { transform-origin: 100% 100%; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
 .cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-/* Dot Matrix Core Spiral — sits beside status text, no bubble chrome. */
+/* Dot Matrix Core Spiral — sole status indicator (no blue pulse). */
 .fu-dmx {
-  display: none;
+  display: grid;
   flex: none;
   grid-template-columns: repeat(5, 2.5px);
   grid-template-rows: repeat(5, 2.5px);
@@ -2385,8 +2382,11 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   32% { opacity: .22; }
   40% { opacity: .12; }
 }
-.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-dmx { display: grid; }
-.cosmos-flow.is-live li.is-on.is-thinking:not(.is-replied) .fu-pulse { display: none; }
+/* After reply settles, hold a quiet mid brightness instead of a second motion. */
+.cosmos-flow.is-live li.is-on.is-replied .fu-dmx i {
+  animation: none;
+  opacity: .35;
+}
 .fu-reply { animation: fu-in .3s var(--ease); }
 @keyframes fu-in { from { opacity: 0; } }
 .fu-input {
@@ -2437,8 +2437,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmos-flow.is-live li.is-on:not(.is-typed) .fu-row + .fu-row { transition-delay: 0s; }
 .cosmos-flow.is-live li.is-on.is-typed .fu-row + .fu-row { transition-delay: .08s; }
 @media (prefers-reduced-motion: reduce) {
-  .fu-caret,
-  .fu-pulse { animation: none !important; }
+  .fu-caret { animation: none !important; }
+  .fu-dmx i { animation: none !important; opacity: .35; }
   .flow-ui,
   .fu-toggle,
   .fu-toggle i,

@@ -2259,8 +2259,8 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 0 0 1px rgba(9, 9, 11, .06), 0 12px 28px -18px rgba(9, 9, 11, .18);
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--muted);
   transition: opacity .5s var(--ease), transform .6s var(--ease), box-shadow .6s var(--ease);
 }
@@ -2269,7 +2269,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-row,
 .fu-card,
 .fu-msg { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.fu-search { height: 34px; padding: 0 12px; border-radius: 10px; background: #f4f4f5; color: var(--ink); }
+.fu-search { height: 36px; padding: 0 12px; border-radius: 10px; background: #f4f4f5; color: var(--ink); }
 .fu-search svg { width: 14px; height: 14px; flex: none; color: var(--faint); }
 .fu-caret { width: 1px; height: 14px; margin-left: -8px; background: var(--ink); opacity: 0; }
 .cosmos-flow li.is-on .fu-caret,
@@ -2322,18 +2322,18 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .cosmos-flow li.is-done .fu-toggle i,
 .cosmos-flow:not(.is-live) .fu-toggle i { transform: translateX(14px); }
 .fu-note { padding: 8px 4px 0; border-top: 1px solid rgba(9, 9, 11, .06); font-size: 11px; color: var(--faint); }
-.fu-msg { width: fit-content; max-width: 100%; padding: 8px 12px; border-radius: 12px; }
+.fu-msg { width: fit-content; max-width: 100%; padding: 9px 13px; border-radius: 12px; font-size: 13px; }
 .fu-msg.is-me { margin-left: auto; background: var(--ink); color: #fff; }
 /* AI status is a light line — not a filled bubble (matrix felt heavy inside one). */
 .fu-ai {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   max-width: 100%;
   padding: 0;
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 1.2;
   transform-origin: 0 100%;
   transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15);
 }
@@ -2344,15 +2344,15 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .fu-msg { transition: opacity .3s var(--ease), transform .45s cubic-bezier(.2, .9, .3, 1.15); }
 .cosmos-flow.is-live li.is-on:not(.is-sent) .fu-msg.is-me,
 .cosmos-flow.is-live li.is-on:not(.is-thinking) .fu-ai { opacity: 0; transform: translateY(10px) scale(.94); }
-/* Dot Matrix — sized to 1em so it sits flush with the status text. */
+/* Dot Matrix — a touch larger than the text so it reads as the status mark. */
 .fu-dmx {
   display: grid;
   flex: none;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
-  gap: .12em;
-  width: 1em;
-  height: 1em;
+  gap: .11em;
+  width: 1.15em;
+  height: 1.15em;
   color: var(--ink);
 }
 .fu-dmx i {

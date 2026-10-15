@@ -2672,15 +2672,17 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 
 .media-slot {
   margin: 40px 0 0;
-  background: #18181b;
-  border: 1px solid rgba(255, 255, 255, .08);
+  /* Light by default so product pages never flash near-black before
+     the more specific overrides settle. Home reel re-darkens below. */
+  background: #ececee;
+  border: 1px solid rgba(9, 9, 11, .06);
   border-radius: 36px;
   overflow: hidden;
 }
 .media-slot-stage {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: #18181b;
+  background: #ececee;
 }
 .page .media-slot-stage {
   aspect-ratio: 21 / 9;
@@ -2695,16 +2697,16 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   font-family: var(--ui);
   font-size: 13px;
   font-weight: 400;
-  color: var(--ice-mute);
+  color: var(--muted);
 }
 .media-slot figcaption {
   margin: 0;
   padding: 16px 28px 20px;
   font-size: 13px;
   line-height: 1.45;
-  color: var(--ice-mute);
-  background: #18181b;
-  border-top: 1px solid rgba(143, 179, 199, .16);
+  color: var(--muted);
+  background: #ececee;
+  border-top: 1px solid rgba(9, 9, 11, .06);
 }
 .home-reel {
   position: relative;
@@ -2722,6 +2724,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
 .home-reel .media-slot-stage {
   background: #0f1216;
 }
+.home-reel .media-slot-stage::after { color: var(--ice-mute); }
 .home-reel .media-slot figcaption {
   background: #0f1216;
   color: var(--ice-mute);

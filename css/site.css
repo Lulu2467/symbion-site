@@ -4736,33 +4736,37 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
   max-width: 1120px;
   margin: 0 auto;
   padding: clamp(3.25rem, 8vh, 5.5rem) var(--pad) clamp(3rem, 7vh, 5rem);
-  overflow: hidden;
+  overflow: visible;
 }
 .hp-glow {
   position: absolute;
   left: 50%;
-  top: 18%;
-  width: min(118%, 1040px);
-  height: min(88%, 780px);
-  border-radius: 50%;
+  top: 8%;
+  width: 100vw;
+  height: 92%;
+  min-height: 560px;
+  border-radius: 0;
   background:
-    radial-gradient(ellipse 52% 48% at 28% 36%, rgba(116, 193, 230, .34), transparent 70%),
-    radial-gradient(ellipse 48% 42% at 74% 48%, rgba(168, 216, 239, .26), transparent 68%),
-    radial-gradient(ellipse 62% 50% at 50% 72%, rgba(190, 214, 224, .2), transparent 74%),
-    radial-gradient(ellipse 40% 36% at 55% 28%, rgba(220, 238, 247, .35), transparent 66%);
-  transform: translate(-50%, 0);
-  filter: blur(56px);
-  opacity: .85;
+    radial-gradient(ellipse 46% 52% at 22% 42%, rgba(116, 193, 230, .42), transparent 72%),
+    radial-gradient(ellipse 42% 46% at 78% 38%, rgba(148, 208, 232, .36), transparent 70%),
+    radial-gradient(ellipse 58% 48% at 50% 68%, rgba(180, 216, 230, .3), transparent 74%),
+    radial-gradient(ellipse 36% 32% at 48% 22%, rgba(220, 238, 247, .45), transparent 68%);
+  transform: translateX(-50%);
+  filter: blur(64px);
+  opacity: 1;
   pointer-events: none;
   z-index: 0;
 }
 @media (max-width: 720px) {
   .hp-glow {
-    top: 22%;
-    width: min(140%, 640px);
-    height: min(78%, 520px);
-    filter: blur(40px);
-    opacity: .75;
+    top: 12%;
+    height: 88%;
+    min-height: 420px;
+    filter: blur(44px);
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 40%, rgba(116, 193, 230, .38), transparent 72%),
+      radial-gradient(ellipse 55% 48% at 70% 55%, rgba(168, 216, 239, .32), transparent 70%),
+      radial-gradient(ellipse 70% 45% at 50% 70%, rgba(190, 214, 224, .26), transparent 74%);
   }
 }
 .hp-copy,

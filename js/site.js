@@ -99,13 +99,28 @@
       </div>
       <div class="foot-bottom">
         <p class="foot-legal">&copy; 2026 Symbion. All rights reserved.</p>
-        <span class="foot-lang" aria-hidden="true">
-          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
-            <circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/>
-            <path d="M2.2 8h11.6M8 1.8c1.8 1.8 2.7 3.8 2.7 6.2S9.8 12.4 8 14.2C6.2 12.4 5.3 10.4 5.3 8S6.2 3.6 8 1.8Z" stroke="currentColor" stroke-width="1.3"/>
-          </svg>
-          简体中文
-        </span>
+        <div class="foot-lang">
+          <button
+            type="button"
+            class="foot-lang-btn"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-label="${zh([0x9009, 0x62e9, 0x8bed, 0x8a00])}"
+          >
+            <svg class="foot-lang-globe" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/>
+              <path d="M2.2 8h11.6M8 1.8c1.8 1.8 2.7 3.8 2.7 6.2S9.8 12.4 8 14.2C6.2 12.4 5.3 10.4 5.3 8S6.2 3.6 8 1.8Z" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+            <span class="foot-lang-label">简体中文</span>
+            <svg class="foot-lang-caret" viewBox="0 0 12 12" width="12" height="12" fill="none" aria-hidden="true">
+              <path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="foot-lang-menu" role="listbox" hidden>
+            <li role="option" aria-selected="true" data-lang="zh-CN">简体中文</li>
+            <li role="option" aria-selected="false" data-lang="en">English</li>
+          </ul>
+        </div>
       </div>
       <aside class="foot-card">
         <p class="foot-card-copy">
@@ -123,6 +138,38 @@
   const footEl = document.getElementById("site-foot");
   if (navEl) navEl.innerHTML = header;
   if (footEl) footEl.innerHTML = footer;
+
+  const footLang = footEl && footEl.querySelector(".foot-lang");
+  if (footLang) {
+    const btn = footLang.querySelector(".foot-lang-btn");
+    const menu = footLang.querySelector(".foot-lang-menu");
+    const label = footLang.querySelector(".foot-lang-label");
+    const setOpen = (open) => {
+      footLang.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.hidden = !open;
+    };
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      setOpen(!footLang.classList.contains("is-open"));
+    });
+    menu.querySelectorAll('[role="option"]').forEach((opt) => {
+      opt.addEventListener("click", () => {
+        menu.querySelectorAll('[role="option"]').forEach((o) => {
+          o.setAttribute("aria-selected", o === opt ? "true" : "false");
+        });
+        label.textContent = opt.textContent.trim();
+        document.documentElement.lang = opt.getAttribute("data-lang") || "zh-CN";
+        setOpen(false);
+      });
+    });
+    document.addEventListener("click", (e) => {
+      if (!footLang.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  }
 
   const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   document.querySelectorAll(".nav-links a, .nav-end a.btn-ghost").forEach((a) => {

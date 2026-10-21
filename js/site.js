@@ -1526,19 +1526,23 @@
       if (navV2) {
         navV2.classList.add("is-ready", "is-docked");
         navV2.style.top = "0px";
-        gsap.set(navV2, { autoAlpha: 1 });
+        gsap.set(navV2, { clearProps: "opacity,visibility", autoAlpha: 1 });
       }
       const heroV2 = document.querySelector(".hp-hero");
       if (heroV2) {
         const bits = heroV2.querySelectorAll(".hp-copy > *, .hp-stage");
-        gsap.from(bits, {
-          y: 18,
-          autoAlpha: 0,
-          duration: 0.85,
-          stagger: 0.07,
-          ease: "power3.out",
-          delay: 0.08
-        });
+        gsap.fromTo(bits,
+          { y: 18, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.07,
+            ease: "power3.out",
+            delay: 0.08,
+            clearProps: "transform"
+          }
+        );
       }
     } else {
     const phoneHome = page === "home" && window.matchMedia("(max-width: 720px)").matches;

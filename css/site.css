@@ -4653,6 +4653,12 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
   margin: 0 auto;
   justify-items: center;
 }
+/* Survive any leftover home ice color tokens. */
+body.home-v2 .hp-copy,
+body.home-v2 .hp-copy * { color: inherit; }
+body.home-v2 .hp-title { color: var(--ink) !important; }
+body.home-v2 .hp-lead { color: var(--muted) !important; }
+body.home-v2 .hp-kicker { color: var(--faint) !important; }
 .hp-kicker {
   margin: 0;
   font-family: var(--latin);

@@ -4192,7 +4192,7 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 1px;
   height: 34px;
   padding: 0 10px;
   border-radius: 999px;
@@ -4212,8 +4212,8 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   text-decoration: none;
 }
 .auth-back svg {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   flex-shrink: 0;
   display: block;
 }

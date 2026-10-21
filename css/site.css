@@ -4871,9 +4871,8 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   text-decoration: none;
 }
 .hp-stage {
-  width: min(1400px, calc(100vw - 48px));
-  max-width: 100%;
-  margin: 0 auto;
+  width: min(1400px, calc(100% - 48px));
+  margin-inline: auto;
   justify-self: center;
   box-sizing: border-box;
 }
@@ -4892,7 +4891,7 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 }
 @media (max-width: 720px) {
   .hp-stage {
-    width: calc(100vw - 32px);
+    width: calc(100% - 32px);
   }
 }
 

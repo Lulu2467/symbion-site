@@ -4761,16 +4761,17 @@ body.home-v2 .hp-kicker { color: var(--faint); }
   border-color: rgba(9, 9, 11, .28);
 }
 .hp-stage {
-  width: min(100%, 960px);
+  width: min(100%, 1080px);
   margin: 0 auto;
 }
 .hp-shot {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 18px;
-  border: 1px solid rgba(9, 9, 11, .08);
+  border-radius: 14px;
+  border: 1px solid rgba(9, 9, 11, .1);
   background: #f3f4f5;
+  image-rendering: -webkit-optimize-contrast;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, .65) inset,
     0 28px 70px -32px rgba(24, 36, 48, .32),

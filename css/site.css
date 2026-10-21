@@ -4214,8 +4214,6 @@ body.auth button { appearance: none; -webkit-appearance: none; }
 .auth-back span {
   display: block;
   line-height: 1;
-  /* Pull the ‹ side-bearing in so left/right padding read as equal. */
-  margin-left: -0.15em;
 }
 .auth-error {
   margin: 10px 0 0;

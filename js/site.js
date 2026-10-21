@@ -69,7 +69,68 @@
       hpEndLabel: "开始使用",
       hpEndTitle: "开始共生",
       hpEndLead: "创建你的 Cosmo，随时调用 Citta。在 Spaces 里与人协作——几步就能上手。",
-      hpEndCta: "立即开始 <i>→</i>"
+      hpEndCta: "立即开始 <i>→</i>",
+      back: "返回",
+      homeAria: "回到首页",
+      loginDocTitle: "登录 — Symbion",
+      loginDocDesc: "登录或注册 Symbion。",
+      loginTitle: "登录",
+      loginLead: "用你的身份进入工作空间。",
+      loginEmail: "邮箱",
+      loginPass: "密码",
+      loginForgot: "忘记密码？",
+      loginContinue: "继续",
+      loginError: "请填写有效邮箱。",
+      loginOr: "或",
+      loginFine: "继续即表示同意 <a href=\"legal/terms.html\">条款</a> 与 <a href=\"legal/privacy.html\">隐私</a>。",
+      exploreCosmos: "探索 Cosmos",
+      exploreCitta: "了解 Citta",
+      cittaDocTitle: "Citta｜属于你的 AI — Symbion",
+      cittaDocDesc: "Citta 是属于你的 AI。理解上下文，调用工具、知识与 Cosmos，把想法做成工作。",
+      cittaTitle: "你的 AI，<br>真正开始为你工作。",
+      cittaLead: "Citta 不只是回答，而是行动。<br>它理解上下文，调用工具、知识与别人的 Cosmo，把一个想法做成完成的工作。",
+      cittaAsk: "帮我做一份中国 AI Agent 市场分析。",
+      cittaWorking: "正在",
+      cittaStep1: "理解任务",
+      cittaStep1Note: "读你的工作方式，判断这件事该怎么做完。",
+      cittaStep2: "搜索资料",
+      cittaStep2Note: "检索公开资料与你已有的上下文。",
+      cittaStep3: "调用 Research AI",
+      cittaStep3Note: "调用工具与功能型 AI，补齐事实。",
+      cittaStep4: "调用专家",
+      cittaStep4Note: "把你订阅的专家接进来，例如律师、设计师、产业分析师。",
+      cittaStep5: "分析信息",
+      cittaStep5Note: "把信息收束成判断，而不是堆砌。",
+      cittaStep6: "生成报告",
+      cittaStep6Note: "生成报告，把工作真正做完。",
+      cittaStep7: "分享到 Space",
+      cittaStep7Note: "放进 Space，让人与 AI 一起接着做。",
+      cittaCaption: "Citta 工作影像",
+      cosmoDocTitle: "Cosmo｜你的智能载体 — Symbion",
+      cosmoDocDesc: "Cosmo 承载身份、知识与能力。众多 Cosmo 聚合成 Cosmos，别人可以通过 Citta 订阅、询问、调用。",
+      cosmoTitle: "每个人，<br>都可以拥有自己的 Cosmo。",
+      cosmoLead: "Cosmo 不是头像。<br>它承载身份、知识与能力，知识仍由本人定义。",
+      cosmoCaption: "Cosmo 影像",
+      spacesDocTitle: "Spaces｜人与 AI 的协作 — Symbion",
+      spacesDocDesc: "Spaces 是人与人、人与 AI、AI 与 AI 的协作空间。",
+      spacesTitle: "当 AI 进入<br>人与人的协作。",
+      spacesLead: "Spaces 是人与人、人与 AI、AI 与 AI 的协作空间。<br>AI 成为关系中的参与者，而不是旁边的聊天窗口。",
+      spacesCaption: "Spaces 协作影像",
+      spacesNote: "人与人、人与 AI、AI 与 AI，在同一个 Space 里工作。没有发出去的消息，除非你点了发送。",
+      downloadDocTitle: "下载 App — Symbion",
+      downloadDocDesc: "下载 Symbion 桌面端：macOS .dmg 与 Windows .zip。",
+      downloadTitle: "把 Symbion 放进你的桌面。",
+      downloadLead: "Mac 与 Windows 桌面端，和网页版共用同一个工作台。",
+      downloadMacDesc: "通用安装包 · 已签名 .dmg",
+      downloadMacBtn: "下载 macOS 版",
+      downloadWinDesc: "Windows 10 / 11 · 64 位 · .zip",
+      downloadWinBtn: "下载 Windows 版",
+      aboutDocTitle: "关于 — Symbion",
+      aboutDocDesc: "Symbion 中国区。Citta、Cosmo、Spaces 在这里被讲述。",
+      aboutTitle: "关于 Symbion",
+      aboutLead: "这是面向中国的官方站点。<br>产品是同一套：Citta、Cosmo、Spaces。",
+      aboutP1: "我们相信智能首先属于人。AI 用来理解、连接、完成工作——不是代替你成为谁。",
+      aboutP2: "官网：<a href=\"https://www.symbionspace.com\">www.symbionspace.com</a>"
     },
     en: {
       product: "Product",
@@ -131,7 +192,68 @@
       hpEndLabel: "Get started",
       hpEndTitle: "Start the symbiosis",
       hpEndLead: "Create your Cosmo, call Citta anytime. Collaborate in Spaces—ready in a few steps.",
-      hpEndCta: "Get started <i>→</i>"
+      hpEndCta: "Get started <i>→</i>",
+      back: "Back",
+      homeAria: "Back to home",
+      loginDocTitle: "Sign in — Symbion",
+      loginDocDesc: "Sign in or create a Symbion account.",
+      loginTitle: "Sign in",
+      loginLead: "Enter the workspace as yourself.",
+      loginEmail: "Email",
+      loginPass: "Password",
+      loginForgot: "Forgot password?",
+      loginContinue: "Continue",
+      loginError: "Enter a valid email address.",
+      loginOr: "or",
+      loginFine: "By continuing you agree to the <a href=\"legal/terms.html\">Terms</a> and <a href=\"legal/privacy.html\">Privacy</a>.",
+      exploreCosmos: "Explore Cosmos",
+      exploreCitta: "Explore Citta",
+      cittaDocTitle: "Citta｜Your AI — Symbion",
+      cittaDocDesc: "Citta is your AI. Understand context, call tools, knowledge, and Cosmos—and turn ideas into finished work.",
+      cittaTitle: "Your AI,<br>finally working for you.",
+      cittaLead: "Citta doesn’t just answer—it acts.<br>It understands context, calls tools, knowledge, and other people’s Cosmo, and turns an idea into finished work.",
+      cittaAsk: "Help me draft a China AI Agent market analysis.",
+      cittaWorking: "Now",
+      cittaStep1: "Understand the task",
+      cittaStep1Note: "Read how you work, and decide how to finish it.",
+      cittaStep2: "Search sources",
+      cittaStep2Note: "Pull public sources and the context you already have.",
+      cittaStep3: "Call Research AI",
+      cittaStep3Note: "Call tools and specialist AI to fill in the facts.",
+      cittaStep4: "Call experts",
+      cittaStep4Note: "Bring in experts you subscribe to—lawyers, designers, industry analysts.",
+      cittaStep5: "Analyze",
+      cittaStep5Note: "Condense information into judgment, not a pile of notes.",
+      cittaStep6: "Generate the report",
+      cittaStep6Note: "Generate the report and actually finish the work.",
+      cittaStep7: "Share to a Space",
+      cittaStep7Note: "Drop it into a Space so people and AI can continue together.",
+      cittaCaption: "Citta at work",
+      cosmoDocTitle: "Cosmo｜Your intelligence carrier — Symbion",
+      cosmoDocDesc: "Cosmo carries identity, knowledge, and capability. Many Cosmo form a Cosmos others can subscribe to, ask, and call through Citta.",
+      cosmoTitle: "Everyone can<br>have their own Cosmo.",
+      cosmoLead: "Cosmo is not an avatar.<br>It carries identity, knowledge, and capability—and the knowledge stays yours to define.",
+      cosmoCaption: "Cosmo",
+      spacesDocTitle: "Spaces｜People and AI collaborating — Symbion",
+      spacesDocDesc: "Spaces are where people, AI, and AI agents collaborate.",
+      spacesTitle: "When AI enters<br>human collaboration.",
+      spacesLead: "Spaces are where people, AI, and AI agents work together.<br>AI becomes a participant in the relationship—not a chat window on the side.",
+      spacesCaption: "Spaces collaboration",
+      spacesNote: "People, AI, and AI agents work in the same Space. Nothing is sent unless you hit send.",
+      downloadDocTitle: "Download — Symbion",
+      downloadDocDesc: "Download the Symbion desktop app for macOS and Windows.",
+      downloadTitle: "Put Symbion on your desktop.",
+      downloadLead: "Mac and Windows apps share the same workspace as the web.",
+      downloadMacDesc: "Universal installer · signed .dmg",
+      downloadMacBtn: "Download for macOS",
+      downloadWinDesc: "Windows 10 / 11 · 64-bit · .zip",
+      downloadWinBtn: "Download for Windows",
+      aboutDocTitle: "About — Symbion",
+      aboutDocDesc: "Symbion. Citta, Cosmo, and Spaces—told for this audience.",
+      aboutTitle: "About Symbion",
+      aboutLead: "This is the official site for China.<br>The product is the same: Citta, Cosmo, Spaces.",
+      aboutP1: "We believe intelligence belongs to people first. AI is here to understand, connect, and finish work—not to replace who you are.",
+      aboutP2: "Site: <a href=\"https://www.symbionspace.com\">www.symbionspace.com</a>"
     }
   };
 
@@ -260,11 +382,31 @@
       const key = el.getAttribute("data-i18n-alt");
       if (key && t[key] != null) el.setAttribute("alt", t[key]);
     });
-    if (page === "home") {
-      if (t.docTitle) document.title = t.docTitle;
-      const meta = document.querySelector('meta[name="description"]');
-      if (meta && t.docDesc) meta.setAttribute("content", t.docDesc);
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      if (key && t[key] != null) el.setAttribute("placeholder", t[key]);
+    });
+    document.querySelectorAll("[data-i18n-note]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-note");
+      if (key && t[key] != null) el.setAttribute("data-note", t[key]);
+    });
+    const docKey = document.body.dataset.i18nDoc;
+    const descKey = document.body.dataset.i18nDesc;
+    if (docKey && t[docKey]) document.title = t[docKey];
+    else if (page === "home" && t.docTitle) document.title = t.docTitle;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      if (descKey && t[descKey]) meta.setAttribute("content", t[descKey]);
+      else if (page === "home" && t.docDesc) meta.setAttribute("content", t.docDesc);
     }
+    const activeStep = document.querySelector(".step.on");
+    const nowTitle = document.getElementById("citta-now-title");
+    const nowNote = document.getElementById("citta-now-note");
+    if (activeStep && nowTitle) {
+      const label = activeStep.querySelector("span:not(.n)");
+      if (label) nowTitle.textContent = label.textContent.trim();
+    }
+    if (activeStep && nowNote) nowNote.textContent = activeStep.getAttribute("data-note") || "";
   };
 
   const navEl = document.getElementById("site-nav");

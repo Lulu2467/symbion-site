@@ -14,20 +14,26 @@
   <meta property="og:description" content="Cosmo 承载身份、知识与能力。众多 Cosmo 聚合成 Cosmos，别人可以通过 Citta 订阅、询问、调用。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/site.css?v=home184">
+  <link rel="stylesheet" href="../css/site.css?v=home203">
+  <script>
+  try {
+    var _lang = localStorage.getItem("symbion-lang");
+    if (_lang === "en" || _lang === "zh-CN") document.documentElement.lang = _lang;
+  } catch (e) {}
+  </script>
 </head>
-<body data-root=".." data-page="cosmo">
+<body data-root=".." data-page="cosmo" data-i18n-doc="cosmoDocTitle" data-i18n-desc="cosmoDocDesc">
   <header class="nav" id="site-nav"></header>
   <main class="page wrap">
-    <h1>每个人，<br>都可以拥有自己的 Cosmo。</h1>
-    <p class="lead">Cosmo 不是头像。<br>它承载身份、知识与能力，知识仍由本人定义。</p>
+    <h1 data-i18n-html="cosmoTitle">每个人，<br>都可以拥有自己的 Cosmo。</h1>
+    <p class="lead" data-i18n-html="cosmoLead">Cosmo 不是头像。<br>它承载身份、知识与能力，知识仍由本人定义。</p>
     <p class="page-actions">
-      <a class="btn btn-ink" href="../login.html">开始使用</a>
-      <a class="btn btn-ghost" href="citta.html">了解 Citta</a>
+      <a class="btn btn-ink" href="../login.html" data-i18n="start">开始使用</a>
+      <a class="btn btn-ghost" href="citta.html" data-i18n="exploreCitta">了解 Citta</a>
     </p>
     <figure class="media-slot">
       <div class="media-slot-stage" data-label="影像位"></div>
-      <figcaption>Cosmo 影像</figcaption>
+      <figcaption data-i18n="cosmoCaption">Cosmo 影像</figcaption>
     </figure>
     <section class="cosmo-anatomy">
       <div class="cosmo-anatomy-head">
@@ -121,6 +127,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="../js/site.js?v=home184"></script>
+  <script src="../js/site.js?v=home203"></script>
 </body>
 </html>

@@ -4742,7 +4742,7 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
   position: relative;
   display: grid;
   gap: clamp(2.75rem, 5.5vw, 4rem);
-  max-width: 1120px;
+  max-width: 1360px;
   margin: 0 auto;
   padding: clamp(3.25rem, 8vh, 5.5rem) var(--pad) clamp(3rem, 7vh, 5rem);
   overflow: visible;
@@ -4866,21 +4866,28 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   text-decoration: none;
 }
 .hp-stage {
-  width: min(100%, 1080px);
+  width: min(100%, 1280px);
   margin: 0 auto;
 }
 .hp-shot {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: #f3f4f5;
   image-rendering: -webkit-optimize-contrast;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, .65) inset,
-    0 28px 70px -32px rgba(24, 36, 48, .32),
-    0 10px 24px -14px rgba(24, 36, 48, .14);
+    0 32px 80px -34px rgba(24, 36, 48, .34),
+    0 12px 28px -14px rgba(24, 36, 48, .16);
+}
+@media (min-width: 1100px) {
+  .hp-stage {
+    width: min(100vw - 64px, 1320px);
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 /* Features chapter — patterned after Notion /product/features. */

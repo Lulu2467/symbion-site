@@ -327,6 +327,7 @@
         if (next === lang) return;
         setLang(next);
         mountChrome(next);
+        if (typeof mountCharFlip === "function") mountCharFlip();
       };
     });
     if (!docUiBound) {

@@ -4920,43 +4920,64 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   padding: 0;
 }
 .hp-pillar {
-  display: grid;
-  gap: 10px;
-  align-content: start;
-  min-height: 220px;
-  padding: 16px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  min-height: 168px;
+  padding: 20px 20px 18px;
   border-radius: 14px;
+  border: 1px solid transparent;
   text-decoration: none;
   color: inherit;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 .hp-pillar--call { background: #eaf4fa; }
-.hp-pillar--carry { background: #f6efe8; }
+.hp-pillar--carry { background: #f4f4f5; }
 .hp-pillar--collab { background: #eef5ef; }
-.hp-pillar-art {
+.hp-pillar-icon {
   display: grid;
   place-items: center;
-  min-height: 104px;
-  margin-bottom: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  color: #fff;
+  flex-shrink: 0;
 }
-.hp-pillar-art svg { width: min(100%, 160px); height: auto; }
+.hp-pillar--call .hp-pillar-icon { background: #3a8fb8; }
+.hp-pillar--carry .hp-pillar-icon { background: #1c1d22; }
+.hp-pillar--collab .hp-pillar-icon { background: #3f6f5f; }
+.hp-pillar-copy {
+  display: grid;
+  gap: 6px;
+}
 .hp-pillar b {
-  font-family: "Noto Sans SC", var(--display);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--latin);
   font-size: 18px;
   font-weight: 650;
   letter-spacing: -.02em;
   color: var(--ink);
 }
-.hp-pillar span {
+.hp-pillar b i {
+  font-style: normal;
+  font-family: "Noto Sans SC", var(--display);
+  transition: transform .18s ease;
+}
+.hp-pillar-copy > span {
   font-size: 14px;
   line-height: 1.55;
-  color: var(--muted);
+  color: #52525b;
 }
 @media (hover: hover) and (pointer: fine) {
   .hp-pillar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 36px -28px rgba(24, 36, 48, .45);
+    box-shadow: 0 16px 36px -28px rgba(24, 36, 48, .4);
+    border-color: rgba(9, 9, 11, .06);
   }
+  .hp-pillar:hover b i { transform: translateX(3px); }
 }
 
 .hp-chapter {

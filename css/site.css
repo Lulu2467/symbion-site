@@ -4193,9 +4193,8 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
   height: 34px;
-  padding: 0 14px;
+  padding: 0 16px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
@@ -4212,19 +4211,11 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   border-color: rgba(9, 9, 11, .18);
   text-decoration: none;
 }
-/* Single-glyph chevron: no SVG air, no rotate overflow that steals left padding. */
-.auth-back::before {
-  content: "‹";
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-  flex-shrink: 0;
-  transform: translateY(-0.5px);
-}
 .auth-back span {
   display: block;
   line-height: 1;
+  /* Pull the ‹ side-bearing in so left/right padding read as equal. */
+  margin-left: -0.15em;
 }
 .auth-error {
   margin: 10px 0 0;

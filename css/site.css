@@ -4193,9 +4193,11 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1px;
+  gap: 0;
   height: 34px;
-  padding: 0 11px 0 10px;
+  /* Extra left padding offsets the chevron tip’s stroke, which optically
+     eats into the left side and makes equal CSS padding look right-heavy. */
+  padding: 0 11px 0 13px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
@@ -4213,10 +4215,11 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   text-decoration: none;
 }
 .auth-back svg {
-  width: 9px;
-  height: 12px;
+  width: 8px;
+  height: 11px;
   flex-shrink: 0;
   display: block;
+  margin-right: 2px;
 }
 .auth-back span {
   display: block;

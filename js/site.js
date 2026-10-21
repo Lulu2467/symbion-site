@@ -411,13 +411,20 @@
     playLayers();
   }
 
-  if (page === "home") {
+  if (page === "home" && !document.body.classList.contains("home-v2")) {
     document.body.classList.add("nav-dark");
     const phoneQ = window.matchMedia("(max-width: 720px)");
     let phoneNow = phoneQ.matches;
     phoneQ.addEventListener("change", () => {
       if (phoneQ.matches !== phoneNow) window.location.reload();
     });
+  }
+  if (page === "home" && document.body.classList.contains("home-v2")) {
+    const nav = document.getElementById("site-nav");
+    if (nav) {
+      nav.classList.add("is-ready", "is-docked");
+      nav.style.top = "0px";
+    }
   }
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -1513,6 +1520,27 @@
       return true;
     };
 
+    // Light product home skips the cinematic lockup intro entirely.
+    if (page === "home" && document.body.classList.contains("home-v2")) {
+      const navV2 = document.getElementById("site-nav");
+      if (navV2) {
+        navV2.classList.add("is-ready", "is-docked");
+        navV2.style.top = "0px";
+        gsap.set(navV2, { autoAlpha: 1 });
+      }
+      const heroV2 = document.querySelector(".hp-hero");
+      if (heroV2) {
+        const bits = heroV2.querySelectorAll(".hp-copy > *, .hp-stage");
+        gsap.from(bits, {
+          y: 18,
+          autoAlpha: 0,
+          duration: 0.85,
+          stagger: 0.07,
+          ease: "power3.out",
+          delay: 0.08
+        });
+      }
+    } else {
     const phoneHome = page === "home" && window.matchMedia("(max-width: 720px)").matches;
     if (phoneHome) {
       document.documentElement.classList.add("is-phone");
@@ -1619,6 +1647,7 @@
       };
       parallaxLoop();
     }
+    } // end !home-v2 cinematic home
   });
   mm.add("(prefers-reduced-motion: reduce)", () => {
     const creation = document.querySelector("#creation");

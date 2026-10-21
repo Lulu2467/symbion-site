@@ -4193,9 +4193,11 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1px;
+  gap: 3px;
   height: 34px;
-  padding: 0 10px;
+  /* Left padding a hair larger: the chevron’s tip reads closer to the edge
+     than the text’s right side, so equal CSS padding still looks left-heavy. */
+  padding: 0 11px 0 12px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
@@ -4213,14 +4215,17 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   text-decoration: none;
 }
 .auth-back svg {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
   display: block;
+  /* Keep stroke inside the box so it doesn’t steal left padding. */
+  overflow: visible;
 }
 .auth-back span {
   display: block;
   line-height: 1;
+  transform: translateY(0.5px);
 }
 .auth-error {
   margin: 10px 0 0;

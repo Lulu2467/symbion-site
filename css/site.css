@@ -4981,15 +4981,19 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 .hp-pillar-icon {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  color: #fff;
+  width: 24px;
+  height: 24px;
+  color: var(--ink);
   flex-shrink: 0;
 }
-.hp-pillar--call .hp-pillar-icon { background: #3a8fb8; }
-.hp-pillar--carry .hp-pillar-icon { background: #1c1d22; }
-.hp-pillar--collab .hp-pillar-icon { background: #3f6f5f; }
+.hp-pillar-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+.hp-pillar--call .hp-pillar-icon { color: #2f6f8f; }
+.hp-pillar--carry .hp-pillar-icon { color: #18181b; }
+.hp-pillar--collab .hp-pillar-icon { color: #3f6f5f; }
 .hp-pillar-copy {
   display: grid;
   gap: 6px;

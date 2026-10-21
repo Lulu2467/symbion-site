@@ -1594,7 +1594,6 @@
           }
         );
       }
-      mountCreationMeet();
     } else {
     const phoneHome = page === "home" && window.matchMedia("(max-width: 720px)").matches;
     if (phoneHome) {

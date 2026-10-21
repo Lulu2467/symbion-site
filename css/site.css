@@ -4152,9 +4152,9 @@ body.auth button { appearance: none; -webkit-appearance: none; }
 .auth-frame {
   position: relative;
   z-index: 1;
-  width: min(400px, calc(100vw - 40px));
+  width: min(400px, calc(100% - 40px));
   max-height: calc(100dvh - 32px);
-  margin: 0;
+  margin: 0 auto;
   overflow: auto;
   padding: 40px 36px 32px;
   border-radius: 16px;
@@ -4444,7 +4444,7 @@ body.auth .hero-flow-bg::after {
   body.auth { padding: 72px 16px 32px; }
   .auth-frame {
     padding: 32px 22px 24px;
-    width: min(400px, calc(100vw - 32px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+    width: min(400px, calc(100% - 32px - env(safe-area-inset-left) - env(safe-area-inset-right)));
     max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   }
   .auth-frame input,
@@ -4752,9 +4752,10 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
 }
 .hp-glow {
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   top: 8%;
-  width: 100vw;
+  width: 100%;
   height: 92%;
   min-height: 560px;
   border-radius: 0;
@@ -4763,7 +4764,6 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
     radial-gradient(ellipse 42% 46% at 78% 38%, rgba(148, 208, 232, .36), transparent 70%),
     radial-gradient(ellipse 58% 48% at 50% 68%, rgba(180, 216, 230, .3), transparent 74%),
     radial-gradient(ellipse 36% 32% at 48% 22%, rgba(220, 238, 247, .45), transparent 68%);
-  transform: translateX(-50%);
   filter: blur(64px);
   opacity: 1;
   pointer-events: none;
@@ -4898,9 +4898,9 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 
 /* Features chapter — patterned after Notion /product/features. */
 .hp-what {
-  max-width: 1080px;
+  max-width: min(1280px, calc(100% - 48px));
   margin: 0 auto;
-  padding: clamp(3rem, 8vh, 5.5rem) var(--pad) 0;
+  padding: clamp(3rem, 8vh, 5.5rem) 0 0;
 }
 .hp-what-head {
   display: grid;
@@ -5009,11 +5009,6 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   letter-spacing: -.02em;
   color: var(--ink);
 }
-.hp-pillar b i {
-  font-style: normal;
-  font-family: "Noto Sans SC", var(--display);
-  transition: transform .18s ease;
-}
 .hp-pillar-copy > span {
   font-size: 14px;
   line-height: 1.55;
@@ -5025,7 +5020,6 @@ body.home-v2 .hp-lead { color: #3f3f46; }
     box-shadow: 0 16px 36px -28px rgba(24, 36, 48, .4);
     border-color: rgba(9, 9, 11, .06);
   }
-  .hp-pillar:hover b i { transform: translateX(3px); }
 }
 
 .hp-chapter {

@@ -111,6 +111,44 @@
       cosmoTitle: "每个人，<br>都可以拥有自己的 Cosmo。",
       cosmoLead: "Cosmo 不是头像。<br>它承载身份、知识与能力，知识仍由本人定义。",
       cosmoCaption: "Cosmo 影像",
+      cosmoCapSuffix: " 影像",
+      cosmoAnatomyTitle: "一个 Cosmo，由三层组成。",
+      cosmoAnatomyLead: "身份让别人认出你，知识装着你的判断，能力让别人可以调用。",
+      cosmoLayer1: "我是谁。可被识别的智能身份",
+      cosmoLayer1Note: "可被识别的智能身份。别人看见的是你定义过的 Cosmo。",
+      cosmoLayer2: "我知道什么。经验、研究与判断",
+      cosmoLayer2Note: "经验、研究与判断收在这一层，知识仍由本人定义。",
+      cosmoLayer3: "我能做什么。可被调用的工作能力",
+      cosmoLayer3Note: "别人可以通过 Citta 订阅、询问、调用的工作能力。",
+      cosmoWhoTitle: "它可以代表谁",
+      cosmoWhoLead: "学者、创作者、专业人士都可以把判断做成 Cosmo。别人在许可范围内调用的，是这位专家的数字人。",
+      cosmoWho1: "学者",
+      cosmoWho1Desc: "研究方法、领域判断与长期积累的问题意识。",
+      cosmoWho2: "创作者",
+      cosmoWho2Desc: "选题、风格与审美标准，按你的方式被理解。",
+      cosmoWho3: "专业人士",
+      cosmoWho3Desc: "行业经验与工作方法，变成可以复用的判断。",
+      cosmoCosmosTitle: "Cosmos：别人的智慧，可以被你调用",
+      cosmoCosmosLead: "众多 Cosmo 聚合成 Cosmos。你在这里找到别人的判断，把它接进自己的工作。",
+      cosmoFlow1: "发现",
+      cosmoFlow1Desc: "找到可以调用的 Cosmo",
+      cosmoFlow2: "订阅",
+      cosmoFlow2Desc: "把判断接进你的工作",
+      cosmoFlow3: "调用",
+      cosmoFlow3Desc: "让 Citta 使用它",
+      cosmoDemoSearch: "产业研究",
+      cosmoDemoAnalyst: "产业分析师",
+      cosmoDemoAnalystTag: "产业研究",
+      cosmoDemoDesigner: "设计师",
+      cosmoDemoDesignTag: "作品评审",
+      cosmoDemoAvA: "产",
+      cosmoDemoAvD: "设",
+      cosmoDemoSubMeta: "研究方法 · 产业判断",
+      cosmoDemoNote: "接入后，Citta 可以在任务中调用这位专家",
+      cosmoDemoMsg: "@产业分析师 帮我判断这个赛道",
+      cosmoDemoReply: "Citta 正在调用产业分析师",
+      cosmoDemoPlaceholder: "给 Citta 发消息",
+      mediaSlotLabel: "影像位",
       spacesDocTitle: "Spaces｜人与 AI 的协作 — Symbion",
       spacesDocDesc: "Spaces 是人与人、人与 AI、AI 与 AI 的协作空间。",
       spacesTitle: "当 AI 进入<br>人与人的协作。",
@@ -234,6 +272,44 @@
       cosmoTitle: "Everyone can<br>have their own Cosmo.",
       cosmoLead: "Cosmo is not an avatar.<br>It carries identity, knowledge, and capability—and the knowledge stays yours to define.",
       cosmoCaption: "Cosmo",
+      cosmoCapSuffix: "",
+      cosmoAnatomyTitle: "One Cosmo, three layers.",
+      cosmoAnatomyLead: "Identity lets others recognize you. Knowledge holds your judgment. Capability lets others call on you.",
+      cosmoLayer1: "Who I am. A recognizable intelligence identity",
+      cosmoLayer1Note: "A recognizable intelligence identity. What others see is the Cosmo you defined.",
+      cosmoLayer2: "What I know. Experience, research, and judgment",
+      cosmoLayer2Note: "Experience, research, and judgment live here—and the knowledge stays yours to define.",
+      cosmoLayer3: "What I can do. Work capabilities others can call",
+      cosmoLayer3Note: "Work capabilities others can subscribe to, ask, and call through Citta.",
+      cosmoWhoTitle: "Who it can represent",
+      cosmoWhoLead: "Scholars, creators, and professionals can turn judgment into a Cosmo. Within permission, what others call is that expert’s digital presence.",
+      cosmoWho1: "Scholar",
+      cosmoWho1Desc: "Research methods, domain judgment, and a long-built sense of the right questions.",
+      cosmoWho2: "Creator",
+      cosmoWho2Desc: "Topics, style, and taste—understood the way you work.",
+      cosmoWho3: "Professional",
+      cosmoWho3Desc: "Industry experience and working methods, turned into reusable judgment.",
+      cosmoCosmosTitle: "Cosmos: other people’s wisdom, callable by you",
+      cosmoCosmosLead: "Many Cosmo form a Cosmos. Find someone else’s judgment here, and bring it into your work.",
+      cosmoFlow1: "Discover",
+      cosmoFlow1Desc: "Find Cosmo you can call",
+      cosmoFlow2: "Subscribe",
+      cosmoFlow2Desc: "Bring judgment into your work",
+      cosmoFlow3: "Invoke",
+      cosmoFlow3Desc: "Let Citta use it",
+      cosmoDemoSearch: "Industry research",
+      cosmoDemoAnalyst: "Industry analyst",
+      cosmoDemoAnalystTag: "Industry research",
+      cosmoDemoDesigner: "Designer",
+      cosmoDemoDesignTag: "Portfolio review",
+      cosmoDemoAvA: "A",
+      cosmoDemoAvD: "D",
+      cosmoDemoSubMeta: "Methods · industry judgment",
+      cosmoDemoNote: "Once connected, Citta can call this expert in a task",
+      cosmoDemoMsg: "@Industry analyst help me judge this space",
+      cosmoDemoReply: "Citta is calling the industry analyst",
+      cosmoDemoPlaceholder: "Message Citta",
+      mediaSlotLabel: "Media",
       spacesDocTitle: "Spaces｜People and AI collaborating — Symbion",
       spacesDocDesc: "Spaces are where people, AI, and AI agents collaborate.",
       spacesTitle: "When AI enters<br>human collaboration.",
@@ -390,6 +466,21 @@
       const key = el.getAttribute("data-i18n-note");
       if (key && t[key] != null) el.setAttribute("data-note", t[key]);
     });
+    document.querySelectorAll("[data-i18n-text]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-text");
+      if (key && t[key] != null) el.setAttribute("data-text", t[key]);
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-ph");
+      if (key && t[key] != null) el.setAttribute("data-placeholder", t[key]);
+    });
+    document.querySelectorAll("[data-i18n-label]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-label");
+      if (key && t[key] != null) el.setAttribute("data-label", t[key]);
+    });
+    document.querySelectorAll("[data-type]").forEach((el) => {
+      el.dataset.full = el.textContent;
+    });
     const docKey = document.body.dataset.i18nDoc;
     const descKey = document.body.dataset.i18nDesc;
     if (docKey && t[docKey]) document.title = t[docKey];
@@ -407,6 +498,9 @@
       if (label) nowTitle.textContent = label.textContent.trim();
     }
     if (activeStep && nowNote) nowNote.textContent = activeStep.getAttribute("data-note") || "";
+    const activeLayer = document.querySelector(".cosmo-layer.is-on");
+    const cosmoNote = document.getElementById("cosmo-now-note");
+    if (activeLayer && cosmoNote) cosmoNote.textContent = activeLayer.getAttribute("data-note") || "";
   };
 
   const navEl = document.getElementById("site-nav");
@@ -742,7 +836,10 @@
     if (layerTitle) layerTitle.textContent = name;
     if (layerNote) layerNote.textContent = current.dataset.note || "";
     if (layerStage) layerStage.setAttribute("data-label", name);
-    if (layerCap) layerCap.textContent = name + " 影像";
+    if (layerCap) {
+      const suffix = copy(getLang()).cosmoCapSuffix || "";
+      layerCap.textContent = name ? name + suffix : (copy(getLang()).cosmoCaption || "");
+    }
   }
   let layerIndex = 0;
   let layerTimer = 0;

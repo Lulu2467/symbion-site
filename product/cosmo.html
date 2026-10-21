@@ -14,7 +14,7 @@
   <meta property="og:description" content="Cosmo 承载身份、知识与能力。众多 Cosmo 聚合成 Cosmos，别人可以通过 Citta 订阅、询问、调用。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/site.css?v=home203">
+  <link rel="stylesheet" href="../css/site.css?v=home204">
   <script>
   try {
     var _lang = localStorage.getItem("symbion-lang");
@@ -32,30 +32,30 @@
       <a class="btn btn-ghost" href="citta.html" data-i18n="exploreCitta">了解 Citta</a>
     </p>
     <figure class="media-slot">
-      <div class="media-slot-stage" data-label="影像位"></div>
+      <div class="media-slot-stage" data-i18n-label="mediaSlotLabel" data-label="影像位"></div>
       <figcaption data-i18n="cosmoCaption">Cosmo 影像</figcaption>
     </figure>
     <section class="cosmo-anatomy">
       <div class="cosmo-anatomy-head">
-        <h2>一个 Cosmo，由三层组成。</h2>
-        <p>身份让别人认出你，知识装着你的判断，能力让别人可以调用。</p>
+        <h2 data-i18n="cosmoAnatomyTitle">一个 Cosmo，由三层组成。</h2>
+        <p data-i18n="cosmoAnatomyLead">身份让别人认出你，知识装着你的判断，能力让别人可以调用。</p>
       </div>
       <div class="cosmo-stage" data-layer="0">
         <div class="cosmo-layers" id="cosmo-layers">
-          <button class="cosmo-layer is-on" type="button" data-note="可被识别的智能身份。别人看见的是你定义过的 Cosmo。">
+          <button class="cosmo-layer is-on" type="button" data-i18n-note="cosmoLayer1Note" data-note="可被识别的智能身份。别人看见的是你定义过的 Cosmo。">
             <span class="n">01</span>
             <span class="layer-en">Identity</span>
-            <span class="layer-zh">我是谁。可被识别的智能身份</span>
+            <span class="layer-zh" data-i18n="cosmoLayer1">我是谁。可被识别的智能身份</span>
           </button>
-          <button class="cosmo-layer" type="button" data-note="经验、研究与判断收在这一层，知识仍由本人定义。">
+          <button class="cosmo-layer" type="button" data-i18n-note="cosmoLayer2Note" data-note="经验、研究与判断收在这一层，知识仍由本人定义。">
             <span class="n">02</span>
             <span class="layer-en">Knowledge</span>
-            <span class="layer-zh">我知道什么。经验、研究与判断</span>
+            <span class="layer-zh" data-i18n="cosmoLayer2">我知道什么。经验、研究与判断</span>
           </button>
-          <button class="cosmo-layer" type="button" data-note="别人可以通过 Citta 订阅、询问、调用的工作能力。">
+          <button class="cosmo-layer" type="button" data-i18n-note="cosmoLayer3Note" data-note="别人可以通过 Citta 订阅、询问、调用的工作能力。">
             <span class="n">03</span>
             <span class="layer-en">Capability</span>
-            <span class="layer-zh">我能做什么。可被调用的工作能力</span>
+            <span class="layer-zh" data-i18n="cosmoLayer3">我能做什么。可被调用的工作能力</span>
           </button>
         </div>
         <div class="cosmo-visual">
@@ -70,41 +70,41 @@
     </section>
     <section class="cosmo-block cosmo-who">
       <div class="cosmo-anatomy-head">
-        <h2>它可以代表谁</h2>
-        <p>学者、创作者、专业人士都可以把判断做成 Cosmo。别人在许可范围内调用的，是这位专家的数字人。</p>
+        <h2 data-i18n="cosmoWhoTitle">它可以代表谁</h2>
+        <p data-i18n="cosmoWhoLead">学者、创作者、专业人士都可以把判断做成 Cosmo。别人在许可范围内调用的，是这位专家的数字人。</p>
       </div>
       <ol class="who-list">
-        <li><span class="n">01</span><span class="who-t"><b>学者</b><span class="k">Scholar</span></span><span class="d">研究方法、领域判断与长期积累的问题意识。</span></li>
-        <li><span class="n">02</span><span class="who-t"><b>创作者</b><span class="k">Creator</span></span><span class="d">选题、风格与审美标准，按你的方式被理解。</span></li>
-        <li><span class="n">03</span><span class="who-t"><b>专业人士</b><span class="k">Professional</span></span><span class="d">行业经验与工作方法，变成可以复用的判断。</span></li>
+        <li><span class="n">01</span><span class="who-t"><b data-i18n="cosmoWho1">学者</b><span class="k">Scholar</span></span><span class="d" data-i18n="cosmoWho1Desc">研究方法、领域判断与长期积累的问题意识。</span></li>
+        <li><span class="n">02</span><span class="who-t"><b data-i18n="cosmoWho2">创作者</b><span class="k">Creator</span></span><span class="d" data-i18n="cosmoWho2Desc">选题、风格与审美标准，按你的方式被理解。</span></li>
+        <li><span class="n">03</span><span class="who-t"><b data-i18n="cosmoWho3">专业人士</b><span class="k">Professional</span></span><span class="d" data-i18n="cosmoWho3Desc">行业经验与工作方法，变成可以复用的判断。</span></li>
       </ol>
     </section>
     <section class="cosmo-block" id="cosmos">
       <div class="cosmo-anatomy-head">
-        <h2>Cosmos：别人的智慧，可以被你调用</h2>
-        <p>众多 Cosmo 聚合成 Cosmos。你在这里找到别人的判断，把它接进自己的工作。</p>
+        <h2 data-i18n="cosmoCosmosTitle">Cosmos：别人的智慧，可以被你调用</h2>
+        <p data-i18n="cosmoCosmosLead">众多 Cosmo 聚合成 Cosmos。你在这里找到别人的判断，把它接进自己的工作。</p>
       </div>
       <ol class="cosmos-flow" data-step="0">
         <li>
-          <span class="node" aria-hidden="true"></span><span class="k">01 · Discover</span><b>发现</b><span class="d">找到可以调用的 Cosmo</span>
+          <span class="node" aria-hidden="true"></span><span class="k">01 · Discover</span><b data-i18n="cosmoFlow1">发现</b><span class="d" data-i18n="cosmoFlow1Desc">找到可以调用的 Cosmo</span>
           <div class="flow-ui" aria-hidden="true">
-            <div class="fu-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><span data-type>产业研究</span><i class="fu-caret"></i></div>
-            <div class="fu-row"><span class="fu-av">产</span><span class="fu-name">产业分析师</span><em>产业研究</em></div>
-            <div class="fu-row"><span class="fu-av">设</span><span class="fu-name">设计师</span><em>作品评审</em></div>
+            <div class="fu-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><span data-type data-i18n="cosmoDemoSearch">产业研究</span><i class="fu-caret"></i></div>
+            <div class="fu-row"><span class="fu-av" data-i18n="cosmoDemoAvA">产</span><span class="fu-name" data-i18n="cosmoDemoAnalyst">产业分析师</span><em data-i18n="cosmoDemoAnalystTag">产业研究</em></div>
+            <div class="fu-row"><span class="fu-av" data-i18n="cosmoDemoAvD">设</span><span class="fu-name" data-i18n="cosmoDemoDesigner">设计师</span><em data-i18n="cosmoDemoDesignTag">作品评审</em></div>
           </div>
         </li>
         <li>
-          <span class="node" aria-hidden="true"></span><span class="k">02 · Subscribe</span><b>订阅</b><span class="d">把判断接进你的工作</span>
+          <span class="node" aria-hidden="true"></span><span class="k">02 · Subscribe</span><b data-i18n="cosmoFlow2">订阅</b><span class="d" data-i18n="cosmoFlow2Desc">把判断接进你的工作</span>
           <div class="flow-ui" aria-hidden="true">
-            <div class="fu-card"><span class="fu-av">产</span><span class="fu-meta"><span class="fu-name">产业分析师</span><span class="fu-sub">研究方法 · 产业判断</span></span><span class="fu-toggle"><i></i></span></div>
-            <div class="fu-note">接入后，Citta 可以在任务中调用这位专家</div>
+            <div class="fu-card"><span class="fu-av" data-i18n="cosmoDemoAvA">产</span><span class="fu-meta"><span class="fu-name" data-i18n="cosmoDemoAnalyst">产业分析师</span><span class="fu-sub" data-i18n="cosmoDemoSubMeta">研究方法 · 产业判断</span></span><span class="fu-toggle"><i></i></span></div>
+            <div class="fu-note" data-i18n="cosmoDemoNote">接入后，Citta 可以在任务中调用这位专家</div>
           </div>
         </li>
         <li>
-          <span class="node" aria-hidden="true"></span><span class="k">03 · Invoke</span><b>调用</b><span class="d">让 Citta 使用它</span>
+          <span class="node" aria-hidden="true"></span><span class="k">03 · Invoke</span><b data-i18n="cosmoFlow3">调用</b><span class="d" data-i18n="cosmoFlow3Desc">让 Citta 使用它</span>
           <div class="flow-ui fu-chat" aria-hidden="true">
             <div class="fu-thread">
-              <div class="fu-msg is-me">@产业分析师 帮我判断这个赛道</div>
+              <div class="fu-msg is-me" data-i18n="cosmoDemoMsg">@产业分析师 帮我判断这个赛道</div>
               <!-- Status line: one indicator only (Dot Matrix), no blue pulse. -->
               <div class="fu-ai">
                 <span class="fu-dmx" aria-hidden="true">
@@ -114,10 +114,10 @@
                   <i style="--o:13"></i><i style="--o:22"></i><i style="--o:21"></i><i style="--o:20"></i><i style="--o:7"></i>
                   <i style="--o:12"></i><i style="--o:11"></i><i style="--o:10"></i><i style="--o:9"></i><i style="--o:8"></i>
                 </span>
-                <span class="fu-reply">Citta 正在调用产业分析师</span>
+                <span class="fu-reply" data-i18n="cosmoDemoReply">Citta 正在调用产业分析师</span>
               </div>
             </div>
-            <div class="fu-input"><span class="fu-field" data-text="@产业分析师 帮我判断这个赛道" data-placeholder="给 Citta 发消息"></span><span class="fu-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg></span></div>
+            <div class="fu-input"><span class="fu-field" data-i18n-text="cosmoDemoMsg" data-i18n-ph="cosmoDemoPlaceholder" data-text="@产业分析师 帮我判断这个赛道" data-placeholder="给 Citta 发消息"></span><span class="fu-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m6 11 6-6 6 6"/></svg></span></div>
           </div>
         </li>
       </ol>
@@ -127,6 +127,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="../js/site.js?v=home203"></script>
+  <script src="../js/site.js?v=home204"></script>
 </body>
 </html>

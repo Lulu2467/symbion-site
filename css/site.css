@@ -2300,6 +2300,7 @@ body:not([data-page="home"]) .page .product-frame { border-radius: 28px; }
   color: #a1a1aa;
 }
 .who-t { display: flex; align-items: baseline; gap: 12px; }
+html[lang="en"] .who-list .k { display: none; }
 .who-list b,
 .cosmos-flow b {
   font-size: clamp(24px, 2.2vw, 30px);

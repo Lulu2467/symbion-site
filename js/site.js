@@ -1520,6 +1520,56 @@
       return true;
     };
 
+    const mountCreationMeet = () => {
+      const creation = document.querySelector("#creation");
+      const handL = document.querySelector(".creation-hand.is-left");
+      const handR = document.querySelector(".creation-hand.is-right");
+      if (!creation || !handL || !handR) return;
+      const aside = document.querySelector("#creation-aside");
+      gsap.set(handL, { xPercent: -108, x: 0, force3D: true });
+      gsap.set(handR, { xPercent: 108, x: 0, force3D: true });
+      if (aside) gsap.set(aside, { autoAlpha: 0, y: 10 });
+      creation.classList.add("is-armed");
+      const meet = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: creation,
+          start: "top top",
+          end: "+=217%",
+          pin: true,
+          scrub: 1.25,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true
+        }
+      });
+      meet
+        .to(handL, { xPercent: 0, duration: 1 }, 0)
+        .to(handR, { xPercent: 0, duration: 1 }, 0);
+      if (aside) meet.to(aside, { autoAlpha: 1, y: 0, duration: 0.28 }, 0.72);
+      meet.to({}, { duration: 0.55 });
+      const asciiLeftPre = document.getElementById("ascii-left");
+      const asciiRightPre = document.getElementById("ascii-right");
+      let mx = 0, my = 0, sx = 0, sy = 0;
+      window.addEventListener("mousemove", (e) => {
+        mx = (e.clientX / Math.max(window.innerWidth, 1) - 0.5) * 2;
+        my = (e.clientY / Math.max(window.innerHeight, 1) - 0.5) * 2;
+      }, { passive: true });
+      const parallaxLoop = () => {
+        sx += (mx - sx) * 0.05;
+        sy += (my - sy) * 0.05;
+        if (creation.classList.contains("is-armed")) {
+          const lx = Math.min(0, sx * -15 - 15);
+          const rx = Math.max(0, sx * 15 + 15);
+          const py = sy * -10;
+          if (asciiLeftPre) asciiLeftPre.style.transform = "translate(" + lx + "px," + py + "px)";
+          if (asciiRightPre) asciiRightPre.style.transform = "translate(" + rx + "px," + py + "px)";
+        }
+        requestAnimationFrame(parallaxLoop);
+      };
+      parallaxLoop();
+    };
+
     // Light product home skips the cinematic lockup intro entirely.
     if (page === "home" && document.body.classList.contains("home-v2")) {
       const navV2 = document.getElementById("site-nav");
@@ -1544,6 +1594,7 @@
           }
         );
       }
+      mountCreationMeet();
     } else {
     const phoneHome = page === "home" && window.matchMedia("(max-width: 720px)").matches;
     if (phoneHome) {
@@ -1598,59 +1649,7 @@
       });
     }
 
-    const creation = document.querySelector("#creation");
-    const handL = document.querySelector(".creation-hand.is-left");
-    const handR = document.querySelector(".creation-hand.is-right");
-    if (creation && handL && handR) {
-      const aside = document.querySelector("#creation-aside");
-      gsap.set(handL, { xPercent: -108, x: 0, force3D: true });
-      gsap.set(handR, { xPercent: 108, x: 0, force3D: true });
-      if (aside) gsap.set(aside, { autoAlpha: 0, y: 10 });
-      creation.classList.add("is-armed");
-      const meet = gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          trigger: creation,
-          start: "top top",
-          // 217% against a timeline of duration 1.55 keeps the hands meeting
-          // over the same 140% of scroll they always did, and spends the
-          // remaining 77% holding the finished frame.
-          end: "+=217%",
-          pin: true,
-          scrub: 1.25,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          fastScrollEnd: true
-        }
-      });
-      meet
-        .to(handL, { xPercent: 0, duration: 1 }, 0)
-        .to(handR, { xPercent: 0, duration: 1 }, 0);
-      if (aside) meet.to(aside, { autoAlpha: 1, y: 0, duration: 0.28 }, 0.72);
-      // Dead air on purpose: the hands stay met and the mouse parallax is
-      // still live, so the section dwells instead of leaving on arrival.
-      meet.to({}, { duration: 0.55 });
-      const asciiLeftPre = document.getElementById("ascii-left");
-      const asciiRightPre = document.getElementById("ascii-right");
-      let mx = 0, my = 0, sx = 0, sy = 0;
-      window.addEventListener("mousemove", (e) => {
-        mx = (e.clientX / Math.max(window.innerWidth, 1) - 0.5) * 2;
-        my = (e.clientY / Math.max(window.innerHeight, 1) - 0.5) * 2;
-      }, { passive: true });
-      const parallaxLoop = () => {
-        sx += (mx - sx) * 0.05;
-        sy += (my - sy) * 0.05;
-        if (creation.classList.contains("is-armed")) {
-          const lx = Math.min(0, sx * -15 - 15);
-          const rx = Math.max(0, sx * 15 + 15);
-          const py = sy * -10;
-          if (asciiLeftPre) asciiLeftPre.style.transform = "translate(" + lx + "px," + py + "px)";
-          if (asciiRightPre) asciiRightPre.style.transform = "translate(" + rx + "px," + py + "px)";
-        }
-        requestAnimationFrame(parallaxLoop);
-      };
-      parallaxLoop();
-    }
+    mountCreationMeet();
     } // end !home-v2 cinematic home
   });
   mm.add("(prefers-reduced-motion: reduce)", () => {

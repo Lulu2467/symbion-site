@@ -4597,14 +4597,47 @@ body.home-v2[data-page="home"] {
 }
 body.home-v2[data-page="home"] .nav-links .chr-flip .ch-flip-top,
 body.home-v2[data-page="home"] .foot-col .chr-flip .ch-flip-top { color: var(--ink); }
+/* Quiet directory footer — match product pages, not the old void foot. */
 body.home-v2[data-page="home"] .site-foot {
+  --foot-blend: #f7f8f9;
+  min-height: 0;
   background: #f7f8f9;
   color: var(--muted);
   border-top: 1px solid var(--line);
 }
-body.home-v2[data-page="home"] .foot-col h4 { color: var(--faint); }
-body.home-v2[data-page="home"] .foot-col a { color: var(--ink-2); }
-body.home-v2[data-page="home"] .foot-wash { display: none; }
+body.home-v2[data-page="home"] .site-foot::before { display: none; }
+body.home-v2[data-page="home"] .foot-wash,
+body.home-v2[data-page="home"] .foot-card,
+body.home-v2[data-page="home"] .foot-wordmark { display: none !important; }
+body.home-v2[data-page="home"] .foot-inner { padding: 72px 0 36px; }
+body.home-v2[data-page="home"] .foot-cols {
+  max-width: none;
+  grid-template-columns: repeat(3, max-content);
+  gap: 80px;
+}
+body.home-v2[data-page="home"] .foot-col h4 {
+  margin: 0 0 10px;
+  padding: 0;
+  border: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+}
+body.home-v2[data-page="home"] .foot-col a {
+  padding: 3px 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+body.home-v2[data-page="home"] .foot-col a:hover { color: var(--ink); }
+body.home-v2[data-page="home"] .foot-legal {
+  margin: 48px 0 0;
+  color: var(--faint);
+}
+body.home-v2[data-page="home"] .foot-top,
+body.home-v2[data-page="home"] .foot-legal {
+  padding-left: max(var(--pad), calc((100% - var(--max)) / 2));
+  padding-right: max(var(--pad), calc((100% - var(--max)) / 2));
+}
 body.home-v2[data-page="home"] .nav {
   position: sticky;
   top: 0;
@@ -4653,12 +4686,9 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
   margin: 0 auto;
   justify-items: center;
 }
-/* Survive any leftover home ice color tokens. */
-body.home-v2 .hp-copy,
-body.home-v2 .hp-copy * { color: inherit; }
-body.home-v2 .hp-title { color: var(--ink) !important; }
-body.home-v2 .hp-lead { color: var(--muted) !important; }
-body.home-v2 .hp-kicker { color: var(--faint) !important; }
+body.home-v2 .hp-title { color: var(--ink); }
+body.home-v2 .hp-lead { color: var(--muted); }
+body.home-v2 .hp-kicker { color: var(--faint); }
 .hp-kicker {
   margin: 0;
   font-family: var(--latin);
@@ -4688,15 +4718,51 @@ body.home-v2 .hp-kicker { color: var(--faint) !important; }
 .hp-cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
+  align-items: center;
   margin: .35rem 0 0;
 }
-.hp-cta .btn {
+.hp-cta .hp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 148px;
+  height: 44px;
   min-height: 44px;
   padding: 0 22px;
   font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
   border-radius: 999px;
+  border-width: 1px;
+  border-style: solid;
+}
+.hp-cta .btn-ink {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.hp-cta .btn-ink:hover {
+  background: var(--ink-2);
+  color: #fff;
+  border-color: var(--ink-2);
+}
+.hp-cta .btn-ghost {
+  background: #fff;
+  color: var(--ink);
+  border-color: rgba(9, 9, 11, .14);
+}
+.hp-cta .btn-ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: rgba(9, 9, 11, .28);
+}
+/* Hands chapter stays a dark beat after the light product home. */
+body.home-v2 #creation {
+  margin-top: 0;
+  border-top: 1px solid rgba(220, 238, 247, .08);
 }
 .hp-stage {
   width: min(100%, 920px);

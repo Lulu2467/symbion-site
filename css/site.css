@@ -4191,9 +4191,10 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   left: max(18px, env(safe-area-inset-left));
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   height: 36px;
-  padding: 0 12px 0 8px;
+  padding: 0 12px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);

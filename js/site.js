@@ -54,23 +54,41 @@
       <button class="burger" type="button" id="burger" aria-label="${t.menu}"><span></span><span></span></button>
     </div>`;
 
+  // 人定义智能。Cosmo 承载。Citta 做完。
+  const footQuote = zh([0x4eba, 0x5b9a, 0x4e49, 0x667a, 0x80fd, 0x3002])
+    + " Cosmo " + zh([0x627f, 0x8f7d, 0x3002])
+    + " Citta " + zh([0x505a, 0x5b8c, 0x3002]);
   const footer = `
     <div class="foot-wash" aria-hidden="true"></div>
     <div class="foot-inner">
       <div class="foot-top">
+        <div class="foot-brand">
+          <a class="foot-logo" href="${root}/index.html">
+            <img src="${mark}" width="22" height="22" alt="">
+            <span>Symbion</span>
+          </a>
+          <p class="foot-quote">${footQuote}</p>
+        </div>
         <nav class="foot-cols" aria-label="${zh([0x9875, 0x811a, 0x5bfc, 0x822a])}">
           <div class="foot-col">
             <h4>${t.product}</h4>
             <a href="${root}/product/citta.html">Citta</a>
             <a href="${root}/product/cosmo.html">Cosmo</a>
             <a href="${root}/product/spaces.html">Spaces</a>
-            <a href="${root}/download.html">${t.download} App</a>
+            <a href="${root}/download.html">${t.download}</a>
+          </div>
+          <div class="foot-col">
+            <h4>${t.resources}</h4>
+            <a href="${root}/explore/use-cases.html">${t.scenes}</a>
+            <a href="${root}/explore/stories.html">${t.stories}</a>
+            <a href="${root}/resources/help.html">${t.help}</a>
+            <a href="${root}/resources/docs.html">${t.docs}</a>
           </div>
           <div class="foot-col">
             <h4>${t.company}</h4>
             <a href="${root}/company/about.html">${t.about}</a>
+            <a href="${root}/company/careers.html">${t.careers}</a>
             <a href="${root}/company/contact.html">${t.contact}</a>
-            <a href="https://www.symbionspace.com">symbionspace.com</a>
           </div>
           <div class="foot-col">
             <h4>${t.legal}</h4>
@@ -79,7 +97,16 @@
           </div>
         </nav>
       </div>
-      <p class="foot-legal">&copy; 2026 Symbion. All rights reserved.</p>
+      <div class="foot-bottom">
+        <p class="foot-legal">&copy; 2026 Symbion. All rights reserved.</p>
+        <span class="foot-lang" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M2.2 8h11.6M8 1.8c1.8 1.8 2.7 3.8 2.7 6.2S9.8 12.4 8 14.2C6.2 12.4 5.3 10.4 5.3 8S6.2 3.6 8 1.8Z" stroke="currentColor" stroke-width="1.3"/>
+          </svg>
+          简体中文
+        </span>
+      </div>
       <aside class="foot-card">
         <p class="foot-card-copy">
           <span class="foot-card-lead">${t.ctaLead}</span>

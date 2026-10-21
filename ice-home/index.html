@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 
-<!-- ice-home-boot -->
+<!-- ice-home-boot: always land on everyday home for this preview -->
 <script>
 (function () {
-  if (!location.hash || location.hash === '#' || location.hash.indexOf('screen=') === -1) {
-    location.replace(location.pathname + location.search + '#screen=home');
+  var want = '#screen=home';
+  if (location.hash !== want) {
+    location.replace(location.pathname + location.search + want);
   }
 })();
 </script>

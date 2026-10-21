@@ -4193,7 +4193,7 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 3px;
   height: 34px;
   padding: 0 14px;
   border-radius: 999px;
@@ -4212,15 +4212,15 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   border-color: rgba(9, 9, 11, .18);
   text-decoration: none;
 }
-/* Chevron drawn in CSS so there’s no SVG viewBox air pulling the group off-center. */
+/* Single-glyph chevron: no SVG air, no rotate overflow that steals left padding. */
 .auth-back::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-left: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
+  content: "‹";
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
   flex-shrink: 0;
+  transform: translateY(-0.5px);
 }
 .auth-back span {
   display: block;

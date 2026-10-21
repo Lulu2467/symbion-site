@@ -4192,9 +4192,9 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  height: 36px;
-  padding: 0 12px;
+  gap: 2px;
+  height: 34px;
+  padding: 0 10px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
@@ -4211,7 +4211,16 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   border-color: rgba(9, 9, 11, .18);
   text-decoration: none;
 }
-.auth-back svg { width: 16px; height: 16px; }
+.auth-back svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  display: block;
+}
+.auth-back span {
+  display: block;
+  line-height: 1;
+}
 .auth-error {
   margin: 10px 0 0;
   font-size: 13px;

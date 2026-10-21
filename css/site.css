@@ -3286,9 +3286,9 @@ body:not([data-page="home"]) .foot-quote {
 body:not([data-page="home"]) .foot-cols {
   max-width: none;
   width: 100%;
-  grid-template-columns: repeat(4, max-content);
-  justify-content: end;
-  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: stretch;
+  gap: clamp(16px, 2.5vw, 40px);
 }
 body:not([data-page="home"]) .foot-bottom {
   margin-top: 48px;
@@ -5042,9 +5042,9 @@ body.home-v2[data-page="home"] .foot-quote {
   color: var(--muted);
 }
 body.home-v2[data-page="home"] .foot-cols {
-  grid-template-columns: repeat(4, minmax(0, max-content));
-  justify-content: end;
-  gap: clamp(28px, 4vw, 56px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: stretch;
+  gap: clamp(16px, 2.5vw, 40px);
   max-width: none;
   width: 100%;
 }

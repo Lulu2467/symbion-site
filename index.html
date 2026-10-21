@@ -15,7 +15,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="css/site.css?v=home189">
-  <script>if (matchMedia("(max-width: 720px)").matches) document.documentElement.classList.add("is-phone");</script>
+  <script>
+  try {
+    var _lang = localStorage.getItem("symbion-lang");
+    if (_lang === "en" || _lang === "zh-CN") document.documentElement.lang = _lang;
+  } catch (e) {}
+  if (matchMedia("(max-width: 720px)").matches) document.documentElement.classList.add("is-phone");
+  </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Symbion","url":"https://www.symbionspace.com","description":"人与 AI，共生智能。"}
   </script>
@@ -24,14 +30,14 @@
   <header class="nav" id="site-nav"></header>
 
   <main>
-    <section class="hp-hero" aria-label="首页">
+    <section class="hp-hero" data-i18n-aria="hpHeroLabel" aria-label="首页">
       <div class="hp-glow" aria-hidden="true"></div>
       <div class="hp-copy">
-        <h1 class="hp-title">让人与 AI 在这里共同<span class="hp-em">工作</span>。</h1>
-        <p class="hp-lead">借助为你打造的 Citta，获取上下文、调用工具，并真正把事情做完。</p>
+        <h1 class="hp-title" data-i18n-html="hpTitle">让人与 AI 在这里共同<span class="hp-em">工作</span>。</h1>
+        <p class="hp-lead" data-i18n="hpLead">借助为你打造的 Citta，获取上下文、调用工具，并真正把事情做完。</p>
         <p class="hp-cta">
-          <a class="btn btn-ink hp-btn" href="login.html">开始使用</a>
-          <a class="btn hp-btn hp-btn-soft" href="product/citta.html">了解 Citta</a>
+          <a class="btn btn-ink hp-btn" href="login.html" data-i18n="start">开始使用</a>
+          <a class="btn hp-btn hp-btn-soft" href="product/citta.html" data-i18n="hpLearnCitta">了解 Citta</a>
         </p>
       </div>
 
@@ -41,6 +47,7 @@
           src="assets/home-welcome.png?v=187"
           width="1440"
           height="900"
+          data-i18n-alt="hpShotAlt"
           alt="Symbion 工作台：与 Citta 协作，继续未完成的文档、幻灯与实验"
           decoding="async"
           fetchpriority="high"
@@ -48,13 +55,13 @@
       </figure>
     </section>
 
-    <section class="hp-what" aria-label="产品能力">
+    <section class="hp-what" data-i18n-aria="hpWhatLabel" aria-label="产品能力">
       <div class="hp-what-head">
-        <h2 class="hp-what-title">那么，能做什么呢？</h2>
-        <p class="hp-what-lead">理解上下文，承载能力，与人同场协作——把工作真正做完。</p>
+        <h2 class="hp-what-title" data-i18n="hpWhatTitle">那么，能做什么呢？</h2>
+        <p class="hp-what-lead" data-i18n="hpWhatLead">理解上下文，承载能力，与人同场协作——把工作真正做完。</p>
         <p class="hp-what-actions">
-          <a class="btn btn-ink hp-btn" href="login.html">开始使用</a>
-          <a class="btn hp-btn-soft" href="product/citta.html">了解产品</a>
+          <a class="btn btn-ink hp-btn" href="login.html" data-i18n="start">开始使用</a>
+          <a class="btn hp-btn-soft" href="product/citta.html" data-i18n="hpLearnProduct">了解产品</a>
         </p>
       </div>
 
@@ -68,7 +75,7 @@
             </span>
             <span class="hp-pillar-copy">
               <b>Citta <i>→</i></b>
-              <span>理解上下文，调用工具，把事情做完。</span>
+              <span data-i18n="hpPillarCitta">理解上下文，调用工具，把事情做完。</span>
             </span>
           </a>
         </li>
@@ -83,7 +90,7 @@
             </span>
             <span class="hp-pillar-copy">
               <b>Cosmo <i>→</i></b>
-              <span>承载身份、知识与可复用的能力。</span>
+              <span data-i18n="hpPillarCosmo">承载身份、知识与可复用的能力。</span>
             </span>
           </a>
         </li>
@@ -98,7 +105,7 @@
             </span>
             <span class="hp-pillar-copy">
               <b>Spaces <i>→</i></b>
-              <span>人与 AI 同场协作，一起推进工作。</span>
+              <span data-i18n="hpPillarSpaces">人与 AI 同场协作，一起推进工作。</span>
             </span>
           </a>
         </li>
@@ -106,8 +113,8 @@
 
       <div class="hp-chapter">
         <div class="hp-chapter-copy">
-          <h2 class="hp-chapter-title">把工作做完。</h2>
-          <p class="hp-chapter-lead">文档、幻灯、表格与代码都在同一工作台。Citta 接着你离开的地方继续。</p>
+          <h2 class="hp-chapter-title" data-i18n="hpChapterTitle">把工作做完。</h2>
+          <p class="hp-chapter-lead" data-i18n="hpChapterLead">文档、幻灯、表格与代码都在同一工作台。Citta 接着你离开的地方继续。</p>
         </div>
         <div class="hp-chapter-mark" aria-hidden="true">
           <svg viewBox="0 0 88 88" width="88" height="88" fill="none">
@@ -124,6 +131,7 @@
           src="assets/home-welcome.png?v=187"
           width="1440"
           height="900"
+          data-i18n-alt="hpPanelAlt"
           alt="在欢迎页继续未完成的报告、摘要与实验"
           loading="lazy"
           decoding="async"
@@ -134,69 +142,69 @@
         <li>
           <a href="product/citta.html">
             <b>Citta <i>→</i></b>
-            <span>理解上下文，调用 Cosmo 与工具，把事情做完。</span>
+            <span data-i18n="hpGridCitta">理解上下文，调用 Cosmo 与工具，把事情做完。</span>
           </a>
         </li>
         <li>
           <a href="product/cosmo.html">
             <b>Cosmo <i>→</i></b>
-            <span>承载身份、知识与可复用的能力。</span>
+            <span data-i18n="hpGridCosmo">承载身份、知识与可复用的能力。</span>
           </a>
         </li>
         <li>
           <a href="product/spaces.html">
             <b>Spaces <i>→</i></b>
-            <span>人与 AI 同场协作，共享进度与上下文。</span>
+            <span data-i18n="hpGridSpaces">人与 AI 同场协作，共享进度与上下文。</span>
           </a>
         </li>
         <li>
           <a href="product/citta.html">
-            <b>文档与幻灯 <i>→</i></b>
-            <span>Doc、Deck 与 SymTex，从草稿到交付。</span>
+            <b><span data-i18n="hpGridDocs">文档与幻灯</span> <i>→</i></b>
+            <span data-i18n="hpGridDocsDesc">Doc、Deck 与 SymTex，从草稿到交付。</span>
           </a>
         </li>
         <li>
           <a href="product/citta.html">
-            <b>表格与代码 <i>→</i></b>
-            <span>Numbers 与 Code 在同一工作流里推进。</span>
+            <b><span data-i18n="hpGridCode">表格与代码</span> <i>→</i></b>
+            <span data-i18n="hpGridCodeDesc">Numbers 与 Code 在同一工作流里推进。</span>
           </a>
         </li>
         <li>
           <a href="explore/use-cases.html">
-            <b>继续未完成 <i>→</i></b>
-            <span>接着上次的报告、实验与课程进度。</span>
+            <b><span data-i18n="hpGridContinue">继续未完成</span> <i>→</i></b>
+            <span data-i18n="hpGridContinueDesc">接着上次的报告、实验与课程进度。</span>
           </a>
         </li>
         <li>
           <a href="product/cosmo.html">
-            <b>Twins 与代理 <i>→</i></b>
-            <span>在 twin 与 AI agents 之间随时切换。</span>
+            <b><span data-i18n="hpGridTwins">Twins 与代理</span> <i>→</i></b>
+            <span data-i18n="hpGridTwinsDesc">在 twin 与 AI agents 之间随时切换。</span>
           </a>
         </li>
         <li>
           <a href="explore/stories.html">
-            <b>发现与知识 <i>→</i></b>
-            <span>从 Cosmo 与领域知识里找到可复用判断。</span>
+            <b><span data-i18n="hpGridDiscover">发现与知识</span> <i>→</i></b>
+            <span data-i18n="hpGridDiscoverDesc">从 Cosmo 与领域知识里找到可复用判断。</span>
           </a>
         </li>
         <li>
           <a href="download.html">
-            <b>下载应用 <i>→</i></b>
-            <span>在桌面随时调用，把工作带回现场。</span>
+            <b><span data-i18n="hpGridDownload">下载应用</span> <i>→</i></b>
+            <span data-i18n="hpGridDownloadDesc">在桌面随时调用，把工作带回现场。</span>
           </a>
         </li>
       </ul>
     </section>
 
-    <section class="hp-end" aria-label="开始使用">
+    <section class="hp-end" data-i18n-aria="hpEndLabel" aria-label="开始使用">
       <div class="hp-cta-band">
         <div class="hp-cta-art" aria-hidden="true">
           <img class="hp-cta-mark" src="mark.svg" width="160" height="110" alt="">
         </div>
         <div class="hp-cta-copy">
-          <h2 class="hp-cta-title">开始共生</h2>
-          <p class="hp-cta-lead">创建你的 Cosmo，随时调用 Citta。在 Spaces 里与人协作——几步就能上手。</p>
-          <a class="hp-cta-btn" href="login.html">立即开始 <i>→</i></a>
+          <h2 class="hp-cta-title" data-i18n="hpEndTitle">开始共生</h2>
+          <p class="hp-cta-lead" data-i18n="hpEndLead">创建你的 Cosmo，随时调用 Citta。在 Spaces 里与人协作——几步就能上手。</p>
+          <a class="hp-cta-btn" href="login.html" data-i18n-html="hpEndCta">立即开始 <i>→</i></a>
         </div>
       </div>
     </section>
@@ -206,6 +214,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-  <script src="js/site.js?v=home184"></script>
+  <script src="js/site.js?v=home190"></script>
 </body>
 </html>

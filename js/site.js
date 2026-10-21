@@ -2,40 +2,152 @@
   const root = document.body.dataset.root || ".";
   const page = document.body.dataset.page || "";
   const mark = `${root}/mark.svg`;
+  const LANG_KEY = "symbion-lang";
 
   const zh = (codes) => String.fromCharCode.apply(null, codes);
-  const t = {
-    product: zh([0x4ea7, 0x54c1]),
-    citta: zh([0x5c5e, 0x4e8e, 0x4f60, 0x7684]) + " AI",
-    cosmo: zh([0x4f60, 0x7684, 0x667a, 0x80fd, 0x8f7d, 0x4f53]),
-    spaces: zh([0x4eba, 0x4e0e]) + " AI " + zh([0x534f, 0x4f5c]),
-    workspace: "AI-native " + zh([0x5de5, 0x4f5c, 0x7a7a, 0x95f4]),
-    explore: zh([0x63a2, 0x7d22]),
-    scenes: zh([0x573a, 0x666f]),
-    stories: zh([0x6545, 0x4e8b]),
-    about: zh([0x5173, 0x4e8e]),
-    start: zh([0x5f00, 0x59cb, 0x4f7f, 0x7528]),
-    download: zh([0x4e0b, 0x8f7d]),
-    menu: zh([0x6253, 0x5f00, 0x83dc, 0x5355]),
-    resources: zh([0x8d44, 0x6e90]),
-    docs: zh([0x6587, 0x6863]),
-    help: zh([0x5e2e, 0x52a9, 0x4e2d, 0x5fc3]),
-    company: zh([0x516c, 0x53f8]),
-    careers: zh([0x52a0, 0x5165, 0x6211, 0x4eec]),
-    contact: zh([0x8054, 0x7cfb]),
-    legal: zh([0x6cd5, 0x5f8b]),
-    privacy: zh([0x9690, 0x79c1]),
-    terms: zh([0x6761, 0x6b3e]),
-    // Footer CTA. Deliberately not the brand tagline or the hero line: those
-    // already play on the homepage, and the closing card should give a reason
-    // to act rather than restate the thesis a third time.
-    // 你的判断，可以被复用。
-    ctaLead: zh([0x4f60, 0x7684, 0x5224, 0x65ad, 0xff0c, 0x53ef, 0x4ee5, 0x88ab, 0x590d, 0x7528, 0x3002]),
-    // 从第一个 Cosmo 开始。
-    ctaStep: zh([0x4ece, 0x7b2c, 0x4e00, 0x4e2a]) + " Cosmo " + zh([0x5f00, 0x59cb, 0x3002])
+
+  const STRINGS = {
+    "zh-CN": {
+      product: zh([0x4ea7, 0x54c1]),
+      about: zh([0x5173, 0x4e8e]),
+      start: zh([0x5f00, 0x59cb, 0x4f7f, 0x7528]),
+      download: zh([0x4e0b, 0x8f7d]),
+      menu: zh([0x6253, 0x5f00, 0x83dc, 0x5355]),
+      resources: zh([0x8d44, 0x6e90]),
+      docs: zh([0x6587, 0x6863]),
+      help: zh([0x5e2e, 0x52a9, 0x4e2d, 0x5fc3]),
+      company: zh([0x516c, 0x53f8]),
+      careers: zh([0x52a0, 0x5165, 0x6211, 0x4eec]),
+      contact: zh([0x8054, 0x7cfb]),
+      legal: zh([0x6cd5, 0x5f8b]),
+      privacy: zh([0x9690, 0x79c1]),
+      terms: zh([0x6761, 0x6b3e]),
+      scenes: zh([0x573a, 0x666f]),
+      stories: zh([0x6545, 0x4e8b]),
+      footNav: zh([0x9875, 0x811a, 0x5bfc, 0x822a]),
+      chooseLang: zh([0x9009, 0x62e9, 0x8bed, 0x8a00]),
+      langZh: zh([0x7b80, 0x4f53, 0x4e2d, 0x6587]),
+      langEn: "English",
+      langLabel: zh([0x7b80, 0x4f53, 0x4e2d, 0x6587]),
+      footQuote: zh([0x4eba, 0x5b9a, 0x4e49, 0x667a, 0x80fd, 0x3002])
+        + " Cosmo " + zh([0x627f, 0x8f7d, 0x3002])
+        + " Citta " + zh([0x505a, 0x5b8c, 0x3002]),
+      ctaLead: zh([0x4f60, 0x7684, 0x5224, 0x65ad, 0xff0c, 0x53ef, 0x4ee5, 0x88ab, 0x590d, 0x7528, 0x3002]),
+      ctaStep: zh([0x4ece, 0x7b2c, 0x4e00, 0x4e2a]) + " Cosmo " + zh([0x5f00, 0x59cb, 0x3002]),
+      docTitle: "Symbion 中国区｜人与 AI，共生智能",
+      docDesc: "工作里随时调用 Citta，把事情做完。",
+      hpHeroLabel: "首页",
+      hpTitle: "让人与 AI 在这里共同<span class=\"hp-em\">工作</span>。",
+      hpLead: "借助为你打造的 Citta，获取上下文、调用工具，并真正把事情做完。",
+      hpLearnCitta: "了解 Citta",
+      hpShotAlt: "Symbion 工作台：与 Citta 协作，继续未完成的文档、幻灯与实验",
+      hpWhatLabel: "产品能力",
+      hpWhatTitle: "那么，能做什么呢？",
+      hpWhatLead: "理解上下文，承载能力，与人同场协作——把工作真正做完。",
+      hpLearnProduct: "了解产品",
+      hpPillarCitta: "理解上下文，调用工具，把事情做完。",
+      hpPillarCosmo: "承载身份、知识与可复用的能力。",
+      hpPillarSpaces: "人与 AI 同场协作，一起推进工作。",
+      hpChapterTitle: "把工作做完。",
+      hpChapterLead: "文档、幻灯、表格与代码都在同一工作台。Citta 接着你离开的地方继续。",
+      hpPanelAlt: "在欢迎页继续未完成的报告、摘要与实验",
+      hpGridCitta: "理解上下文，调用 Cosmo 与工具，把事情做完。",
+      hpGridCosmo: "承载身份、知识与可复用的能力。",
+      hpGridSpaces: "人与 AI 同场协作，共享进度与上下文。",
+      hpGridDocs: "文档与幻灯",
+      hpGridDocsDesc: "Doc、Deck 与 SymTex，从草稿到交付。",
+      hpGridCode: "表格与代码",
+      hpGridCodeDesc: "Numbers 与 Code 在同一工作流里推进。",
+      hpGridContinue: "继续未完成",
+      hpGridContinueDesc: "接着上次的报告、实验与课程进度。",
+      hpGridTwins: "Twins 与代理",
+      hpGridTwinsDesc: "在 twin 与 AI agents 之间随时切换。",
+      hpGridDiscover: "发现与知识",
+      hpGridDiscoverDesc: "从 Cosmo 与领域知识里找到可复用判断。",
+      hpGridDownload: "下载应用",
+      hpGridDownloadDesc: "在桌面随时调用，把工作带回现场。",
+      hpEndLabel: "开始使用",
+      hpEndTitle: "开始共生",
+      hpEndLead: "创建你的 Cosmo，随时调用 Citta。在 Spaces 里与人协作——几步就能上手。",
+      hpEndCta: "立即开始 <i>→</i>"
+    },
+    en: {
+      product: "Product",
+      about: "About",
+      start: "Get started",
+      download: "Download",
+      menu: "Open menu",
+      resources: "Resources",
+      docs: "Docs",
+      help: "Help Center",
+      company: "Company",
+      careers: "Careers",
+      contact: "Contact",
+      legal: "Legal",
+      privacy: "Privacy",
+      terms: "Terms",
+      scenes: "Use cases",
+      stories: "Stories",
+      footNav: "Footer",
+      chooseLang: "Choose language",
+      langZh: "简体中文",
+      langEn: "English",
+      langLabel: "English",
+      footQuote: "People define intelligence. Cosmo carries it. Citta finishes it.",
+      ctaLead: "Your judgment can be reused.",
+      ctaStep: "Start with your first Cosmo.",
+      docTitle: "Symbion｜People and AI, working as one",
+      docDesc: "Call Citta in your work—and actually finish things.",
+      hpHeroLabel: "Home",
+      hpTitle: "Let people and AI <span class=\"hp-em\">work</span> together here.",
+      hpLead: "With Citta built around you, get context, call tools, and really get things done.",
+      hpLearnCitta: "Explore Citta",
+      hpShotAlt: "Symbion workspace: collaborating with Citta on docs, decks, and experiments",
+      hpWhatLabel: "Product",
+      hpWhatTitle: "So what can you do?",
+      hpWhatLead: "Understand context, carry capability, collaborate in the same space—and finish the work.",
+      hpLearnProduct: "Explore product",
+      hpPillarCitta: "Understand context, call tools, and finish the work.",
+      hpPillarCosmo: "Carry identity, knowledge, and reusable capability.",
+      hpPillarSpaces: "People and AI collaborate in the same space.",
+      hpChapterTitle: "Get the work done.",
+      hpChapterLead: "Docs, decks, sheets, and code in one workspace. Citta picks up where you left off.",
+      hpPanelAlt: "Continue unfinished reports, summaries, and experiments from Home",
+      hpGridCitta: "Understand context, call Cosmo and tools, and finish.",
+      hpGridCosmo: "Carry identity, knowledge, and reusable capability.",
+      hpGridSpaces: "People and AI collaborate with shared progress and context.",
+      hpGridDocs: "Docs & decks",
+      hpGridDocsDesc: "Doc, Deck, and SymTex—from draft to delivery.",
+      hpGridCode: "Sheets & code",
+      hpGridCodeDesc: "Numbers and Code in the same workflow.",
+      hpGridContinue: "Pick up where you left off",
+      hpGridContinueDesc: "Continue reports, labs, and course progress.",
+      hpGridTwins: "Twins & agents",
+      hpGridTwinsDesc: "Switch between twins and AI agents anytime.",
+      hpGridDiscover: "Discover & knowledge",
+      hpGridDiscoverDesc: "Find reusable judgment in Cosmo and domain knowledge.",
+      hpGridDownload: "Download the app",
+      hpGridDownloadDesc: "Call it from your desktop and bring work into the room.",
+      hpEndLabel: "Get started",
+      hpEndTitle: "Start the symbiosis",
+      hpEndLead: "Create your Cosmo, call Citta anytime. Collaborate in Spaces—ready in a few steps.",
+      hpEndCta: "Get started <i>→</i>"
+    }
   };
 
-  const header = `
+  const getLang = () => {
+    try {
+      const v = localStorage.getItem(LANG_KEY);
+      if (v === "en" || v === "zh-CN") return v;
+    } catch (_) {}
+    return "zh-CN";
+  };
+  const setLang = (lang) => {
+    try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
+  };
+  const copy = (lang) => STRINGS[lang] || STRINGS["zh-CN"];
+
+  const buildHeader = (t) => `
     <a class="wordmark" href="${root}/index.html">
       <img src="${mark}" width="28" height="28" alt="">
       <span>Symbion</span>
@@ -54,11 +166,7 @@
       <button class="burger" type="button" id="burger" aria-label="${t.menu}"><span></span><span></span></button>
     </div>`;
 
-  // 人定义智能。Cosmo 承载。Citta 做完。
-  const footQuote = zh([0x4eba, 0x5b9a, 0x4e49, 0x667a, 0x80fd, 0x3002])
-    + " Cosmo " + zh([0x627f, 0x8f7d, 0x3002])
-    + " Citta " + zh([0x505a, 0x5b8c, 0x3002]);
-  const footer = `
+  const buildFooter = (t, lang) => `
     <div class="foot-wash" aria-hidden="true"></div>
     <div class="foot-inner">
       <div class="foot-top">
@@ -67,9 +175,9 @@
             <img src="${mark}" width="22" height="22" alt="">
             <span>Symbion</span>
           </a>
-          <p class="foot-quote">${footQuote}</p>
+          <p class="foot-quote">${t.footQuote}</p>
         </div>
-        <nav class="foot-cols" aria-label="${zh([0x9875, 0x811a, 0x5bfc, 0x822a])}">
+        <nav class="foot-cols" aria-label="${t.footNav}">
           <div class="foot-col">
             <h4>${t.product}</h4>
             <a href="${root}/product/citta.html">Citta</a>
@@ -105,20 +213,20 @@
             class="foot-lang-btn"
             aria-haspopup="listbox"
             aria-expanded="false"
-            aria-label="${zh([0x9009, 0x62e9, 0x8bed, 0x8a00])}"
+            aria-label="${t.chooseLang}"
           >
             <svg class="foot-lang-globe" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
               <circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/>
               <path d="M2.2 8h11.6M8 1.8c1.8 1.8 2.7 3.8 2.7 6.2S9.8 12.4 8 14.2C6.2 12.4 5.3 10.4 5.3 8S6.2 3.6 8 1.8Z" stroke="currentColor" stroke-width="1.3"/>
             </svg>
-            <span class="foot-lang-label">简体中文</span>
+            <span class="foot-lang-label">${t.langLabel}</span>
             <svg class="foot-lang-caret" viewBox="0 0 12 12" width="12" height="12" fill="none" aria-hidden="true">
               <path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
           <ul class="foot-lang-menu" role="listbox" hidden>
-            <li role="option" aria-selected="true" data-lang="zh-CN">简体中文</li>
-            <li role="option" aria-selected="false" data-lang="en">English</li>
+            <li role="option" aria-selected="${lang === "zh-CN" ? "true" : "false"}" data-lang="zh-CN">${t.langZh}</li>
+            <li role="option" aria-selected="${lang === "en" ? "true" : "false"}" data-lang="en">${t.langEn}</li>
           </ul>
         </div>
       </div>
@@ -134,69 +242,130 @@
       </div>
     </div>`;
 
+  const applyPageI18n = (lang) => {
+    const t = copy(lang);
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (key && t[key] != null) el.textContent = t[key];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-html");
+      if (key && t[key] != null) el.innerHTML = t[key];
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-aria");
+      if (key && t[key] != null) el.setAttribute("aria-label", t[key]);
+    });
+    document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-alt");
+      if (key && t[key] != null) el.setAttribute("alt", t[key]);
+    });
+    if (page === "home") {
+      if (t.docTitle) document.title = t.docTitle;
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta && t.docDesc) meta.setAttribute("content", t.docDesc);
+    }
+  };
+
   const navEl = document.getElementById("site-nav");
   const footEl = document.getElementById("site-foot");
-  if (navEl) navEl.innerHTML = header;
-  if (footEl) footEl.innerHTML = footer;
+  let docUiBound = false;
 
-  const footLang = footEl && footEl.querySelector(".foot-lang");
-  if (footLang) {
-    const btn = footLang.querySelector(".foot-lang-btn");
-    const menu = footLang.querySelector(".foot-lang-menu");
-    const label = footLang.querySelector(".foot-lang-label");
-    const setOpen = (open) => {
-      footLang.classList.toggle("is-open", open);
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      menu.hidden = !open;
-    };
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      setOpen(!footLang.classList.contains("is-open"));
+  const markNavCurrent = () => {
+    const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+    document.querySelectorAll(".nav-links a, .nav-end a.btn-ghost").forEach((a) => {
+      a.classList.remove("is-current");
+      a.removeAttribute("aria-current");
+      const file = (a.getAttribute("href") || "").split("/").pop().toLowerCase();
+      if (!file || file !== here) return;
+      a.classList.add("is-current");
+      a.setAttribute("aria-current", "page");
     });
-    menu.querySelectorAll('[role="option"]').forEach((opt) => {
-      opt.addEventListener("click", () => {
-        menu.querySelectorAll('[role="option"]').forEach((o) => {
-          o.setAttribute("aria-selected", o === opt ? "true" : "false");
-        });
-        label.textContent = opt.textContent.trim();
-        document.documentElement.lang = opt.getAttribute("data-lang") || "zh-CN";
-        setOpen(false);
-      });
-    });
-    document.addEventListener("click", (e) => {
-      if (!footLang.contains(e.target)) setOpen(false);
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setOpen(false);
-    });
-  }
+  };
 
-  const here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
-  document.querySelectorAll(".nav-links a, .nav-end a.btn-ghost").forEach((a) => {
-    const file = (a.getAttribute("href") || "").split("/").pop().toLowerCase();
-    if (!file || file !== here) return;
-    a.classList.add("is-current");
-    a.setAttribute("aria-current", "page");
-  });
-
-  const burger = document.getElementById("burger");
-  if (burger && navEl) {
+  const bindBurger = () => {
+    const burger = document.getElementById("burger");
+    if (!burger || !navEl) return;
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-controls", "navLinks");
     const setMenu = (open) => {
       navEl.classList.toggle("open", open);
       burger.setAttribute("aria-expanded", open ? "true" : "false");
     };
-    burger.addEventListener("click", () => setMenu(!navEl.classList.contains("open")));
-    document.addEventListener("keydown", (e) => {
-      if (e.key !== "Escape" || !navEl.classList.contains("open")) return;
-      setMenu(false);
-      burger.focus();
-    });
+    burger.onclick = () => setMenu(!navEl.classList.contains("open"));
     navEl.querySelectorAll(".nav-links a").forEach((a) => {
       a.addEventListener("click", () => setMenu(false));
     });
-  }
+    if (!docUiBound) {
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape" || !navEl.classList.contains("open")) return;
+        setMenu(false);
+        const b = document.getElementById("burger");
+        if (b) b.focus();
+      });
+    }
+  };
+
+  const bindFootLang = (lang) => {
+    const footLang = footEl && footEl.querySelector(".foot-lang");
+    if (!footLang) return;
+    const btn = footLang.querySelector(".foot-lang-btn");
+    const menu = footLang.querySelector(".foot-lang-menu");
+    const setOpen = (open) => {
+      footLang.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.hidden = !open;
+    };
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      setOpen(!footLang.classList.contains("is-open"));
+    };
+    menu.querySelectorAll('[role="option"]').forEach((opt) => {
+      opt.onclick = () => {
+        const next = opt.getAttribute("data-lang") || "zh-CN";
+        setOpen(false);
+        if (next === lang) return;
+        setLang(next);
+        mountChrome(next);
+      };
+    });
+    if (!docUiBound) {
+      document.addEventListener("click", (e) => {
+        const el = footEl && footEl.querySelector(".foot-lang");
+        if (el && !el.contains(e.target)) {
+          el.classList.remove("is-open");
+          const b = el.querySelector(".foot-lang-btn");
+          const m = el.querySelector(".foot-lang-menu");
+          if (b) b.setAttribute("aria-expanded", "false");
+          if (m) m.hidden = true;
+        }
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+        const el = footEl && footEl.querySelector(".foot-lang");
+        if (!el) return;
+        el.classList.remove("is-open");
+        const b = el.querySelector(".foot-lang-btn");
+        const m = el.querySelector(".foot-lang-menu");
+        if (b) b.setAttribute("aria-expanded", "false");
+        if (m) m.hidden = true;
+      });
+      docUiBound = true;
+    }
+  };
+
+  const mountChrome = (lang) => {
+    const t = copy(lang);
+    document.documentElement.lang = lang;
+    if (navEl) navEl.innerHTML = buildHeader(t);
+    if (footEl) footEl.innerHTML = buildFooter(t, lang);
+    markNavCurrent();
+    bindBurger();
+    bindFootLang(lang);
+    applyPageI18n(lang);
+  };
+
+  mountChrome(getLang());
 
   const reveals = [...document.querySelectorAll("[data-reveal]")];
   if (reveals.length) {

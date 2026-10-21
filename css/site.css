@@ -4759,11 +4759,6 @@ body.home-v2 .hp-kicker { color: var(--faint); }
   color: var(--ink);
   border-color: rgba(9, 9, 11, .28);
 }
-/* Hands chapter stays a dark beat after the light product home. */
-body.home-v2 #creation {
-  margin-top: 0;
-  border-top: 1px solid rgba(220, 238, 247, .08);
-}
 .hp-stage {
   width: min(100%, 920px);
   margin: 0 auto;
@@ -4967,22 +4962,24 @@ body.home-v2 #creation {
   gap: 0;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 var(--pad) clamp(3rem, 8vh, 5.5rem);
+  padding: clamp(2.5rem, 6vh, 4rem) var(--pad) clamp(2.5rem, 6vh, 4rem);
   border-top: 1px solid var(--line);
 }
 .hp-pillar {
   display: grid;
   gap: 10px;
-  padding: 2rem 1.5rem 0;
+  align-content: start;
+  padding: 0 1.5rem;
   text-decoration: none;
   color: inherit;
   border-right: 1px solid var(--line);
-  transition: background .22s var(--ease);
+  transition: opacity .22s var(--ease);
 }
-.hp-pillar:last-child { border-right: 0; }
+.hp-pillar:first-child { padding-left: 0; }
+.hp-pillar:last-child { border-right: 0; padding-right: 0; }
 .hp-pillar b {
   font-family: var(--latin);
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -4994,52 +4991,107 @@ body.home-v2 #creation {
   max-width: 18em;
 }
 @media (hover: hover) and (pointer: fine) {
-  .hp-pillar:hover { background: rgba(255, 255, 255, .65); }
+  .hp-pillar:hover { opacity: .72; }
   .hp-pillar:hover b { text-decoration: underline; text-underline-offset: 4px; }
 }
 
-.hp-whisper {
+/* Closing band: one job — leave with an action. */
+.hp-close {
   display: grid;
-  gap: .75rem;
+  gap: 1rem;
   justify-items: center;
   text-align: center;
-  padding: clamp(3rem, 8vh, 5rem) var(--pad) clamp(4rem, 10vh, 6rem);
-  border-top: 1px solid var(--line);
-  background: #fff;
-}
-.hp-whisper > p:first-child {
-  display: flex;
-  align-items: baseline;
-  gap: .55rem;
   margin: 0;
+  padding: clamp(4rem, 10vh, 6.5rem) var(--pad);
+  background: #fff;
+  border-top: 1px solid var(--line);
 }
-.hp-whisper-cn {
-  font-family: "Noto Sans SC", var(--display);
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
+.hp-close-kicker {
+  margin: 0;
+  font-family: var(--latin);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: .04em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.hp-close-title {
+  margin: 0;
+  max-width: 14em;
+  font-family: "Noto Sans SC", var(--display);
+  font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.03em;
   color: var(--ink);
 }
-.hp-whisper-en {
-  font-family: "Newsreader", "Instrument Serif", var(--serif);
-  font-style: italic;
-  font-size: clamp(1.5rem, 2.8vw, 2rem);
-  font-weight: 400;
-  color: var(--ink-2);
-}
-.hp-whisper-line {
+.hp-close-lead {
   margin: 0;
-  font-size: 14px;
+  max-width: 22em;
+  font-size: 15px;
+  line-height: 1.55;
   color: var(--muted);
+}
+.hp-close-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin: .35rem 0 0;
+}
+.hp-close-cta .hp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 148px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 22px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 999px;
+  border-width: 1px;
+  border-style: solid;
+}
+.hp-close-cta .btn-ink {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.hp-close-cta .btn-ink:hover {
+  background: var(--ink-2);
+  color: #fff;
+  border-color: var(--ink-2);
+}
+.hp-close-cta .btn-ghost {
+  background: #fff;
+  color: var(--ink);
+  border-color: rgba(9, 9, 11, .14);
+}
+.hp-close-cta .btn-ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: rgba(9, 9, 11, .28);
+}
+body.home-v2[data-page="home"] .site-foot {
+  border-top: 0;
+}
+body.home-v2[data-page="home"] .foot-inner {
+  padding-top: 48px;
 }
 
 @media (max-width: 860px) {
-  .hp-pillars { grid-template-columns: 1fr; }
+  .hp-pillars { grid-template-columns: 1fr; gap: 0; }
   .hp-pillar {
     border-right: 0;
     border-bottom: 1px solid var(--line);
-    padding: 1.5rem 0;
+    padding: 1.35rem 0;
   }
+  .hp-pillar:first-child,
+  .hp-pillar:last-child { padding-left: 0; padding-right: 0; }
   .hp-pillar:last-child { border-bottom: 0; }
 }
 @media (max-width: 720px) {

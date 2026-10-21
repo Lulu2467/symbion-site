@@ -4729,21 +4729,21 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
 .hp-hero {
   position: relative;
   display: grid;
-  gap: clamp(2.5rem, 5vw, 3.75rem);
+  gap: clamp(2.75rem, 5.5vw, 4rem);
   max-width: 1120px;
   margin: 0 auto;
-  padding: clamp(2.5rem, 6vh, 4.5rem) var(--pad) clamp(3rem, 7vh, 5rem);
+  padding: clamp(3.25rem, 8vh, 5.5rem) var(--pad) clamp(3rem, 7vh, 5rem);
   overflow: hidden;
 }
 .hp-glow {
   position: absolute;
   left: 50%;
-  top: 42%;
+  top: 38%;
   width: min(78vw, 720px);
   height: min(58vw, 520px);
   border-radius: 50%;
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(176, 214, 230, .42), transparent 68%);
+    radial-gradient(ellipse at 50% 45%, rgba(176, 214, 230, .38), transparent 68%);
   transform: translate(-50%, -10%);
   filter: blur(2px);
   pointer-events: none;
@@ -4753,48 +4753,50 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
 .hp-stage { position: relative; z-index: 1; }
 .hp-copy {
   display: grid;
-  gap: 1.1rem;
-  max-width: 38rem;
+  gap: 0;
+  max-width: 44rem;
   text-align: center;
   margin: 0 auto;
   justify-items: center;
 }
 body.home-v2 .hp-title { color: var(--ink); }
-body.home-v2 .hp-lead { color: var(--muted); }
-body.home-v2 .hp-kicker { color: var(--faint); }
-.hp-kicker {
-  margin: 0;
-  font-family: var(--latin);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
+body.home-v2 .hp-lead { color: #3f3f46; }
+/* Notion-like hero type: heavy H1, lead ~1/3 the optical size. */
 .hp-title {
   margin: 0;
   font-family: "Noto Sans SC", var(--display);
-  font-size: clamp(2.4rem, 5.6vw, 3.75rem);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: -.03em;
+  font-size: clamp(2.75rem, 6.8vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -.045em;
   color: var(--ink);
+  text-wrap: balance;
+}
+.hp-em {
+  display: inline;
+  padding: .04em .22em;
+  margin: 0 .02em;
+  border-radius: 999px;
+  background: rgba(163, 214, 236, .55);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .hp-lead {
-  margin: 0;
-  max-width: 28em;
-  font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+  margin: 1rem 0 0;
+  max-width: 34em;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
   font-weight: 400;
-  line-height: 1.55;
-  color: var(--muted);
+  line-height: 1.65;
+  letter-spacing: -.01em;
+  color: #3f3f46;
 }
 .hp-cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
-  margin: .35rem 0 0;
+  margin: 1.5rem 0 0;
 }
 .hp-cta .hp-btn {
   display: inline-flex;
@@ -4802,15 +4804,16 @@ body.home-v2 .hp-kicker { color: var(--faint); }
   justify-content: center;
   box-sizing: border-box;
   min-width: 148px;
-  height: 44px;
-  min-height: 44px;
-  padding: 0 22px;
-  font-size: 14px;
-  font-weight: 500;
+  height: 42px;
+  min-height: 42px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 550;
   line-height: 1;
-  border-radius: 999px;
+  border-radius: 10px;
   border-width: 1px;
   border-style: solid;
+  text-decoration: none;
 }
 .hp-cta .btn-ink {
   background: var(--ink);
@@ -4822,15 +4825,15 @@ body.home-v2 .hp-kicker { color: var(--faint); }
   color: #fff;
   border-color: var(--ink-2);
 }
-.hp-cta .btn-ghost {
-  background: #fff;
-  color: var(--ink);
-  border-color: rgba(9, 9, 11, .14);
+.hp-cta .hp-btn-soft {
+  background: #e8f3f9;
+  color: #1d5170;
+  border-color: transparent;
 }
-.hp-cta .btn-ghost:hover {
-  background: #fff;
-  color: var(--ink);
-  border-color: rgba(9, 9, 11, .28);
+.hp-cta .hp-btn-soft:hover {
+  background: #d7ebf5;
+  color: #102938;
+  text-decoration: none;
 }
 .hp-stage {
   width: min(100%, 1080px);
@@ -4867,17 +4870,17 @@ body.home-v2 .hp-kicker { color: var(--faint); }
 .hp-what-title {
   margin: 0;
   font-family: "Noto Sans SC", var(--display);
-  font-size: clamp(1.85rem, 4vw, 2.75rem);
-  font-weight: 650;
-  letter-spacing: -.03em;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
   line-height: 1.2;
   color: var(--ink);
 }
 .hp-what-lead {
   margin: 0;
-  font-size: 16px;
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
   line-height: 1.65;
-  color: var(--muted);
+  color: #3f3f46;
 }
 .hp-what-actions {
   display: flex;
@@ -4971,16 +4974,16 @@ body.home-v2 .hp-kicker { color: var(--faint); }
 .hp-chapter-title {
   margin: 0;
   font-family: "Noto Sans SC", var(--display);
-  font-size: clamp(1.7rem, 3.4vw, 2.35rem);
-  font-weight: 650;
-  letter-spacing: -.03em;
+  font-size: clamp(1.85rem, 3.6vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
   color: var(--ink);
 }
 .hp-chapter-lead {
   margin: 0;
-  font-size: 15px;
+  font-size: clamp(1rem, 1.3vw, 1.0625rem);
   line-height: 1.65;
-  color: var(--muted);
+  color: #3f3f46;
 }
 .hp-chapter-mark { flex-shrink: 0; }
 

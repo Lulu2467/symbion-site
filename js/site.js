@@ -199,7 +199,7 @@
       docTitle: "Symbion｜People and AI, working as one",
       docDesc: "Call Citta in your work—and actually finish things.",
       hpHeroLabel: "Home",
-      hpTitle: "Let people and AI<br><span class=\"hp-em\">work</span> together here.",
+      hpTitle: "<span class=\"hp-line\">Let people and AI</span><br><span class=\"hp-line\"><span class=\"hp-em\">work</span> together here.</span>",
       hpLead: "With Citta built around you, get context, call tools, and really get things done.",
       hpLearnCitta: "Explore Citta",
       hpShotAlt: "Symbion workspace: collaborating with Citta on docs, decks, and experiments",

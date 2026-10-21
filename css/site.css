@@ -4217,12 +4217,11 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   height: 11px;
   flex-shrink: 0;
   display: block;
-  margin-right: 1px;
+  margin-right: 0;
 }
 .auth-back span {
   display: block;
   line-height: 1;
-  transform: translateY(1.5px);
 }
 .auth-error {
   margin: 10px 0 0;

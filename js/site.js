@@ -282,7 +282,7 @@
       }, at);
       at += 520;
       later(() => li.classList.add("is-thinking"), at);
-      at += 1800;
+      at += 2400;
       later(() => li.classList.add("is-replied", "is-typed"), at);
       return at;
     }
@@ -1110,6 +1110,8 @@
       const hero = document.getElementById("hero");
       const nav = document.getElementById("site-nav");
       const tagline = document.getElementById("hero-tagline");
+      const heroCta = document.getElementById("hero-cta");
+      const heroProducts = document.getElementById("hero-products");
       const line = document.getElementById("hero-line");
       const wash = document.getElementById("hero-wash");
       if (!pContent || !pGong || !pSym || !hero) return false;
@@ -1342,6 +1344,8 @@
         // Both gone inside the first ~80px of scroll: the rule wiping away is
         // the signal that the page has started moving.
         if (tagline) tl.fromTo(tagline, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.04, ease: "none" }, 0);
+        if (heroCta) tl.fromTo(heroCta, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.04, ease: "none" }, 0);
+        if (heroProducts) tl.fromTo(heroProducts, { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.04, ease: "none" }, 0);
         if (line) tl.fromTo(line, { autoAlpha: 1, scaleX: 1 }, { autoAlpha: 0, scaleX: 0, duration: 0.04, ease: "none" }, 0);
 
         tl.fromTo(pContent,
@@ -1438,6 +1442,8 @@
       gsap.set(pContent, { x: 0, transformOrigin: "50% 50%", force3D: true });
       gsap.set(nav, { autoAlpha: 0 });
       if (tagline) gsap.set(tagline, { opacity: 0, clipPath: "inset(0 0 100% 0)" });
+      if (heroCta) gsap.set(heroCta, { opacity: 0 });
+      if (heroProducts) gsap.set(heroProducts, { opacity: 0 });
       if (line) gsap.set(line, { opacity: 0, scaleX: 0, transformOrigin: "left center" });
       if (introBg) gsap.set(introBg, { autoAlpha: 1 });
 
@@ -1490,6 +1496,12 @@
           ease: "power3.inOut"
         }, "-=0.28");
       }
+      if (heroCta) {
+        master.to(heroCta, { opacity: 1, duration: 0.7, ease: "power3.out" }, "-=0.55");
+      }
+      if (heroProducts) {
+        master.to(heroProducts, { opacity: 1, duration: 0.7, ease: "power3.out" }, "-=0.55");
+      }
       if (nav) master.to(nav, { autoAlpha: 1, duration: 0.7, ease: "power3.out" }, "-=0.65");
       if (line) {
         master.fromTo(line, { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, "<");
@@ -1510,8 +1522,9 @@
       document.documentElement.style.overflow = "";
       const hero = document.getElementById("hero");
       const nameLayer = document.getElementById("name-layer");
+      const heroCopy = document.getElementById("hero-copy");
       const tagline = document.getElementById("hero-tagline");
-      if (hero && nameLayer && tagline) hero.insertBefore(nameLayer, tagline.nextSibling);
+      if (hero && nameLayer && heroCopy) hero.insertBefore(nameLayer, heroCopy);
       const nav = document.getElementById("site-nav");
       if (nav) {
         nav.classList.add("is-ready", "is-docked");
@@ -1526,6 +1539,10 @@
         tagline.style.opacity = "1";
         tagline.style.clipPath = "none";
       }
+      ["hero-cta", "hero-products"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.opacity = "1";
+      });
       return;
     }
 
@@ -1627,6 +1644,10 @@
       tagReduce.style.opacity = "1";
       tagReduce.style.clipPath = "none";
     }
+    ["hero-cta", "hero-products"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.style.opacity = "1";
+    });
     if (lineReduce) {
       lineReduce.style.opacity = "1";
       lineReduce.style.transform = "none";

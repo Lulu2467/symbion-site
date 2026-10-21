@@ -612,17 +612,27 @@ body.is-intro { overflow: hidden; }
   width: 100%;
   height: 100%;
 }
-.hero-tagline {
+.hero-copy {
   position: absolute;
   z-index: 2;
-  top: 3rem;
+  top: max(4.5rem, 10vh);
   left: var(--hero-gutter, 3rem);
+  right: var(--hero-gutter, 3rem);
+  max-width: 34rem;
+  display: grid;
+  gap: 1.15rem;
+  pointer-events: none;
+}
+.hero-copy a { pointer-events: auto; }
+.hero-tagline {
+  position: static;
   margin: 0;
-  max-width: 28rem;
+  max-width: 32rem;
   font-family: "Noto Sans SC", var(--ui);
-  font-size: .85rem;
-  line-height: 1.7;
-  letter-spacing: .01em;
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: .005em;
   color: var(--ice-body);
   clip-path: inset(0 0 100% 0);
   opacity: 0;
@@ -632,6 +642,76 @@ body.is-intro { overflow: hidden; }
   font-style: italic;
   font-weight: 400;
   color: var(--ice-em);
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  opacity: 0;
+}
+.hero-cta .btn {
+  min-height: 42px;
+  padding: 0 20px;
+  font-size: 14px;
+  border-radius: 999px;
+}
+.hero-cta-ink {
+  background: #fff;
+  color: var(--ink);
+  border-color: #fff;
+  box-shadow: none;
+}
+.hero-cta-ink:hover {
+  background: #fff;
+  opacity: .92;
+  box-shadow: none;
+}
+.hero-cta-ghost {
+  background: transparent;
+  color: var(--snow);
+  border-color: rgba(232, 238, 242, .3);
+}
+.hero-cta-ghost:hover {
+  background: #fff;
+  color: var(--ink);
+  border-color: #fff;
+}
+.hero-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem 1.75rem;
+  margin: .15rem 0 0;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+}
+.hero-products a {
+  display: grid;
+  gap: 3px;
+  min-width: 8.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+.hero-products b {
+  font-family: var(--latin);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--ice-title);
+}
+.hero-products span {
+  font-family: "Noto Sans SC", var(--ui);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--ice-mute);
+}
+body[data-page="home"] .hero-products a:hover {
+  text-decoration: none;
+}
+body[data-page="home"] .hero-products a:hover b {
+  color: #fff;
 }
 .hero-line {
   position: absolute;
@@ -643,6 +723,21 @@ body.is-intro { overflow: hidden; }
   background: var(--ice-mute);
   transform-origin: left center;
   opacity: 0;
+}
+/* Product index: show the one-line note on desktop, not only giant names. */
+.home-index-note {
+  display: block;
+  position: relative;
+  z-index: 1;
+  margin-top: .35em;
+  max-width: 22em;
+  font-family: "Noto Sans SC", var(--ui);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: .01em;
+  line-height: 1.45;
+  color: var(--ice-mute);
 }
 .reveal-image-wrap {
   position: fixed;
@@ -1402,7 +1497,6 @@ body[data-page="home"] main a.home-index-item {
   z-index: 1;
   display: block;
 }
-.home-index-note { display: none; }
 body[data-page="home"] main a.home-index-item.is-on,
 body[data-page="home"] main a.home-index-item:focus-visible {
   text-decoration: none;
@@ -3366,8 +3460,8 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
   }
   .name-gong,
   .name-sym { font-size: clamp(2.2rem, 12.8vw, 9rem); }
-  .hero-tagline {
-    top: 1.5rem;
+  .hero-copy {
+    top: max(4rem, 8vh);
     max-width: calc(100% - 2.5rem);
   }
   .hero-line {
@@ -3422,20 +3516,44 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     font-size: clamp(4.4rem, 22vw, 6.4rem);
     letter-spacing: -.04em;
   }
-  html.is-phone .hero-tagline {
+  html.is-phone .hero-copy {
     position: relative;
     order: 2;
     top: auto;
     left: auto;
+    right: auto;
     margin: 22px auto 0;
-    max-width: 22em;
+    max-width: 24em;
     padding: 0 var(--pad);
+    justify-items: center;
     text-align: center;
-    font-size: 15px;
+    gap: 1rem;
+  }
+  html.is-phone .hero-tagline {
+    position: static;
+    margin: 0;
+    max-width: none;
+    padding: 0;
+    text-align: center;
+    font-size: 16px;
     line-height: 1.65;
     letter-spacing: .01em;
     clip-path: none;
     opacity: 1;
+  }
+  html.is-phone .hero-cta,
+  html.is-phone .hero-products {
+    opacity: 1;
+    justify-content: center;
+  }
+  html.is-phone .hero-products {
+    flex-direction: column;
+    align-items: center;
+    gap: .85rem;
+  }
+  html.is-phone .hero-products a {
+    min-width: 0;
+    justify-items: center;
   }
   html.is-phone .home-index {
     min-height: 0;

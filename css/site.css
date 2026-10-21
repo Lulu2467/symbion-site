@@ -4665,14 +4665,15 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
 }
 .hp-glow {
   position: absolute;
-  inset: auto auto -20% -15%;
-  width: min(70vw, 640px);
-  height: min(70vw, 640px);
+  left: 50%;
+  top: 42%;
+  width: min(78vw, 720px);
+  height: min(58vw, 520px);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 40% 40%, rgba(160, 210, 230, .38), transparent 62%),
-    radial-gradient(circle at 70% 60%, rgba(210, 225, 220, .45), transparent 58%);
-  filter: blur(8px);
+    radial-gradient(ellipse at 50% 45%, rgba(176, 214, 230, .42), transparent 68%);
+  transform: translate(-50%, -10%);
+  filter: blur(2px);
   pointer-events: none;
   z-index: 0;
 }
@@ -4956,143 +4957,132 @@ body.home-v2 .hp-kicker { color: var(--faint); }
   color: #0a7a5c;
 }
 
-.hp-pillars {
+/* End of home: product row + typographic brand close — one continuous surface. */
+.hp-end {
+  position: relative;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  padding: 0;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, .72) 18%, #fff 42%);
+  border-top: 1px solid transparent;
+}
+.hp-end-products {
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  max-width: 1120px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: clamp(2.5rem, 6vh, 4rem) var(--pad) clamp(2.5rem, 6vh, 4rem);
-  border-top: 1px solid var(--line);
+  padding: clamp(2.75rem, 6vh, 4rem) var(--pad) clamp(2rem, 4vh, 2.75rem);
 }
-.hp-pillar {
+.hp-end-products a {
   display: grid;
-  gap: 10px;
-  align-content: start;
-  padding: 0 1.5rem;
+  gap: 8px;
+  padding: 0 1.75rem;
   text-decoration: none;
   color: inherit;
-  border-right: 1px solid var(--line);
-  transition: opacity .22s var(--ease);
 }
-.hp-pillar:first-child { padding-left: 0; }
-.hp-pillar:last-child { border-right: 0; padding-right: 0; }
-.hp-pillar b {
+.hp-end-products li:first-child a { padding-left: 0; }
+.hp-end-products li:last-child a { padding-right: 0; }
+.hp-end-products b {
   font-family: var(--latin);
-  font-size: 1.2rem;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: -.02em;
+  letter-spacing: -.01em;
   color: var(--ink);
 }
-.hp-pillar span {
-  font-size: 14px;
-  line-height: 1.55;
+.hp-end-products span {
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--muted);
-  max-width: 18em;
+  max-width: 14em;
 }
 @media (hover: hover) and (pointer: fine) {
-  .hp-pillar:hover { opacity: .72; }
-  .hp-pillar:hover b { text-decoration: underline; text-underline-offset: 4px; }
+  .hp-end-products a:hover b {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 
-/* Closing band: one job — leave with an action. */
-.hp-close {
+.hp-end-brand {
   display: grid;
-  gap: 1rem;
   justify-items: center;
+  gap: 1.15rem;
   text-align: center;
-  margin: 0;
-  padding: clamp(4rem, 10vh, 6.5rem) var(--pad);
-  background: #fff;
-  border-top: 1px solid var(--line);
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vh, 6rem) var(--pad) clamp(3.25rem, 7vh, 4.5rem);
 }
-.hp-close-kicker {
+.hp-end-lockup {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: .55rem;
   margin: 0;
-  font-family: var(--latin);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--faint);
+  line-height: 1;
 }
-.hp-close-title {
-  margin: 0;
-  max-width: 14em;
+.hp-end-cn {
   font-family: "Noto Sans SC", var(--display);
-  font-size: clamp(1.85rem, 3.6vw, 2.6rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -.03em;
+  font-size: clamp(2.4rem, 5.2vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: .06em;
   color: var(--ink);
 }
-.hp-close-lead {
+.hp-end-en {
+  font-family: "Newsreader", "Instrument Serif", var(--serif);
+  font-style: italic;
+  font-size: clamp(2.15rem, 4.6vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  color: var(--ink-2);
+}
+.hp-end-line {
   margin: 0;
-  max-width: 22em;
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 14px;
+  letter-spacing: .02em;
   color: var(--muted);
 }
-.hp-close-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  margin: .35rem 0 0;
-}
-.hp-close-cta .hp-btn {
+.hp-end-go {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  min-width: 148px;
-  height: 44px;
-  min-height: 44px;
+  margin-top: .35rem;
+  min-width: 132px;
+  height: 42px;
   padding: 0 22px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff !important;
   font-size: 14px;
   font-weight: 500;
-  line-height: 1;
-  border-radius: 999px;
-  border-width: 1px;
-  border-style: solid;
+  text-decoration: none;
+  transition: background .2s ease, transform .16s ease;
 }
-.hp-close-cta .btn-ink {
-  background: var(--ink);
-  color: #fff;
-  border-color: var(--ink);
-}
-.hp-close-cta .btn-ink:hover {
+.hp-end-go:hover {
   background: var(--ink-2);
-  color: #fff;
-  border-color: var(--ink-2);
+  text-decoration: none;
 }
-.hp-close-cta .btn-ghost {
-  background: #fff;
-  color: var(--ink);
-  border-color: rgba(9, 9, 11, .14);
-}
-.hp-close-cta .btn-ghost:hover {
-  background: #fff;
-  color: var(--ink);
-  border-color: rgba(9, 9, 11, .28);
-}
+.hp-end-go:active { transform: translateY(1px); }
+
 body.home-v2[data-page="home"] .site-foot {
-  border-top: 0;
+  border-top: 1px solid var(--line);
+  background: #fff;
 }
 body.home-v2[data-page="home"] .foot-inner {
-  padding-top: 48px;
+  padding-top: 56px;
 }
 
 @media (max-width: 860px) {
-  .hp-pillars { grid-template-columns: 1fr; gap: 0; }
-  .hp-pillar {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-    padding: 1.35rem 0;
+  .hp-end-products {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
   }
-  .hp-pillar:first-child,
-  .hp-pillar:last-child { padding-left: 0; padding-right: 0; }
-  .hp-pillar:last-child { border-bottom: 0; }
+  .hp-end-products a,
+  .hp-end-products li:first-child a,
+  .hp-end-products li:last-child a {
+    padding: 0;
+  }
 }
 @media (max-width: 720px) {
   .hp-hero { padding-top: 1.75rem; }

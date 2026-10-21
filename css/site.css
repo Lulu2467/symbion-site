@@ -4745,7 +4745,7 @@ body.home-v2[data-page="home"] main a:not(.btn):hover { text-decoration: none; }
   height: min(58vw, 520px);
   border-radius: 50%;
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(176, 214, 230, .38), transparent 68%);
+    radial-gradient(ellipse at 50% 45%, rgba(9, 9, 11, .045), transparent 68%);
   transform: translate(-50%, -10%);
   filter: blur(2px);
   pointer-events: none;

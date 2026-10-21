@@ -4193,9 +4193,9 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 5px;
   height: 34px;
-  padding: 0 12px 0 10px;
+  padding: 0 14px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
@@ -4212,12 +4212,15 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   border-color: rgba(9, 9, 11, .18);
   text-decoration: none;
 }
-.auth-back svg {
-  width: 8px;
-  height: 11px;
+/* Chevron drawn in CSS so there’s no SVG viewBox air pulling the group off-center. */
+.auth-back::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-left: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
   flex-shrink: 0;
-  display: block;
-  margin-right: 0;
 }
 .auth-back span {
   display: block;

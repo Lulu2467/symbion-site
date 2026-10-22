@@ -4194,7 +4194,7 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   align-items: center;
   justify-content: center;
   height: 34px;
-  padding: 0 16px;
+  padding: 0 14px;
   border-radius: 999px;
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
@@ -4211,7 +4211,19 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   border-color: rgba(9, 9, 11, .18);
   text-decoration: none;
 }
-.auth-back span {
+.auth-back-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.auth-back-inner svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex-shrink: 0;
+}
+.auth-back-inner span {
   display: block;
   line-height: 1;
 }

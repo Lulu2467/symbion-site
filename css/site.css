@@ -4830,12 +4830,13 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   color: inherit;
 }
 .hp-lead {
-  margin: 1rem 0 0;
-  max-width: 34em;
-  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  margin: 1.1rem 0 0;
+  max-width: 28em;
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.6;
   letter-spacing: -.01em;
+  text-wrap: pretty;
   color: #3f3f46;
 }
 .hp-cta {

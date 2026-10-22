@@ -4198,17 +4198,18 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   border-radius: var(--r-btn);
   border: 1px solid rgba(9, 9, 11, .1);
   background: rgba(255, 255, 255, .86);
-  color: var(--ink-2);
+  color: var(--ink);
   font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 13px;
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
-  transition: background .16s ease, border-color .16s ease;
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
 .auth-back:hover {
   background: #fff;
   border-color: rgba(9, 9, 11, .18);
+  color: var(--ink);
   text-decoration: none;
 }
 .auth-back-inner {
@@ -4216,18 +4217,25 @@ body.auth button { appearance: none; -webkit-appearance: none; }
   align-items: center;
   justify-content: center;
   gap: 6px;
+  color: inherit;
 }
 .auth-back-ico {
   width: 14px;
   height: 14px;
   display: block;
   flex-shrink: 0;
+  color: inherit;
+  fill: currentColor;
   /* Source asset points right; flip for back. */
   transform: scaleX(-1);
+}
+.auth-back-ico path {
+  fill: currentColor;
 }
 .auth-back-inner span {
   display: block;
   line-height: 1;
+  color: inherit;
 }
 .auth-error {
   margin: 10px 0 0;

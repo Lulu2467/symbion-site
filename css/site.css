@@ -5015,33 +5015,232 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   color: #3c7a94;
 }
 
-/* Figma 3× export stickers — 1:1 badge art */
-.hp-pillar-sticker {
+/* Badges: site ice palette + real glass (backdrop-filter) */
+.hp-badge {
+  --badge-ice: var(--ice-blue);
+  --badge-ice-soft: var(--ice-body);
+  --badge-ice-deep: var(--ice-meta);
   position: absolute;
-  left: -18px;
-  top: -28px;
-  width: auto;
-  height: auto;
-  max-width: none;
+  left: -12px;
+  top: -22px;
+  width: 148px;
+  height: 52px;
   pointer-events: none;
   z-index: 2;
-  display: block;
-  user-select: none;
 }
-.hp-pillar--citta .hp-pillar-sticker {
+.hp-badge--spaces {
+  left: -18px;
+  top: -26px;
+  width: 150px;
+  height: 56px;
+  transform: rotate(-5.1deg);
+  transform-origin: 30% 70%;
+}
+.hp-badge--cosmo {
   left: -14px;
-  top: -24px;
-  width: 148px;
+  top: -20px;
+  width: 152px;
 }
-.hp-pillar--cosmo .hp-pillar-sticker {
-  left: -16px;
+.hp-badge--citta {
+  left: -10px;
   top: -22px;
-  width: 155px;
+  width: 142px;
 }
-.hp-pillar--spaces .hp-pillar-sticker {
-  left: -22px;
-  top: -30px;
-  width: 168px;
+
+.hp-badge-tape {
+  position: absolute;
+  left: 28px;
+  top: 8px;
+  width: 108px;
+  height: 34px;
+}
+.hp-badge--citta .hp-badge-tape {
+  left: 30px;
+  width: 102px;
+}
+.hp-badge--spaces .hp-badge-tape {
+  left: 32px;
+  top: 10px;
+  width: 104px;
+  transform: rotate(-4.8deg) skewX(-2deg);
+  transform-origin: left center;
+}
+.hp-badge-tape-fill {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .35), transparent 42%),
+    color-mix(in srgb, var(--ice-blue) 48%, rgba(255, 255, 255, .55));
+  -webkit-backdrop-filter: blur(10px) saturate(1.25);
+  backdrop-filter: blur(10px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, .45);
+  opacity: .95;
+  -webkit-mask: url("../assets/pillars/tape-mask-cosmo.svg") center / 100% 100% no-repeat;
+  mask: url("../assets/pillars/tape-mask-cosmo.svg") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 4px 12px rgba(100, 167, 204, .18));
+}
+.hp-badge--spaces .hp-badge-tape-fill {
+  -webkit-mask: url("../assets/pillars/tape-mask-space.svg") center / 100% 100% no-repeat;
+  mask: url("../assets/pillars/tape-mask-space.svg") center / 100% 100% no-repeat;
+}
+.hp-badge-tape-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='40' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  background-size: 120px 40px;
+  opacity: .22;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  -webkit-mask: inherit;
+  mask: inherit;
+}
+.hp-badge-tape-text {
+  position: absolute;
+  left: 34px;
+  top: 11px;
+  z-index: 1;
+  font-family: var(--latin);
+  font-size: 12px;
+  font-weight: 550;
+  letter-spacing: -.01em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(100, 167, 204, .25);
+}
+.hp-badge--spaces .hp-badge-tape-text {
+  left: 30px;
+  top: 12px;
+  transform: rotate(-1.5deg);
+}
+.hp-badge--citta .hp-badge-tape-text {
+  left: 28px;
+}
+
+/* Spaces plates */
+.hp-badge-plates {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 48px;
+  height: 42px;
+  z-index: 2;
+}
+.hp-badge-plate {
+  position: absolute;
+  border-radius: 8px;
+}
+.hp-badge-plate--solid {
+  left: 16px;
+  top: 0;
+  width: 30px;
+  height: 24px;
+  background: color-mix(in srgb, var(--ice-meta) 55%, #fff);
+  transform: rotate(12deg);
+  box-shadow: 0 6px 14px rgba(100, 167, 204, .2);
+}
+.hp-badge-plate--glass {
+  left: 0;
+  top: 10px;
+  width: 32px;
+  height: 26px;
+  background: color-mix(in srgb, var(--ice-body) 42%, transparent);
+  border: 1px solid rgba(255, 255, 255, .55);
+  -webkit-backdrop-filter: blur(8px) saturate(1.3);
+  backdrop-filter: blur(8px) saturate(1.3);
+  transform: rotate(-9deg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .55),
+    -2px 6px 14px rgba(100, 167, 204, .12);
+}
+
+/* Cosmo people */
+.hp-badge-people {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 44px;
+  height: 40px;
+  z-index: 2;
+}
+.hp-badge-person {
+  position: absolute;
+  width: 26px;
+  height: 30px;
+}
+.hp-badge-person::before,
+.hp-badge-person::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hp-badge-person::before {
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.hp-badge-person::after {
+  top: 12px;
+  width: 22px;
+  height: 16px;
+  border-radius: 11px 11px 6px 6px;
+}
+.hp-badge-person--back {
+  left: 14px;
+  top: 0;
+}
+.hp-badge-person--back::before,
+.hp-badge-person--back::after {
+  background: color-mix(in srgb, var(--ice-meta) 58%, #fff);
+}
+.hp-badge-person--front {
+  left: 0;
+  top: 6px;
+}
+.hp-badge-person--front::before,
+.hp-badge-person--front::after {
+  background: color-mix(in srgb, var(--ice-body) 50%, transparent);
+  border: 1px solid rgba(255, 255, 255, .5);
+  -webkit-backdrop-filter: blur(7px) saturate(1.25);
+  backdrop-filter: blur(7px) saturate(1.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45);
+}
+
+/* Citta orb */
+.hp-badge-orb {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 38px;
+  height: 38px;
+  z-index: 2;
+}
+.hp-badge-orb-glass {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, .55), transparent 45%),
+    color-mix(in srgb, var(--ice-body) 45%, transparent);
+  border: 1px solid rgba(255, 255, 255, .55);
+  -webkit-backdrop-filter: blur(9px) saturate(1.3);
+  backdrop-filter: blur(9px) saturate(1.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .6),
+    0 6px 14px rgba(100, 167, 204, .16);
+}
+.hp-badge-orb-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 14px;
+  margin: -7px 0 0 -2.5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 0 0 1px rgba(100, 167, 204, .12);
 }
 
 .hp-pillar-desc {

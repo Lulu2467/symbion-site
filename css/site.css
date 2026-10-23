@@ -5016,32 +5016,74 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 }
 
 /* Figma poster-ui badge stickers — keep original icon art */
-.hp-pillar-sticker {
+.hp-pillar-markwrap {
   position: absolute;
   left: -14px;
   top: -24px;
+  width: 168px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 2;
+}
+.hp-pillar--citta .hp-pillar-markwrap {
+  display: none; /* citta sticker already has its glass orb */
+}
+.hp-pillar-sticker {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: auto;
   height: auto;
   max-width: none;
   display: block;
-  pointer-events: none;
   user-select: none;
-  z-index: 2;
 }
 .hp-pillar--citta .hp-pillar-sticker {
+  position: absolute;
   left: -12px;
   top: -22px;
   width: 152px;
+  z-index: 2;
+  pointer-events: none;
 }
-.hp-pillar--cosmo .hp-pillar-sticker {
+.hp-pillar--cosmo .hp-pillar-markwrap {
   left: -14px;
   top: -20px;
   width: 155px;
+  height: 52px;
 }
-.hp-pillar--spaces .hp-pillar-sticker {
+.hp-pillar--cosmo .hp-pillar-sticker {
+  width: 155px;
+}
+.hp-pillar--spaces .hp-pillar-markwrap {
   left: -20px;
   top: -28px;
   width: 168px;
+  height: 64px;
+}
+.hp-pillar--spaces .hp-pillar-sticker {
+  width: 168px;
+}
+/* Front glass = Citta circular frosted orb (topmost layer) */
+.hp-pillar-lens {
+  position: absolute;
+  display: block;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 8px rgba(100, 167, 204, .16));
+}
+.hp-pillar--cosmo .hp-pillar-lens {
+  left: 1px;
+  top: 3px;
+  width: 36px;
+  height: 36px;
+}
+.hp-pillar--spaces .hp-pillar-lens {
+  left: 0;
+  top: 9px;
+  width: 38px;
+  height: 38px;
+  transform: rotate(-3deg);
 }
 
 .hp-pillar-desc {

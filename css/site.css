@@ -5015,7 +5015,7 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   color: #3c7a94;
 }
 
-/* Figma poster-ui badge stickers — Cosmo/Spaces front glass baked as Citta orb */
+/* Figma poster-ui badge stickers */
 .hp-pillar-sticker {
   position: absolute;
   left: -14px;
@@ -5039,9 +5039,9 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   width: 155px;
 }
 .hp-pillar--spaces .hp-pillar-sticker {
-  left: -20px;
-  top: -28px;
-  width: 168px;
+  left: -14px;
+  top: -22px;
+  width: 160px;
 }
 
 .hp-pillar-desc {

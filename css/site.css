@@ -5064,25 +5064,57 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 .hp-pillar--spaces .hp-pillar-sticker {
   width: 168px;
 }
-/* Front glass = Citta circular frosted orb (topmost layer) */
+/* Front glass = Citta circular frosted orb (topmost layer, no icon art) */
 .hp-pillar-lens {
   position: absolute;
-  display: block;
   z-index: 3;
   pointer-events: none;
-  filter: drop-shadow(0 3px 8px rgba(100, 167, 204, .16));
+  border-radius: 50%;
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, .62) 0%,
+      rgba(230, 244, 250, .38) 42%,
+      rgba(180, 220, 238, .28) 100%);
+  -webkit-backdrop-filter: blur(7px) saturate(1.2);
+  backdrop-filter: blur(7px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, .55);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, .95),
+    inset 0 -3px 8px rgba(116, 193, 230, .14),
+    0 3px 10px rgba(100, 167, 204, .18);
+}
+.hp-pillar-lens::before,
+.hp-pillar-lens::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .88);
+  box-shadow: 0 0 4px rgba(255, 255, 255, .45);
+}
+.hp-pillar-lens::before {
+  left: 28%;
+  top: 30%;
+  width: 3.5px;
+  height: 13px;
+}
+.hp-pillar-lens::after {
+  left: 40%;
+  top: 42%;
+  width: 2.5px;
+  height: 9px;
+  opacity: .55;
 }
 .hp-pillar--cosmo .hp-pillar-lens {
-  left: 1px;
-  top: 3px;
-  width: 36px;
-  height: 36px;
-}
-.hp-pillar--spaces .hp-pillar-lens {
-  left: 0;
-  top: 9px;
+  left: 2px;
+  top: 2px;
   width: 38px;
   height: 38px;
+}
+.hp-pillar--spaces .hp-pillar-lens {
+  left: 1px;
+  top: 8px;
+  width: 40px;
+  height: 40px;
   transform: rotate(-3deg);
 }
 

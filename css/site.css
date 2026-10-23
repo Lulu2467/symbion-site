@@ -4989,34 +4989,31 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2.5rem;
+  gap: 2.25rem;
   min-height: 168px;
   padding: 20px 20px 18px;
   border-radius: 14px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(9, 9, 11, .08);
+  background: #f4f4f5;
   text-decoration: none;
   color: inherit;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
 }
-.hp-pillar--call { background: #eaf4fa; }
-.hp-pillar--carry { background: #f4f4f5; }
-.hp-pillar--collab { background: #eef5ef; }
 .hp-pillar-icon {
   display: grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(9, 9, 11, .05);
   color: var(--ink);
   flex-shrink: 0;
 }
 .hp-pillar-icon svg {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 }
-.hp-pillar--call .hp-pillar-icon { color: #2f6f8f; }
-.hp-pillar--carry .hp-pillar-icon { color: #18181b; }
-.hp-pillar--collab .hp-pillar-icon { color: #3f6f5f; }
 .hp-pillar-copy {
   display: grid;
   gap: 6px;
@@ -5034,13 +5031,14 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 .hp-pillar-copy > span {
   font-size: 14px;
   line-height: 1.55;
-  color: #52525b;
+  color: var(--muted);
 }
 @media (hover: hover) and (pointer: fine) {
   .hp-pillar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 36px -28px rgba(24, 36, 48, .4);
-    border-color: rgba(9, 9, 11, .06);
+    background: #fff;
+    box-shadow: 0 16px 36px -28px rgba(9, 9, 11, .35);
+    border-color: rgba(9, 9, 11, .14);
   }
 }
 

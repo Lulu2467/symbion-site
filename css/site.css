@@ -4989,14 +4989,15 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 0;
-  min-height: 132px;
-  padding: 44px 22px 22px;
+  min-height: 112px;
+  padding: 36px 22px 22px;
   border-radius: 10px;
   border: none;
   text-decoration: none;
   color: inherit;
+  overflow: visible;
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 .hp-pillar--citta,
@@ -5008,7 +5009,7 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   color: #3f3f46;
 }
 .hp-pillar--spaces {
-  /* poster-ui Space card: 求职浅蓝 / 求职深蓝 */
+  /* poster-ui: 求职浅蓝 / 求职深蓝 */
   background: #ebf5fa;
   box-shadow:
     -10px -11px 15px rgba(0, 0, 0, .02),
@@ -5034,29 +5035,6 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   line-height: 1;
   white-space: nowrap;
 }
-.hp-pillar-chip--spaces {
-  left: -10px;
-  top: -22px;
-  min-width: 112px;
-  min-height: 46px;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  color: #fff;
-  /* poster-ui 2525:10683 — badge sits crooked */
-  transform: rotate(-5.1deg);
-  transform-origin: left center;
-}
-.hp-pillar-tab {
-  position: absolute;
-  left: 14px;
-  top: 6px;
-  width: 86px;
-  height: 32px;
-  pointer-events: none;
-  transform: rotate(-4.8deg) skewX(-2deg);
-  transform-origin: left center;
-}
 .hp-pillar-mark {
   display: grid;
   place-items: center;
@@ -5069,29 +5047,92 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   width: 16px;
   height: 16px;
 }
-.hp-pillar-mark-img {
-  position: absolute;
-  left: -4px;
-  top: 0;
-  width: 36px;
-  height: 28px;
-  z-index: 1;
-  pointer-events: none;
-  transform: rotate(-8deg);
-}
 .hp-pillar-chip-label {
   position: relative;
   z-index: 1;
 }
-.hp-pillar-chip--spaces .hp-pillar-chip-label {
-  margin-left: 38px;
-  margin-top: 2px;
+
+/* Spaces badge — match poster-ui crooked sticker + frosted plates */
+.hp-space-badge {
+  position: absolute;
+  left: -22px;
+  top: -26px;
+  width: 128px;
+  height: 58px;
+  pointer-events: none;
+  transform: rotate(-5.1deg);
+  transform-origin: 40% 60%;
+  z-index: 2;
+}
+.hp-space-plates {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 48px;
+  height: 40px;
+}
+.hp-space-plate {
+  position: absolute;
+  border-radius: 7px;
+}
+.hp-space-plate--solid {
+  left: 16px;
+  top: 0;
+  width: 30px;
+  height: 24px;
+  background: #609bb9;
+  transform: rotate(12deg);
+  box-shadow: 0 6px 14px rgba(96, 155, 185, .22);
+}
+.hp-space-plate--glass {
+  left: 2px;
+  top: 10px;
+  width: 32px;
+  height: 26px;
+  background: rgba(135, 215, 255, .38);
+  border: 1px solid rgba(255, 255, 255, .35);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  transform: rotate(-8deg);
+  box-shadow:
+    -1px 2px 6px rgba(145, 145, 145, .08),
+    -4px 8px 14px rgba(145, 145, 145, .06),
+    -8px 16px 22px rgba(145, 145, 145, .04);
+}
+.hp-space-ribbon {
+  position: absolute;
+  left: 28px;
+  top: 6px;
+  width: 92px;
+  height: 36px;
+}
+.hp-space-ribbon-shape {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 90px;
+  height: 33px;
+  display: block;
+  opacity: .92;
+  transform: rotate(-4.8deg) skewX(-2.1deg);
+  transform-origin: left center;
+  filter: drop-shadow(0 4px 10px rgba(93, 174, 214, .25));
+}
+.hp-space-ribbon-text {
+  position: absolute;
+  left: 30px;
+  top: 12px;
+  z-index: 1;
+  font-family: var(--latin);
   font-size: 12px;
   font-weight: 550;
+  letter-spacing: -.01em;
+  line-height: 1;
   color: #fff;
-  transform: rotate(-1.9deg);
-  text-shadow: 0 1px 0 rgba(0, 0, 0, .08);
+  transform: rotate(-1.94deg);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
 }
+
 .hp-pillar-desc {
   display: block;
   max-width: 22em;

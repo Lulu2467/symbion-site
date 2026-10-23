@@ -5035,23 +5035,27 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   white-space: nowrap;
 }
 .hp-pillar-chip--spaces {
-  left: -6px;
-  top: -18px;
-  min-width: 108px;
-  min-height: 42px;
+  left: -10px;
+  top: -22px;
+  min-width: 112px;
+  min-height: 46px;
   padding: 0;
   border-radius: 0;
   background: transparent;
   color: #fff;
+  /* poster-ui 2525:10683 — badge sits crooked */
+  transform: rotate(-5.1deg);
+  transform-origin: left center;
 }
 .hp-pillar-tab {
   position: absolute;
-  left: 12px;
-  top: 4px;
+  left: 14px;
+  top: 6px;
   width: 86px;
   height: 32px;
   pointer-events: none;
-  transform: rotate(1.2deg);
+  transform: rotate(-4.8deg) skewX(-2deg);
+  transform-origin: left center;
 }
 .hp-pillar-mark {
   display: grid;
@@ -5067,23 +5071,25 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 }
 .hp-pillar-mark-img {
   position: absolute;
-  left: 0;
-  top: -2px;
-  width: 34px;
-  height: 26px;
+  left: -4px;
+  top: 0;
+  width: 36px;
+  height: 28px;
   z-index: 1;
   pointer-events: none;
-  transform: rotate(-6deg);
+  transform: rotate(-8deg);
 }
 .hp-pillar-chip-label {
   position: relative;
   z-index: 1;
 }
 .hp-pillar-chip--spaces .hp-pillar-chip-label {
-  margin-left: 36px;
+  margin-left: 38px;
+  margin-top: 2px;
   font-size: 12px;
   font-weight: 550;
   color: #fff;
+  transform: rotate(-1.9deg);
   text-shadow: 0 1px 0 rgba(0, 0, 0, .08);
 }
 .hp-pillar-desc {

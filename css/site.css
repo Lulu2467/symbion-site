@@ -4981,9 +4981,9 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(24px, 3.2vw, 36px);
+  gap: clamp(28px, 3.5vw, 40px);
   margin: 0 0 clamp(3.5rem, 8vh, 5rem);
-  padding: 32px 4px 0;
+  padding: 40px 2px 0;
 }
 .hp-pillars > li {
   min-width: 0;
@@ -4995,9 +4995,9 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   flex-direction: column;
   justify-content: flex-end;
   gap: 0;
-  min-height: 118px;
-  padding: 44px 20px 22px;
-  border-radius: 12px;
+  min-height: clamp(148px, 18vw, 176px);
+  padding: 56px 26px 28px;
+  border-radius: 14px;
   border: none;
   text-decoration: none;
   color: inherit;
@@ -5022,32 +5022,33 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 /* Figma poster-ui badge stickers — sit on card corner, don't invade neighbors */
 .hp-pillar-sticker {
   position: absolute;
-  left: 10px;
-  top: -18px;
+  left: 12px;
+  top: -22px;
   width: auto;
   height: auto;
-  max-width: min(148px, 72%);
+  max-width: min(176px, 78%);
   display: block;
   pointer-events: none;
   user-select: none;
   z-index: 2;
 }
 .hp-pillar--citta .hp-pillar-sticker {
-  width: 148px;
+  width: 172px;
 }
 .hp-pillar--cosmo .hp-pillar-sticker {
-  width: 148px;
+  width: 172px;
 }
 .hp-pillar--spaces .hp-pillar-sticker {
-  width: 152px;
+  width: 178px;
 }
 
 .hp-pillar-desc {
   display: block;
   max-width: 22em;
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: clamp(16px, 1.35vw, 18px);
+  line-height: 1.55;
   font-weight: 450;
+  letter-spacing: -.01em;
   color: #3c7a94;
 }
 @media (hover: hover) and (pointer: fine) {
@@ -5377,11 +5378,18 @@ body.home-v2[data-page="home"] .foot-lang {
     grid-template-columns: 1fr;
   }
   .hp-pillars {
-    gap: 28px;
-    padding-top: 28px;
+    gap: 32px;
+    padding-top: 36px;
+  }
+  .hp-pillar {
+    min-height: 140px;
+    padding: 52px 24px 26px;
   }
   .hp-pillar-sticker {
-    max-width: 160px;
+    max-width: 176px;
+  }
+  .hp-pillar-desc {
+    font-size: 17px;
   }
   .hp-cta-band {
     grid-template-columns: 1fr;

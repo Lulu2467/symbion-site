@@ -5015,109 +5015,33 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   color: #3c7a94;
 }
 
-/* Figma poster-ui badge stickers — keep original icon art */
-.hp-pillar-markwrap {
+/* Figma poster-ui badge stickers — Cosmo/Spaces front glass baked as Citta orb */
+.hp-pillar-sticker {
   position: absolute;
   left: -14px;
   top: -24px;
-  width: 168px;
-  height: 64px;
-  pointer-events: none;
-  z-index: 2;
-}
-.hp-pillar--citta .hp-pillar-markwrap {
-  display: none; /* citta sticker already has its glass orb */
-}
-.hp-pillar-sticker {
-  position: absolute;
-  left: 0;
-  top: 0;
   width: auto;
   height: auto;
   max-width: none;
   display: block;
+  pointer-events: none;
   user-select: none;
+  z-index: 2;
 }
 .hp-pillar--citta .hp-pillar-sticker {
-  position: absolute;
   left: -12px;
   top: -22px;
   width: 152px;
-  z-index: 2;
-  pointer-events: none;
 }
-.hp-pillar--cosmo .hp-pillar-markwrap {
+.hp-pillar--cosmo .hp-pillar-sticker {
   left: -14px;
   top: -20px;
   width: 155px;
-  height: 52px;
 }
-.hp-pillar--cosmo .hp-pillar-sticker {
-  width: 155px;
-}
-.hp-pillar--spaces .hp-pillar-markwrap {
+.hp-pillar--spaces .hp-pillar-sticker {
   left: -20px;
   top: -28px;
   width: 168px;
-  height: 64px;
-}
-.hp-pillar--spaces .hp-pillar-sticker {
-  width: 168px;
-}
-/* Front glass = Citta circular frosted orb (topmost layer, no icon art) */
-.hp-pillar-lens {
-  position: absolute;
-  z-index: 3;
-  pointer-events: none;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 28%,
-      rgba(255, 255, 255, .92) 0%,
-      rgba(236, 246, 252, .72) 38%,
-      rgba(196, 228, 242, .55) 72%,
-      rgba(170, 214, 236, .48) 100%);
-  -webkit-backdrop-filter: blur(10px) saturate(1.25);
-  backdrop-filter: blur(10px) saturate(1.25);
-  border: 1.5px solid rgba(255, 255, 255, .78);
-  box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 1),
-    inset 0 -4px 10px rgba(116, 193, 230, .22),
-    0 0 0 1px rgba(148, 198, 222, .18),
-    0 4px 14px rgba(100, 167, 204, .28);
-}
-.hp-pillar-lens::before,
-.hp-pillar-lens::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .95);
-  box-shadow: 0 0 5px rgba(255, 255, 255, .55);
-}
-.hp-pillar-lens::before {
-  left: 26%;
-  top: 28%;
-  width: 4px;
-  height: 15px;
-}
-.hp-pillar-lens::after {
-  left: 40%;
-  top: 40%;
-  width: 3px;
-  height: 10px;
-  opacity: .62;
-}
-.hp-pillar--cosmo .hp-pillar-lens {
-  left: 0;
-  top: 0;
-  width: 42px;
-  height: 42px;
-}
-.hp-pillar--spaces .hp-pillar-lens {
-  left: -1px;
-  top: 6px;
-  width: 44px;
-  height: 44px;
-  transform: rotate(-3deg);
 }
 
 .hp-pillar-desc {

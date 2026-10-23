@@ -5073,27 +5073,14 @@ body.home-v2 .hp-lead { color: #3f3f46; }
     color-mix(in srgb, var(--ice-blue) 48%, rgba(255, 255, 255, .55));
   -webkit-backdrop-filter: blur(10px) saturate(1.25);
   backdrop-filter: blur(10px) saturate(1.25);
-  border: 1px solid rgba(255, 255, 255, .45);
   opacity: .95;
   -webkit-mask: url("../assets/pillars/tape-mask-cosmo.svg") center / 100% 100% no-repeat;
   mask: url("../assets/pillars/tape-mask-cosmo.svg") center / 100% 100% no-repeat;
-  filter: drop-shadow(0 4px 12px rgba(100, 167, 204, .18));
+  filter: drop-shadow(0 3px 8px rgba(100, 167, 204, .14));
 }
 .hp-badge--spaces .hp-badge-tape-fill {
   -webkit-mask: url("../assets/pillars/tape-mask-space.svg") center / 100% 100% no-repeat;
   mask: url("../assets/pillars/tape-mask-space.svg") center / 100% 100% no-repeat;
-}
-.hp-badge-tape-fill::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='40' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
-  background-size: 120px 40px;
-  opacity: .22;
-  mix-blend-mode: soft-light;
-  pointer-events: none;
-  -webkit-mask: inherit;
-  mask: inherit;
 }
 .hp-badge-tape-text {
   position: absolute;
@@ -5149,9 +5136,7 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   -webkit-backdrop-filter: blur(8px) saturate(1.3);
   backdrop-filter: blur(8px) saturate(1.3);
   transform: rotate(-9deg);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .55),
-    -2px 6px 14px rgba(100, 167, 204, .12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
 }
 
 /* Cosmo people */

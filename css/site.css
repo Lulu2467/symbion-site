@@ -5041,6 +5041,43 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 .hp-pillar--spaces .hp-pillar-sticker {
   width: 178px;
 }
+.hp-pillar-mark {
+  position: absolute;
+  left: 16px;
+  top: -14px;
+  display: inline-flex;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+.hp-pillar-icon {
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  margin-right: -12px;
+  position: relative;
+  z-index: 1;
+}
+.hp-pillar-icon--space {
+  width: 40px;
+  height: 34px;
+}
+.hp-pillar-label {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 14px 0 18px;
+  border-radius: 4px;
+  background: #7dbede;
+  color: #fff;
+  font-family: var(--ui);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
 
 .hp-pillar-desc {
   display: block;

@@ -4983,7 +4983,7 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   margin: 0 0 clamp(3.5rem, 8vh, 5rem);
-  padding: 18px 0 0;
+  padding: 28px 8px 0 12px;
 }
 .hp-pillar {
   position: relative;
@@ -5055,74 +5055,78 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 /* Spaces badge — match poster-ui crooked sticker + frosted plates */
 .hp-space-badge {
   position: absolute;
-  left: -22px;
-  top: -26px;
-  width: 128px;
-  height: 58px;
+  left: -30px;
+  top: -28px;
+  width: 140px;
+  height: 64px;
   pointer-events: none;
   transform: rotate(-5.1deg);
-  transform-origin: 40% 60%;
+  transform-origin: 36% 70%;
   z-index: 2;
 }
 .hp-space-plates {
   position: absolute;
   left: 0;
-  top: 4px;
-  width: 48px;
-  height: 40px;
+  top: 0;
+  width: 56px;
+  height: 48px;
+  z-index: 3;
 }
 .hp-space-plate {
   position: absolute;
-  border-radius: 7px;
+  border-radius: 8px;
 }
 .hp-space-plate--solid {
-  left: 16px;
-  top: 0;
-  width: 30px;
-  height: 24px;
+  left: 20px;
+  top: 2px;
+  width: 34px;
+  height: 28px;
   background: #609bb9;
-  transform: rotate(12deg);
-  box-shadow: 0 6px 14px rgba(96, 155, 185, .22);
+  transform: rotate(14deg);
+  box-shadow: 0 8px 16px rgba(96, 155, 185, .28);
+  z-index: 1;
 }
 .hp-space-plate--glass {
-  left: 2px;
-  top: 10px;
-  width: 32px;
-  height: 26px;
-  background: rgba(135, 215, 255, .38);
-  border: 1px solid rgba(255, 255, 255, .35);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  transform: rotate(-8deg);
+  left: 0;
+  top: 12px;
+  width: 36px;
+  height: 30px;
+  background: rgba(135, 215, 255, .42);
+  border: 1px solid rgba(255, 255, 255, .45);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  transform: rotate(-10deg);
+  z-index: 2;
   box-shadow:
-    -1px 2px 6px rgba(145, 145, 145, .08),
-    -4px 8px 14px rgba(145, 145, 145, .06),
-    -8px 16px 22px rgba(145, 145, 145, .04);
+    -1px 2px 6px rgba(145, 145, 145, .1),
+    -4px 10px 16px rgba(145, 145, 145, .08),
+    -10px 22px 28px rgba(145, 145, 145, .05);
 }
 .hp-space-ribbon {
   position: absolute;
-  left: 28px;
-  top: 6px;
-  width: 92px;
-  height: 36px;
+  left: 34px;
+  top: 8px;
+  width: 96px;
+  height: 38px;
+  z-index: 1;
 }
 .hp-space-ribbon-shape {
   position: absolute;
   left: 0;
   top: 2px;
-  width: 90px;
-  height: 33px;
+  width: 94px;
+  height: 34px;
   display: block;
-  opacity: .92;
+  opacity: .9;
   transform: rotate(-4.8deg) skewX(-2.1deg);
   transform-origin: left center;
-  filter: drop-shadow(0 4px 10px rgba(93, 174, 214, .25));
+  filter: drop-shadow(0 4px 10px rgba(93, 174, 214, .28));
 }
 .hp-space-ribbon-text {
   position: absolute;
-  left: 30px;
-  top: 12px;
-  z-index: 1;
+  left: 32px;
+  top: 13px;
+  z-index: 2;
   font-family: var(--latin);
   font-size: 12px;
   font-weight: 550;

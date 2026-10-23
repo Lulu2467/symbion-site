@@ -5000,20 +5000,24 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   overflow: visible;
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.hp-pillar--citta,
-.hp-pillar--cosmo {
+.hp-pillar--citta {
   background: #f4f4f5;
   box-shadow:
     -8px -8px 18px rgba(0, 0, 0, .02),
     12px 12px 20px rgba(0, 0, 0, .04);
   color: #3f3f46;
 }
+/* poster-ui glass cards */
+.hp-pillar--cosmo,
 .hp-pillar--spaces {
-  /* poster-ui: 求职浅蓝 / 求职深蓝 */
-  background: #ebf5fa;
+  background: rgba(235, 245, 250, .42);
+  border: 1px solid rgba(255, 255, 255, .62);
   box-shadow:
     -10px -11px 15px rgba(0, 0, 0, .02),
-    15px 13px 15px rgba(0, 0, 0, .05);
+    15px 13px 15px rgba(0, 0, 0, .05),
+    inset 0 1px 0 rgba(255, 255, 255, .55);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
   color: #3c7a94;
 }
 .hp-pillar-chip {
@@ -5052,62 +5056,28 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   z-index: 1;
 }
 
-/* Spaces badge — match poster-ui crooked sticker + frosted plates */
-.hp-space-badge {
+/* Figma 3× export stickers — 1:1 badge art */
+.hp-pillar-sticker {
   position: absolute;
-  left: -30px;
+  left: -18px;
   top: -28px;
-  width: 140px;
-  height: 64px;
-  pointer-events: none;
-  transform: rotate(-5.1deg);
-  transform-origin: 36% 70%;
-  z-index: 2;
-}
-.hp-space-plates {
-  position: absolute;
-  left: -2px;
-  top: 2px;
-  width: 48px;
+  width: auto;
   height: auto;
-  z-index: 3;
-  display: block;
-  transform: rotate(-6deg);
-  filter: drop-shadow(-2px 6px 10px rgba(96, 155, 185, .22));
-}
-.hp-space-ribbon {
-  position: absolute;
-  left: 30px;
-  top: 8px;
-  width: 96px;
-  height: 38px;
-  z-index: 1;
-}
-.hp-space-ribbon-shape {
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 94px;
-  height: 34px;
-  display: block;
-  opacity: .9;
-  transform: rotate(-4.8deg) skewX(-2.1deg);
-  transform-origin: left center;
-  filter: drop-shadow(0 4px 10px rgba(93, 174, 214, .28));
-}
-.hp-space-ribbon-text {
-  position: absolute;
-  left: 32px;
-  top: 13px;
+  max-width: none;
+  pointer-events: none;
   z-index: 2;
-  font-family: var(--latin);
-  font-size: 12px;
-  font-weight: 550;
-  letter-spacing: -.01em;
-  line-height: 1;
-  color: #fff;
-  transform: rotate(-1.94deg);
-  text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+  display: block;
+  user-select: none;
+}
+.hp-pillar--cosmo .hp-pillar-sticker {
+  left: -16px;
+  top: -22px;
+  width: 155px;
+}
+.hp-pillar--spaces .hp-pillar-sticker {
+  left: -22px;
+  top: -30px;
+  width: 168px;
 }
 
 .hp-pillar-desc {
@@ -5117,10 +5087,10 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   line-height: 1.45;
   font-weight: 450;
 }
-.hp-pillar--citta .hp-pillar-desc,
-.hp-pillar--cosmo .hp-pillar-desc {
+.hp-pillar--citta .hp-pillar-desc {
   color: #52525b;
 }
+.hp-pillar--cosmo .hp-pillar-desc,
 .hp-pillar--spaces .hp-pillar-desc {
   color: #3c7a94;
 }
@@ -5128,18 +5098,19 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   .hp-pillar:hover {
     transform: translateY(-2px);
   }
-  .hp-pillar--citta:hover,
-  .hp-pillar--cosmo:hover {
+  .hp-pillar--citta:hover {
     background: #fff;
     box-shadow:
       -8px -8px 18px rgba(0, 0, 0, .02),
       14px 16px 28px rgba(0, 0, 0, .07);
   }
+  .hp-pillar--cosmo:hover,
   .hp-pillar--spaces:hover {
-    background: #e5f2f8;
+    background: rgba(229, 242, 248, .55);
     box-shadow:
       -10px -11px 15px rgba(0, 0, 0, .02),
-      16px 16px 28px rgba(60, 122, 148, .14);
+      16px 16px 28px rgba(60, 122, 148, .14),
+      inset 0 1px 0 rgba(255, 255, 255, .65);
   }
 }
 

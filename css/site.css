@@ -5020,42 +5020,26 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 }
 
 /* Figma poster-ui badge stickers — sit on card corner, don't invade neighbors */
-.hp-pillar-mark {
+.hp-pillar-sticker {
   position: absolute;
-  left: 16px;
-  top: -40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 2;
+  left: 12px;
+  top: -22px;
+  width: auto;
+  height: auto;
+  max-width: min(176px, 78%);
+  display: block;
   pointer-events: none;
   user-select: none;
-}
-.hp-pillar-icon {
-  display: block;
-  width: 28px;
-  height: 28px;
-  margin: 0 0 -8px 8px;
-  position: relative;
   z-index: 2;
 }
-.hp-pillar-icon--space {
-  width: 32px;
-  height: 26px;
+.hp-pillar--citta .hp-pillar-sticker {
+  width: 172px;
 }
-.hp-pillar-sticker {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 12px;
-  border-radius: 4px;
-  background: #7dbede;
-  color: #fff;
-  font-family: var(--ui);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1;
+.hp-pillar--cosmo .hp-pillar-sticker {
+  width: 172px;
+}
+.hp-pillar--spaces .hp-pillar-sticker {
+  width: 178px;
 }
 
 .hp-pillar-desc {

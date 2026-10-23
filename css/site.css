@@ -4980,20 +4980,24 @@ body.home-v2 .hp-lead { color: #3f3f46; }
 .hp-pillars {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3.2vw, 36px);
   margin: 0 0 clamp(3.5rem, 8vh, 5rem);
-  padding: 28px 8px 0 12px;
+  padding: 32px 4px 0;
+}
+.hp-pillars > li {
+  min-width: 0;
+  isolation: isolate;
 }
 .hp-pillar {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0;
-  min-height: 112px;
-  padding: 36px 22px 22px;
-  border-radius: 10px;
+  min-height: 118px;
+  padding: 44px 20px 22px;
+  border-radius: 12px;
   border: none;
   text-decoration: none;
   color: inherit;
@@ -5007,41 +5011,35 @@ body.home-v2 .hp-lead { color: #3f3f46; }
   background: rgba(235, 245, 250, .42);
   border: 1px solid rgba(255, 255, 255, .62);
   box-shadow:
-    -10px -11px 15px rgba(0, 0, 0, .02),
-    15px 13px 15px rgba(0, 0, 0, .05),
+    -8px -8px 14px rgba(0, 0, 0, .02),
+    12px 12px 18px rgba(0, 0, 0, .05),
     inset 0 1px 0 rgba(255, 255, 255, .55);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   backdrop-filter: blur(18px) saturate(1.2);
   color: #3c7a94;
 }
 
-/* Figma poster-ui badge stickers */
+/* Figma poster-ui badge stickers — sit on card corner, don't invade neighbors */
 .hp-pillar-sticker {
   position: absolute;
-  left: -14px;
-  top: -24px;
+  left: 10px;
+  top: -18px;
   width: auto;
   height: auto;
-  max-width: none;
+  max-width: min(148px, 72%);
   display: block;
   pointer-events: none;
   user-select: none;
   z-index: 2;
 }
 .hp-pillar--citta .hp-pillar-sticker {
-  left: -12px;
-  top: -22px;
-  width: 152px;
+  width: 148px;
 }
 .hp-pillar--cosmo .hp-pillar-sticker {
-  left: -14px;
-  top: -20px;
-  width: 155px;
+  width: 148px;
 }
 .hp-pillar--spaces .hp-pillar-sticker {
-  left: -14px;
-  top: -22px;
-  width: 160px;
+  width: 152px;
 }
 
 .hp-pillar-desc {
@@ -5377,6 +5375,13 @@ body.home-v2[data-page="home"] .foot-lang {
   .hp-pillars,
   .hp-grid {
     grid-template-columns: 1fr;
+  }
+  .hp-pillars {
+    gap: 28px;
+    padding-top: 28px;
+  }
+  .hp-pillar-sticker {
+    max-width: 160px;
   }
   .hp-cta-band {
     grid-template-columns: 1fr;

@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosmo · Symbion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #09090b;
+    --muted: #52525b;
+    --faint: #71717a;
+    --line: #ececee;
+    --surface: #f4f4f5;
+    --green: #09090b;
+    --green-dark: #18181b;
+    --green-tint: #dceef7;
+    --green-wash: #f4f4f5;
+    --amber-tint: #f4f4f5;
+    --amber: #3f3f46;
+    --canvas: #fafafa;
+    --shadow: rgba(9, 9, 11, .06);
+    --font: "DM Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei UI", sans-serif;
+    --page: 1120px;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; }
+  body {
+    background: #fafafa;
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  button, input, textarea { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: 0; padding: 0; }
+  a { color: inherit; }
+
+  .top {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 32px;
+    background: transparent;
+  }
+  .top::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 96px; z-index: -1; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(250,250,250,.78) 0%, rgba(250,250,250,.28) 46%, rgba(250,250,250,0) 100%);
+  }
+  .veil {
+    position: fixed; left: 0; right: 0; top: 0; height: 96px; z-index: 19;
+    pointer-events: none;
+  }
+  .veil i {
+    position: absolute; inset: 0; display: block;
+    -webkit-backdrop-filter: blur(var(--b));
+    backdrop-filter: blur(var(--b));
+    -webkit-mask-image: var(--mask);
+    mask-image: var(--mask);
+  }
+  .top.is-stuck { box-shadow: none; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand svg { width: 28px; height: 19px; display: block; }
+  .brand b { font-weight: 600; letter-spacing: -.02em; font-size: 16px; }
+  .top-kicker { font-size: 13px; font-weight: 500; color: var(--green-dark); }
+  .top .sp { flex: 1; }
+  .search {
+    width: min(260px, 32vw);
+    background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 14px; font-size: 13px; outline: none; color: var(--ink);
+  }
+  .search:focus { border-color: #09090b; }
+  .desk-link {
+    text-decoration: none; font-size: 13px; font-weight: 500; color: var(--green-dark);
+    background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px;
+  }
+  .desk-link:hover { background: var(--green-wash); }
+
+  .wrap { width: min(var(--page), calc(100% - 64px)); margin: 0 auto; padding: 8px 0 88px; }
+  .eyebrow {
+    margin: 0 0 14px; font-size: 11px; font-weight: 600;
+    letter-spacing: .16em; color: var(--muted);
+  }
+  h1 { margin: 0; font-size: 56px; font-weight: 600; letter-spacing: -.03em; line-height: 1.08; }
+  .stage h1, .stage .eyebrow, .stage .lede { text-align: center; }
+  .lede { margin: 10px auto 0; max-width: 460px; color: var(--muted); font-size: 16px; line-height: 1.45; }
+  .domain-hero h1, .reader h1 { text-align: left; font-size: 44px; }
+  .lede b { font-weight: 500; color: var(--green-dark); }
+
+  .stage {
+    position: relative; isolation: isolate; min-height: 520px; padding: 28px 0 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .stage::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 0;
+    width: 100vw; height: 100%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse 100% 78% at 50% 48%,
+      rgba(176, 212, 226, .48) 0%,
+      rgba(198, 224, 234, .18) 42%,
+      rgba(250, 250, 250, 0) 74%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orbit { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+  .orbit span {
+    position: absolute; left: var(--x); top: var(--y);
+    white-space: nowrap;
+    transform: translate(-50%, -50%) rotate(var(--r, 0deg));
+    pointer-events: auto; cursor: pointer;
+    animation: pill-float var(--d, 14s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  .orbit span b {
+    display: block; font-weight: 500;
+    background: rgba(255,255,255,.38);
+    -webkit-backdrop-filter: blur(12px) saturate(1.45);
+    backdrop-filter: blur(12px) saturate(1.45);
+    border: 1px solid rgba(255,255,255,.72);
+    color: #52525b; border-radius: 999px; padding: 7px 14px;
+    font-size: 12px;
+    box-shadow: 0 8px 18px rgba(40, 80, 110, .06), inset 0 1px 0 rgba(255,255,255,.85);
+    transform: scale(1);
+    transition: transform .45s ease;
+  }
+  .orbit span:hover { animation-play-state: paused; }
+  .orbit span:hover b { transform: scale(1.04); }
+  .orbit span:nth-child(1) { animation-name: pill-a; }
+  .orbit span:nth-child(2) { animation-name: pill-b; }
+  .orbit span:nth-child(3) { animation-name: pill-c; }
+  .orbit span:nth-child(4) { animation-name: pill-d; }
+  @keyframes pill-a {
+    0%   { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+    17%  { transform: translate(calc(-50% - 16px), calc(-50% - 6px)) rotate(calc(var(--r, 0deg) - 2.2deg)); }
+    38%  { transform: translate(calc(-50% + 4px), calc(-50% - 14px)) rotate(calc(var(--r, 0deg) + 1.4deg)); }
+    61%  { transform: translate(calc(-50% + 13px), calc(-50% + 7px)) rotate(calc(var(--r, 0deg) - 0.8deg)); }
+    82%  { transform: translate(calc(-50% - 7px), calc(-50% + 4px)) rotate(calc(var(--r, 0deg) + 1.8deg)); }
+    100% { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+  }
+  @keyframes pill-b {
+    0%   { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+    23%  { transform: translate(calc(-50% + 9px), calc(-50% - 11px)) rotate(calc(var(--r, 0deg) + 1.6deg)); }
+    44%  { transform: translate(calc(-50% + 15px), calc(-50% + 3px)) rotate(calc(var(--r, 0deg) - 1.1deg)); }
+    69%  { transform: translate(calc(-50% - 6px), calc(-50% + 8px)) rotate(calc(var(--r, 0deg) + 2deg)); }
+    88%  { transform: translate(calc(-50% - 12px), calc(-50% - 4px)) rotate(calc(var(--r, 0deg) - 0.6deg)); }
+    100% { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+  }
+  @keyframes pill-c {
+    0%   { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+    19%  { transform: translate(calc(-50% + 8px), calc(-50% - 12px)) rotate(calc(var(--r, 0deg) + 1.5deg)); }
+    41%  { transform: translate(calc(-50% + 18px), calc(-50% - 3px)) rotate(calc(var(--r, 0deg) - 1.8deg)); }
+    63%  { transform: translate(calc(-50% - 4px), calc(-50% - 15px)) rotate(calc(var(--r, 0deg) + 0.7deg)); }
+    84%  { transform: translate(calc(-50% - 11px), calc(-50% - 5px)) rotate(calc(var(--r, 0deg) - 1.2deg)); }
+    100% { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+  }
+  @keyframes pill-d {
+    0%   { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+    14%  { transform: translate(calc(-50% - 5px), calc(-50% + 6px)) rotate(calc(var(--r, 0deg) - 1.4deg)); }
+    36%  { transform: translate(calc(-50% - 14px), calc(-50% - 9px)) rotate(calc(var(--r, 0deg) + 1.9deg)); }
+    58%  { transform: translate(calc(-50% + 3px), calc(-50% - 13px)) rotate(calc(var(--r, 0deg) - 0.5deg)); }
+    79%  { transform: translate(calc(-50% + 10px), calc(-50% + 4px)) rotate(calc(var(--r, 0deg) + 1.3deg)); }
+    100% { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .orbit span { animation: none; }
+  }
+  .stage h1, .stage .lede, .stage .composer { position: relative; z-index: 1; }
+  .composer {
+    position: relative; z-index: 1;
+    width: min(640px, 100%); margin: 26px auto 0;
+    background: rgba(255,255,255,.82);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.4);
+    border-radius: 22px; padding: 14px 14px 12px;
+    border: 1px solid rgba(255,255,255,.72);
+    box-shadow: 0 16px 40px rgba(40, 80, 110, .08), inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  .lbl { margin: 0 0 10px; min-height: 28px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .lbl b { color: var(--ink); font-weight: 600; }
+  .ask-row { display: flex; gap: 10px; align-items: flex-end; }
+  .ask-row textarea, .thread-form textarea {
+    flex: 1; resize: none; border: 0; outline: none; background: transparent;
+    border-radius: 16px; padding: 12px 8px; min-height: 56px; line-height: 1.45; font-size: 16px;
+  }
+  .thread-form textarea { background: var(--green-wash); padding: 14px 16px; }
+  .ask-row textarea::placeholder, .thread-form textarea::placeholder { color: var(--faint); }
+  .send {
+    width: 42px; height: 42px; border-radius: 21px; background: var(--green); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    box-shadow: none;
+  }
+  .send:hover { background: var(--green-dark); }
+
+  .filters { display: flex; gap: 8px; margin: 22px 0 4px; justify-content: center; overflow: auto; scrollbar-width: none; }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none; border: 1px solid var(--line); background: #fff; color: var(--muted);
+    border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 500;
+  }
+  .chip:hover { background: var(--green-wash); }
+  .chip[aria-pressed="true"] { border-color: var(--green); }
+  .chip[aria-pressed="true"] { background: var(--green); color: #fff; }
+
+  .lived-topics {
+    display: flex; align-items: center; gap: 8px;
+    margin: -2px 0 14px; overflow: auto; scrollbar-width: none;
+  }
+  .lived-topics::-webkit-scrollbar { display: none; }
+  .lived-topics .sep {
+    flex: none; width: 1px; height: 18px; background: var(--line); margin: 0 2px;
+  }
+  .lived-topics .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface); border-color: transparent; color: var(--muted);
+    padding: 7px 12px; font-size: 13px;
+  }
+  .lived-topics .chip:hover { background: var(--green-tint); color: var(--ink); }
+  .lived-topics .chip[aria-pressed="true"] {
+    background: var(--ink); border-color: var(--ink); color: #fff;
+  }
+  .lived-topics .chip .star {
+    width: 11px; height: 11px; display: block; flex: none;
+  }
+
+  .sec-hd { display: flex; align-items: baseline; gap: 10px; margin: 42px 0 14px; }
+  .sec-hd h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.025em; line-height: 1.4; color: var(--ink); }
+  .sec-hd .count { font-size: 12px; color: var(--faint); font-weight: 500; }
+
+  .lived { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .lived-card {
+    min-height: 188px; text-align: left; border: 0; border-radius: 22px;
+    padding: 18px 18px 14px;
+    color: #fff;
+    background:
+      radial-gradient(120% 90% at 100% 100%, var(--lift, #1c5670) 0%, transparent 55%),
+      var(--base, #0c3548);
+    display: flex; flex-direction: column;
+  }
+  .lived-card:hover { filter: brightness(1.06); }
+  .lived-card .mark {
+    width: 14px; height: 14px; opacity: .9; display: block;
+    color: #fff;
+  }
+  .lived-card .lead {
+    margin: 16px 0 0; font-size: 22px; font-weight: 600;
+    letter-spacing: -.025em; line-height: 1.22;
+  }
+  .lived-card .accent { color: var(--accent, #8aadc0); }
+  .lived-card .tags { margin-top: auto; padding-top: 20px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .lived-card .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    padding: 5px 8px; border-radius: 8px;
+    background: rgba(0, 0, 0, .22);
+    color: rgba(255, 255, 255, .88);
+  }
+
+  .quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .qask {
+    position: relative; overflow: hidden;
+    min-height: 148px; text-align: left; background: #fff;
+    border: 1px solid var(--line); border-radius: 18px; padding: 18px 18px 14px;
+    display: flex; flex-direction: column;
+  }
+  .qask::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, #d4eaf5 0%, #e7f3f9 22%, #fff 50%);
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .qask:hover, .qask:focus-visible { border-color: #c5d7e4; }
+  .qask:hover::before, .qask:focus-visible::before { opacity: 1; }
+  .qask > * { position: relative; z-index: 1; }
+  .qask .line { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.3; }
+  .qask .foot { margin-top: auto; padding-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .qask .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); background: rgba(9,9,11,.05); border-radius: 8px; padding: 5px 8px;
+  }
+  .faces { display: flex; }
+  .faces .av { margin-left: -8px; box-shadow: 0 0 0 2px #fff; }
+  .faces .av:first-child { margin-left: 0; }
+
+  .rail-wrap, .quote-wrap { position: relative; }
+  .rail-wrap::after, .quote-wrap::after {
+    content: "";
+    position: absolute; top: 0; right: 0; bottom: 0; width: 128px;
+    pointer-events: none; z-index: 1;
+    background: linear-gradient(90deg, rgba(250,250,250,0) 0%, rgba(250,250,250,.72) 48%, #fafafa 100%);
+  }
+  .portraits {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+    overscroll-behavior: contain;
+    padding: 10px 2px 18px; scrollbar-width: none;
+  }
+  .portraits::-webkit-scrollbar { display: none; }
+  .nudge {
+    position: absolute; top: 108px; z-index: 2;
+    width: 34px; height: 34px; border-radius: 17px;
+    background: #fff; border: 1px solid var(--line);
+    box-shadow: 0 8px 18px var(--shadow);
+    color: var(--ink); display: inline-flex; align-items: center; justify-content: center;
+  }
+  .nudge.prev { left: 10px; }
+  .nudge.next { right: 10px; }
+  .nudge:hover { background: var(--green-wash); }
+
+  .portrait {
+    position: relative; flex: none; width: 220px; height: 332px;
+    border-radius: 22px; overflow: hidden; scroll-snap-align: start;
+    background: #fff; border: 1px solid var(--line); color: var(--ink);
+    box-shadow: 0 8px 24px rgba(9,9,11,.05);
+    transition: transform .18s ease, box-shadow .18s ease;
+    text-align: left;
+  }
+  .portrait.agent { border-radius: 16px; }
+  .portrait:hover { transform: translateY(-3px); border-color: #d4d4d8; }
+  .portrait.is-on {
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #09090b, 0 18px 40px rgba(9,9,11,.14);
+  }
+  .portrait .mono {
+    position: absolute; left: 50%; top: 28px; transform: translateX(-50%);
+    width: 92px; height: 92px; border-radius: 46px;
+    display: flex; align-items: center; justify-content: center;
+    background: #dceef7; color: #09090b;
+    font-size: 30px; font-weight: 500; letter-spacing: -.04em;
+  }
+  .portrait.agent .mono { border-radius: 18px; }
+  .portrait .shade { display: none; }
+  .portrait .foot { position: absolute; z-index: 1; left: 16px; right: 16px; bottom: 16px; }
+  .portrait .nm { display: block; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+  .portrait .role { display: block; margin-top: 3px; font-size: 12px; line-height: 1.35; color: var(--muted); }
+  .portrait .place { display: block; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--faint); }
+  .about-line {
+    display: block; width: 100%; text-align: left; margin-top: 10px;
+    border-radius: 12px; padding: 8px 10px;
+    font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--ink);
+    background: #f4f4f5;
+  }
+  .about-line:hover { background: #ececee; }
+  .frost {
+    flex: 1; text-align: center; border-radius: 999px; padding: 7px 8px;
+    font-size: 13px; font-weight: 500; color: var(--ink);
+    background: #fff;
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .frost:hover { background: var(--green-wash); }
+  .mini {
+    border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 600;
+    background: rgba(255,255,255,.16); color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.42);
+  }
+  .mini:hover { background: rgba(255,255,255,.3); }
+  .mini.solid { background: #fff; color: var(--ink); box-shadow: none; }
+  .mini.solid:hover { background: var(--green-tint); }
+
+  .quotes {
+    position: relative;
+    display: flex; gap: 16px; overflow-x: auto; padding: 2px 2px 22px; scrollbar-width: none;
+  }
+  .quotes::-webkit-scrollbar { display: none; }
+  .qcard {
+    position: relative; overflow: hidden; isolation: isolate;
+    flex: none; width: min(540px, 84vw); min-height: 248px; text-align: left;
+    background: #f6f9fb; border: 1px solid rgba(9, 9, 11, .05); border-radius: 26px;
+    padding: 22px 28px 18px;
+    display: flex; flex-direction: column;
+  }
+  .qcard:hover { background: #f3f7fa; }
+  .qcard .qghost {
+    position: absolute; z-index: 0; left: 8px; right: -160px; top: -18px;
+    font-size: 76px; font-weight: 600; letter-spacing: -.04em; line-height: .9;
+    pointer-events: none; user-select: none;
+  }
+  .qcard .qghost b {
+    position: relative; z-index: 1; display: block; font-weight: inherit;
+    color: rgba(130, 168, 186, .14);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .55) 34%, transparent 78%);
+    mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .55) 34%, transparent 78%);
+  }
+  .qcard .qghost b.soft {
+    position: absolute; left: -8px; right: -8px; top: 8px; bottom: -40px; z-index: 0;
+    color: rgba(176, 204, 216, .28);
+    filter: blur(22px);
+    mix-blend-mode: multiply;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, .35) 26%, rgba(0, 0, 0, .12) 68%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, .35) 26%, rgba(0, 0, 0, .12) 68%, transparent 100%);
+  }
+  .qcard .qmark {
+    position: relative; z-index: 1;
+    font-size: 34px; line-height: .8; color: var(--ink); font-weight: 500;
+  }
+  .qcard .qt {
+    position: relative; z-index: 1;
+    margin-top: 14px; max-width: 92%;
+    font-size: 22px; font-weight: 600; letter-spacing: -.02em; line-height: 1.28;
+    color: var(--ink);
+  }
+  .qcard .qmeta {
+    position: relative; z-index: 1;
+    margin-top: auto; padding: 22px 28px 0 0;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .qcard .qchev {
+    position: absolute; z-index: 1; right: 18px; bottom: 16px;
+    width: 28px; height: 28px; border-radius: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--faint);
+  }
+  .qpill {
+    font-size: 12px; font-weight: 500;
+    color: var(--pill-ink, #18181b); background: var(--pill-wash, #e7edf4);
+    border-radius: 999px; padding: 5px 9px;
+  }
+  .qpill.go {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px var(--pill-line, #d4d4d8);
+  }
+  .feed-note { margin: -6px 0 12px; font-size: 13px; color: var(--muted); }
+  .feed-note a { color: var(--green-dark); font-weight: 500; }
+  .sec-hd .count.is-new { color: var(--green); font-weight: 600; font-size: 13px; }
+  .cosmos {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 6px 8px;
+  }
+  .cosmos:has(.empty) { background: transparent; border: 0; padding: 0; }
+  .act {
+    width: 100%; display: flex; gap: 12px; align-items: flex-start;
+    text-align: left; padding: 12px 10px; border-radius: 12px; background: transparent;
+  }
+  .act:hover { background: var(--green-wash); }
+  .aav {
+    width: 32px; height: 32px; border-radius: 16px; flex: none;
+    background: var(--surface); border: 1px solid var(--line);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: var(--muted);
+  }
+  .aav.agent { border-radius: 8px; }
+  .act .tx { min-width: 0; display: flex; flex-direction: column; }
+  .act .t { font-size: 14px; font-weight: 400; line-height: 1.4; color: var(--ink); }
+  .act small { display: block; margin-top: 2px; font-size: 12px; color: var(--faint); }
+  .act .go {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 4px; font-size: 12px; font-weight: 500; color: #09090b;
+  }
+  .act:hover .go { color: var(--green); }
+  .act .go svg { width: 11px; height: 11px; display: block; }
+
+  .answers { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .answer {
+    background: #fff; border: 1px solid var(--line); border-radius: 18px;
+    padding: 16px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start;
+  }
+  .answer .who-line { display: flex; gap: 10px; align-items: center; }
+  .answer .who-line b { font-size: 16px; }
+  .answer .say { margin: 10px 0 0; font-size: 15px; line-height: 1.5; }
+  .answer .disc { margin: 8px 0 0; }
+  #ask-q { font-size: 32px; text-align: left; max-width: 18em; }
+  #ask-lede { margin: 8px 0 20px; text-align: left; max-width: 36em; }
+  .empty {
+    grid-column: 1 / -1;
+    background: #fff; border: 1px dashed var(--line); border-radius: 18px;
+    padding: 28px; color: var(--muted); font-size: 14px; line-height: 1.5;
+  }
+
+  .av {
+    width: 36px; height: 36px; border-radius: 18px; flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #09090b; font-size: 11px; font-weight: 600; background: #dceef7;
+  }
+  .av.sm { width: 26px; height: 26px; border-radius: 13px; font-size: 10px; }
+  .av.lg { width: 72px; height: 72px; border-radius: 36px; font-size: 22px; font-weight: 500; }
+  .av.agent, .av.agent.lg { border-radius: 14px; }
+  .av.agent.sm { border-radius: 7px; }
+  .domain-hero .av, .identity .av {
+    background: rgba(255,255,255,.16); color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
+  }
+
+  .back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--green-dark); font-size: 13px; font-weight: 600; margin-bottom: 18px;
+  }
+  .back:hover { text-decoration: underline; }
+
+  .split { display: grid; grid-template-columns: 300px 1fr; gap: 22px; align-items: start; }
+  .identity {
+    position: sticky; top: 84px;
+    border-radius: 28px; padding: 22px; color: #fff; min-height: 340px;
+    background:
+      radial-gradient(90% 60% at 50% 0%, rgba(255,255,255,.2), transparent 60%),
+      var(--tone, #14382e);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .identity h2 { margin: 10px 0 0; font-size: 28px; font-weight: 500; letter-spacing: -.4px; color: #fff; }
+  .identity .role { margin: 0; font-size: 13px; color: rgba(255,255,255,.8); line-height: 1.4; }
+  .identity .disc { margin: 4px 0 0; font-size: 12px; color: rgba(255,255,255,.65); }
+  .identity .sp { flex: 1; }
+  .identity .mini { align-self: flex-start; }
+
+  .thread {
+    background: #fff; border: 1px solid var(--line); border-radius: 28px;
+    min-height: 520px; padding: 18px 18px 14px;
+    display: flex; flex-direction: column;
+    box-shadow: 0 12px 32px rgba(90,120,110,.06);
+  }
+  .log { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 6px 4px 16px; }
+  .bubble { max-width: min(78%, 460px); padding: 12px 14px; border-radius: 18px; font-size: 15px; line-height: 1.5; }
+  .bubble.user { align-self: flex-end; background: #09090b; color: #fff; border-bottom-right-radius: 6px; }
+  .bubble.twin { align-self: flex-start; background: #f4f4f5; border: 1px solid #ececee; border-bottom-left-radius: 6px; }
+  .bubble .who-l { display: block; font-size: 11px; font-weight: 600; margin-bottom: 4px; color: var(--green-dark); }
+  .bubble .about { display: block; font-size: 11px; opacity: .8; margin-bottom: 4px; }
+  .context {
+    align-self: flex-start; font-size: 12px; color: var(--green-dark);
+    background: var(--green-tint); border-radius: 999px; padding: 5px 10px;
+  }
+  .typing { font-size: 12px; color: var(--faint); }
+  .thread-form { display: flex; gap: 8px; align-items: flex-end; border-top: 1px solid var(--line); padding-top: 12px; }
+  .thread .meta { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+  .domain-hero {
+    border-radius: 28px; padding: 28px; color: #fff;
+    background:
+      radial-gradient(70% 80% at 100% 0%, rgba(255,255,255,.16), transparent 55%),
+      var(--tone, #14382e);
+    display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: end;
+  }
+  .domain-hero h1 { font-size: 48px; color: #fff; }
+  .domain-hero .meta { margin: 10px 0 0; max-width: 520px; color: rgba(255,255,255,.82); font-size: 15px; line-height: 1.5; }
+  .domain-hero .who-line { margin-top: 16px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,.9); }
+  .domain-hero .disc { margin: 8px 0 0; font-size: 12px; color: rgba(255,255,255,.62); }
+  .files { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .file {
+    background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 12px; font-size: 13px; display: inline-flex; gap: 8px; align-items: center;
+  }
+  .file small { color: var(--faint); }
+
+  .reader { width: min(680px, 100%); margin: 0 auto; }
+  .reader-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 32px 32px 24px;
+    box-shadow: 0 16px 40px rgba(90,120,110,.06);
+  }
+  .reader h1 { font-size: 44px; letter-spacing: -1px; }
+  .reader .byline { display: flex; align-items: center; gap: 10px; margin: 18px 0 8px; font-size: 13px; color: var(--muted); }
+  .reader .body { margin-top: 18px; font-size: 17px; line-height: 1.65; }
+  .reader .body p { margin: 0 0 14px; }
+  .reader .body p:first-child { font-size: 20px; letter-spacing: -.2px; }
+  .reader .disc { margin: 8px 0 0; font-size: 12px; color: var(--faint); }
+  .actions { display: flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
+  .btn {
+    border-radius: 999px; padding: 10px 16px; font-size: 13px; font-weight: 600;
+    border: 1px solid var(--line); background: #fff;
+  }
+  .btn.primary { background: var(--green); border-color: var(--green); color: #fff; }
+  .btn.primary:hover { background: var(--green-dark); }
+  .btn.ghost:hover { background: var(--green-wash); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(8px);
+    background: var(--ink); color: #fff; border-radius: 999px; padding: 10px 16px;
+    font-size: 13px; opacity: 0; pointer-events: none; transition: .2s; z-index: 50;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%); }
+
+  @media (max-width: 900px) {
+    h1 { font-size: 44px; }
+    .hero, .split, .domain-hero { grid-template-columns: 1fr; }
+    .identity { position: static; min-height: 0; }
+    .wrap { width: min(var(--page), calc(100% - 32px)); }
+    .domain-hero h1, .reader h1 { font-size: 36px; }
+    .search, .top-kicker, .orbit { display: none; }
+    .stage::before { display: none; }
+    .stage { min-height: 0; padding: 28px 0 8px; }
+    h1 { font-size: 40px; }
+    .stage h1 { font-size: 40px; }
+    .lived, .quick, .answer { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="veil" aria-hidden="true">
+  <i style="--b:6px;--mask:linear-gradient(#000 0%,#000 8.333%,transparent 18.333%)"></i>
+  <i style="--b:5.45px;--mask:linear-gradient(transparent 0%,#000 8.333%,#000 16.667%,transparent 26.667%)"></i>
+  <i style="--b:4.91px;--mask:linear-gradient(transparent 6.667%,#000 16.667%,#000 25%,transparent 35%)"></i>
+  <i style="--b:4.36px;--mask:linear-gradient(transparent 15%,#000 25%,#000 33.333%,transparent 43.333%)"></i>
+  <i style="--b:3.82px;--mask:linear-gradient(transparent 23.333%,#000 33.333%,#000 41.667%,transparent 51.667%)"></i>
+  <i style="--b:3.27px;--mask:linear-gradient(transparent 31.667%,#000 41.667%,#000 50%,transparent 60%)"></i>
+  <i style="--b:2.73px;--mask:linear-gradient(transparent 40%,#000 50%,#000 58.333%,transparent 68.333%)"></i>
+  <i style="--b:2.18px;--mask:linear-gradient(transparent 48.333%,#000 58.333%,#000 66.667%,transparent 76.667%)"></i>
+  <i style="--b:1.64px;--mask:linear-gradient(transparent 56.667%,#000 66.667%,#000 75%,transparent 85%)"></i>
+  <i style="--b:1.09px;--mask:linear-gradient(transparent 65%,#000 75%,#000 83.333%,transparent 93.333%)"></i>
+  <i style="--b:0.55px;--mask:linear-gradient(transparent 73.333%,#000 83.333%,#000 91.667%,transparent 100%)"></i>
+  <i style="--b:0px;--mask:linear-gradient(transparent 81.667%,#000 91.667%,#000 100%)"></i>
+</div>
+<header class="top" id="top">
+  <a class="brand" href="#home" id="brand">
+    <svg viewBox="0 0 588 403" aria-hidden="true"><path fill="currentColor" d="M185.04 0C187.18 0 189.31.13 191.42.39H286.59V.4C341.65 1.27 386.18 90.49 386.5 200.66H386.5C386.5 256.02 397.77 306.11 415.96 342.36C434.17 378.62 459.25 400.9 486.83 400.9C507.52 400.9 526.8 388.36 542.83 366.78C529.37 380.53 514.05 388.31 497.79 388.31C479.15 388.31 461.75 378.09 446.96 360.37C471.08 323.73 486.69 217.76 486.82 152.57C527.76 167.04 549.73 138.98 587.55 124.76H587.97C587.97 180.22 576.68 306.34 558.42 342.72C540.17 379.08 514.88 401.72 486.83 401.72C484.63 401.72 482.44 401.58 480.27 401.3H385.28V401.29C330.23 400.42 285.69 311.22 285.37 201.06H285.37C285.37 145.7 274.1 95.6 255.91 59.36C237.7 23.09 212.62.81 185.04.81C164.36.81 145.08 13.34 129.06 34.9C142.51 21.17 157.83 13.4 174.08 13.4C192.71 13.4 210.12 23.62 224.91 41.33C201.59 76.75 186.23 132 185.11 194.52C188.22 199.38 191.52 203.5 195.09 207.12C207.41 219.62 226.5 229.76 263.77 239.38L267.47 299.19C231.96 313.23 210.16 325.95 194.71 340.73C179.66 355.13 168.55 373.5 158.11 402.57L98.7 402.3C88.15 372.03 79.01 353.08 65.91 338.01C53 323.17 34.1 309.71 0 294.97L4.2 235.65C38.34 226.33 56.62 216.91 69.29 204.63C74.61 199.48 79.49 193.29 84.21 185.36C86.12 136.16 96.93 91.91 113.45 58.99C131.7 22.64 156.99 0 185.04 0Z"/></svg>
+    <b>Symbion</b>
+  </a>
+  <div class="top-kicker">Cosmo</div>
+  <div class="sp"></div>
+  <input class="search" id="q" type="search" placeholder="Search people or posts" aria-label="Search people or posts" autocomplete="off">
+  <a class="desk-link" href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">Desk</a>
+</header>
+
+<main class="wrap">
+  <section id="home">
+    <div class="stage">
+      <div class="orbit" aria-hidden="true">
+        <span style="--x:27%;--y:17%;--r:-7deg;--d:13.6s;--delay:-2.4s"><b>Heavy-ion physics</b></span>
+        <span style="--x:83%;--y:11%;--r:6deg;--d:17.2s;--delay:-9.1s"><b>Cosmology</b></span>
+        <span style="--x:8%;--y:49%;--r:4deg;--d:11.8s;--delay:-6.5s"><b>Climate mathematics</b></span>
+        <span style="--x:90%;--y:74%;--r:-5deg;--d:15.4s;--delay:-4.2s"><b>Planetary health</b></span>
+      </div>
+      <h1>Ask anything</h1>
+      <p class="lede">People it concerns will answer. Continue with whoever you want.</p>
+      <form class="composer" id="home-form">
+        <div class="ask-row">
+          <textarea id="home-draft" rows="2" placeholder="Ask anything" aria-label="Ask anything"></textarea>
+          <button class="send" type="submit" aria-label="Send">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="sec-hd">
+      <h2>Ask someone who has the work</h2>
+    </div>
+    <div class="lived-topics" id="lived-topics" role="toolbar" aria-label="Topics"></div>
+    <div class="lived" id="lived"></div>
+
+    <div class="sec-hd">
+      <h2>A short question</h2>
+    </div>
+    <div class="quick" id="quick"></div>
+
+    <div class="filters" id="filters" role="toolbar" aria-label="Filter"></div>
+
+    <div class="sec-hd">
+      <h2>Talk with them</h2>
+      <span class="count" id="people-count"></span>
+    </div>
+    <div class="rail-wrap">
+      <button type="button" class="nudge prev" data-nudge="-240" aria-label="Previous people" hidden>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.25 5.25 8 10 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="portraits" id="people" data-scroll></div>
+      <button type="button" class="nudge next" data-nudge="240" aria-label="Next people" hidden>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.25 10.75 8 6 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="sec-hd">
+      <h2>From your Cosmos</h2>
+      <span class="count" id="post-count"></span>
+    </div>
+    <p class="feed-note">Same posts as on the <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
+    <div class="quote-wrap">
+      <div class="quotes" id="posts"></div>
+    </div>
+  </section>
+
+  <section id="answers" hidden>
+    <button type="button" class="back" id="answers-back">← Cosmo</button>
+    <p class="eyebrow">YOUR QUESTION</p>
+    <h1 id="ask-q"></h1>
+    <p class="lede" id="ask-lede" style="margin-left:0;text-align:left">People this concerns. Continue with anyone.</p>
+    <div class="answers" id="ask-cards"></div>
+  </section>
+
+  <section id="talk" hidden>
+    <button type="button" class="back" id="talk-back">← Cosmo</button>
+    <div class="split">
+      <aside id="talk-hd"></aside>
+      <article class="thread">
+        <div class="log" id="talk-log"></div>
+        <form class="thread-form" id="talk-form">
+          <textarea id="talk-draft" rows="1" placeholder="Continue" aria-label="Continue"></textarea>
+          <button class="send" type="submit" aria-label="Send">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <section id="domain" hidden>
+    <button type="button" class="back" id="domain-back">← Cosmo</button>
+    <div id="domain-body"></div>
+  </section>
+
+  <section id="post" hidden>
+    <div class="reader">
+      <button type="button" class="back" id="post-back">← Back</button>
+      <article class="reader-card" id="post-body"></article>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const FILTERS = [
+  { id: "all", label: "All" },
+  { id: "domain", label: "Has a domain" },
+  { id: "course", label: "In your courses" },
+  { id: "talk", label: "Talk only" }
+];
+
+const PEOPLE = [
+  {
+    id: "roland", initials: "GR", name: "Prof. Roland", tone: "#14382e", kind: "twin", course: true,
+    role: "Heavy-ion physics · your course",
+    domain: { name: "Heavy-ion physics", about: "The slides, the reading report, and the course live here. You read the posts and the files. You talk with the twin." },
+    files: [
+      { name: "Lecture 5 slides", where: "Deck" },
+      { name: "Lecture 4 summary", where: "Doc" }
+    ],
+    reply: "Say which sentence you are stuck on. If it is the phase diagram, tell me which axis you can name.",
+    follow: "Stay on that sentence. The next one is yours to write."
+  },
+  {
+    id: "pajer", initials: "EP", name: "Prof. Pajer", tone: "#1e3358", kind: "twin", course: true,
+    role: "Cosmology · Cornell",
+    domain: { name: "Cosmology", about: "The problem set and the line from class live in this domain. The twin only touches the line you point to." },
+    files: [{ name: "Problem set 2", where: "Doc" }],
+    reply: "Send the line you are stuck on. What is known, what is not, and what class calls it.",
+    follow: "Still just this line."
+  },
+  {
+    id: "luo", initials: "王", name: "骆王宇", tone: "#3d4450", kind: "twin", course: false,
+    role: "Live at 3:10 · the twin keeps the recap",
+    domain: { name: "骆王宇", about: "The live is the person. This domain belongs to the twin: the recap, and the question you did not ask, become posts." },
+    files: [],
+    reply: "I am the twin, not the 3:10 live. After the live, a three-point recap is posted here.",
+    follow: "If you want the recap, say which part you missed."
+  },
+  {
+    id: "greer", initials: "JG", name: "Julia R. Greer", tone: "#24362c", kind: "twin", course: false,
+    role: "Materials · Caltech",
+    domain: { name: "Materials", about: "Posts about scale, the sample, and the lattice live here. The twin speaks from the sentence in the post." },
+    files: [{ name: "Lattice note", where: "Doc" }],
+    reply: "Write the scale the lattice can see, and the scale the sample can see. The mismatch usually sits between those two lines.",
+    follow: "Send the two scales."
+  },
+  {
+    id: "anastasia", initials: "AR", name: "Anastasia Romanou", tone: "#1a3330", kind: "twin", course: false,
+    role: "Climate mathematics · Columbia",
+    domain: { name: "Climate mathematics", about: "The notebook and the figure you are about to draw live here. A post names the axes before it names a trend." },
+    files: [{ name: "Climate notebook", where: "Code" }],
+    reply: "Write the axis, the unit, and the time step first. If the trend only appears after you change an axis, do not close it into a result yet.",
+    follow: "Tell me which axis you changed."
+  },
+  {
+    id: "xu", initials: "HX", name: "Prof. Xu", tone: "#3d2c14", kind: "twin", course: false,
+    role: "AI and decisions · data and pricing",
+    domain: null,
+    files: [],
+    reply: "I have no private domain. The pricing insight is already on your desk. Say the decision, and how many rows are in the sample.",
+    follow: "Send the row count and the sentence you want to write."
+  },
+  {
+    id: "lab", initials: "LR", name: "Lab Report Coach", tone: "#6a4a12", kind: "agent", course: true,
+    role: "Drafts the lab report in Doc",
+    domain: null,
+    files: [],
+    reply: "I draft the report. I have no domain of my own. The numbers stay in your notebook. I only arrange Aim, Method, Result, and Uncertainty.",
+    follow: "Point to the section you do not trust. It is usually Method."
+  },
+  {
+    id: "smith", initials: "KS", name: "Katherine F. Smith", tone: "#243044", kind: "twin", course: false,
+    role: "Planetary health · Brown",
+    domain: { name: "Planetary health", about: "A health number and the people it counted are posted here. A sentence with no people does not stay." },
+    files: [],
+    reply: "A health number needs the people it counted. If you cannot name them, do not send the sentence yet.",
+    follow: "Send the number and the people together."
+  }
+];
+
+const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
+
+/* Cool only — no cream / burgundy / orange: teal-navy, steel, forest, plum, slate, azure */
+const LIVED = [
+  { id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?", base: "#0c3548", lift: "#1c5670", accentColor: "#8aadc0" },
+  { id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the 3:10 recap", q: "I missed part of the 3:10 live. What does the recap cover?", base: "#1e2448", lift: "#353a72", accentColor: "#a0a8d0" },
+  { id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "the line you are stuck on", q: "I am stuck on one line in the cosmology thread.", base: "#163028", lift: "#2a4a3a", accentColor: "#9bb8a8" },
+  { id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the axis you changed", q: "Which axis did I change in the climate notebook?", base: "#2e1f3d", lift: "#4a3560", accentColor: "#b5a3c8" },
+  { id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the pricing sample", q: "How should I read the pricing insight?", base: "#1c2430", lift: "#323a48", accentColor: "#a0aab8" },
+  { id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold.", base: "#0a4048", lift: "#1a6870", accentColor: "#7eb8bc" }
+];
+
+const LIVED_TOPICS = [
+  { id: "for-you", label: "For you", star: true },
+  { id: "all", label: "All" },
+  { id: "heavy-ion", label: "Heavy-ion" },
+  { id: "cosmology", label: "Cosmology" },
+  { id: "live", label: "Live" },
+  { id: "climate", label: "Climate" },
+  { id: "decisions", label: "Decisions" },
+  { id: "lab", label: "Lab report" }
+];
+
+const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
+
+const QUICK = [
+  { q: "Temperature is which axis on lecture 5?", tag: "Heavy-ion" },
+  { q: "Is the 3:10 live the twin?", tag: "Live" },
+  { q: "Paste the cosmology line I am stuck on.", tag: "Cosmology" },
+  { q: "How many rows are in the pricing sample?", tag: "Decisions" },
+  { q: "I changed an axis in the climate notebook.", tag: "Climate" },
+  { q: "I do not trust the method section.", tag: "Lab report" }
+];
+
+const ASK = {
+  roland: ["Ask about the lecture 5 diagram", "Which axis is temperature on the lecture 5 diagram?"],
+  pajer: ["Ask about the cosmology line", "I am stuck on one line in the cosmology thread."],
+  luo: ["Ask about the 3:10 recap", "I missed part of the 3:10 live. What does the recap cover?"],
+  greer: ["Ask about the two scales", "Write the scale the lattice can see, and the scale the sample can see."],
+  anastasia: ["Ask about the axis you changed", "Which axis did I change in the climate notebook?"],
+  xu: ["Ask about the pricing sample", "How should I read the pricing insight?"],
+  lab: ["Ask about the method section", "The method section of my lab report does not hold."],
+  smith: ["Ask about the people in the number", "A health number needs the people it counted."]
+};
+
+const NE = `<svg viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M.35 14.5 14.35.5M1.85.5h12.5V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const POSTS = [
+  {
+    id: "l5", author: "roland",
+    title: "Prof. Roland’s twin posted lecture 5 slides",
+    meta: "Heavy-ion Physics · 1h ago",
+    tint: { ink: "#3d4450", wash: "#eceef1", line: "#d0d4da" },
+    action: "Turn into study notes",
+    paragraphs: [
+      "The twin posted the lecture 5 slides. They are in the Heavy-ion physics domain, and the same line is on your desk.",
+      "Temperature is the vertical axis. Baryon chemical potential is the horizontal axis. Lecture 5 follows the crossover, not a sharp first-order line.",
+      "The twin posted this. The person is still the one who teaches the class."
+    ],
+    reply: "If you can already name the vertical axis, we stop at crossover. Send me the axis you cannot name."
+  },
+  {
+    id: "live", author: "luo",
+    title: "骆王宇 is going live soon (the real person)",
+    meta: "Live at 3:10 · twin has a recap ready",
+    tint: { ink: "#3d4450", wash: "#eceef1", line: "#d0d4da" },
+    action: "Set reminder",
+    paragraphs: [
+      "The live at 3:10 is 骆王宇. The twin is not the live.",
+      "A recap is ready in this domain for after it ends. The same notice is on your desk."
+    ],
+    reply: "I am the twin, not the 3:10 live. If you missed a stretch, say the time. The recap stays in this domain."
+  },
+  {
+    id: "eq", author: "pajer",
+    title: "2 replies to your #cosmology thread",
+    meta: "Prof. Pajer’s twin + @maya_k",
+    tint: { ink: "#1d3e66", wash: "#dceaf8", line: "#b9d0e8" },
+    action: "Open thread",
+    paragraphs: [
+      "Two replies are in. The twin only names the line you were stuck on. @maya_k replied in the same thread.",
+      "Write that line as three cells: known, unknown, and what class calls it. This thread is also on your desk."
+    ],
+    reply: "Paste the line. I will only give it a name. I will not touch the later problems."
+  },
+  {
+    id: "pricing", author: "xu",
+    title: "Prof. Xu’s twin: new insight on pricing data",
+    meta: "AI & decisions · today",
+    tint: { ink: "#3d4450", wash: "#eef3f8", line: "#d0d8e2" },
+    action: "View insight",
+    paragraphs: [
+      "Prof. Xu has no private domain. This insight is still a post, and it shows on your desk.",
+      "Say the decision you need to make, and how many rows are in the sample."
+    ],
+    reply: "Send the row count and the sentence you want the insight to support."
+  },
+  {
+    id: "axis", author: "anastasia",
+    title: "Anastasia’s twin shared a climate-math notebook",
+    meta: "Physics & Space · 3h ago",
+    tint: { ink: "#2a5560", wash: "#e6f2f5", line: "#c5dce2" },
+    action: "Open in Code",
+    paragraphs: [
+      "The notebook is in the Climate mathematics domain, and the share is on your desk.",
+      "Axis, unit, time step. Those three names go in front of the figure."
+    ],
+    reply: "Which axis did you change? If the trend follows the axis, leave the sentence in the notebook."
+  }
+];
+
+const state = {
+  view: "home",
+  filter: "all",
+  livedTopic: "for-you",
+  query: "",
+  who: null,
+  talkId: null,
+  about: null,
+  domainId: null,
+  postId: null,
+  postBack: "home",
+  question: "",
+  threads: {},
+  read: new Set(),
+  typing: false
+};
+
+const $ = (id) => document.getElementById(id);
+function person(id) { return PEOPLE.find((p) => p.id === id); }
+function post(id) { return POSTS.find((p) => p.id === id); }
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function toast(msg) {
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove("show"), 2200);
+}
+function matches(blob) {
+  const q = state.query.trim().toLowerCase();
+  return !q || blob.toLowerCase().includes(q);
+}
+function personMatches(p) {
+  const blob = `${p.name} ${p.role} ${p.domain ? p.domain.name : "no domain"}`;
+  if (matches(blob)) return true;
+  return POSTS.some((item) => item.author === p.id && matches(`${item.title} ${item.paragraphs.join(" ")}`));
+}
+function visiblePeople() {
+  return PEOPLE.filter((p) => {
+    if (state.filter === "domain" && !p.domain) return false;
+    if (state.filter === "course" && !p.course) return false;
+    if (state.filter === "talk" && p.domain) return false;
+    return personMatches(p);
+  });
+}
+function visiblePosts() {
+  const ids = new Set(visiblePeople().map((p) => p.id));
+  return POSTS.filter((item) => {
+    if (!ids.has(item.author)) return false;
+    const p = person(item.author);
+    return matches(`${item.title} ${item.meta} ${item.action} ${item.paragraphs.join(" ")} ${p.name} ${p.domain ? p.domain.name : ""}`);
+  });
+}
+
+function av(p, size) {
+  const cls = size === "lg" ? " lg" : size === "sm" ? " sm" : "";
+  return `<span class="av${cls}${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">${esc(p.initials)}</span>`;
+}
+
+function renderFilters() {
+  $("filters").innerHTML = FILTERS.map((f) =>
+    `<button type="button" class="chip" data-filter="${f.id}" aria-pressed="${f.id === state.filter}">${esc(f.label)}</button>`
+  ).join("");
+}
+function renderPeople() {
+  const people = visiblePeople();
+  $("people-count").textContent = people.length === 1 ? "1 person" : `${people.length} people`;
+  $("people").innerHTML = people.length ? people.map((p) => {
+    const place = p.domain ? "" : `<span class="place">No domain</span>`;
+    return `<article class="portrait${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">
+      <div class="mono">${esc(p.initials)}</div>
+      <div class="shade"></div>
+      <div class="foot">
+        <span class="nm">${esc(p.name)}</span>
+        <span class="role">${esc(p.role)}</span>
+        ${place}
+        <button type="button" class="about-line" data-ask="${esc(ASK[p.id][1])}">${esc(ASK[p.id][0])}</button>
+      </div>
+    </article>`;
+  }).join("") : `<div class="empty">No one matches.</div>`;
+  requestAnimationFrame(updateScroller);
+}
+function actRow(item, from) {
+  const p = person(item.author);
+  const fromAttr = from ? ` data-from="${from}"` : "";
+  return `<button type="button" class="act" data-post="${item.id}"${fromAttr}>
+    <span class="aav${p.kind === "agent" ? " agent" : ""}">${esc(p.initials)}</span>
+    <span class="tx">
+      <span class="t">${esc(item.title)}</span>
+      <small>${esc(item.meta)}</small>
+      <span class="go">${esc(item.action)}${NE}</span>
+    </span>
+  </button>`;
+}
+function renderPosts() {
+  const rows = visiblePosts();
+  const unread = rows.filter((item) => !state.read.has(item.id)).length;
+  const count = $("post-count");
+  count.textContent = unread ? `${unread} new` : "";
+  count.classList.toggle("is-new", unread > 0);
+  if (!rows.length) {
+    const reason = state.filter === "talk"
+      ? "Nothing from them in From your Cosmos. Talk with them directly."
+      : "No posts match.";
+    $("posts").innerHTML = `<div class="empty">${esc(reason)}</div>`;
+    return;
+  }
+  $("posts").innerHTML = rows.map((item) => {
+    const p = person(item.author);
+    const where = p.domain ? p.domain.name : "No domain";
+    const tint = item.tint || { ink: "#18181b", wash: "#e7edf4", line: "#d4d4d8" };
+    return `<button type="button" class="qcard" data-post="${item.id}" style="--pill-ink:${tint.ink};--pill-wash:${tint.wash};--pill-line:${tint.line}">
+      <span class="qghost" aria-hidden="true"><b class="soft">${esc(p.name)}</b><b>${esc(p.name)}</b></span>
+      <span class="qmark" aria-hidden="true">“</span>
+      <span class="qt">${esc(item.title)}</span>
+      <span class="qmeta"><span class="qpill">${esc(where)}</span><span class="qpill go">${esc(item.action)}</span></span>
+      <span class="qchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </button>`;
+  }).join("");
+}
+function livedVisible(item, shown) {
+  if (!shown.some((p) => p.id === item.id)) return false;
+  const topic = state.livedTopic;
+  if (topic === "all") return true;
+  if (topic === "for-you") return !!person(item.id).course;
+  return item.topic === topic;
+}
+
+function renderLivedTopics() {
+  const parts = [];
+  LIVED_TOPICS.forEach((t, i) => {
+    if (i === 1) parts.push(`<span class="sep" aria-hidden="true"></span>`);
+    const star = t.star ? STAR_CHIP : "";
+    parts.push(`<button type="button" class="chip" data-lived-topic="${t.id}" aria-pressed="${t.id === state.livedTopic}">${star}${esc(t.label)}</button>`);
+  });
+  $("lived-topics").innerHTML = parts.join("");
+}
+
+function renderLived() {
+  renderLivedTopics();
+  const shown = visiblePeople();
+  const cards = LIVED.filter((item) => livedVisible(item, shown));
+  $("lived").innerHTML = cards.length ? cards.map((item) => {
+    const p = person(item.id);
+    const where = p.domain ? p.domain.name : "No domain";
+    return `<button type="button" class="lived-card" data-ask="${esc(item.q)}" style="--base:${item.base};--lift:${item.lift};--accent:${item.accentColor}">
+      ${MARK}
+      <p class="lead">${esc(item.lead)} <span class="accent">${esc(item.accent)}</span></p>
+      <span class="tags"><span class="tag">${esc(where)}</span>${p.course ? `<span class="tag">Your course</span>` : ""}</span>
+    </button>`;
+  }).join("") : `<div class="empty">No one matches.</div>`;
+}
+
+function renderQuick() {
+  const shown = new Set(visiblePeople().map((p) => p.id));
+  const cards = QUICK.map((item) => ({ item, people: relatedPeople(item.q).filter((p) => shown.has(p.id)) })).filter((row) => row.people.length);
+  $("quick").innerHTML = cards.length ? cards.map(({ item, people }) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
+      <span class="line">${esc(item.q)}</span>
+      <span class="foot"><span class="tag">${esc(item.tag)}</span><span class="faces">${people.map((p) => av(p, "sm")).join("")}</span></span>
+    </button>`).join("") : `<div class="empty">No question matches.</div>`;
+}
+
+function renderHome() {
+  renderLived();
+  renderQuick();
+  renderFilters();
+  renderPeople();
+  renderPosts();
+}
+
+const TOPICS = {
+  roland: ["roland", "heavy", "ion", "lecture", "slide", "phase", "diagram", "crossover", "quark", "baryon", "temperature", "axis"],
+  pajer: ["pajer", "cosmolog", "cornell", "problem set", "equation", "cosmology"],
+  luo: ["luo", "骆", "王宇", "live", "3:10", "recap", "直播"],
+  greer: ["greer", "material", "lattice", "caltech", "defect"],
+  anastasia: ["anastasia", "romanou", "climate", "notebook", "time step", "axis"],
+  xu: ["xu", "pricing", "price", "decision", "insight"],
+  lab: ["lab", "report", "method", "experiment", "uncertainty", "coach"],
+  smith: ["smith", "planetary", "health"]
+};
+
+const STOP = new Set(["the", "and", "for", "how", "what", "who", "why", "when", "this", "that", "with", "your", "from", "about", "should", "would", "could", "can", "are", "was", "were", "have", "has", "had", "you", "they", "them", "not", "but", "into", "onto", "just", "like", "want", "need", "tell", "say", "does", "did", "its", "read", "new", "twin", "prof"]);
+
+function wordHit(blob, word) {
+  if (word.length < 4 || STOP.has(word)) return false;
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?:^|[^a-z0-9\\u4e00-\\u9fff])${escaped}`, "i").test(blob);
+}
+function topicHit(q, key) {
+  const k = key.toLowerCase();
+  if (/[^\u0000-\u007f]/.test(k) || k.length >= 4) return q.includes(k);
+  const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?:^|[^a-z0-9])${escaped}(?:[^a-z0-9]|$)`, "i").test(q);
+}
+
+function relatedPeople(text) {
+  const q = text.toLowerCase();
+  const words = q.split(/[^a-z0-9#\u4e00-\u9fff.]+/).filter((word) => word.length > 2);
+  return PEOPLE.map((p) => {
+    const keys = TOPICS[p.id] || [];
+    let score = 0;
+    for (const key of keys) {
+      if (topicHit(q, key)) score += 3;
+    }
+    const blob = [
+      p.name,
+      p.role,
+      p.domain ? p.domain.name : "",
+      ...POSTS.filter((item) => item.author === p.id).flatMap((item) => [item.title, item.meta])
+    ].join(" ").toLowerCase();
+    for (const word of words) {
+      if (wordHit(blob, word)) score += 1;
+    }
+    return { p, score };
+  }).filter((row) => row.score > 0).sort((a, b) => b.score - a.score).slice(0, 3).map((row) => row.p);
+}
+
+function openAnswers(text) {
+  state.question = text;
+  const people = relatedPeople(text);
+  show("answers");
+  $("ask-q").textContent = text;
+  if (!people.length) {
+    $("ask-lede").textContent = "No one here is close to this. Ask about a course, a post, or a person.";
+    $("ask-cards").innerHTML = "";
+    return;
+  }
+  $("ask-lede").textContent = people.length === 1
+    ? "This person can take it. Continue if you want to keep going."
+    : "People this concerns. Continue with anyone.";
+  $("ask-cards").innerHTML = people.map((p) => `<article class="answer">
+    <div>
+      <div class="who-line">${av(p)}<div><b>${esc(p.name)}</b><div class="meta">${esc(p.role)}</div></div></div>
+      <p class="say">${esc(p.reply)}</p>
+      <p class="disc">A synthetic digital human, not the person.</p>
+    </div>
+    <button type="button" class="btn primary" data-continue="${p.id}">Continue</button>
+  </article>`).join("");
+}
+
+function continueWith(id) {
+  const text = state.question;
+  const p = person(id);
+  if (!text || !p) return;
+  if (!state.threads[id]) state.threads[id] = [];
+  const thread = state.threads[id];
+  if (!thread.some((m) => m.role === "user" && m.text === text)) {
+    thread.push({ role: "user", text });
+    thread.push({ role: "twin", text: p.reply });
+  }
+  openTalk(id, null);
+}
+
+function show(view) {
+  state.view = view;
+  $("home").hidden = view !== "home";
+  $("answers").hidden = view !== "answers";
+  $("talk").hidden = view !== "talk";
+  $("domain").hidden = view !== "domain";
+  $("post").hidden = view !== "post";
+  window.scrollTo(0, 0);
+}
+
+function openTalk(id, about) {
+  state.talkId = id;
+  state.about = about || null;
+  state.typing = false;
+  if (!state.threads[id]) state.threads[id] = [];
+  show("talk");
+  renderTalk();
+  $("talk-draft").focus({ preventScroll: true });
+}
+function renderTalk() {
+  const p = person(state.talkId);
+  if (!p) return;
+  const domain = p.domain
+    ? `<button type="button" class="mini solid" data-domain="${p.id}">Open ${esc(p.domain.name)}</button>`
+    : `<p class="disc">No domain. This conversation stays here.</p>`;
+  $("talk-hd").innerHTML = `<div class="identity" style="--tone:${p.tone}">
+    ${av(p, "lg")}
+    <h2>${esc(p.name)}</h2>
+    <p class="role">${esc(p.role)}</p>
+    <p class="disc">A synthetic digital human, not the person.</p>
+    <div class="sp"></div>
+    ${domain}
+  </div>`;
+  paintLog();
+}
+function paintLog() {
+  const id = state.talkId;
+  const p = person(id);
+  const item = state.about ? post(state.about) : null;
+  const ctx = item ? `<div class="context">Reading · ${esc(item.title)}</div>` : "";
+  const msgs = (state.threads[id] || []).map((m) => {
+    if (m.role === "user") {
+      const about = m.about ? `<span class="about">About “${esc(m.about)}”</span>` : "";
+      return `<article class="bubble user">${about}${esc(m.text)}</article>`;
+    }
+    return `<article class="bubble twin"><span class="who-l">${esc(p.name)}</span>${esc(m.text)}</article>`;
+  }).join("");
+  const typing = state.typing ? `<div class="typing">${esc(p.name)} is writing…</div>` : "";
+  const empty = !msgs && !item
+    ? `<p class="meta">${p.domain ? "Say it directly. Posts live in the domain, when you want them." : "No domain. The conversation stays here."}</p>`
+    : "";
+  $("talk-log").innerHTML = ctx + empty + msgs + typing;
+}
+function sendTalk(text) {
+  const id = state.talkId;
+  const p = person(id);
+  const msg = (text || "").trim();
+  if (!p || !msg) return;
+  const aboutPost = state.about ? post(state.about) : null;
+  state.threads[id].push({ role: "user", text: msg, about: aboutPost ? aboutPost.title : "" });
+  state.typing = true;
+  $("talk-draft").value = "";
+  paintLog();
+  const prior = state.threads[id].filter((m) => m.role === "twin").length;
+  const reply = prior === 0 && aboutPost ? aboutPost.reply : (prior === 0 ? p.reply : p.follow);
+  setTimeout(() => {
+    if (state.talkId !== id) return;
+    state.typing = false;
+    state.threads[id].push({ role: "twin", text: reply });
+    if (state.view === "talk") paintLog();
+  }, 420);
+}
+
+function openDomain(id) {
+  const p = person(id);
+  if (!p || !p.domain) {
+    toast("No private domain");
+    return;
+  }
+  state.domainId = id;
+  show("domain");
+  const posts = POSTS.filter((item) => item.author === id);
+  const files = (p.files || []).map((f) =>
+    `<div class="file"><span>${esc(f.name)}</span><small>${esc(f.where)}</small></div>`
+  ).join("");
+  const cards = posts.length
+    ? `<div class="cosmos">${posts.map((item) => actRow(item, "domain")).join("")}</div>`
+    : `<div class="empty">No posts yet. Nothing from here is on the desk.</div>`;
+  $("domain-body").innerHTML = `
+    <header class="domain-hero" style="--tone:${p.tone}">
+      <div>
+        <p class="eyebrow" style="color:rgba(255,255,255,.7)">PRIVATE DOMAIN</p>
+        <h1>${esc(p.domain.name)}</h1>
+        <p class="meta">${esc(p.domain.about)}</p>
+        <div class="who-line">${av(p, "sm")} ${esc(p.name)}</div>
+        <p class="disc">A synthetic digital human, not the person.</p>
+      </div>
+      <button type="button" class="mini solid" data-talk="${p.id}">Talk</button>
+    </header>
+    <div class="sec-hd"><h2>Posts</h2><span class="count">${posts.length}</span></div>
+    ${cards}
+    ${files ? `<div class="sec-hd"><h2>Files</h2></div><div class="files">${files}</div>` : ""}
+  `;
+}
+
+function openPost(id, from) {
+  const item = post(id);
+  const p = person(item.author);
+  state.postId = id;
+  state.postBack = from || "home";
+  state.read.add(id);
+  show("post");
+  $("post-back").textContent = state.postBack === "domain" && p.domain ? `← ${p.domain.name}` : "← Cosmo";
+  const stay = p.domain
+    ? `<button type="button" class="btn ghost" data-domain="${p.id}">Stay in the domain</button>`
+    : "";
+  $("post-body").innerHTML = `
+    <p class="eyebrow">FROM YOUR COSMOS${p.domain ? ` · ${esc(p.domain.name)}` : ""}</p>
+    <h1>${esc(item.title)}</h1>
+    <div class="byline">${av(p)}<div><b style="color:var(--ink)">${esc(p.name)}</b><div>${esc(item.meta)} · also on the desk</div></div></div>
+    <div class="body">${item.paragraphs.map((para) => `<p>${esc(para)}</p>`).join("")}</div>
+    <p class="disc">A synthetic digital human, not the person.</p>
+    <div class="actions">
+      <button type="button" class="btn primary" data-talk="${p.id}" data-about="${item.id}">Talk about this</button>
+      ${stay}
+    </div>
+  `;
+}
+
+function updateScroller() {
+  const el = $("people");
+  if (!el) return;
+  const wrap = el.parentElement;
+  const prev = wrap.querySelector(".prev");
+  const next = wrap.querySelector(".next");
+  const max = el.scrollWidth - el.clientWidth;
+  const overflow = max > 8;
+  prev.hidden = !overflow || el.scrollLeft < 8;
+  next.hidden = !overflow || el.scrollLeft > max - 8;
+}
+
+document.addEventListener("mousedown", (e) => {
+  if (e.target.closest("[data-nudge], .portrait button, .qcard, .qask, .lived-card")) e.preventDefault();
+});
+document.addEventListener("click", (e) => {
+  const nudge = e.target.closest("[data-nudge]");
+  if (nudge) {
+    e.preventDefault();
+    $("people").scrollBy({ left: Number(nudge.dataset.nudge), behavior: "smooth" });
+    return;
+  }
+  const livedTopic = e.target.closest("[data-lived-topic]");
+  if (livedTopic) {
+    state.livedTopic = livedTopic.dataset.livedTopic;
+    renderLived();
+    return;
+  }
+  const filter = e.target.closest("[data-filter]");
+  if (filter) {
+    state.filter = filter.dataset.filter;
+    if (state.who && !visiblePeople().some((p) => p.id === state.who)) state.who = null;
+    renderHome();
+    return;
+  }
+  const talk = e.target.closest("[data-talk]");
+  if (talk) {
+    openTalk(talk.dataset.talk, talk.dataset.about || null);
+    return;
+  }
+  const domain = e.target.closest("[data-domain]");
+  if (domain) {
+    openDomain(domain.dataset.domain);
+    return;
+  }
+  const postBtn = e.target.closest("[data-post]");
+  if (postBtn) {
+    openPost(postBtn.dataset.post, postBtn.dataset.from || (state.view === "domain" ? "domain" : "home"));
+    return;
+  }
+  const ask = e.target.closest("[data-ask]");
+  if (ask) {
+    openAnswers(ask.dataset.ask);
+    return;
+  }
+  const keep = e.target.closest("[data-continue]");
+  if (keep) continueWith(keep.dataset.continue);
+});
+
+$("home-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = $("home-draft").value.trim();
+  if (!text) { toast("Write a question, then send"); return; }
+  $("home-draft").value = "";
+  openAnswers(text);
+});
+$("home-draft").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    $("home-form").requestSubmit();
+  }
+});
+$("talk-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  sendTalk($("talk-draft").value);
+});
+$("talk-draft").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendTalk($("talk-draft").value);
+  }
+});
+$("answers-back").addEventListener("click", () => { show("home"); renderHome(); });
+$("talk-back").addEventListener("click", () => { show("home"); renderHome(); });
+$("domain-back").addEventListener("click", () => { show("home"); renderHome(); });
+$("post-back").addEventListener("click", () => {
+  if (state.postBack === "domain") openDomain(person(post(state.postId).author).id);
+  else { show("home"); renderHome(); }
+});
+$("brand").addEventListener("click", (e) => {
+  e.preventDefault();
+  show("home");
+  renderHome();
+});
+$("q").addEventListener("input", () => {
+  state.query = $("q").value;
+  if (state.who && !visiblePeople().some((p) => p.id === state.who)) state.who = null;
+  if (state.view === "home") {
+    renderPeople();
+    renderPosts();
+  }
+});
+$("people").addEventListener("scroll", updateScroller, { passive: true });
+addEventListener("resize", updateScroller);
+addEventListener("scroll", () => {
+  $("top").classList.toggle("is-stuck", scrollY > 4);
+}, { passive: true });
+
+renderHome();
+</script>
+</body>
+</html>

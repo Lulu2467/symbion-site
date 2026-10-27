@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027145840">
+  <meta name="cosmo-build" content="20261027150120">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -273,14 +273,14 @@
   }
   .lived-card:hover { filter: brightness(1.04) saturate(1.02); }
   .lived-card.light {
-    color: #0f2a3a;
-    box-shadow: inset 0 0 0 1px rgba(60, 122, 148, .14);
+    color: #4a5568;
+    box-shadow: inset 0 0 0 1px rgba(130, 148, 175, .18);
   }
   .lived-card .mark {
     width: 14px; height: 14px; opacity: .9; display: block;
     color: #fff;
   }
-  .lived-card.light .mark { color: #3c7a94; opacity: .9; }
+  .lived-card.light .mark { color: #8294AF; opacity: .9; }
   .lived-card .lead {
     margin: 16px 0 0; font-size: 22px; font-weight: 600;
     letter-spacing: -.025em; line-height: 1.22;
@@ -294,8 +294,8 @@
     color: rgba(255, 255, 255, .9);
   }
   .lived-card.light .tag {
-    background: rgba(60, 122, 148, .12);
-    color: #3c7a94;
+    background: rgba(130, 148, 175, .16);
+    color: #5A7088;
   }
 
   .quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -914,72 +914,28 @@ const BUILD_APPS = [
 
 const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
 
-/* Per-topic palettes (6 each). Order is 3×2 grid — similar hues are not adjacent. */
+/* Rain-from-bed palette — soft sheets / raindrop / fairy lights / pyjamas / journal / rain clouds */
+const RAIN = {
+  sheets:   { base: "#E9F3F1", lift: "#F7FBFA", accentColor: "#8294AF", light: true },
+  raindrop: { base: "#C7E5EE", lift: "#E8F5F9", accentColor: "#5A7088", light: true },
+  lights:   { base: "#FFE4A9", lift: "#FFF4D6", accentColor: "#6B6580", light: true },
+  pyjamas:  { base: "#A6BAD6", lift: "#C5D2E6", accentColor: "#F7FBFA", light: false },
+  journal:  { base: "#C2BED7", lift: "#DEDCEB", accentColor: "#F7FBFA", light: false },
+  clouds:   { base: "#8294AF", lift: "#A8B6C9", accentColor: "#E9F3F1", light: false }
+};
+/* Keys in 3×2 order — similar hues not side-by-side; each topic rotates the set */
+function rainPack(order) {
+  return order.map((k) => RAIN[k]);
+}
 const TOPIC_LOOKS = {
-  "for-you": [
-    { base: "#dceef7", lift: "#f4fafc", accentColor: "#3c7a94", light: true },
-    { base: "#6b6580", lift: "#a39cbc", accentColor: "#f0eef6", light: false },
-    { base: "#d8ebe3", lift: "#f2f8f5", accentColor: "#3d6b5c", light: true },
-    { base: "#5a6e78", lift: "#9aadb6", accentColor: "#dceef7", light: false },
-    { base: "#e4e0ef", lift: "#f5f3f9", accentColor: "#5c5678", light: true },
-    { base: "#3d7a72", lift: "#7aada4", accentColor: "#e7f3f9", light: false }
-  ],
-  all: [
-    { base: "#c5dce8", lift: "#eef6fa", accentColor: "#3c7a94", light: true },
-    { base: "#5a7a6a", lift: "#9ab0a4", accentColor: "#eef6f2", light: false },
-    { base: "#d4cce8", lift: "#f3f0f8", accentColor: "#5a5478", light: true },
-    { base: "#4a7d8c", lift: "#8ab0bc", accentColor: "#e7f3f9", light: false },
-    { base: "#e8eef2", lift: "#f7fafb", accentColor: "#4a6380", light: true },
-    { base: "#8b85b0", lift: "#c0bcd4", accentColor: "#f0eef6", light: false }
-  ],
-  "heavy-ion": [
-    { base: "#dceef7", lift: "#f4fafc", accentColor: "#3c7a94", light: true },
-    { base: "#4a6380", lift: "#8a9eb4", accentColor: "#e7f0f6", light: false },
-    { base: "#e4e0ef", lift: "#f5f3f9", accentColor: "#5c5678", light: true },
-    { base: "#3d7a72", lift: "#7aada4", accentColor: "#e7f3f9", light: false },
-    { base: "#e8eef2", lift: "#f7fafb", accentColor: "#5a6e78", light: true },
-    { base: "#6b6580", lift: "#a39cbc", accentColor: "#f0eef6", light: false }
-  ],
-  cosmology: [
-    { base: "#d4cce8", lift: "#f3f0f8", accentColor: "#5a5478", light: true },
-    { base: "#3c7a94", lift: "#7aabbf", accentColor: "#e7f3f9", light: false },
-    { base: "#d8ebe3", lift: "#f2f8f5", accentColor: "#3d6b5c", light: true },
-    { base: "#5a6e78", lift: "#9aadb6", accentColor: "#dceef7", light: false },
-    { base: "#c5dce8", lift: "#eef6fa", accentColor: "#3c7a94", light: true },
-    { base: "#5a7a6a", lift: "#9ab0a4", accentColor: "#eef6f2", light: false }
-  ],
-  live: [
-    { base: "#d8ebe3", lift: "#f2f8f5", accentColor: "#3d6b5c", light: true },
-    { base: "#8b85b0", lift: "#c0bcd4", accentColor: "#f0eef6", light: false },
-    { base: "#dceef7", lift: "#f4fafc", accentColor: "#3c7a94", light: true },
-    { base: "#5a7a6a", lift: "#9ab0a4", accentColor: "#eef6f2", light: false },
-    { base: "#e4e0ef", lift: "#f5f3f9", accentColor: "#5c5678", light: true },
-    { base: "#4a7d8c", lift: "#8ab0bc", accentColor: "#e7f3f9", light: false }
-  ],
-  climate: [
-    { base: "#c5e8e4", lift: "#eef8f6", accentColor: "#2f6b64", light: true },
-    { base: "#4a6380", lift: "#8a9eb4", accentColor: "#e7f0f6", light: false },
-    { base: "#e4e0ef", lift: "#f5f3f9", accentColor: "#5c5678", light: true },
-    { base: "#3d7a72", lift: "#7aada4", accentColor: "#e7f3f9", light: false },
-    { base: "#dceef7", lift: "#f4fafc", accentColor: "#3c7a94", light: true },
-    { base: "#6b6580", lift: "#a39cbc", accentColor: "#f0eef6", light: false }
-  ],
-  decisions: [
-    { base: "#e8eef2", lift: "#f7fafb", accentColor: "#4a6380", light: true },
-    { base: "#6b6580", lift: "#a39cbc", accentColor: "#f0eef6", light: false },
-    { base: "#d8ebe3", lift: "#f2f8f5", accentColor: "#3d6b5c", light: true },
-    { base: "#3c7a94", lift: "#7aabbf", accentColor: "#e7f3f9", light: false },
-    { base: "#d4cce8", lift: "#f3f0f8", accentColor: "#5a5478", light: true },
-    { base: "#5a7a6a", lift: "#9ab0a4", accentColor: "#eef6f2", light: false }
-  ],
-  lab: [
-    { base: "#e4e0ef", lift: "#f5f3f9", accentColor: "#5c5678", light: true },
-    { base: "#3d7a72", lift: "#7aada4", accentColor: "#e7f3f9", light: false },
-    { base: "#c5dce8", lift: "#eef6fa", accentColor: "#3c7a94", light: true },
-    { base: "#5a6e78", lift: "#9aadb6", accentColor: "#dceef7", light: false },
-    { base: "#c5e8e4", lift: "#eef8f6", accentColor: "#2f6b64", light: true },
-    { base: "#8b85b0", lift: "#c0bcd4", accentColor: "#f0eef6", light: false }
-  ]
+  "for-you": rainPack(["sheets", "journal", "lights", "clouds", "raindrop", "pyjamas"]),
+  all: rainPack(["raindrop", "clouds", "lights", "journal", "sheets", "pyjamas"]),
+  "heavy-ion": rainPack(["sheets", "pyjamas", "lights", "clouds", "journal", "raindrop"]),
+  cosmology: rainPack(["journal", "raindrop", "lights", "clouds", "sheets", "pyjamas"]),
+  live: rainPack(["lights", "clouds", "sheets", "journal", "raindrop", "pyjamas"]),
+  climate: rainPack(["sheets", "clouds", "lights", "pyjamas", "raindrop", "journal"]),
+  decisions: rainPack(["raindrop", "journal", "lights", "clouds", "sheets", "pyjamas"]),
+  lab: rainPack(["pyjamas", "lights", "sheets", "journal", "raindrop", "clouds"])
 };
 function withLook(card, i) {
   const pack = TOPIC_LOOKS[card.topic] || TOPIC_LOOKS.all;

@@ -468,6 +468,33 @@
     width: min(420px, 78vw); min-height: 220px; flex: none; scroll-snap-align: start;
   }
 
+  .build-entry {
+    display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center;
+    background: #fff; border: 1px solid var(--line); border-radius: 24px;
+    padding: 28px 28px 26px;
+  }
+  .build-entry .steps {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .build-entry .steps li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 14px; line-height: 1.45; color: var(--ink);
+  }
+  .build-entry .steps .n {
+    flex: none; width: 22px; height: 22px; border-radius: 11px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; color: #3c7a94; background: var(--green-tint);
+  }
+  .build-entry .steps span { color: var(--muted); }
+  .build-entry .cta-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .build-entry .cta {
+    border-radius: 999px; padding: 12px 18px;
+    font-size: 14px; font-weight: 600;
+    background: var(--ink); color: #fff;
+  }
+  .build-entry .cta:hover { background: #222; }
+  .build-entry .hint { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
   .build-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
   }
@@ -728,6 +755,7 @@
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
     .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
+    .build-entry { grid-template-columns: 1fr; gap: 20px; padding: 22px 18px; }
     .expert { width: 220px; height: 320px; }
     .rail-fade { width: 56px; }
   }
@@ -842,9 +870,27 @@
       <div class="sec-hd">
         <h2>Build your Cosmo</h2>
       </div>
-      <p class="sec-lede">Connect apps that feed your twin. You can start here in Cosmo, or finish the same links later in Symbion.</p>
-      <div class="build-grid" id="build"></div>
+      <p class="sec-lede">Shape what your twin knows — a few steps, then connect the apps that feed it.</p>
+      <div class="build-entry">
+        <ol class="steps">
+          <li><span class="n">1</span><div>Pick what the twin should learn from — courses, notes, files.</div></li>
+          <li><span class="n">2</span><div>Connect apps once. Same links finish later in Symbion.</div></li>
+          <li><span class="n">3</span><div>Ask in Cosmo with that context already on.</div></li>
+        </ol>
+        <div class="cta-wrap">
+          <button type="button" class="cta" id="open-build">Customize your Cosmo</button>
+          <p class="hint" id="build-status">Desk is linked. Add Notion, Drive, or files when you are ready.</p>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <section id="build-page" hidden>
+    <button type="button" class="back" id="build-back">← Cosmo</button>
+    <p class="eyebrow">CUSTOMIZE</p>
+    <h1>Connect what feeds your twin</h1>
+    <p class="lede" style="margin-left:0;text-align:left">Start here in Cosmo, or finish the same links later in Symbion. Coming-soon apps stay listed but stay off.</p>
+    <div class="build-grid" id="build" style="margin-top:28px"></div>
   </section>
 
   <section id="answers" hidden>
@@ -1523,7 +1569,9 @@ function renderQuick() {
 }
 
 function renderBuild() {
-  $("build").innerHTML = BUILD_APPS.map((app) => {
+  const el = $("build");
+  if (!el) return;
+  el.innerHTML = BUILD_APPS.map((app) => {
     const on = state.connected.has(app.id);
     const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
     return `<article class="build-card${app.soon ? " is-soon" : ""}">
@@ -1533,6 +1581,13 @@ function renderBuild() {
       <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
     </article>`;
   }).join("");
+  const status = $("build-status");
+  if (status) {
+    const n = [...state.connected].filter((id) => BUILD_APPS.some((a) => a.id === id && !a.soon)).length;
+    status.textContent = n <= 1
+      ? "Desk is linked. Add Notion, Drive, or files when you are ready."
+      : `${n} sources linked. Open customize to add or change apps.`;
+  }
 }
 
 function renderHome() {
@@ -1649,6 +1704,8 @@ function show(view) {
   $("talk").hidden = view !== "talk";
   $("domain").hidden = view !== "domain";
   $("post").hidden = view !== "post";
+  $("build-page").hidden = view !== "build";
+  if (view === "build") renderBuild();
   window.scrollTo(0, 0);
 }
 
@@ -1891,6 +1948,8 @@ $("talk-draft").addEventListener("keydown", (e) => {
 $("answers-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("talk-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("domain-back").addEventListener("click", () => { show("home"); renderHome(); });
+$("open-build").addEventListener("click", () => show("build"));
+$("build-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("post-back").addEventListener("click", () => {
   if (state.postBack === "domain") openDomain(person(post(state.postId).author).id);
   else { show("home"); renderHome(); }

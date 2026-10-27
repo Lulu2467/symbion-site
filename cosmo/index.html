@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027152320">
+  <meta name="cosmo-build" content="20261027152600">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -352,35 +352,41 @@
   }
   .faces .av:first-child { margin-left: 0; }
 
-  .expert-rail, .dynamics-rail { position: relative; }
+  .expert-rail, .dynamics-rail { position: relative; overflow: clip; }
   .experts, .dynamics {
     display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
     overscroll-behavior: contain;
     padding: 6px 2px 18px; scrollbar-width: none;
-    /* fade the cards themselves — no white edge overlay */
-    -webkit-mask-image: linear-gradient(
-      90deg,
-      #000 0%,
-      #000 calc(100% - 160px),
-      rgba(0, 0, 0, .55) calc(100% - 88px),
-      rgba(0, 0, 0, .18) calc(100% - 36px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      90deg,
-      #000 0%,
-      #000 calc(100% - 160px),
-      rgba(0, 0, 0, .55) calc(100% - 88px),
-      rgba(0, 0, 0, .18) calc(100% - 36px),
-      transparent 100%
-    );
-  }
-  .expert-rail.is-end .experts,
-  .dynamics-rail.is-end .dynamics {
-    -webkit-mask-image: none;
-    mask-image: none;
   }
   .experts::-webkit-scrollbar, .dynamics::-webkit-scrollbar { display: none; }
+  /* Delphi-style right edge: progressive blur + soft surface tint */
+  .rail-fade {
+    position: absolute; z-index: 1; top: 6px; right: 0; bottom: 18px;
+    width: 80px; pointer-events: none; opacity: 1;
+    transition: opacity .2s ease;
+  }
+  .expert-rail.is-end .rail-fade,
+  .dynamics-rail.is-end .rail-fade { opacity: 0; }
+  .rail-fade .pblur {
+    position: absolute; inset: 0;
+  }
+  .rail-fade .pblur > i {
+    position: absolute; inset: 0; display: block;
+    -webkit-backdrop-filter: blur(var(--b));
+    backdrop-filter: blur(var(--b));
+    -webkit-mask-image: var(--mask);
+    mask-image: var(--mask);
+    transform: translateZ(0);
+  }
+  .rail-fade .tint {
+    position: absolute; inset: 0; display: block;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in srgb, #fafafa 55%, transparent) 40%,
+      #fafafa 94%
+    );
+  }
   .expert-nudge, .rail-nudge {
     position: absolute; top: 42%; z-index: 2; transform: translateY(-50%);
     width: 34px; height: 34px; border-radius: 17px;
@@ -709,7 +715,7 @@
     .stage h1 { font-size: 40px; }
     .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
     .expert { width: 220px; height: 320px; }
-    .expert-rail::after { width: 48px; }
+    .rail-fade { width: 56px; }
   }
 </style>
 </head>
@@ -796,6 +802,7 @@
         <button type="button" class="expert-nudge next" data-expert-nudge="280" aria-label="Next experts" hidden>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.25 10.75 8 6 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <div class="rail-fade" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -813,6 +820,7 @@
         <button type="button" class="rail-nudge next" data-rail-nudge="320" data-rail="posts" aria-label="Next posts" hidden>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.25 10.75 8 6 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <div class="rail-fade" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -1804,6 +1812,26 @@ addEventListener("scroll", () => {
 }, { passive: true });
 
 document.querySelectorAll("[data-shuffle]").forEach((btn) => { btn.innerHTML = SHUFFLE_ICON; });
+/* Delphi progressive blur: stronger toward the right edge */
+(function fillRailFades() {
+  const n = 8;
+  const layers = Array.from({ length: n }, (_, i) => {
+    const t0 = (i / n) * 100;
+    const t1 = ((i + 0.5) / n) * 100;
+    const t2 = ((i + 1) / n) * 100;
+    const t3 = ((i + 1.6) / n) * 100;
+    const blur = ((n - 1 - i) / (n - 1)) * 7;
+    const mask = i === 0
+      ? `linear-gradient(to left, #000 0%, #000 ${100 / n}%, transparent ${(100 / n) * 2.2}%)`
+      : i === n - 1
+        ? `linear-gradient(to left, transparent ${t0 - 10}%, #000 ${t1}%, #000 100%)`
+        : `linear-gradient(to left, transparent ${Math.max(0, t0 - 8)}%, #000 ${t1}%, #000 ${t2}%, transparent ${Math.min(100, t3)}%)`;
+    return `<i style="--b:${blur.toFixed(2)}px;--mask:${mask}"></i>`;
+  }).join("");
+  document.querySelectorAll(".rail-fade").forEach((el) => {
+    el.innerHTML = `<div class="pblur">${layers}</div><span class="tint"></span>`;
+  });
+})();
 renderHome();
 </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027172130">
+  <meta name="cosmo-build" content="20261027172850">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1155,6 +1155,10 @@ const faceUrl = (id, w = 240, h = w) => {
 };
 const EXPERT_PHOTO = Object.fromEntries(Object.keys(FACE_ID).map((id) => [id, faceUrl(id, 240, 240)]));
 const IMG_MISS = `this.classList.add('is-miss');this.removeAttribute('src');this.alt='';`;
+const EXPERT_IMG_MISS = `var c=this.closest('.expert');if(c){c.remove();var n=document.querySelectorAll('#people .expert').length;var el=document.getElementById('people-count');if(el)el.textContent=n===1?'1 expert':n+' experts';}else{this.classList.add('is-miss');this.removeAttribute('src');this.alt='';}`;
+function hasPortrait(p) {
+  return !!(p && FACE_ID[p.id] && p.kind !== "agent");
+}
 
 const PEOPLE = [
   {
@@ -1608,16 +1612,13 @@ function renderExpertBar() {
 }
 function renderPeople() {
   renderExpertBar();
-  const people = shuffleCopy(visiblePeople(), state.shuffleSeed.experts);
+  const people = shuffleCopy(visiblePeople().filter(hasPortrait), state.shuffleSeed.experts);
   $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
     const shot = faceUrl(p.id, 640, 960);
-    const media = shot
-      ? `<div class="shot"><span class="shot-fallback" aria-hidden="true">${esc(p.initials)}</span><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${IMG_MISS}"></div>`
-      : `<div class="shot-fallback" aria-hidden="true">${esc(p.initials)}</div>`;
-    return `<article class="expert${p.kind === "agent" ? " agent" : ""}" style="--base:${look.base};--lift:${look.lift}">
-      ${media}
+    return `<article class="expert" style="--base:${look.base};--lift:${look.lift}">
+      <div class="shot"><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${EXPERT_IMG_MISS}"></div>
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(p.role)}</span>
@@ -1734,7 +1735,7 @@ function boldAccent(q, accent) {
 function faceStack(seedPeople, prefer, maxN) {
   const cap = Math.max(2, Math.min(5, maxN || 5));
   const faces = [];
-  const push = (p) => { if (p && !faces.some((x) => x.id === p.id)) faces.push(p); };
+  const push = (p) => { if (hasPortrait(p) && !faces.some((x) => x.id === p.id)) faces.push(p); };
   (seedPeople || []).forEach(push);
   push(prefer);
   PEOPLE.forEach((p) => {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027163620">
+  <meta name="cosmo-build" content="20261027163840">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -458,13 +458,13 @@
   .expert::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg,
-      transparent 38%,
-      rgba(0,0,0,.2) 56%,
-      rgba(0,0,0,.68) 76%,
-      rgba(0,0,0,.88) 100%);
+      transparent 48%,
+      rgba(0,0,0,.18) 68%,
+      rgba(0,0,0,.62) 88%,
+      rgba(0,0,0,.78) 100%);
   }
   .expert .foot {
-    position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 2;
+    position: absolute; left: 16px; right: 16px; bottom: 18px; z-index: 2;
     display: flex; flex-direction: column; gap: 5px;
   }
   .expert .nm {
@@ -478,18 +478,6 @@
     font-size: 14px; line-height: 1.4; color: rgba(255,255,255,.9);
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .expert .ask-about {
-    margin-top: 10px;
-    width: 100%; text-align: left;
-    border-radius: 999px; padding: 11px 14px;
-    font-size: 13px; font-weight: 500; line-height: 1.35;
-    color: #fff;
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.28);
-    backdrop-filter: blur(14px) saturate(1.2);
-    -webkit-backdrop-filter: blur(14px) saturate(1.2);
-  }
-  .expert .ask-about:hover { background: rgba(255,255,255,.22); }
 
   .quote-wrap { position: relative; }
   .dynamics .qcard {
@@ -930,7 +918,6 @@
     .expert { width: 260px; height: 344px; }
     .expert .nm { font-size: 18px; }
     .expert .role { font-size: 13px; }
-    .expert .ask-about { font-size: 12px; padding: 10px 12px; }
     .rail-fade { width: 96px; }
   }
 </style>
@@ -1481,33 +1468,6 @@ const QUICK_TAG = {
   lab: "Lab report"
 };
 
-const ASK = {
-  roland: ["Ask about the lecture 5 diagram", "Which axis is temperature on the lecture 5 diagram?"],
-  pajer: ["Ask about the cosmology line", "I am stuck on one line in the cosmology thread."],
-  luo: ["Ask about the 3:10 recap", "I missed part of the 3:10 live. What does the recap cover?"],
-  greer: ["Ask about the two scales", "Write the scale the lattice can see, and the scale the sample can see."],
-  anastasia: ["Ask about the axis you changed", "Which axis did I change in the climate notebook?"],
-  xu: ["Ask about the pricing sample", "How should I read the pricing insight?"],
-  lab: ["Ask about the method section", "The method section of my lab report does not hold."],
-  smith: ["Ask about the people in the number", "A health number needs the people it counted."],
-  chen: ["Ask about the detector cut", "Which detector cut am I unsure about?"],
-  oka: ["Ask about the lattice line", "How does the lattice line sit on lecture 5?"],
-  nova: ["Ask about the free parameter", "What is fixed before the free parameter?"],
-  kim: ["Ask about the recitation line", "Which recitation line broke?"],
-  maya: ["Ask about the office-hours clip", "Which clip do I need after the live?"],
-  river: ["Ask about the seminar FAQ", "What belongs in the seminar FAQ?"],
-  park: ["Ask about the sample", "What is the sample before the lattice scale?"],
-  lin: ["Ask about the defect", "Where does the defect sit between the two scales?"],
-  reef: ["Ask about the climate figure", "What axis and unit go before the trend?"],
-  moss: ["Ask about the time step", "Does the time step match the figure?"],
-  vale: ["Ask about the decision", "What decision and row count go together?"],
-  brook: ["Ask about the pricing rows", "How many rows support this sentence?"],
-  draft: ["Ask about Aim", "Does this sentence belong in Aim?"],
-  meter: ["Ask about Method", "Which Method line feels soft?"],
-  hale: ["Ask about the count", "Who did this health number count?"],
-  quill: ["Ask about the health sentence", "Can I send a health sentence with no people?"]
-};
-
 const NE = `<svg viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M.35 14.5 14.35.5M1.85.5h12.5V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 const POSTS = [
@@ -1654,7 +1614,6 @@ function renderPeople() {
   $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
-    const ask = ASK[p.id] || ["Ask about their work", "Tell me what you work on."];
     const shot = faceUrl(p.id, 640, 960);
     const media = shot
       ? `<div class="shot"><span class="shot-fallback" aria-hidden="true">${esc(p.initials)}</span><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${IMG_MISS}"></div>`
@@ -1664,7 +1623,6 @@ function renderPeople() {
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(p.role)}</span>
-        <button type="button" class="ask-about" data-ask="${esc(ask[1])}">${esc(ask[0])}</button>
       </div>
     </article>`;
   }).join("") : `<div class="empty">No experts match.</div>`;
@@ -2090,7 +2048,7 @@ function openPost(id, from) {
 }
 
 document.addEventListener("mousedown", (e) => {
-  if (e.target.closest(".qcard, .qask, .lived-card, .expert .ask-about, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
+  if (e.target.closest(".qcard, .qask, .lived-card, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
 });
 document.addEventListener("click", (e) => {
   const expertNudge = e.target.closest("[data-expert-nudge]");

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027155540">
+  <meta name="cosmo-build" content="20261027155740">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -439,6 +439,10 @@
     border: 1px solid rgba(255,255,255,.28);
     color: #fff;
     font-size: 28px; font-weight: 500; letter-spacing: -.04em;
+    overflow: hidden;
+  }
+  .expert .mono img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
   }
   .expert.agent .mono { border-radius: 22px; }
   .expert .foot {
@@ -669,7 +673,9 @@
     width: 36px; height: 36px; border-radius: 18px; flex: none;
     display: inline-flex; align-items: center; justify-content: center;
     color: #09090b; font-size: 11px; font-weight: 600; background: #dceef7;
+    overflow: hidden;
   }
+  .av img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .av.sm { width: 26px; height: 26px; border-radius: 13px; font-size: 10px; }
   .av.lg { width: 72px; height: 72px; border-radius: 36px; font-size: 22px; font-weight: 500; }
   .av.agent, .av.agent.lg { border-radius: 14px; }
@@ -972,6 +978,35 @@ const EXPERT_FILTERS = [
   { id: "lab", label: "Lab" },
   { id: "health", label: "Health" }
 ];
+
+/* Stock portraits for prototype faces — professors, creators, hosts (not claimed likenesses) */
+const FACE = (id, w = 240) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${w}&q=80&crop=faces`;
+const EXPERT_PHOTO = {
+  roland: FACE("photo-1472099645785-5658abf4ff4e"),
+  pajer: FACE("photo-1507003211169-0a1dd7228f2d"),
+  luo: FACE("photo-1506794778202-cad84cf45f1d"),
+  greer: FACE("photo-1573496359142-b8d87734a5a2"),
+  anastasia: FACE("photo-1580489944761-15a19d654956"),
+  xu: FACE("photo-1519085360753-af0119f7cbe7"),
+  lab: FACE("photo-1560250097-0b93528c311a"),
+  smith: FACE("photo-1494790108377-be9c29b29330"),
+  chen: FACE("photo-1500648767791-00dcc994a43e"),
+  oka: FACE("photo-1507591064344-4c6ce005b928"),
+  nova: FACE("photo-1534528741775-53994a69daeb"),
+  kim: FACE("photo-1544005313-94ddf0286df2"),
+  maya: FACE("photo-1524504388940-b1c1722653e1"),
+  river: FACE("photo-1539571696357-5a69c17a67c6"),
+  park: FACE("photo-1463453091185-61582044d556"),
+  lin: FACE("photo-1438761681033-6461ffad8d80"),
+  reef: FACE("photo-1548142813-c348350df52b"),
+  moss: FACE("photo-1556157382-97eda2d62296"),
+  vale: FACE("photo-1487412720507-e7ab37603c6f"),
+  brook: FACE("photo-1492562080023-ab3db95bfbce"),
+  draft: FACE("photo-1552058544-f2b08422138a"),
+  meter: FACE("photo-1547425260-76bcadfb4f2c"),
+  hale: FACE("photo-1551836022-d5d88e9218df"),
+  quill: FACE("photo-1521119989659-a83fb39b4bf0")
+};
 
 const PEOPLE = [
   {
@@ -1424,7 +1459,11 @@ function visiblePosts() {
 
 function av(p, size) {
   const cls = size === "lg" ? " lg" : size === "sm" ? " sm" : "";
-  return `<span class="av${cls}${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">${esc(p.initials)}</span>`;
+  const photo = EXPERT_PHOTO[p.id];
+  const inner = photo
+    ? `<img src="${photo}" alt="" loading="lazy" width="72" height="72">`
+    : esc(p.initials);
+  return `<span class="av${cls}${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">${inner}</span>`;
 }
 
 function renderExpertBar() {
@@ -1444,8 +1483,12 @@ function renderPeople() {
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
     const ask = ASK[p.id] || ["Ask about their work", "Tell me what you work on."];
+    const photo = EXPERT_PHOTO[p.id];
+    const mono = photo
+      ? `<img src="${photo}" alt="" loading="lazy" width="96" height="96">`
+      : esc(p.initials);
     return `<article class="expert${p.kind === "agent" ? " agent" : ""}" style="--base:${look.base};--lift:${look.lift}">
-      <div class="mono">${esc(p.initials)}</div>
+      <div class="mono">${mono}</div>
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(p.role)}</span>

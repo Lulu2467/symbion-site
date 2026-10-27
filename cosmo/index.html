@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027152600">
+  <meta name="cosmo-build" content="20261027152820">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -317,40 +317,54 @@
     color: #3c7a94;
   }
 
-  /* Recommended — same card size/gap as lived / 图二 */
-  .quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  /* Recommended — Delphi “Ask a quick question” (图一) */
+  .quick { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .qask {
     position: relative; overflow: hidden;
-    aspect-ratio: 324 / 167; min-height: 0;
+    min-height: 168px;
     text-align: left; background: #fff;
-    border: 1px solid var(--line); border-radius: 20px; padding: 18px 18px 14px;
+    border: 0; border-radius: 22px; padding: 22px 22px 18px;
     display: flex; flex-direction: column;
+    box-shadow: inset 0 0 0 1px rgba(9, 9, 11, .04);
   }
   .qask::before {
     content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, #d4eaf5 0%, #e7f3f9 22%, #fff 50%);
+    background: linear-gradient(180deg, #eef5f8 0%, #f7fafb 28%, #fff 55%);
     opacity: 0; transition: opacity .2s ease;
   }
-  .qask:hover, .qask:focus-visible { border-color: #c5d7e4; }
   .qask:hover::before, .qask:focus-visible::before { opacity: 1; }
   .qask > * { position: relative; z-index: 1; }
   .qask .line {
-    margin: 0; font-size: clamp(16px, 1.7vw, 20px); font-weight: 500;
-    letter-spacing: -.02em; line-height: 1.2;
+    margin: 0; font-size: clamp(18px, 1.9vw, 24px); font-weight: 500;
+    letter-spacing: -.025em; line-height: 1.28; color: var(--ink);
   }
-  .qask .foot { margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .qask .tag {
-    font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--muted); background: rgba(9,9,11,.05); border-radius: 7px; padding: 4px 7px;
+  .qask .line b { font-weight: 700; }
+  .qask .foot {
+    margin-top: auto; padding-top: 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
-  .faces { display: flex; }
-  .faces .av,
-  .faces .av.agent,
-  .faces .av.agent.sm {
-    margin-left: -8px; box-shadow: 0 0 0 2px #fff;
-    border-radius: 50%;
+  .qask .tag-pair {
+    display: inline-flex; align-items: stretch;
+    background: rgba(9, 9, 11, .05); border-radius: 999px; overflow: hidden;
   }
-  .faces .av:first-child { margin-left: 0; }
+  .qask .tag-pair .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); background: transparent; border-radius: 0;
+    padding: 6px 10px; white-space: nowrap;
+  }
+  .qask .tag-pair .tag + .tag {
+    border-left: 1px solid rgba(9, 9, 11, .08);
+  }
+  .faces { display: flex; align-items: center; }
+  .faces.portrait .av,
+  .faces.portrait .av.sm,
+  .faces.portrait .av.agent,
+  .faces.portrait .av.agent.sm {
+    width: 28px; height: 38px; border-radius: 9px;
+    margin-left: -10px; box-shadow: 0 0 0 2px #fff;
+    font-size: 9px;
+  }
+  .faces.portrait .av:first-child { margin-left: 0; }
 
   .expert-rail, .dynamics-rail { position: relative; overflow: clip; }
   .experts, .dynamics {
@@ -1417,18 +1431,46 @@ function renderLived() {
   }).join("") : `<div class="empty">No prompts in this topic.</div>`;
 }
 
+function boldAccent(q, accent) {
+  if (!accent) return esc(q);
+  const i = q.toLowerCase().indexOf(accent.toLowerCase());
+  if (i < 0) return esc(q);
+  return `${esc(q.slice(0, i))}<b>${esc(q.slice(i, i + accent.length))}</b>${esc(q.slice(i + accent.length))}`;
+}
+function faceStack(seedPeople, prefer) {
+  const faces = [];
+  const push = (p) => { if (p && !faces.some((x) => x.id === p.id)) faces.push(p); };
+  (seedPeople || []).forEach(push);
+  push(prefer);
+  PEOPLE.forEach((p) => {
+    if (faces.length >= 5) return;
+    if (prefer && p.field === prefer.field) push(p);
+  });
+  PEOPLE.forEach((p) => { if (faces.length < 5) push(p); });
+  return faces.slice(0, 5);
+}
 function renderQuick() {
   const tag = QUICK_TAG[state.livedTopic] || "All";
   const cards = shuffleCopy(LIVED.filter((item) => livedVisible(item)).slice(0, 6), state.shuffleSeed.quick).map((item) => {
     const p = person(item.id);
     let people = relatedPeople(item.q);
     if (!people.length && p) people = [p];
-    return { q: item.q, tag: p && p.fieldLabel ? p.fieldLabel : tag, people };
-  }).filter((row) => row.people.length);
+    const faces = faceStack(people, p);
+    return {
+      q: item.q,
+      accent: item.accent,
+      tag: p && p.fieldLabel ? p.fieldLabel : tag,
+      count: Math.max(faces.length, people.length, 3),
+      faces
+    };
+  }).filter((row) => row.faces.length);
   $("quick-count").textContent = cards.length ? `${cards.length}` : "";
   $("quick").innerHTML = cards.length ? cards.map((item) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
-      <span class="line">${esc(item.q)}</span>
-      <span class="foot"><span class="tag">${esc(item.tag)}</span><span class="faces">${item.people.map((p) => av(p, "sm")).join("")}</span></span>
+      <span class="line">${boldAccent(item.q, item.accent)}</span>
+      <span class="foot">
+        <span class="tag-pair"><span class="tag">${esc(item.tag)}</span><span class="tag">${item.count} perspectives</span></span>
+        <span class="faces portrait">${item.faces.map((p) => av(p, "sm")).join("")}</span>
+      </span>
     </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
 }
 

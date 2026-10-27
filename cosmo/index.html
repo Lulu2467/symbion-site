@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027152240">
+  <meta name="cosmo-build" content="20261027152320">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -344,7 +344,12 @@
     color: var(--muted); background: rgba(9,9,11,.05); border-radius: 7px; padding: 4px 7px;
   }
   .faces { display: flex; }
-  .faces .av { margin-left: -8px; box-shadow: 0 0 0 2px #fff; }
+  .faces .av,
+  .faces .av.agent,
+  .faces .av.agent.sm {
+    margin-left: -8px; box-shadow: 0 0 0 2px #fff;
+    border-radius: 50%;
+  }
   .faces .av:first-child { margin-left: 0; }
 
   .expert-rail, .dynamics-rail { position: relative; }

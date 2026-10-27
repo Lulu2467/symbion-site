@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027164250">
+  <meta name="cosmo-build" content="20261027164820">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1398,74 +1398,58 @@ function withLook(card, i) {
   return Object.assign({}, card, pack[i % pack.length]);
 }
 
-/* 6 cards per topic chip (For you / All / each field) */
+/* 6 cards per topic chip — life, learning, startup, work */
 const LIVED = [
-  withLook({ id: "roland", topic: "for-you", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?" }, 0),
-  withLook({ id: "pajer", topic: "for-you", lead: "Ask Prof. Pajer about", accent: "the stuck line", q: "I am stuck on one line in the cosmology thread." }, 1),
-  withLook({ id: "lab", topic: "for-you", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold." }, 2),
-  withLook({ id: "roland", topic: "for-you", lead: "Ask Prof. Roland about", accent: "the crossover wording", q: "Does lecture 5 call this a crossover or a first-order line?" }, 3),
-  withLook({ id: "pajer", topic: "for-you", lead: "Ask Prof. Pajer about", accent: "problem set 2", q: "Which cell is still blank in problem set 2?" }, 4),
-  withLook({ id: "lab", topic: "for-you", lead: "Ask the lab coach about", accent: "uncertainty", q: "Where should the uncertainty sentence go in the report?" }, 5),
+  withLook({ id: "vale", topic: "for-you", tag: "Life", tag2: "Path", lead: "Ask Nora about", accent: "the next five years", q: "Should I stay in school or take the industry offer this year?" }, 0),
+  withLook({ id: "pajer", topic: "for-you", tag: "Learning", tag2: "Skill", lead: "Ask Prof. Pajer about", accent: "what to deepen next", q: "Which skill should I deepen before the internship interview?" }, 1),
+  withLook({ id: "xu", topic: "for-you", tag: "Startup", tag2: "Build", lead: "Ask Prof. Xu about", accent: "the first customer", q: "How do I know this problem is painful enough to build for?" }, 2),
+  withLook({ id: "maya", topic: "for-you", tag: "Work", tag2: "Career", lead: "Ask Maya about", accent: "the promotion talk", q: "How do I open the promotion conversation without sounding needy?" }, 3),
+  withLook({ id: "brook", topic: "for-you", tag: "Startup", tag2: "Funding", lead: "Ask Theo about", accent: "raising now", q: "Do we raise this quarter or ship one more month first?" }, 4),
+  withLook({ id: "lab", topic: "for-you", tag: "Learning", tag2: "Practice", lead: "Ask the coach about", accent: "practice vs rereading", q: "I keep rereading the same chapter — what should I practice instead?" }, 5),
 
-  withLook({ id: "roland", topic: "all", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?" }, 0),
-  withLook({ id: "luo", topic: "all", lead: "Ask 骆王宇’s twin about", accent: "the 3:10 recap", q: "I missed part of the 3:10 live. What does the recap cover?" }, 1),
-  withLook({ id: "pajer", topic: "all", lead: "Ask Prof. Pajer about", accent: "the cosmology line", q: "I am stuck on one line in the cosmology thread." }, 2),
-  withLook({ id: "anastasia", topic: "all", lead: "Ask Anastasia about", accent: "the axis you changed", q: "Which axis did I change in the climate notebook?" }, 3),
-  withLook({ id: "xu", topic: "all", lead: "Ask Prof. Xu about", accent: "the pricing sample", q: "How should I read the pricing insight?" }, 4),
-  withLook({ id: "lab", topic: "all", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold." }, 5),
+  withLook({ id: "smith", topic: "all", tag: "Life", tag2: "Health", lead: "Ask Katherine about", accent: "burnout signs", q: "Which early burnout signs should I treat as real, not drama?" }, 0),
+  withLook({ id: "greer", topic: "all", tag: "Learning", tag2: "Depth", lead: "Ask Julia about", accent: "one deep skill", q: "Should I go deep on one skill or stay broad this semester?" }, 1),
+  withLook({ id: "xu", topic: "all", tag: "Startup", tag2: "Pricing", lead: "Ask Prof. Xu about", accent: "first pricing", q: "How should I price the first ten customers without guessing?" }, 2),
+  withLook({ id: "river", topic: "all", tag: "Work", tag2: "Scope", lead: "Ask Jordan about", accent: "a two-week scope", q: "How do I cut this project so it ships in two weeks?" }, 3),
+  withLook({ id: "vale", topic: "all", tag: "Life", tag2: "Choice", lead: "Ask Nora about", accent: "safe vs mine", q: "How do I tell if this path is mine or just the safe one?" }, 4),
+  withLook({ id: "maya", topic: "all", tag: "Work", tag2: "Blocker", lead: "Ask Maya about", accent: "the standup", q: "What do I say in standup when the blocker is me?" }, 5),
 
-  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?" }, 0),
-  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "baryon chemical potential", q: "Which axis is baryon chemical potential?" }, 1),
-  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the crossover", q: "Does lecture 5 follow a crossover or a sharp first-order line?" }, 2),
-  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "lecture 4 summary", q: "What did lecture 4 leave unfinished before lecture 5?" }, 3),
-  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the phase diagram", q: "Where does the phase diagram start on the slide?" }, 4),
-  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the reading report", q: "Which sentence in the reading report is still weak?" }, 5),
+  withLook({ id: "vale", topic: "life", tag: "Life", tag2: "Path", lead: "Ask Nora about", accent: "the next five years", q: "Should I stay in school or take the industry offer this year?" }, 0),
+  withLook({ id: "smith", topic: "life", tag: "Life", tag2: "Pace", lead: "Ask Katherine about", accent: "rest vs quit", q: "Is this a rest week or a sign I should change direction?" }, 1),
+  withLook({ id: "luo", topic: "life", tag: "Life", tag2: "Network", lead: "Ask 骆王宇’s twin about", accent: "who to meet", q: "Who is worth one coffee this month for the path I want?" }, 2),
+  withLook({ id: "quill", topic: "life", tag: "Life", tag2: "Story", lead: "Ask Sam about", accent: "the life story", q: "How do I write a short story of myself that is not a CV dump?" }, 3),
+  withLook({ id: "hale", topic: "life", tag: "Life", tag2: "Balance", lead: "Ask Dr. Hale about", accent: "energy budget", q: "How do I budget energy across study, work, and family this term?" }, 4),
+  withLook({ id: "vale", topic: "life", tag: "Life", tag2: "Choice", lead: "Ask Nora about", accent: "safe vs mine", q: "How do I tell if this path is mine or just the safe one?" }, 5),
 
-  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "the stuck line", q: "I am stuck on one line in the cosmology thread." }, 0),
-  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "known vs unknown", q: "How do I split this line into known and unknown?" }, 1),
-  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "what class calls it", q: "What does class call the term I cannot name?" }, 2),
-  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "problem set 2", q: "Which problem in set 2 matches this line?" }, 3),
-  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "the next cell", q: "Should I fill the next cell or stay on this line?" }, 4),
-  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "Maya’s reply", q: "How should I read Maya’s reply next to the twin’s?" }, 5),
+  withLook({ id: "pajer", topic: "learning", tag: "Learning", tag2: "Skill", lead: "Ask Prof. Pajer about", accent: "what to deepen next", q: "Which skill should I deepen before the internship interview?" }, 0),
+  withLook({ id: "lab", topic: "learning", tag: "Learning", tag2: "Practice", lead: "Ask the coach about", accent: "practice vs rereading", q: "I keep rereading the same chapter — what should I practice instead?" }, 1),
+  withLook({ id: "greer", topic: "learning", tag: "Learning", tag2: "Depth", lead: "Ask Julia about", accent: "one deep skill", q: "Should I go deep on one skill or stay broad this semester?" }, 2),
+  withLook({ id: "anastasia", topic: "learning", tag: "Learning", tag2: "Method", lead: "Ask Anastasia about", accent: "a weekly loop", q: "What weekly learning loop keeps me from forgetting by Friday?" }, 3),
+  withLook({ id: "kim", topic: "learning", tag: "Learning", tag2: "Course", lead: "Ask Prof. Kim about", accent: "which course", q: "Which course should I finish before I apply for that role?" }, 4),
+  withLook({ id: "draft", topic: "learning", tag: "Learning", tag2: "Write", lead: "Ask Aim Draft about", accent: "the study note", q: "How do I turn today’s notes into one page I can reuse later?" }, 5),
 
-  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the 3:10 recap", q: "I missed part of the 3:10 live. What does the recap cover?" }, 0),
-  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "who is live", q: "Is the 3:10 live the twin or the person?" }, 1),
-  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the missed stretch", q: "I missed from 3:20 to 3:35. What belongs in the recap?" }, 2),
-  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the question you did not ask", q: "Can the twin post the question I did not ask?" }, 3),
-  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "after the live", q: "When does the three-point recap appear in the domain?" }, 4),
-  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "desk notice", q: "Is the live notice also on my desk?" }, 5),
+  withLook({ id: "xu", topic: "startup", tag: "Startup", tag2: "Build", lead: "Ask Prof. Xu about", accent: "the first customer", q: "How do I know this problem is painful enough to build for?" }, 0),
+  withLook({ id: "brook", topic: "startup", tag: "Startup", tag2: "Funding", lead: "Ask Theo about", accent: "raising now", q: "Do we raise this quarter or ship one more month first?" }, 1),
+  withLook({ id: "vale", topic: "startup", tag: "Startup", tag2: "Focus", lead: "Ask Nora about", accent: "one wedge", q: "What is the one wedge we should sell before the platform story?" }, 2),
+  withLook({ id: "xu", topic: "startup", tag: "Startup", tag2: "Pricing", lead: "Ask Prof. Xu about", accent: "first pricing", q: "How should I price the first ten customers without guessing?" }, 3),
+  withLook({ id: "brook", topic: "startup", tag: "Startup", tag2: "Pitch", lead: "Ask Theo about", accent: "the pitch line", q: "Which one sentence should stay in the pitch after we cut the rest?" }, 4),
+  withLook({ id: "river", topic: "startup", tag: "Startup", tag2: "Team", lead: "Ask Jordan about", accent: "first hire", q: "What should our first hire own in the first 90 days?" }, 5),
 
-  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the axis you changed", q: "Which axis did I change in the climate notebook?" }, 0),
-  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "unit and time step", q: "What unit and time step sit in front of the figure?" }, 1),
-  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the trend", q: "If the trend only appears after I change an axis, is it a result?" }, 2),
-  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the notebook share", q: "Where does the climate notebook live in the domain?" }, 3),
-  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "closing the sentence", q: "Should I leave the sentence in the notebook or close it?" }, 4),
-  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the next figure", q: "What three names go in front of the next figure?" }, 5),
-
-  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the pricing sample", q: "How should I read the pricing insight?" }, 0),
-  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "row count", q: "How many rows are in the pricing sample?" }, 1),
-  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the decision", q: "What decision should the insight support?" }, 2),
-  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "no private domain", q: "If there is no private domain, where does this insight live?" }, 3),
-  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the sentence you want", q: "Which sentence do I want the insight to support?" }, 4),
-  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "desk copy", q: "Is this pricing post also on my desk?" }, 5),
-
-  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold." }, 0),
-  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "Aim vs Method", q: "Does this sentence belong in Aim or Method?" }, 1),
-  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "Result", q: "Can I move this number into Result yet?" }, 2),
-  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "Uncertainty", q: "Where should Uncertainty sit in the draft?" }, 3),
-  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the notebook", q: "Do the numbers stay in my notebook while you draft?" }, 4),
-  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the weak section", q: "Which section do you usually distrust first?" }, 5)
+  withLook({ id: "maya", topic: "work", tag: "Work", tag2: "Career", lead: "Ask Maya about", accent: "the promotion talk", q: "How do I open the promotion conversation without sounding needy?" }, 0),
+  withLook({ id: "river", topic: "work", tag: "Work", tag2: "Scope", lead: "Ask Jordan about", accent: "a two-week scope", q: "How do I cut this project so it ships in two weeks?" }, 1),
+  withLook({ id: "maya", topic: "work", tag: "Work", tag2: "Blocker", lead: "Ask Maya about", accent: "the standup", q: "What do I say in standup when the blocker is me?" }, 2),
+  withLook({ id: "vale", topic: "work", tag: "Work", tag2: "Manager", lead: "Ask Nora about", accent: "1:1 agenda", q: "What three lines belong on my manager 1:1 agenda this week?" }, 3),
+  withLook({ id: "xu", topic: "work", tag: "Work", tag2: "Decision", lead: "Ask Prof. Xu about", accent: "a hard call", q: "How do I make the hard call when both options look half-right?" }, 4),
+  withLook({ id: "quill", topic: "work", tag: "Work", tag2: "Update", lead: "Ask Sam about", accent: "the status note", q: "How do I write a status note that names risk without drama?" }, 5)
 ];
 
 const LIVED_TOPICS = [
   { id: "for-you", label: "For you", star: true },
   { id: "all", label: "All" },
-  { id: "heavy-ion", label: "Heavy-ion" },
-  { id: "cosmology", label: "Cosmology" },
-  { id: "live", label: "Live" },
-  { id: "climate", label: "Climate" },
-  { id: "decisions", label: "Decisions" },
-  { id: "lab", label: "Lab report" }
+  { id: "life", label: "Life" },
+  { id: "learning", label: "Learning" },
+  { id: "startup", label: "Startup" },
+  { id: "work", label: "Work" }
 ];
 
 const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
@@ -1474,39 +1458,37 @@ const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true">
 const QUICK_TAG = {
   "for-you": "For you",
   all: "All",
-  "heavy-ion": "Heavy-ion",
-  cosmology: "Cosmology",
-  live: "Live",
-  climate: "Climate",
-  decisions: "Decisions",
-  lab: "Lab report"
+  life: "Life",
+  learning: "Learning",
+  startup: "Startup",
+  work: "Work"
 };
 
 const ASK = {
-  roland: ["Ask about the lecture 5 diagram", "Which axis is temperature on the lecture 5 diagram?"],
-  pajer: ["Ask about the cosmology line", "I am stuck on one line in the cosmology thread."],
-  luo: ["Ask about the 3:10 recap", "I missed part of the 3:10 live. What does the recap cover?"],
-  greer: ["Ask about the two scales", "Write the scale the lattice can see, and the scale the sample can see."],
-  anastasia: ["Ask about the axis you changed", "Which axis did I change in the climate notebook?"],
-  xu: ["Ask about the pricing sample", "How should I read the pricing insight?"],
-  lab: ["Ask about the method section", "The method section of my lab report does not hold."],
-  smith: ["Ask about the people in the number", "A health number needs the people it counted."],
-  chen: ["Ask about the detector cut", "Which detector cut am I unsure about?"],
-  oka: ["Ask about the lattice line", "How does the lattice line sit on lecture 5?"],
-  nova: ["Ask about the free parameter", "What is fixed before the free parameter?"],
-  kim: ["Ask about the recitation line", "Which recitation line broke?"],
-  maya: ["Ask about the office-hours clip", "Which clip do I need after the live?"],
-  river: ["Ask about the seminar FAQ", "What belongs in the seminar FAQ?"],
-  park: ["Ask about the sample", "What is the sample before the lattice scale?"],
-  lin: ["Ask about the defect", "Where does the defect sit between the two scales?"],
-  reef: ["Ask about the climate figure", "What axis and unit go before the trend?"],
-  moss: ["Ask about the time step", "Does the time step match the figure?"],
-  vale: ["Ask about the decision", "What decision and row count go together?"],
-  brook: ["Ask about the pricing rows", "How many rows support this sentence?"],
-  draft: ["Ask about Aim", "Does this sentence belong in Aim?"],
-  meter: ["Ask about Method", "Which Method line feels soft?"],
-  hale: ["Ask about the count", "Who did this health number count?"],
-  quill: ["Ask about the health sentence", "Can I send a health sentence with no people?"]
+  roland: ["Ask about the career fork", "Should I stay on the research track or try industry this year?"],
+  pajer: ["Ask about what to deepen next", "Which skill should I deepen before the internship interview?"],
+  luo: ["Ask about who to meet", "Who is worth one coffee this month for the path I want?"],
+  greer: ["Ask about one deep skill", "Should I go deep on one skill or stay broad this semester?"],
+  anastasia: ["Ask about a weekly loop", "What weekly learning loop keeps me from forgetting by Friday?"],
+  xu: ["Ask about the first customer", "How do I know this problem is painful enough to build for?"],
+  lab: ["Ask about practice vs rereading", "I keep rereading the same chapter — what should I practice instead?"],
+  smith: ["Ask about burnout signs", "Which early burnout signs should I treat as real, not drama?"],
+  chen: ["Ask about the research bet", "Is this research bet still worth another year?"],
+  oka: ["Ask about switching fields", "What should I check before I switch fields mid-degree?"],
+  nova: ["Ask about the long bet", "What is fixed in my plan before the free parameter of luck?"],
+  kim: ["Ask about which course", "Which course should I finish before I apply for that role?"],
+  maya: ["Ask about the promotion talk", "How do I open the promotion conversation without sounding needy?"],
+  river: ["Ask about a two-week scope", "How do I cut this project so it ships in two weeks?"],
+  park: ["Ask about lab-to-industry", "What from lab work actually transfers to an industry role?"],
+  lin: ["Ask about craft depth", "Where does craft depth matter more than speed on my team?"],
+  reef: ["Ask about climate careers", "What climate role fits someone who likes figures more than fieldwork?"],
+  moss: ["Ask about the learning pace", "Am I moving too slow, or just protecting quality?"],
+  vale: ["Ask about the next five years", "Should I stay in school or take the industry offer this year?"],
+  brook: ["Ask about raising now", "Do we raise this quarter or ship one more month first?"],
+  draft: ["Ask about the study note", "How do I turn today’s notes into one page I can reuse later?"],
+  meter: ["Ask about weak plans", "Which line in my plan feels soft and should be cut?"],
+  hale: ["Ask about energy budget", "How do I budget energy across study, work, and family this term?"],
+  quill: ["Ask about the status note", "How do I write a status note that names risk without drama?"]
 };
 
 const NE = `<svg viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M.35 14.5 14.35.5M1.85.5h12.5V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -1760,11 +1742,12 @@ function renderLived() {
   const cards = shuffleCopy(LIVED.filter((item) => livedVisible(item)), state.shuffleSeed.lived);
   $("lived").innerHTML = cards.length ? cards.map((item) => {
     const p = person(item.id);
-    const where = p.domain ? p.domain.name : "No domain";
+    const tag = item.tag || (p.domain ? p.domain.name : "Ask");
+    const tag2 = item.tag2 || "";
     return `<button type="button" class="lived-card${item.light ? " light" : ""}" data-ask="${esc(item.q)}" style="--base:${item.base};--lift:${item.lift};--accent:${item.accentColor}">
       ${MARK}
       <p class="lead">${esc(item.lead)} <span class="accent">${esc(item.accent)}</span></p>
-      <span class="tags"><span class="tag">${esc(where)}</span>${p.course ? `<span class="tag">Your course</span>` : ""}</span>
+      <span class="tags"><span class="tag">${esc(tag)}</span>${tag2 ? `<span class="tag">${esc(tag2)}</span>` : ""}</span>
     </button>`;
   }).join("") : `<div class="empty">No prompts in this topic.</div>`;
 }
@@ -1806,7 +1789,7 @@ function renderQuick() {
     return {
       q: item.q,
       accent: item.accent,
-      tag: p && p.fieldLabel ? p.fieldLabel : tag,
+      tag: item.tag || (p && p.fieldLabel ? p.fieldLabel : tag),
       count: faces.length,
       faces
     };
@@ -1861,30 +1844,30 @@ function renderHome() {
 }
 
 const TOPICS = {
-  roland: ["roland", "heavy", "ion", "lecture", "slide", "phase", "diagram", "crossover", "quark", "baryon", "temperature", "axis"],
-  pajer: ["pajer", "cosmolog", "cornell", "problem set", "equation", "cosmology"],
-  luo: ["luo", "骆", "王宇", "live", "3:10", "recap", "直播"],
-  greer: ["greer", "material", "lattice", "caltech", "defect"],
-  anastasia: ["anastasia", "romanou", "climate", "notebook", "time step", "axis"],
-  xu: ["xu", "pricing", "price", "decision", "insight"],
-  lab: ["lab", "report", "method", "experiment", "uncertainty", "coach"],
-  smith: ["smith", "planetary", "health"],
-  chen: ["chen", "detector", "heavy", "ion", "beam"],
-  oka: ["oka", "lattice", "qcd", "heavy"],
-  nova: ["nova", "cosmolog", "horizon", "parameter"],
-  kim: ["kim", "cosmolog", "recitation"],
-  maya: ["maya", "live", "office", "clip"],
-  river: ["river", "seminar", "live", "faq"],
-  park: ["park", "material", "sample", "lattice"],
-  lin: ["lin", "material", "defect", "nano"],
-  reef: ["reef", "climate", "ocean", "figure"],
-  moss: ["moss", "climate", "time step"],
-  vale: ["vale", "decision", "product", "sample"],
-  brook: ["brook", "pricing", "rows", "decision"],
-  draft: ["draft", "aim", "lab", "report"],
-  meter: ["meter", "method", "uncertainty", "lab"],
-  hale: ["hale", "health", "count", "population"],
-  quill: ["quill", "health", "sentence", "people"]
+  roland: ["roland", "career", "research", "industry", "track"],
+  pajer: ["pajer", "skill", "deepen", "internship", "interview", "learning"],
+  luo: ["luo", "骆", "王宇", "coffee", "network", "meet", "path"],
+  greer: ["greer", "deep", "skill", "broad", "semester"],
+  anastasia: ["anastasia", "weekly", "loop", "learning", "forget"],
+  xu: ["xu", "customer", "pricing", "startup", "painful", "build", "decision"],
+  lab: ["lab", "coach", "practice", "rereading", "chapter"],
+  smith: ["smith", "burnout", "health", "rest"],
+  chen: ["chen", "research", "bet", "year"],
+  oka: ["oka", "switch", "fields", "degree"],
+  nova: ["nova", "plan", "parameter", "luck"],
+  kim: ["kim", "course", "apply", "role"],
+  maya: ["maya", "promotion", "standup", "blocker", "career"],
+  river: ["river", "scope", "ships", "weeks", "hire", "team"],
+  park: ["park", "lab", "industry", "transfer"],
+  lin: ["lin", "craft", "depth", "speed"],
+  reef: ["reef", "climate", "career", "role"],
+  moss: ["moss", "pace", "quality", "slow"],
+  vale: ["vale", "school", "offer", "path", "safe", "manager", "wedge", "five"],
+  brook: ["brook", "raise", "funding", "pitch", "ship", "quarter"],
+  draft: ["draft", "notes", "study", "page"],
+  meter: ["meter", "plan", "soft", "cut"],
+  hale: ["hale", "energy", "budget", "family"],
+  quill: ["quill", "status", "risk", "story", "cv"]
 };
 
 const STOP = new Set(["the", "and", "for", "how", "what", "who", "why", "when", "this", "that", "with", "your", "from", "about", "should", "would", "could", "can", "are", "was", "were", "have", "has", "had", "you", "they", "them", "not", "but", "into", "onto", "just", "like", "want", "need", "tell", "say", "does", "did", "its", "read", "new", "twin", "prof"]);
@@ -2175,10 +2158,14 @@ document.addEventListener("click", (e) => {
   if (orbit) {
     const label = orbit.textContent.trim().toLowerCase();
     const map = {
-      "heavy-ion physics": "heavy-ion",
-      cosmology: "cosmology",
-      "climate mathematics": "climate",
-      "planetary health": "all"
+      "heavy-ion physics": "learning",
+      cosmology: "learning",
+      "climate mathematics": "learning",
+      "planetary health": "life",
+      materials: "learning",
+      "ai & decisions": "startup",
+      "office hours": "work",
+      seminar: "work"
     };
     const topic = map[label];
     if (topic) {

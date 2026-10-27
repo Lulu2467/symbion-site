@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027163840">
+  <meta name="cosmo-build" content="20261027164250">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -458,14 +458,14 @@
   .expert::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg,
-      transparent 48%,
-      rgba(0,0,0,.18) 68%,
-      rgba(0,0,0,.62) 88%,
-      rgba(0,0,0,.78) 100%);
+      transparent 36%,
+      rgba(0,0,0,.22) 54%,
+      rgba(0,0,0,.72) 76%,
+      rgba(0,0,0,.9) 100%);
   }
   .expert .foot {
-    position: absolute; left: 16px; right: 16px; bottom: 18px; z-index: 2;
-    display: flex; flex-direction: column; gap: 5px;
+    position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2;
+    display: flex; flex-direction: column; gap: 4px;
   }
   .expert .nm {
     display: flex; align-items: center; gap: 6px;
@@ -475,9 +475,22 @@
     width: 18px; height: 18px; flex: none; display: block;
   }
   .expert .role {
-    font-size: 14px; line-height: 1.4; color: rgba(255,255,255,.9);
+    font-size: 13.5px; line-height: 1.35; color: rgba(255,255,255,.92);
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    margin-bottom: 2px;
   }
+  .expert .ask-about {
+    margin-top: 8px;
+    width: 100%; text-align: left;
+    border-radius: 999px; padding: 11px 14px;
+    font-size: 13px; font-weight: 500; line-height: 1.3;
+    color: #fff;
+    background: rgba(40,44,52,.55);
+    border: 1px solid rgba(255,255,255,.32);
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  }
+  .expert .ask-about:hover { background: rgba(55,60,70,.68); }
 
   .quote-wrap { position: relative; }
   .dynamics .qcard {
@@ -917,7 +930,8 @@
     .build-cta .go { padding: 14px 22px; font-size: 15px; }
     .expert { width: 260px; height: 344px; }
     .expert .nm { font-size: 18px; }
-    .expert .role { font-size: 13px; }
+    .expert .role { font-size: 12.5px; }
+    .expert .ask-about { font-size: 12px; padding: 10px 12px; }
     .rail-fade { width: 96px; }
   }
 </style>
@@ -1170,7 +1184,7 @@ const IMG_MISS = `this.classList.add('is-miss');this.removeAttribute('src');this
 const PEOPLE = [
   {
     id: "roland", initials: "GR", name: "Prof. Roland", tone: "#14382e", kind: "twin", course: true, field: "heavy-ion", fieldLabel: "Heavy-ion",
-    role: "Heavy-ion physics · your course",
+    role: "Heavy-ion physics · your course • Lecture 5 on the desk",
     domain: { name: "Heavy-ion physics", about: "The slides, the reading report, and the course live here. You read the posts and the files. You talk with the twin." },
     files: [
       { name: "Lecture 5 slides", where: "Deck" },
@@ -1181,7 +1195,7 @@ const PEOPLE = [
   },
   {
     id: "pajer", initials: "EP", name: "Prof. Pajer", tone: "#1e3358", kind: "twin", course: true, field: "cosmology", fieldLabel: "Cosmology",
-    role: "Cosmology · Cornell",
+    role: "Cosmology · Cornell • Problem sets you can point at",
     domain: { name: "Cosmology", about: "The problem set and the line from class live in this domain. The twin only touches the line you point to." },
     files: [{ name: "Problem set 2", where: "Doc" }],
     reply: "Send the line you are stuck on. What is known, what is not, and what class calls it.",
@@ -1189,7 +1203,7 @@ const PEOPLE = [
   },
   {
     id: "luo", initials: "王", name: "骆王宇", tone: "#3d4450", kind: "twin", course: false, field: "live", fieldLabel: "Live",
-    role: "Live at 3:10 · the twin keeps the recap",
+    role: "Live at 3:10 · person on stage • Twin keeps the recap",
     domain: { name: "骆王宇", about: "The live is the person. This domain belongs to the twin: the recap, and the question you did not ask, become posts." },
     files: [],
     reply: "I am the twin, not the 3:10 live. After the live, a three-point recap is posted here.",
@@ -1197,7 +1211,7 @@ const PEOPLE = [
   },
   {
     id: "greer", initials: "JG", name: "Julia R. Greer", tone: "#24362c", kind: "twin", course: false, field: "materials", fieldLabel: "Materials",
-    role: "Materials · Caltech",
+    role: "Materials · Caltech • Lattice vs sample scale",
     domain: { name: "Materials", about: "Posts about scale, the sample, and the lattice live here. The twin speaks from the sentence in the post." },
     files: [{ name: "Lattice note", where: "Doc" }],
     reply: "Write the scale the lattice can see, and the scale the sample can see. The mismatch usually sits between those two lines.",
@@ -1205,7 +1219,7 @@ const PEOPLE = [
   },
   {
     id: "anastasia", initials: "AR", name: "Anastasia Romanou", tone: "#1a3330", kind: "twin", course: false, field: "climate", fieldLabel: "Climate",
-    role: "Climate mathematics · Columbia",
+    role: "Climate mathematics · Columbia • Axes before trends",
     domain: { name: "Climate mathematics", about: "The notebook and the figure you are about to draw live here. A post names the axes before it names a trend." },
     files: [{ name: "Climate notebook", where: "Code" }],
     reply: "Write the axis, the unit, and the time step first. If the trend only appears after you change an axis, do not close it into a result yet.",
@@ -1213,7 +1227,7 @@ const PEOPLE = [
   },
   {
     id: "xu", initials: "HX", name: "Prof. Xu", tone: "#3d2c14", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions",
-    role: "AI and decisions · data and pricing",
+    role: "AI and decisions · pricing samples on your desk",
     domain: null,
     files: [],
     reply: "I have no private domain. The pricing insight is already on your desk. Say the decision, and how many rows are in the sample.",
@@ -1221,7 +1235,7 @@ const PEOPLE = [
   },
   {
     id: "lab", initials: "LR", name: "Lab Report Coach", tone: "#6a4a12", kind: "agent", course: true, field: "lab", fieldLabel: "Lab",
-    role: "Drafts the lab report in Doc",
+    role: "Lab report coach · Aim Method Result in Doc",
     domain: null,
     files: [],
     reply: "I draft the report. I have no domain of my own. The numbers stay in your notebook. I only arrange Aim, Method, Result, and Uncertainty.",
@@ -1229,28 +1243,28 @@ const PEOPLE = [
   },
   {
     id: "smith", initials: "KS", name: "Katherine F. Smith", tone: "#243044", kind: "twin", course: false, field: "health", fieldLabel: "Health", featured: true,
-    role: "Planetary health · Brown",
+    role: "Planetary health · Brown • Numbers need the people counted",
     domain: { name: "Planetary health", about: "A health number and the people it counted are posted here. A sentence with no people does not stay." },
     files: [],
     reply: "A health number needs the people it counted. If you cannot name them, do not send the sentence yet.",
     follow: "Send the number and the people together."
   },
-  { id: "chen", initials: "MC", name: "Prof. Chen", tone: "#1a3a48", kind: "twin", course: true, field: "heavy-ion", fieldLabel: "Heavy-ion", role: "Heavy-ion · detector notes", domain: { name: "Heavy-ion physics", about: "Detector notes and beam times live here." }, files: [], reply: "Name the detector cut you are unsure about.", follow: "Stay on that cut." },
-  { id: "oka", initials: "TO", name: "Dr. Oka", tone: "#2a4058", kind: "twin", course: false, field: "heavy-ion", fieldLabel: "Heavy-ion", featured: true, role: "QCD matter · RIKEN", domain: { name: "Heavy-ion physics", about: "Lattice checks against the phase diagram." }, files: [], reply: "Compare the lattice line to lecture 5 before you close.", follow: "Send both lines." },
-  { id: "nova", initials: "AN", name: "Ava Nova", tone: "#243050", kind: "twin", course: false, field: "cosmology", fieldLabel: "Cosmology", featured: true, role: "Early universe · notes", domain: { name: "Cosmology", about: "Horizon and power-spectrum notes." }, files: [], reply: "Write what is fixed before the free parameter.", follow: "Keep one free parameter." },
-  { id: "kim", initials: "SK", name: "Prof. Kim", tone: "#1e3850", kind: "twin", course: true, field: "cosmology", fieldLabel: "Cosmology", role: "Cosmology recitation", domain: { name: "Cosmology", about: "Recitation lines you can paste." }, files: [], reply: "Paste the recitation line that broke.", follow: "Only that line." },
-  { id: "maya", initials: "MK", name: "Maya K.", tone: "#3a4850", kind: "twin", course: false, field: "live", fieldLabel: "Live", featured: true, role: "Office hours · twin clips", domain: { name: "Office hours", about: "Clips from office hours become posts." }, files: [], reply: "Say which clip you need after the live.", follow: "Time stamp helps." },
-  { id: "river", initials: "JR", name: "Jordan River", tone: "#354850", kind: "twin", course: false, field: "live", fieldLabel: "Live", role: "Seminar host · twin FAQ", domain: { name: "Seminar", about: "FAQ after the seminar live." }, files: [], reply: "I keep the FAQ, not the live stream.", follow: "Ask the FAQ item." },
-  { id: "park", initials: "HP", name: "Prof. Park", tone: "#2c4038", kind: "twin", course: true, field: "materials", fieldLabel: "Materials", role: "Materials lab · sample book", domain: { name: "Materials", about: "Sample book and lattice posts." }, files: [], reply: "Name the sample before the lattice scale.", follow: "Sample first." },
-  { id: "lin", initials: "YL", name: "Dr. Lin", tone: "#334840", kind: "twin", course: false, field: "materials", fieldLabel: "Materials", featured: true, role: "Nanomechanics · notes", domain: { name: "Materials", about: "Defect notes from class." }, files: [], reply: "Where does the defect sit between the two scales?", follow: "Send both scales." },
-  { id: "reef", initials: "ER", name: "Elena Reef", tone: "#1a4040", kind: "twin", course: false, field: "climate", fieldLabel: "Climate", featured: true, role: "Ocean climate · figures", domain: { name: "Climate mathematics", about: "Figures before trends." }, files: [], reply: "Axis and unit before the trend sentence.", follow: "Which axis?" },
-  { id: "moss", initials: "DM", name: "Prof. Moss", tone: "#204038", kind: "twin", course: true, field: "climate", fieldLabel: "Climate", role: "Climate lab · time steps", domain: { name: "Climate mathematics", about: "Time-step checks." }, files: [], reply: "Does the time step match the figure?", follow: "Send the step." },
-  { id: "vale", initials: "NV", name: "Nora Vale", tone: "#3d3428", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", featured: true, role: "Product decisions · samples", domain: null, files: [], reply: "Say the decision and the row count together.", follow: "Decision first." },
-  { id: "brook", initials: "TB", name: "Theo Brook", tone: "#403828", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", role: "Pricing desk · twin", domain: null, files: [], reply: "How many rows support the sentence you want?", follow: "Row count." },
-  { id: "draft", initials: "AD", name: "Aim Draft", tone: "#5a4820", kind: "agent", course: true, field: "lab", fieldLabel: "Lab", role: "Aims the lab report", domain: null, files: [], reply: "I only shape Aim. Method stays yours.", follow: "Paste Aim." },
-  { id: "meter", initials: "UM", name: "Uncertainty Meter", tone: "#4a4030", kind: "agent", course: false, field: "lab", fieldLabel: "Lab", featured: true, role: "Flags weak Method lines", domain: null, files: [], reply: "Point to the Method line that feels soft.", follow: "That line." },
-  { id: "hale", initials: "RH", name: "Dr. Hale", tone: "#283848", kind: "twin", course: true, field: "health", fieldLabel: "Health", role: "Population health · counts", domain: { name: "Planetary health", about: "Counts and who was counted." }, files: [], reply: "Who did the number count?", follow: "Name them." },
-  { id: "quill", initials: "SQ", name: "Sam Quill", tone: "#303c48", kind: "twin", course: false, field: "health", fieldLabel: "Health", featured: true, role: "Health writing · twin", domain: { name: "Planetary health", about: "Sentences that keep the people in." }, files: [], reply: "Do not send a health sentence with no people.", follow: "People + number." }
+  { id: "chen", initials: "MC", name: "Prof. Chen", tone: "#1a3a48", kind: "twin", course: true, field: "heavy-ion", fieldLabel: "Heavy-ion", role: "Heavy-ion · detector notes • Beam times on the desk", domain: { name: "Heavy-ion physics", about: "Detector notes and beam times live here." }, files: [], reply: "Name the detector cut you are unsure about.", follow: "Stay on that cut." },
+  { id: "oka", initials: "TO", name: "Dr. Oka", tone: "#2a4058", kind: "twin", course: false, field: "heavy-ion", fieldLabel: "Heavy-ion", featured: true, role: "QCD matter · RIKEN • Lattice vs lecture 5", domain: { name: "Heavy-ion physics", about: "Lattice checks against the phase diagram." }, files: [], reply: "Compare the lattice line to lecture 5 before you close.", follow: "Send both lines." },
+  { id: "nova", initials: "AN", name: "Ava Nova", tone: "#243050", kind: "twin", course: false, field: "cosmology", fieldLabel: "Cosmology", featured: true, role: "Early universe · notes • Horizon before the free parameter", domain: { name: "Cosmology", about: "Horizon and power-spectrum notes." }, files: [], reply: "Write what is fixed before the free parameter.", follow: "Keep one free parameter." },
+  { id: "kim", initials: "SK", name: "Prof. Kim", tone: "#1e3850", kind: "twin", course: true, field: "cosmology", fieldLabel: "Cosmology", role: "Cosmology recitation • Lines you can paste", domain: { name: "Cosmology", about: "Recitation lines you can paste." }, files: [], reply: "Paste the recitation line that broke.", follow: "Only that line." },
+  { id: "maya", initials: "MK", name: "Maya K.", tone: "#3a4850", kind: "twin", course: false, field: "live", fieldLabel: "Live", featured: true, role: "Office hours · twin clips • After the live", domain: { name: "Office hours", about: "Clips from office hours become posts." }, files: [], reply: "Say which clip you need after the live.", follow: "Time stamp helps." },
+  { id: "river", initials: "JR", name: "Jordan River", tone: "#354850", kind: "twin", course: false, field: "live", fieldLabel: "Live", role: "Seminar host · twin FAQ • Not the live stream", domain: { name: "Seminar", about: "FAQ after the seminar live." }, files: [], reply: "I keep the FAQ, not the live stream.", follow: "Ask the FAQ item." },
+  { id: "park", initials: "HP", name: "Prof. Park", tone: "#2c4038", kind: "twin", course: true, field: "materials", fieldLabel: "Materials", role: "Materials lab · sample book • Sample before lattice", domain: { name: "Materials", about: "Sample book and lattice posts." }, files: [], reply: "Name the sample before the lattice scale.", follow: "Sample first." },
+  { id: "lin", initials: "YL", name: "Dr. Lin", tone: "#334840", kind: "twin", course: false, field: "materials", fieldLabel: "Materials", featured: true, role: "Nanomechanics · notes • Defect between two scales", domain: { name: "Materials", about: "Defect notes from class." }, files: [], reply: "Where does the defect sit between the two scales?", follow: "Send both scales." },
+  { id: "reef", initials: "ER", name: "Elena Reef", tone: "#1a4040", kind: "twin", course: false, field: "climate", fieldLabel: "Climate", featured: true, role: "Ocean climate · figures • Axis and unit first", domain: { name: "Climate mathematics", about: "Figures before trends." }, files: [], reply: "Axis and unit before the trend sentence.", follow: "Which axis?" },
+  { id: "moss", initials: "DM", name: "Prof. Moss", tone: "#204038", kind: "twin", course: true, field: "climate", fieldLabel: "Climate", role: "Climate lab · time steps • Match the figure", domain: { name: "Climate mathematics", about: "Time-step checks." }, files: [], reply: "Does the time step match the figure?", follow: "Send the step." },
+  { id: "vale", initials: "NV", name: "Nora Vale", tone: "#3d3428", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", featured: true, role: "Product decisions · samples • Decision + row count", domain: null, files: [], reply: "Say the decision and the row count together.", follow: "Decision first." },
+  { id: "brook", initials: "TB", name: "Theo Brook", tone: "#403828", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", role: "Pricing desk · twin • Rows behind the sentence", domain: null, files: [], reply: "How many rows support the sentence you want?", follow: "Row count." },
+  { id: "draft", initials: "AD", name: "Aim Draft", tone: "#5a4820", kind: "agent", course: true, field: "lab", fieldLabel: "Lab", role: "Aims the lab report • Method stays yours", domain: null, files: [], reply: "I only shape Aim. Method stays yours.", follow: "Paste Aim." },
+  { id: "meter", initials: "UM", name: "Uncertainty Meter", tone: "#4a4030", kind: "agent", course: false, field: "lab", fieldLabel: "Lab", featured: true, role: "Flags weak Method lines • Soft spots only", domain: null, files: [], reply: "Point to the Method line that feels soft.", follow: "That line." },
+  { id: "hale", initials: "RH", name: "Dr. Hale", tone: "#283848", kind: "twin", course: true, field: "health", fieldLabel: "Health", role: "Population health · counts • Who was counted", domain: { name: "Planetary health", about: "Counts and who was counted." }, files: [], reply: "Who did the number count?", follow: "Name them." },
+  { id: "quill", initials: "SQ", name: "Sam Quill", tone: "#303c48", kind: "twin", course: false, field: "health", fieldLabel: "Health", featured: true, role: "Health writing · twin • People stay in the sentence", domain: { name: "Planetary health", about: "Sentences that keep the people in." }, files: [], reply: "Do not send a health sentence with no people.", follow: "People + number." }
 ];
 
 const EXPERT_LOOK = {
@@ -1468,6 +1482,33 @@ const QUICK_TAG = {
   lab: "Lab report"
 };
 
+const ASK = {
+  roland: ["Ask about the lecture 5 diagram", "Which axis is temperature on the lecture 5 diagram?"],
+  pajer: ["Ask about the cosmology line", "I am stuck on one line in the cosmology thread."],
+  luo: ["Ask about the 3:10 recap", "I missed part of the 3:10 live. What does the recap cover?"],
+  greer: ["Ask about the two scales", "Write the scale the lattice can see, and the scale the sample can see."],
+  anastasia: ["Ask about the axis you changed", "Which axis did I change in the climate notebook?"],
+  xu: ["Ask about the pricing sample", "How should I read the pricing insight?"],
+  lab: ["Ask about the method section", "The method section of my lab report does not hold."],
+  smith: ["Ask about the people in the number", "A health number needs the people it counted."],
+  chen: ["Ask about the detector cut", "Which detector cut am I unsure about?"],
+  oka: ["Ask about the lattice line", "How does the lattice line sit on lecture 5?"],
+  nova: ["Ask about the free parameter", "What is fixed before the free parameter?"],
+  kim: ["Ask about the recitation line", "Which recitation line broke?"],
+  maya: ["Ask about the office-hours clip", "Which clip do I need after the live?"],
+  river: ["Ask about the seminar FAQ", "What belongs in the seminar FAQ?"],
+  park: ["Ask about the sample", "What is the sample before the lattice scale?"],
+  lin: ["Ask about the defect", "Where does the defect sit between the two scales?"],
+  reef: ["Ask about the climate figure", "What axis and unit go before the trend?"],
+  moss: ["Ask about the time step", "Does the time step match the figure?"],
+  vale: ["Ask about the decision", "What decision and row count go together?"],
+  brook: ["Ask about the pricing rows", "How many rows support this sentence?"],
+  draft: ["Ask about Aim", "Does this sentence belong in Aim?"],
+  meter: ["Ask about Method", "Which Method line feels soft?"],
+  hale: ["Ask about the count", "Who did this health number count?"],
+  quill: ["Ask about the health sentence", "Can I send a health sentence with no people?"]
+};
+
 const NE = `<svg viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M.35 14.5 14.35.5M1.85.5h12.5V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 const POSTS = [
@@ -1614,6 +1655,7 @@ function renderPeople() {
   $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
+    const ask = ASK[p.id] || ["Ask about their work", "Tell me what you work on."];
     const shot = faceUrl(p.id, 640, 960);
     const media = shot
       ? `<div class="shot"><span class="shot-fallback" aria-hidden="true">${esc(p.initials)}</span><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${IMG_MISS}"></div>`
@@ -1623,6 +1665,7 @@ function renderPeople() {
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(p.role)}</span>
+        <button type="button" class="ask-about" data-ask="${esc(ask[1])}">${esc(ask[0])}</button>
       </div>
     </article>`;
   }).join("") : `<div class="empty">No experts match.</div>`;
@@ -2048,7 +2091,7 @@ function openPost(id, from) {
 }
 
 document.addEventListener("mousedown", (e) => {
-  if (e.target.closest(".qcard, .qask, .lived-card, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
+  if (e.target.closest(".qcard, .qask, .lived-card, .expert .ask-about, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
 });
 document.addEventListener("click", (e) => {
   const expertNudge = e.target.closest("[data-expert-nudge]");

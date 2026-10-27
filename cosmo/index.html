@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027153820">
+  <meta name="cosmo-build" content="20261027154040">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -370,8 +370,9 @@
   .experts, .dynamics {
     display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
     overscroll-behavior: contain;
-    padding: 6px 2px 18px; scrollbar-width: none;
+    padding: 4px 2px 10px; scrollbar-width: none;
   }
+  .experts { padding-bottom: 4px; }
   .experts::-webkit-scrollbar, .dynamics::-webkit-scrollbar { display: none; }
   /* Delphi-style right edge: progressive blur + soft surface tint — no hard line */
   .rail-fade {
@@ -420,17 +421,17 @@
   .expert {
     position: relative; flex: none; width: 260px; height: 360px;
     border-radius: 24px; overflow: hidden; scroll-snap-align: start;
-    text-align: left; border: 0; color: #fff;
+    text-align: left; border: 0; outline: 0; color: #fff;
     background:
       linear-gradient(180deg, rgba(9,9,11,.08) 0%, rgba(9,9,11,.55) 48%, rgba(9,9,11,.88) 100%),
       radial-gradient(120% 90% at 20% 0%, var(--lift, #4682B4) 0%, transparent 55%),
       var(--base, #003153);
-    box-shadow: 0 12px 28px rgba(9,9,11,.12);
+    box-shadow: none;
     display: flex; flex-direction: column;
-    transition: transform .18s ease, box-shadow .18s ease;
+    transition: transform .18s ease;
   }
   .expert.agent { border-radius: 18px; }
-  .expert:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(9,9,11,.16); }
+  .expert:hover { transform: translateY(-3px); box-shadow: none; }
   .expert .mono {
     position: absolute; left: 50%; top: 36px; transform: translateX(-50%);
     width: 96px; height: 96px; border-radius: 48px;

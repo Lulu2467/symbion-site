@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027154040">
+  <meta name="cosmo-build" content="20261027154150">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1520,17 +1520,25 @@ function boldAccent(q, accent) {
   if (i < 0) return esc(q);
   return `${esc(q.slice(0, i))}<b>${esc(q.slice(i, i + accent.length))}</b>${esc(q.slice(i + accent.length))}`;
 }
-function faceStack(seedPeople, prefer) {
+function faceStack(seedPeople, prefer, maxN) {
+  const cap = Math.max(2, Math.min(5, maxN || 5));
   const faces = [];
   const push = (p) => { if (p && !faces.some((x) => x.id === p.id)) faces.push(p); };
   (seedPeople || []).forEach(push);
   push(prefer);
   PEOPLE.forEach((p) => {
-    if (faces.length >= 5) return;
+    if (faces.length >= cap) return;
     if (prefer && p.field === prefer.field) push(p);
   });
-  PEOPLE.forEach((p) => { if (faces.length < 5) push(p); });
-  return faces.slice(0, 5);
+  PEOPLE.forEach((p) => { if (faces.length < cap) push(p); });
+  return faces.slice(0, cap);
+}
+function faceCountFor(item, relatedLen) {
+  let h = 0;
+  const s = `${item.id}|${item.q || ""}`;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
+  const varied = 2 + (h % 4); /* 2–5 */
+  return Math.max(2, Math.min(5, Math.max(relatedLen || 1, varied)));
 }
 function renderQuick() {
   const tag = QUICK_TAG[state.livedTopic] || "All";
@@ -1538,12 +1546,13 @@ function renderQuick() {
     const p = person(item.id);
     let people = relatedPeople(item.q);
     if (!people.length && p) people = [p];
-    const faces = faceStack(people, p);
+    const count = faceCountFor(item, people.length);
+    const faces = faceStack(people, p, count);
     return {
       q: item.q,
       accent: item.accent,
       tag: p && p.fieldLabel ? p.fieldLabel : tag,
-      count: Math.max(faces.length, people.length, 3),
+      count: faces.length,
       faces
     };
   }).filter((row) => row.faces.length);

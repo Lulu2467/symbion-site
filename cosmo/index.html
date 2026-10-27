@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027154620">
+  <meta name="cosmo-build" content="20261027154800">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -329,7 +329,7 @@
   }
   .qask::before {
     content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, #eef5f8 0%, #f7fafb 28%, #fff 55%);
+    background: linear-gradient(180deg, #c8dde9 0%, #d7e6ef 30%, #e8f0f4 100%);
     opacity: 0; transition: opacity .2s ease;
   }
   .qask:hover::before, .qask:focus-visible::before { opacity: 1; }
@@ -659,7 +659,8 @@
   .av {
     width: 36px; height: 36px; border-radius: 18px; flex: none;
     display: inline-flex; align-items: center; justify-content: center;
-    color: #09090b; font-size: 11px; font-weight: 600; background: #dceef7;
+    color: #09090b; font-size: 11px; font-weight: 600;
+    background: color-mix(in srgb, var(--tone, #3c7a94) 22%, #eef2f4);
   }
   .av.sm { width: 26px; height: 26px; border-radius: 13px; font-size: 10px; }
   .av.lg { width: 72px; height: 72px; border-radius: 36px; font-size: 22px; font-weight: 500; }

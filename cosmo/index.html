@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027153500">
+  <meta name="cosmo-build" content="20261027153820">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -382,7 +382,8 @@
     mask-image: linear-gradient(to left, #000 0%, #000 42%, transparent 100%);
   }
   .expert-rail.is-end .rail-fade,
-  .dynamics-rail.is-end .rail-fade { opacity: 0; }
+  .dynamics-rail.is-end .rail-fade,
+  .build-rail.is-end .rail-fade { opacity: 0; }
   .rail-fade .pblur {
     position: absolute; inset: 0;
   }
@@ -472,33 +473,17 @@
     width: min(420px, 78vw); min-height: 220px; flex: none; scroll-snap-align: start;
   }
 
-  .build-entry {
-    display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center;
-    background: #fff; border: 1px solid var(--line); border-radius: 24px;
-    padding: 28px 28px 26px;
+  .build-rail { position: relative; overflow: clip; }
+  .build-rail .build-cards {
+    display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity;
+    overscroll-behavior: contain;
+    padding: 6px 2px 18px; scrollbar-width: none;
   }
-  .build-entry .steps {
-    margin: 0; padding: 0; list-style: none;
-    display: flex; flex-direction: column; gap: 12px;
+  .build-rail .build-cards::-webkit-scrollbar { display: none; }
+  .build-rail .qcard {
+    width: min(380px, 78vw); min-height: 220px; flex: none; scroll-snap-align: start;
   }
-  .build-entry .steps li {
-    display: flex; gap: 12px; align-items: flex-start;
-    font-size: 14px; line-height: 1.45; color: var(--ink);
-  }
-  .build-entry .steps .n {
-    flex: none; width: 22px; height: 22px; border-radius: 11px;
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 600; color: #3c7a94; background: var(--green-tint);
-  }
-  .build-entry .steps span { color: var(--muted); }
-  .build-entry .cta-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
-  .build-entry .cta {
-    border-radius: 999px; padding: 12px 18px;
-    font-size: 14px; font-weight: 600;
-    background: var(--ink); color: #fff;
-  }
-  .build-entry .cta:hover { background: #222; }
-  .build-entry .hint { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .build-rail.is-end .rail-fade { opacity: 0; }
   .build-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
   }
@@ -759,7 +744,6 @@
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
     .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
-    .build-entry { grid-template-columns: 1fr; gap: 20px; padding: 22px 18px; }
     .expert { width: 220px; height: 320px; }
     .rail-fade { width: 96px; }
   }
@@ -873,18 +857,18 @@
     <div class="home-block" id="block-build">
       <div class="sec-hd">
         <h2>Build your Cosmo</h2>
+        <span class="count" id="build-status"></span>
       </div>
-      <p class="sec-lede">Shape what your twin knows — a few steps, then connect the apps that feed it.</p>
-      <div class="build-entry">
-        <ol class="steps">
-          <li><span class="n">1</span><div>Pick what the twin should learn from — courses, notes, files.</div></li>
-          <li><span class="n">2</span><div>Connect apps once. Same links finish later in Symbion.</div></li>
-          <li><span class="n">3</span><div>Ask in Cosmo with that context already on.</div></li>
-        </ol>
-        <div class="cta-wrap">
-          <button type="button" class="cta" id="open-build">Customize your Cosmo</button>
-          <p class="hint" id="build-status">Desk is linked. Add Notion, Drive, or files when you are ready.</p>
-        </div>
+      <p class="sec-lede">Shape what your twin knows — a few steps, then open customize to connect apps.</p>
+      <div class="build-rail">
+        <button type="button" class="rail-nudge prev" data-rail-nudge="-320" data-rail="build-cards" aria-label="Previous build steps" hidden>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.25 5.25 8 10 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="build-cards" id="build-cards"></div>
+        <button type="button" class="rail-nudge next" data-rail-nudge="320" data-rail="build-cards" aria-label="Next build steps" hidden>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.25 10.75 8 6 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="rail-fade" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -1572,25 +1556,81 @@ function renderQuick() {
     </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
 }
 
-function renderBuild() {
-  const el = $("build");
+function updateBuildScroller() {
+  const el = $("build-cards");
   if (!el) return;
-  el.innerHTML = BUILD_APPS.map((app) => {
-    const on = state.connected.has(app.id);
-    const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
-    return `<article class="build-card${app.soon ? " is-soon" : ""}">
+  const wrap = el.parentElement;
+  if (!wrap || !wrap.classList.contains("build-rail")) return;
+  const prev = wrap.querySelector(".prev");
+  const next = wrap.querySelector(".next");
+  if (!prev || !next) return;
+  const max = el.scrollWidth - el.clientWidth;
+  const overflow = max > 8;
+  const atEnd = !overflow || el.scrollLeft > max - 8;
+  prev.hidden = !overflow || el.scrollLeft < 8;
+  next.hidden = atEnd;
+  wrap.classList.toggle("is-end", atEnd);
+}
+
+function renderBuild() {
+  const linked = [...state.connected].filter((id) => BUILD_APPS.some((a) => a.id === id && !a.soon));
+  const n = linked.length;
+  const detail = $("build");
+  if (detail) {
+    detail.innerHTML = BUILD_APPS.map((app) => {
+      const on = state.connected.has(app.id);
+      const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
+      return `<article class="build-card${app.soon ? " is-soon" : ""}">
       <span class="app">${esc(app.app)}</span>
       <b>${esc(app.title)}</b>
       <p>${esc(app.blurb)}</p>
       <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
     </article>`;
-  }).join("");
+    }).join("");
+  }
   const status = $("build-status");
-  if (status) {
-    const n = [...state.connected].filter((id) => BUILD_APPS.some((a) => a.id === id && !a.soon)).length;
-    status.textContent = n <= 1
-      ? "Desk is linked. Add Notion, Drive, or files when you are ready."
-      : `${n} sources linked. Open customize to add or change apps.`;
+  if (status) status.textContent = n ? `${n} linked` : "";
+  const cards = $("build-cards");
+  if (cards) {
+    const steps = [
+      {
+        ghost: "Sources",
+        title: "Pick what the twin should learn from",
+        pills: ["Courses", "Notes", "Files"],
+        go: "Start here"
+      },
+      {
+        ghost: "Connect",
+        title: n <= 1 ? "Desk is linked — add Notion, Drive, or files" : `${n} sources linked — add or change apps`,
+        pills: linked.slice(0, 3).map((id) => BUILD_APPS.find((a) => a.id === id)?.title || id),
+        go: "Open links"
+      },
+      {
+        ghost: "Ask",
+        title: "Ask in Cosmo with that context already on",
+        pills: ["Cosmo", "Same in Symbion"],
+        go: "Customize"
+      },
+      {
+        ghost: "Cosmo",
+        title: "Customize your Cosmo",
+        pills: ["Apps", "Coming soon"],
+        go: "Enter"
+      }
+    ];
+    cards.innerHTML = steps.map((step) => {
+      const tint = { ink: "#3c7a94", wash: "#e7f1f7", line: "#c5dce8" };
+      const pills = (step.pills.length ? step.pills : ["Ready"]).map((t) => `<span class="qpill">${esc(t)}</span>`).join("")
+        + `<span class="qpill go">${esc(step.go)}</span>`;
+      return `<button type="button" class="qcard" data-open-build style="--pill-ink:${tint.ink};--pill-wash:${tint.wash};--pill-line:${tint.line}">
+      <span class="qghost" aria-hidden="true"><b class="soft">${esc(step.ghost)}</b><b>${esc(step.ghost)}</b></span>
+      <span class="qmark" aria-hidden="true">“</span>
+      <span class="qt">${esc(step.title)}</span>
+      <span class="qmeta">${pills}</span>
+      <span class="qchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </button>`;
+    }).join("");
+    requestAnimationFrame(updateBuildScroller);
   }
 }
 
@@ -1849,6 +1889,12 @@ document.addEventListener("click", (e) => {
     if (rail) rail.scrollBy({ left: Number(railNudge.dataset.railNudge), behavior: "smooth" });
     return;
   }
+  const openBuild = e.target.closest("[data-open-build]");
+  if (openBuild) {
+    e.preventDefault();
+    show("build");
+    return;
+  }
   const shuffleBtn = e.target.closest("[data-shuffle]");
   if (shuffleBtn) {
     e.preventDefault();
@@ -1952,7 +1998,6 @@ $("talk-draft").addEventListener("keydown", (e) => {
 $("answers-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("talk-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("domain-back").addEventListener("click", () => { show("home"); renderHome(); });
-$("open-build").addEventListener("click", () => show("build"));
 $("build-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("post-back").addEventListener("click", () => {
   if (state.postBack === "domain") openDomain(person(post(state.postId).author).id);
@@ -1975,7 +2020,8 @@ $("q").addEventListener("input", () => {
 });
 $("people").addEventListener("scroll", updateExpertScroller, { passive: true });
 $("posts").addEventListener("scroll", updateDynamicsScroller, { passive: true });
-addEventListener("resize", () => { updateExpertScroller(); updateDynamicsScroller(); });
+$("build-cards").addEventListener("scroll", updateBuildScroller, { passive: true });
+addEventListener("resize", () => { updateExpertScroller(); updateDynamicsScroller(); updateBuildScroller(); });
 addEventListener("scroll", () => {
   $("top").classList.toggle("is-stuck", scrollY > 4);
 }, { passive: true });

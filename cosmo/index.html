@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027160640">
+  <meta name="cosmo-build" content="20261027160820">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -431,12 +431,22 @@
   .expert .shot {
     position: absolute; inset: 0; z-index: 0;
     overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 20% 0%, var(--lift, #4682B4) 0%, transparent 55%),
+      var(--base, #003153);
+  }
+  .expert .shot .shot-fallback {
+    position: absolute; inset: 0; z-index: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; font-weight: 500; letter-spacing: -.04em; color: rgba(255,255,255,.85);
   }
   .expert .shot img {
+    position: absolute; inset: 0; z-index: 1;
     width: 100%; height: 100%; object-fit: cover; object-position: center 8%;
     transform: scale(1.14); transform-origin: center 16%;
     display: block;
   }
+  .expert .shot img.is-miss { display: none !important; }
   .expert .shot-fallback {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
@@ -445,6 +455,7 @@
       radial-gradient(120% 90% at 20% 0%, var(--lift, #4682B4) 0%, transparent 55%),
       var(--base, #003153);
   }
+  .av img.is-miss { display: none !important; }
   .expert::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg,
@@ -545,6 +556,7 @@
   .build-viz .viz-photo img {
     width: 100%; height: 100%; object-fit: cover; display: block;
   }
+  .build-viz .viz-photo img.is-miss { display: none !important; }
   .build-viz .p1 { width: 46%; height: 54%; left: 10%; top: 12%; transform: rotate(-4deg); }
   .build-viz .p2 { width: 42%; height: 48%; right: 8%; top: 22%; transform: rotate(5deg); z-index: 1; }
   .build-viz .p3 { width: 52%; height: 36%; left: 22%; bottom: 10%; transform: rotate(-2deg); z-index: 2; }
@@ -752,7 +764,12 @@
     color: #09090b; font-size: 11px; font-weight: 600; background: #dceef7;
     overflow: hidden;
   }
-  .av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .av { position: relative; }
+  .av .av-txt { position: relative; z-index: 0; }
+  .av img {
+    position: absolute; inset: 0; z-index: 1;
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
   .av.sm { width: 26px; height: 26px; border-radius: 13px; font-size: 10px; }
   .av.lg { width: 72px; height: 72px; border-radius: 36px; font-size: 22px; font-weight: 500; }
   .av.agent, .av.agent.lg { border-radius: 14px; }
@@ -1006,9 +1023,9 @@
           <span class="chip a">Desk</span>
           <span class="chip b">Notion</span>
           <span class="chip c">Drive · files</span>
-          <div class="viz-photo p1"><img src="https://images.unsplash.com/photo-1456513080080-7e9e7be56143?auto=format&fit=crop&w=480&h=560&q=80" alt="" loading="lazy"></div>
-          <div class="viz-photo p2"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=440&h=520&q=80" alt="" loading="lazy"></div>
-          <div class="viz-photo p3"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=560&h=360&q=80" alt="" loading="lazy"></div>
+          <div class="viz-photo p1"><img src="https://images.unsplash.com/photo-1456513080080-7e9e7be56143?ixlib=rb-4.0.3&auto=format&fit=crop&w=480&h=560&q=80" alt="" loading="lazy" onerror="this.classList.add('is-miss');this.removeAttribute('src')"></div>
+          <div class="viz-photo p2"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=440&h=520&q=80" alt="" loading="lazy" onerror="this.classList.add('is-miss');this.removeAttribute('src')"></div>
+          <div class="viz-photo p3"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=560&h=360&q=80" alt="" loading="lazy" onerror="this.classList.add('is-miss');this.removeAttribute('src')"></div>
         </aside>
       </div>
     </div>
@@ -1085,7 +1102,7 @@ const FACE_ID = {
   lab: "photo-1560250097-0b93528c311a",
   smith: "photo-1494790108377-be9c29b29330",
   chen: "photo-1500648767791-00dcc994a43e",
-  oka: "photo-1507591064344-4c6ce005b928",
+  oka: "photo-1568602471122-7832951cc4c5",
   nova: "photo-1534528741775-53994a69daeb",
   kim: "photo-1544005313-94ddf0286df2",
   maya: "photo-1524504388940-b1c1722653e1",
@@ -1103,9 +1120,12 @@ const FACE_ID = {
 };
 const faceUrl = (id, w = 240, h = w) => {
   const key = FACE_ID[id];
-  return key ? `https://images.unsplash.com/${key}?auto=format&fit=crop&w=${w}&h=${h}&q=80` : "";
+  return key
+    ? `https://images.unsplash.com/${key}?ixlib=rb-4.0.3&auto=format&fit=crop&w=${w}&h=${h}&q=80`
+    : "";
 };
 const EXPERT_PHOTO = Object.fromEntries(Object.keys(FACE_ID).map((id) => [id, faceUrl(id, 240, 240)]));
+const IMG_MISS = `this.classList.add('is-miss');this.removeAttribute('src');this.alt='';`;
 
 const PEOPLE = [
   {
@@ -1559,10 +1579,10 @@ function visiblePosts() {
 function av(p, size) {
   const cls = size === "lg" ? " lg" : size === "sm" ? " sm" : "";
   const photo = EXPERT_PHOTO[p.id];
-  const inner = photo
-    ? `<img src="${photo}" alt="" loading="lazy" width="72" height="72">`
-    : esc(p.initials);
-  return `<span class="av${cls}${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">${inner}</span>`;
+  const photoTag = photo
+    ? `<img src="${photo}" alt="" loading="lazy" width="72" height="72" onerror="${IMG_MISS}">`
+    : "";
+  return `<span class="av${cls}${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}"><span class="av-txt">${esc(p.initials)}</span>${photoTag}</span>`;
 }
 
 function renderExpertBar() {
@@ -1584,7 +1604,7 @@ function renderPeople() {
     const ask = ASK[p.id] || ["Ask about their work", "Tell me what you work on."];
     const shot = faceUrl(p.id, 640, 960);
     const media = shot
-      ? `<div class="shot"><img src="${shot}" alt="" loading="lazy" width="248" height="420"></div>`
+      ? `<div class="shot"><span class="shot-fallback" aria-hidden="true">${esc(p.initials)}</span><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${IMG_MISS}"></div>`
       : `<div class="shot-fallback" aria-hidden="true">${esc(p.initials)}</div>`;
     return `<article class="expert${p.kind === "agent" ? " agent" : ""}" style="--base:${look.base};--lift:${look.lift}">
       ${media}

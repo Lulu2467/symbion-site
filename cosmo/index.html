@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027150410">
+  <meta name="cosmo-build" content="20261027150540">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -302,11 +302,13 @@
     color: #5A7088;
   }
 
-  .quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  /* Recommended — same card size/gap as lived / 图二 */
+  .quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .qask {
     position: relative; overflow: hidden;
-    min-height: 148px; text-align: left; background: #fff;
-    border: 1px solid var(--line); border-radius: 18px; padding: 18px 18px 14px;
+    aspect-ratio: 324 / 167; min-height: 0;
+    text-align: left; background: #fff;
+    border: 1px solid var(--line); border-radius: 20px; padding: 18px 18px 14px;
     display: flex; flex-direction: column;
   }
   .qask::before {
@@ -317,11 +319,14 @@
   .qask:hover, .qask:focus-visible { border-color: #c5d7e4; }
   .qask:hover::before, .qask:focus-visible::before { opacity: 1; }
   .qask > * { position: relative; z-index: 1; }
-  .qask .line { font-size: 22px; font-weight: 500; letter-spacing: -.02em; line-height: 1.3; }
-  .qask .foot { margin-top: auto; padding-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .qask .line {
+    margin: 0; font-size: clamp(16px, 1.7vw, 20px); font-weight: 500;
+    letter-spacing: -.02em; line-height: 1.2;
+  }
+  .qask .foot { margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .qask .tag {
-    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--muted); background: rgba(9,9,11,.05); border-radius: 8px; padding: 5px 8px;
+    font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--muted); background: rgba(9,9,11,.05); border-radius: 7px; padding: 4px 7px;
   }
   .faces { display: flex; }
   .faces .av { margin-left: -8px; box-shadow: 0 0 0 2px #fff; }

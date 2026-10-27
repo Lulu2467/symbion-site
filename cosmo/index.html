@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027144943">
+  <meta name="cosmo-build" content="20261027145530">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -914,14 +914,74 @@ const BUILD_APPS = [
 
 const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
 
-/* Lived cards — ice blue + cool companions (teal / sage / slate; no purple) */
+/* 6 looks: ice / lilac / mint / teal / periwinkle / slate — theme ice + a little purple */
+const LOOKS = [
+  { base: "#dceef7", lift: "#f4fafc", accentColor: "#3c7a94", light: true },
+  { base: "#e4e0ef", lift: "#f5f3f9", accentColor: "#5c5678", light: true },
+  { base: "#d8ebe3", lift: "#f2f8f5", accentColor: "#3d6b5c", light: true },
+  { base: "#4a7d8c", lift: "#8ab0bc", accentColor: "#e7f3f9", light: false },
+  { base: "#9b95b8", lift: "#c8c4de", accentColor: "#f0eef6", light: false },
+  { base: "#5a6e78", lift: "#9aadb6", accentColor: "#dceef7", light: false }
+];
+function withLook(card, i) { return Object.assign({}, card, LOOKS[i % LOOKS.length]); }
+
+/* 6 cards per topic chip (For you / All / each field) */
 const LIVED = [
-  { id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?", base: "#dceef7", lift: "#f4fafc", accentColor: "#3c7a94", light: true },
-  { id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the 3:10 recap", q: "I missed part of the 3:10 live. What does the recap cover?", base: "#d8ebe3", lift: "#f2f8f5", accentColor: "#3d6b5c", light: true },
-  { id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "the line you are stuck on", q: "I am stuck on one line in the cosmology thread.", base: "#4a7d8c", lift: "#8ab0bc", accentColor: "#e7f3f9" },
-  { id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the axis you changed", q: "Which axis did I change in the climate notebook?", base: "#e4ebe6", lift: "#f6f8f6", accentColor: "#4a6358", light: true },
-  { id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the pricing sample", q: "How should I read the pricing insight?", base: "#5a6e78", lift: "#9aadb6", accentColor: "#dceef7" },
-  { id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold.", base: "#3d7a72", lift: "#7aada4", accentColor: "#e7f3f9" }
+  withLook({ id: "roland", topic: "for-you", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?" }, 0),
+  withLook({ id: "pajer", topic: "for-you", lead: "Ask Prof. Pajer about", accent: "the stuck line", q: "I am stuck on one line in the cosmology thread." }, 1),
+  withLook({ id: "lab", topic: "for-you", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold." }, 2),
+  withLook({ id: "roland", topic: "for-you", lead: "Ask Prof. Roland about", accent: "the crossover wording", q: "Does lecture 5 call this a crossover or a first-order line?" }, 3),
+  withLook({ id: "pajer", topic: "for-you", lead: "Ask Prof. Pajer about", accent: "problem set 2", q: "Which cell is still blank in problem set 2?" }, 4),
+  withLook({ id: "lab", topic: "for-you", lead: "Ask the lab coach about", accent: "uncertainty", q: "Where should the uncertainty sentence go in the report?" }, 5),
+
+  withLook({ id: "roland", topic: "all", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?" }, 0),
+  withLook({ id: "luo", topic: "all", lead: "Ask 骆王宇’s twin about", accent: "the 3:10 recap", q: "I missed part of the 3:10 live. What does the recap cover?" }, 1),
+  withLook({ id: "pajer", topic: "all", lead: "Ask Prof. Pajer about", accent: "the cosmology line", q: "I am stuck on one line in the cosmology thread." }, 2),
+  withLook({ id: "anastasia", topic: "all", lead: "Ask Anastasia about", accent: "the axis you changed", q: "Which axis did I change in the climate notebook?" }, 3),
+  withLook({ id: "xu", topic: "all", lead: "Ask Prof. Xu about", accent: "the pricing sample", q: "How should I read the pricing insight?" }, 4),
+  withLook({ id: "lab", topic: "all", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold." }, 5),
+
+  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the lecture 5 diagram", q: "Which axis is temperature on the lecture 5 diagram?" }, 0),
+  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "baryon chemical potential", q: "Which axis is baryon chemical potential?" }, 1),
+  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the crossover", q: "Does lecture 5 follow a crossover or a sharp first-order line?" }, 2),
+  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "lecture 4 summary", q: "What did lecture 4 leave unfinished before lecture 5?" }, 3),
+  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the phase diagram", q: "Where does the phase diagram start on the slide?" }, 4),
+  withLook({ id: "roland", topic: "heavy-ion", lead: "Ask Prof. Roland about", accent: "the reading report", q: "Which sentence in the reading report is still weak?" }, 5),
+
+  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "the stuck line", q: "I am stuck on one line in the cosmology thread." }, 0),
+  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "known vs unknown", q: "How do I split this line into known and unknown?" }, 1),
+  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "what class calls it", q: "What does class call the term I cannot name?" }, 2),
+  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "problem set 2", q: "Which problem in set 2 matches this line?" }, 3),
+  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "the next cell", q: "Should I fill the next cell or stay on this line?" }, 4),
+  withLook({ id: "pajer", topic: "cosmology", lead: "Ask Prof. Pajer about", accent: "Maya’s reply", q: "How should I read Maya’s reply next to the twin’s?" }, 5),
+
+  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the 3:10 recap", q: "I missed part of the 3:10 live. What does the recap cover?" }, 0),
+  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "who is live", q: "Is the 3:10 live the twin or the person?" }, 1),
+  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the missed stretch", q: "I missed from 3:20 to 3:35. What belongs in the recap?" }, 2),
+  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "the question you did not ask", q: "Can the twin post the question I did not ask?" }, 3),
+  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "after the live", q: "When does the three-point recap appear in the domain?" }, 4),
+  withLook({ id: "luo", topic: "live", lead: "Ask 骆王宇’s twin about", accent: "desk notice", q: "Is the live notice also on my desk?" }, 5),
+
+  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the axis you changed", q: "Which axis did I change in the climate notebook?" }, 0),
+  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "unit and time step", q: "What unit and time step sit in front of the figure?" }, 1),
+  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the trend", q: "If the trend only appears after I change an axis, is it a result?" }, 2),
+  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the notebook share", q: "Where does the climate notebook live in the domain?" }, 3),
+  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "closing the sentence", q: "Should I leave the sentence in the notebook or close it?" }, 4),
+  withLook({ id: "anastasia", topic: "climate", lead: "Ask Anastasia about", accent: "the next figure", q: "What three names go in front of the next figure?" }, 5),
+
+  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the pricing sample", q: "How should I read the pricing insight?" }, 0),
+  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "row count", q: "How many rows are in the pricing sample?" }, 1),
+  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the decision", q: "What decision should the insight support?" }, 2),
+  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "no private domain", q: "If there is no private domain, where does this insight live?" }, 3),
+  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "the sentence you want", q: "Which sentence do I want the insight to support?" }, 4),
+  withLook({ id: "xu", topic: "decisions", lead: "Ask Prof. Xu about", accent: "desk copy", q: "Is this pricing post also on my desk?" }, 5),
+
+  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the method section", q: "The method section of my lab report does not hold." }, 0),
+  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "Aim vs Method", q: "Does this sentence belong in Aim or Method?" }, 1),
+  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "Result", q: "Can I move this number into Result yet?" }, 2),
+  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "Uncertainty", q: "Where should Uncertainty sit in the draft?" }, 3),
+  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the notebook", q: "Do the numbers stay in my notebook while you draft?" }, 4),
+  withLook({ id: "lab", topic: "lab", lead: "Ask the lab coach about", accent: "the weak section", q: "Which section do you usually distrust first?" }, 5)
 ];
 
 const LIVED_TOPICS = [
@@ -1161,14 +1221,14 @@ function renderPosts() {
 }
 function topicMatches(topic, itemTopic) {
   if (topic === "all") return true;
-  if (topic === "for-you") return itemTopic === "heavy-ion" || itemTopic === "cosmology" || itemTopic === "lab";
-  return itemTopic === topic;
+  if (topic === "for-you") return itemTopic === "heavy-ion" || itemTopic === "cosmology" || itemTopic === "lab" || itemTopic === "all";
+  return itemTopic === topic || itemTopic === "all";
 }
 function livedVisible(item) {
   const p = person(item.id);
   if (!p || !personMatches(p)) return false;
-  if (state.livedTopic === "for-you") return !!p.course;
-  return topicMatches(state.livedTopic, item.topic);
+  if (!matches(`${item.lead} ${item.accent} ${item.q}`)) return false;
+  return item.topic === state.livedTopic;
 }
 
 function renderTopicBar() {

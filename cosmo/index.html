@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027155740">
+  <meta name="cosmo-build" content="20261027155920">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -477,6 +477,40 @@
     width: min(420px, 78vw); min-height: 220px; flex: none; scroll-snap-align: start;
   }
 
+  #block-build {
+    margin-top: 96px;
+    padding-top: 72px;
+  }
+  #block-build .build-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 40px;
+  }
+  #block-build .build-intro .eyebrow {
+    margin: 0 0 28px;
+    font-size: 14px; font-weight: 500; color: var(--muted);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  #block-build .build-intro .eyebrow .count {
+    margin-left: 8px; color: var(--faint); font-size: 13px;
+  }
+  #block-build .build-intro h2 {
+    margin: 0;
+    font-size: clamp(32px, 4.2vw, 48px);
+    font-weight: 600;
+    letter-spacing: -.035em;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  #block-build .build-intro .lede {
+    margin: 20px auto 0;
+    max-width: 34em;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--muted);
+    text-align: center;
+  }
   .build-panel {
     display: flex; flex-direction: column; gap: 28px;
     background: #fff; border: 1px solid var(--line); border-radius: 28px;
@@ -783,6 +817,10 @@
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
     .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
+    #block-build { margin-top: 56px; padding-top: 48px; }
+    #block-build .build-intro { margin-bottom: 28px; }
+    #block-build .build-intro .eyebrow { margin-bottom: 18px; }
+    #block-build .build-intro h2 { font-size: 30px; }
     .build-panel { padding: 26px 20px 24px; min-height: 0; gap: 22px; }
     .build-steps li { padding: 18px 0; gap: 12px 14px; grid-template-columns: 34px 1fr; }
     .build-steps .n { width: 34px; height: 34px; border-radius: 17px; font-size: 14px; }
@@ -900,11 +938,11 @@
     </div>
 
     <div class="home-block" id="block-build">
-      <div class="sec-hd">
-        <h2>Build your Cosmo</h2>
-        <span class="count" id="build-status"></span>
+      <div class="build-intro">
+        <p class="eyebrow">Build your Cosmo<span class="count" id="build-status"></span></p>
+        <h2>What one mind knows should help another.</h2>
+        <p class="lede">Shape what your twin knows — three steps, then connect the apps that feed it.</p>
       </div>
-      <p class="sec-lede">Shape what your twin knows — three steps, then connect the apps that feed it.</p>
       <div class="build-panel">
         <ol class="build-steps" id="build-steps">
           <li><span class="n">1</span><span class="t">Pick sources</span><span class="d">Courses, notes, and files the twin should learn from.</span></li>

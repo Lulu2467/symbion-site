@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027151220">
+  <meta name="cosmo-build" content="20261027151540">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -259,13 +259,13 @@
   .sec-hd .count { font-size: 12px; color: var(--faint); font-weight: 500; }
   .sec-hd .shuffle {
     margin-left: auto; flex: none;
-    width: 32px; height: 32px; border-radius: 10px;
-    border: 1px solid var(--line); background: #fff; color: #515151;
+    width: 28px; height: 28px; padding: 0;
+    border: 0; background: transparent; color: #515151;
     display: inline-flex; align-items: center; justify-content: center;
   }
-  .sec-hd .shuffle:hover { background: var(--green-tint); color: var(--ink); border-color: #c5d7e4; }
+  .sec-hd .shuffle:hover { color: var(--ink); }
   .sec-hd .shuffle:active { transform: rotate(-12deg); }
-  .sec-hd .shuffle svg { width: 16px; height: 16px; display: block; }
+  .sec-hd .shuffle svg { width: 18px; height: 18px; display: block; }
   .sec-lede { margin: 0 0 14px; max-width: 560px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
   .home-block { scroll-margin-top: 88px; }
@@ -784,7 +784,6 @@
     <div class="home-block" id="block-build">
       <div class="sec-hd">
         <h2>Build your Cosmo</h2>
-        <button type="button" class="shuffle" data-shuffle="build" aria-label="Shuffle apps"></button>
       </div>
       <p class="sec-lede">Connect apps that feed your twin. You can start here in Cosmo, or finish the same links later in Symbion.</p>
       <div class="build-grid" id="build"></div>
@@ -1205,7 +1204,7 @@ const state = {
   read: new Set(),
   connected: new Set(["desk"]),
   typing: false,
-  shuffleSeed: { lived: 1, quick: 1, experts: 1, posts: 1, build: 1 }
+  shuffleSeed: { lived: 1, quick: 1, experts: 1, posts: 1 }
 };
 
 const $ = (id) => document.getElementById(id);
@@ -1372,7 +1371,7 @@ function renderQuick() {
 }
 
 function renderBuild() {
-  $("build").innerHTML = shuffleCopy(BUILD_APPS, state.shuffleSeed.build).map((app) => {
+  $("build").innerHTML = BUILD_APPS.map((app) => {
     const on = state.connected.has(app.id);
     const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
     return `<article class="build-card${app.soon ? " is-soon" : ""}">
@@ -1623,7 +1622,6 @@ document.addEventListener("click", (e) => {
     else if (key === "quick") renderQuick();
     else if (key === "experts") renderPeople();
     else if (key === "posts") renderPosts();
-    else if (key === "build") renderBuild();
     return;
   }
   const livedTopic = e.target.closest("[data-lived-topic]");

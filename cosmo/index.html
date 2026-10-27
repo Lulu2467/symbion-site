@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027161320">
+  <meta name="cosmo-build" content="20261027163240">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -418,15 +418,15 @@
   .expert-nudge:hover, .rail-nudge:hover { background: var(--green-wash); }
 
   .expert {
-    position: relative; flex: none; width: 248px; height: 420px;
-    border-radius: 24px; overflow: hidden; scroll-snap-align: start;
+    position: relative; flex: none; width: 300px; height: 396px;
+    border-radius: 28px; overflow: hidden; scroll-snap-align: start;
     text-align: left; border: 0; outline: 0; color: #fff;
     background: #1a1f24;
     box-shadow: none;
     display: flex; flex-direction: column;
     transition: transform .18s ease;
   }
-  .expert.agent { border-radius: 22px; }
+  .expert.agent { border-radius: 26px; }
   .expert:hover { transform: translateY(-3px); }
   .expert .shot {
     position: absolute; inset: 0; z-index: 0;
@@ -442,8 +442,8 @@
   }
   .expert .shot img {
     position: absolute; inset: 0; z-index: 1;
-    width: 100%; height: 100%; object-fit: cover; object-position: center 8%;
-    transform: scale(1.14); transform-origin: center 16%;
+    width: 100%; height: 100%; object-fit: cover; object-position: center 12%;
+    transform: scale(1.04); transform-origin: center 18%;
     display: block;
   }
   .expert .shot img.is-miss { display: none !important; }
@@ -459,31 +459,31 @@
   .expert::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg,
-      transparent 40%,
-      rgba(0,0,0,.22) 58%,
-      rgba(0,0,0,.7) 78%,
+      transparent 38%,
+      rgba(0,0,0,.2) 56%,
+      rgba(0,0,0,.68) 76%,
       rgba(0,0,0,.88) 100%);
   }
   .expert .foot {
-    position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2;
-    display: flex; flex-direction: column; gap: 4px;
+    position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 2;
+    display: flex; flex-direction: column; gap: 5px;
   }
   .expert .nm {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 17px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; color: #fff;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 22px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; color: #fff;
   }
   .expert .nm .check {
-    width: 16px; height: 16px; flex: none; display: block;
+    width: 18px; height: 18px; flex: none; display: block;
   }
   .expert .role {
-    font-size: 12px; line-height: 1.35; color: rgba(255,255,255,.86);
+    font-size: 14px; line-height: 1.4; color: rgba(255,255,255,.9);
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
   .expert .ask-about {
-    margin-top: 8px;
+    margin-top: 10px;
     width: 100%; text-align: left;
-    border-radius: 999px; padding: 9px 12px;
-    font-size: 11px; font-weight: 500; line-height: 1.3;
+    border-radius: 999px; padding: 11px 14px;
+    font-size: 13px; font-weight: 500; line-height: 1.35;
     color: #fff;
     background: rgba(255,255,255,.14);
     border: 1px solid rgba(255,255,255,.28);
@@ -544,34 +544,72 @@
   .build-viz {
     position: relative; border-radius: 22px; overflow: hidden;
     background:
-      radial-gradient(90% 80% at 70% 20%, #dceef7 0%, transparent 55%),
-      linear-gradient(165deg, #eef5f8 0%, #f7fafb 45%, #e8f1f6 100%);
+      radial-gradient(90% 80% at 78% 12%, #dceef7 0%, transparent 52%),
+      linear-gradient(165deg, #eef5f8 0%, #f7fafb 48%, #e8f1f6 100%);
     min-height: 360px;
+    padding: 22px 20px;
+    display: flex; flex-direction: column; gap: 12px; justify-content: center;
   }
-  .build-viz .viz-photo {
-    position: absolute; overflow: hidden; border-radius: 16px;
-    box-shadow: 0 14px 32px rgba(40, 80, 110, .12);
-    background: #d7e6ef;
+  .build-viz .ui-card {
+    background: #fff;
+    border: 1px solid rgba(9, 9, 11, .06);
+    border-radius: 16px;
+    padding: 14px 14px 12px;
+    box-shadow: 0 10px 24px rgba(40, 80, 110, .07);
   }
-  .build-viz .viz-photo img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+  .build-viz .ui-card .lbl {
+    display: block; margin: 0 0 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: #3c7a94;
   }
-  .build-viz .viz-photo img.is-miss { display: none !important; }
-  .build-viz .p1 { width: 46%; height: 54%; left: 10%; top: 12%; transform: rotate(-4deg); }
-  .build-viz .p2 { width: 42%; height: 48%; right: 8%; top: 22%; transform: rotate(5deg); z-index: 1; }
-  .build-viz .p3 { width: 52%; height: 36%; left: 22%; bottom: 10%; transform: rotate(-2deg); z-index: 2; }
-  .build-viz .chip {
-    position: absolute; z-index: 3;
-    border-radius: 999px; padding: 8px 12px;
-    font-size: 12px; font-weight: 600; color: var(--ink);
-    background: rgba(255,255,255,.88);
-    border: 1px solid rgba(255,255,255,.9);
-    box-shadow: 0 8px 18px rgba(40, 80, 110, .08);
-    backdrop-filter: blur(8px);
+  .build-viz .ui-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
   }
-  .build-viz .chip.a { left: 12%; top: 8%; }
-  .build-viz .chip.b { right: 10%; top: 14%; }
-  .build-viz .chip.c { left: 18%; bottom: 14%; }
+  .build-viz .ui-pill {
+    border-radius: 999px; padding: 7px 11px;
+    font-size: 12px; font-weight: 500; color: var(--ink);
+    background: #eef4f8; border: 1px solid transparent;
+  }
+  .build-viz .ui-pill.on {
+    background: var(--ink); color: #fff;
+  }
+  .build-viz .ui-app {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .build-viz .ui-app:last-child { border-bottom: 0; padding-bottom: 0; }
+  .build-viz .ui-app:first-of-type { padding-top: 0; }
+  .build-viz .ui-app b {
+    display: block; font-size: 13px; font-weight: 600; color: var(--ink);
+  }
+  .build-viz .ui-app span {
+    display: block; margin-top: 2px; font-size: 11px; color: var(--muted);
+  }
+  .build-viz .ui-dot {
+    flex: none; width: 28px; height: 16px; border-radius: 999px;
+    background: #d4d4d8; position: relative;
+  }
+  .build-viz .ui-dot::after {
+    content: ""; position: absolute; top: 2px; left: 2px;
+    width: 12px; height: 12px; border-radius: 50%; background: #fff;
+  }
+  .build-viz .ui-dot.on { background: #3c7a94; }
+  .build-viz .ui-dot.on::after { left: auto; right: 2px; }
+  .build-viz .ui-ask {
+    display: flex; align-items: center; gap: 8px;
+    border-radius: 14px; padding: 10px 10px 10px 12px;
+    background: #f4f7fa; border: 1px solid rgba(9, 9, 11, .05);
+  }
+  .build-viz .ui-ask p {
+    margin: 0; flex: 1; font-size: 12px; line-height: 1.35; color: var(--muted);
+  }
+  .build-viz .ui-ask i {
+    flex: none; width: 28px; height: 28px; border-radius: 14px;
+    background: var(--ink); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .build-viz .ui-ask i svg { width: 12px; height: 12px; display: block; }
   .build-steps {
     margin: 0; padding: 0; list-style: none;
     display: flex; flex-direction: column; gap: 0;
@@ -888,10 +926,10 @@
     .build-steps .t { font-size: 18px; }
     .build-steps .d { font-size: 14px; }
     .build-cta .go { padding: 14px 22px; font-size: 15px; }
-    .expert { width: 220px; height: 372px; }
-    .expert .nm { font-size: 16px; }
-    .expert .role { font-size: 11px; }
-    .expert .ask-about { font-size: 10.5px; padding: 8px 10px; }
+    .expert { width: 260px; height: 344px; }
+    .expert .nm { font-size: 18px; }
+    .expert .role { font-size: 13px; }
+    .expert .ask-about { font-size: 12px; padding: 10px 12px; }
     .rail-fade { width: 96px; }
   }
 </style>
@@ -1019,12 +1057,27 @@
           </div>
         </div>
         <aside class="build-viz" aria-hidden="true">
-          <span class="chip a">Desk</span>
-          <span class="chip b">Notion</span>
-          <span class="chip c">Drive · files</span>
-          <div class="viz-photo p1"><img src="https://images.unsplash.com/photo-1456513080080-7e9e7be56143?ixlib=rb-4.0.3&auto=format&fit=crop&w=480&h=560&q=80" alt="" loading="lazy" onerror="this.classList.add('is-miss');this.removeAttribute('src')"></div>
-          <div class="viz-photo p2"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=440&h=520&q=80" alt="" loading="lazy" onerror="this.classList.add('is-miss');this.removeAttribute('src')"></div>
-          <div class="viz-photo p3"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=560&h=360&q=80" alt="" loading="lazy" onerror="this.classList.add('is-miss');this.removeAttribute('src')"></div>
+          <div class="ui-card">
+            <span class="lbl">1 · Sources</span>
+            <div class="ui-row">
+              <span class="ui-pill on">Courses</span>
+              <span class="ui-pill on">Notes</span>
+              <span class="ui-pill">Files</span>
+            </div>
+          </div>
+          <div class="ui-card">
+            <span class="lbl">2 · Connect</span>
+            <div class="ui-app"><div><b>Symbion Desk</b><span>Linked</span></div><i class="ui-dot on"></i></div>
+            <div class="ui-app"><div><b>Notion</b><span>Ready to connect</span></div><i class="ui-dot"></i></div>
+            <div class="ui-app"><div><b>Google Drive</b><span>Ready to connect</span></div><i class="ui-dot"></i></div>
+          </div>
+          <div class="ui-card">
+            <span class="lbl">3 · Ask</span>
+            <div class="ui-ask">
+              <p>Ask with Desk notes already on…</p>
+              <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+            </div>
+          </div>
         </aside>
       </div>
     </div>

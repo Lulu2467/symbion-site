@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027150120">
+  <meta name="cosmo-build" content="20261027150410">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -261,15 +261,19 @@
 
   .home-block { scroll-margin-top: 88px; }
 
+  /* Lived grid — size/gap from 图二 (~324×167, 12px gutters) */
   .lived { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .lived-card {
-    min-height: 188px; text-align: left; border: 0; border-radius: 22px;
+    aspect-ratio: 324 / 167;
+    min-height: 0;
+    text-align: left; border: 0; border-radius: 20px;
     padding: 18px 18px 14px;
     color: #fff;
     background:
       radial-gradient(130% 100% at 100% 100%, var(--lift, #576D93) 0%, transparent 58%),
       linear-gradient(155deg, color-mix(in srgb, var(--base, #183A65) 78%, #fff) 0%, var(--base, #183A65) 72%);
     display: flex; flex-direction: column;
+    overflow: hidden;
   }
   .lived-card:hover { filter: brightness(1.04) saturate(1.02); }
   .lived-card.light {
@@ -277,19 +281,19 @@
     box-shadow: inset 0 0 0 1px rgba(130, 148, 175, .18);
   }
   .lived-card .mark {
-    width: 14px; height: 14px; opacity: .9; display: block;
+    width: 12px; height: 12px; opacity: .9; display: block; flex: none;
     color: #fff;
   }
   .lived-card.light .mark { color: #8294AF; opacity: .9; }
   .lived-card .lead {
-    margin: 16px 0 0; font-size: 22px; font-weight: 600;
-    letter-spacing: -.025em; line-height: 1.22;
+    margin: 12px 0 0; font-size: clamp(16px, 1.7vw, 20px); font-weight: 600;
+    letter-spacing: -.025em; line-height: 1.2;
   }
   .lived-card .accent { color: var(--accent, #dceef7); }
-  .lived-card .tags { margin-top: auto; padding-top: 20px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .lived-card .tags { margin-top: auto; padding-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
   .lived-card .tag {
-    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
-    padding: 5px 8px; border-radius: 8px;
+    font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    padding: 4px 7px; border-radius: 7px;
     background: rgba(0, 0, 0, .18);
     color: rgba(255, 255, 255, .9);
   }

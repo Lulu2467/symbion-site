@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027155920">
+  <meta name="cosmo-build" content="20261027160100">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -418,59 +418,65 @@
   .expert-nudge:hover, .rail-nudge:hover { background: var(--green-wash); }
 
   .expert {
-    position: relative; flex: none; width: 260px; height: 360px;
-    border-radius: 24px; overflow: hidden; scroll-snap-align: start;
+    position: relative; flex: none; width: 280px; height: 400px;
+    border-radius: 28px; overflow: hidden; scroll-snap-align: start;
     text-align: left; border: 0; outline: 0; color: #fff;
-    background:
-      linear-gradient(180deg, rgba(9,9,11,.08) 0%, rgba(9,9,11,.55) 48%, rgba(9,9,11,.88) 100%),
-      radial-gradient(120% 90% at 20% 0%, var(--lift, #4682B4) 0%, transparent 55%),
-      var(--base, #003153);
+    background: #1a1f24;
     box-shadow: none;
     display: flex; flex-direction: column;
     transition: transform .18s ease;
   }
-  .expert.agent { border-radius: 18px; }
-  .expert:hover { transform: translateY(-3px); box-shadow: none; }
-  .expert .mono {
-    position: absolute; left: 50%; top: 36px; transform: translateX(-50%);
-    width: 96px; height: 96px; border-radius: 48px;
+  .expert.agent { border-radius: 24px; }
+  .expert:hover { transform: translateY(-3px); }
+  .expert .shot {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .expert .shot img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 18%;
+    display: block;
+  }
+  .expert .shot-fallback {
+    position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,.16);
-    border: 1px solid rgba(255,255,255,.28);
-    color: #fff;
-    font-size: 28px; font-weight: 500; letter-spacing: -.04em;
-    overflow: hidden;
+    font-size: 42px; font-weight: 500; letter-spacing: -.04em; color: rgba(255,255,255,.85);
+    background:
+      radial-gradient(120% 90% at 20% 0%, var(--lift, #4682B4) 0%, transparent 55%),
+      var(--base, #003153);
   }
-  .expert .mono img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+  .expert::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg,
+      transparent 28%,
+      rgba(0,0,0,.28) 52%,
+      rgba(0,0,0,.72) 78%,
+      rgba(0,0,0,.88) 100%);
   }
-  .expert.agent .mono { border-radius: 22px; }
   .expert .foot {
-    position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 1;
+    position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 2;
     display: flex; flex-direction: column; gap: 6px;
   }
   .expert .nm {
     display: flex; align-items: center; gap: 6px;
-    font-size: 18px; font-weight: 600; letter-spacing: -.02em; color: #fff;
+    font-size: 20px; font-weight: 600; letter-spacing: -.02em; color: #fff;
   }
   .expert .nm .check {
-    width: 16px; height: 16px; flex: none; color: #87CEEB;
+    width: 16px; height: 16px; flex: none; color: #7ec8e8;
   }
   .expert .role {
-    font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.78);
+    font-size: 13px; line-height: 1.4; color: rgba(255,255,255,.88);
   }
   .expert .ask-about {
     margin-top: 10px;
     width: 100%; text-align: left;
-    border-radius: 999px; padding: 10px 12px;
+    border-radius: 999px; padding: 11px 14px;
     font-size: 12px; font-weight: 500; line-height: 1.35;
     color: #fff;
-    background: rgba(9,9,11,.42);
-    border: 1px solid rgba(255,255,255,.14);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.28);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
   }
-  .expert .ask-about:hover { background: rgba(9,9,11,.55); }
+  .expert .ask-about:hover { background: rgba(255,255,255,.22); }
 
   .quote-wrap { position: relative; }
   .dynamics .qcard {
@@ -827,7 +833,7 @@
     .build-steps .t { font-size: 18px; }
     .build-steps .d { font-size: 14px; }
     .build-cta .go { padding: 14px 22px; font-size: 15px; }
-    .expert { width: 220px; height: 320px; }
+    .expert { width: 240px; height: 360px; }
     .rail-fade { width: 96px; }
   }
 </style>
@@ -1017,34 +1023,38 @@ const EXPERT_FILTERS = [
   { id: "health", label: "Health" }
 ];
 
-/* Stock portraits for prototype faces — professors, creators, hosts (not claimed likenesses) */
-const FACE = (id, w = 240) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${w}&q=80&crop=faces`;
-const EXPERT_PHOTO = {
-  roland: FACE("photo-1472099645785-5658abf4ff4e"),
-  pajer: FACE("photo-1507003211169-0a1dd7228f2d"),
-  luo: FACE("photo-1506794778202-cad84cf45f1d"),
-  greer: FACE("photo-1573496359142-b8d87734a5a2"),
-  anastasia: FACE("photo-1580489944761-15a19d654956"),
-  xu: FACE("photo-1519085360753-af0119f7cbe7"),
-  lab: FACE("photo-1560250097-0b93528c311a"),
-  smith: FACE("photo-1494790108377-be9c29b29330"),
-  chen: FACE("photo-1500648767791-00dcc994a43e"),
-  oka: FACE("photo-1507591064344-4c6ce005b928"),
-  nova: FACE("photo-1534528741775-53994a69daeb"),
-  kim: FACE("photo-1544005313-94ddf0286df2"),
-  maya: FACE("photo-1524504388940-b1c1722653e1"),
-  river: FACE("photo-1539571696357-5a69c17a67c6"),
-  park: FACE("photo-1463453091185-61582044d556"),
-  lin: FACE("photo-1438761681033-6461ffad8d80"),
-  reef: FACE("photo-1548142813-c348350df52b"),
-  moss: FACE("photo-1556157382-97eda2d62296"),
-  vale: FACE("photo-1487412720507-e7ab37603c6f"),
-  brook: FACE("photo-1492562080023-ab3db95bfbce"),
-  draft: FACE("photo-1552058544-f2b08422138a"),
-  meter: FACE("photo-1547425260-76bcadfb4f2c"),
-  hale: FACE("photo-1551836022-d5d88e9218df"),
-  quill: FACE("photo-1521119989659-a83fb39b4bf0")
+/* Stock portraits for prototype — professors / creators / hosts (not claimed likenesses) */
+const FACE_ID = {
+  roland: "photo-1472099645785-5658abf4ff4e",
+  pajer: "photo-1507003211169-0a1dd7228f2d",
+  luo: "photo-1506794778202-cad84cf45f1d",
+  greer: "photo-1573496359142-b8d87734a5a2",
+  anastasia: "photo-1580489944761-15a19d654956",
+  xu: "photo-1519085360753-af0119f7cbe7",
+  lab: "photo-1560250097-0b93528c311a",
+  smith: "photo-1494790108377-be9c29b29330",
+  chen: "photo-1500648767791-00dcc994a43e",
+  oka: "photo-1507591064344-4c6ce005b928",
+  nova: "photo-1534528741775-53994a69daeb",
+  kim: "photo-1544005313-94ddf0286df2",
+  maya: "photo-1524504388940-b1c1722653e1",
+  river: "photo-1539571696357-5a69c17a67c6",
+  park: "photo-1463453091185-61582044d556",
+  lin: "photo-1438761681033-6461ffad8d80",
+  reef: "photo-1548142813-c348350df52b",
+  moss: "photo-1556157382-97eda2d62296",
+  vale: "photo-1487412720507-e7ab37603c6f",
+  brook: "photo-1492562080023-ab3db95bfbce",
+  draft: "photo-1552058544-f2b08422138a",
+  meter: "photo-1547425260-76bcadfb4f2c",
+  hale: "photo-1551836022-d5d88e9218df",
+  quill: "photo-1521119989659-a83fb39b4bf0"
 };
+const faceUrl = (id, w = 240, h = w) => {
+  const key = FACE_ID[id];
+  return key ? `https://images.unsplash.com/${key}?auto=format&fit=crop&w=${w}&h=${h}&q=80` : "";
+};
+const EXPERT_PHOTO = Object.fromEntries(Object.keys(FACE_ID).map((id) => [id, faceUrl(id, 240, 240)]));
 
 const PEOPLE = [
   {
@@ -1521,12 +1531,12 @@ function renderPeople() {
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
     const ask = ASK[p.id] || ["Ask about their work", "Tell me what you work on."];
-    const photo = EXPERT_PHOTO[p.id];
-    const mono = photo
-      ? `<img src="${photo}" alt="" loading="lazy" width="96" height="96">`
-      : esc(p.initials);
+    const shot = faceUrl(p.id, 560, 800);
+    const media = shot
+      ? `<div class="shot"><img src="${shot}" alt="" loading="lazy" width="280" height="400"></div>`
+      : `<div class="shot-fallback" aria-hidden="true">${esc(p.initials)}</div>`;
     return `<article class="expert${p.kind === "agent" ? " agent" : ""}" style="--base:${look.base};--lift:${look.lift}">
-      <div class="mono">${mono}</div>
+      ${media}
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(p.role)}</span>

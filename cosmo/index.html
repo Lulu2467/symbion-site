@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027161000">
+  <meta name="cosmo-build" content="20261027161320">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -955,7 +955,6 @@
       <div class="lived" id="lived"></div>
       <div class="sec-hd" style="margin-top:28px">
         <h2>Recommended</h2>
-        <span class="count" id="quick-count"></span>
         <button type="button" class="shuffle" data-shuffle="quick" aria-label="Shuffle recommended"></button>
       </div>
       <div class="quick" id="quick"></div>
@@ -1757,7 +1756,6 @@ function renderQuick() {
       faces
     };
   }).filter((row) => row.faces.length);
-  $("quick-count").textContent = cards.length ? `${cards.length}` : "";
   $("quick").innerHTML = cards.length ? cards.map((item) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
       <span class="line">${boldAccent(item.q, item.accent)}</span>
       <span class="foot">

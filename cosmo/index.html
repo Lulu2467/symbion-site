@@ -205,30 +205,33 @@
   .chip[aria-pressed="true"] { border-color: var(--green); }
   .chip[aria-pressed="true"] { background: var(--green); color: #fff; }
 
-  .lived-topics {
+  .topic-bar, .expert-bar {
     display: flex; align-items: center; gap: 8px;
     margin: -2px 0 14px; overflow: auto; scrollbar-width: none;
   }
-  .lived-topics::-webkit-scrollbar { display: none; }
-  .lived-topics .sep {
+  .topic-bar::-webkit-scrollbar, .expert-bar::-webkit-scrollbar { display: none; }
+  .topic-bar .sep, .expert-bar .sep {
     flex: none; width: 1px; height: 18px; background: var(--line); margin: 0 2px;
   }
-  .lived-topics .chip {
+  .topic-bar .chip, .expert-bar .chip {
     display: inline-flex; align-items: center; gap: 6px;
     background: var(--surface); border-color: transparent; color: var(--muted);
     padding: 7px 12px; font-size: 13px;
   }
-  .lived-topics .chip:hover { background: var(--green-tint); color: var(--ink); }
-  .lived-topics .chip[aria-pressed="true"] {
+  .topic-bar .chip:hover, .expert-bar .chip:hover { background: var(--green-tint); color: var(--ink); }
+  .topic-bar .chip[aria-pressed="true"], .expert-bar .chip[aria-pressed="true"] {
     background: var(--ink); border-color: var(--ink); color: #fff;
   }
-  .lived-topics .chip .star {
+  .topic-bar .chip .star {
     width: 11px; height: 11px; display: block; flex: none;
   }
 
-  .sec-hd { display: flex; align-items: baseline; gap: 10px; margin: 42px 0 14px; }
+  .sec-hd { display: flex; align-items: baseline; gap: 10px; margin: 48px 0 10px; }
   .sec-hd h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.025em; line-height: 1.4; color: var(--ink); }
   .sec-hd .count { font-size: 12px; color: var(--faint); font-weight: 500; }
+  .sec-lede { margin: 0 0 14px; max-width: 560px; font-size: 14px; line-height: 1.45; color: var(--muted); }
+
+  .home-block { scroll-margin-top: 88px; }
 
   .lived { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .lived-card {
@@ -283,63 +286,70 @@
   .faces .av { margin-left: -8px; box-shadow: 0 0 0 2px #fff; }
   .faces .av:first-child { margin-left: 0; }
 
-  .rail-wrap, .quote-wrap { position: relative; }
-  .rail-wrap::after, .quote-wrap::after {
-    content: "";
-    position: absolute; top: 0; right: 0; bottom: 0; width: 128px;
-    pointer-events: none; z-index: 1;
-    background: linear-gradient(90deg, rgba(250,250,250,0) 0%, rgba(250,250,250,.72) 48%, #fafafa 100%);
+  .experts {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
   }
-  .portraits {
-    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
-    overscroll-behavior: contain;
-    padding: 10px 2px 18px; scrollbar-width: none;
-  }
-  .portraits::-webkit-scrollbar { display: none; }
-  .nudge {
-    position: absolute; top: 108px; z-index: 2;
-    width: 34px; height: 34px; border-radius: 17px;
-    background: #fff; border: 1px solid var(--line);
-    box-shadow: 0 8px 18px var(--shadow);
-    color: var(--ink); display: inline-flex; align-items: center; justify-content: center;
-  }
-  .nudge.prev { left: 10px; }
-  .nudge.next { right: 10px; }
-  .nudge:hover { background: var(--green-wash); }
-
-  .portrait {
-    position: relative; flex: none; width: 220px; height: 332px;
-    border-radius: 22px; overflow: hidden; scroll-snap-align: start;
+  .expert {
+    text-align: left; border-radius: 22px; padding: 18px 16px 14px;
     background: #fff; border: 1px solid var(--line); color: var(--ink);
-    box-shadow: 0 8px 24px rgba(9,9,11,.05);
-    transition: transform .18s ease, box-shadow .18s ease;
-    text-align: left;
+    box-shadow: 0 8px 24px rgba(9,9,11,.04);
+    display: flex; flex-direction: column; min-height: 220px;
+    transition: transform .18s ease, border-color .18s ease;
   }
-  .portrait.agent { border-radius: 16px; }
-  .portrait:hover { transform: translateY(-3px); border-color: #d4d4d8; }
-  .portrait.is-on {
-    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #09090b, 0 18px 40px rgba(9,9,11,.14);
-  }
-  .portrait .mono {
-    position: absolute; left: 50%; top: 28px; transform: translateX(-50%);
-    width: 92px; height: 92px; border-radius: 46px;
+  .expert.agent { border-radius: 16px; }
+  .expert:hover { transform: translateY(-2px); border-color: #d4d4d8; }
+  .expert .mono {
+    width: 56px; height: 56px; border-radius: 28px;
     display: flex; align-items: center; justify-content: center;
     background: #dceef7; color: #09090b;
-    font-size: 30px; font-weight: 500; letter-spacing: -.04em;
+    font-size: 18px; font-weight: 500; letter-spacing: -.04em;
   }
-  .portrait.agent .mono { border-radius: 18px; }
-  .portrait .shade { display: none; }
-  .portrait .foot { position: absolute; z-index: 1; left: 16px; right: 16px; bottom: 16px; }
-  .portrait .nm { display: block; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
-  .portrait .role { display: block; margin-top: 3px; font-size: 12px; line-height: 1.35; color: var(--muted); }
-  .portrait .place { display: block; margin-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--faint); }
-  .about-line {
-    display: block; width: 100%; text-align: left; margin-top: 10px;
-    border-radius: 12px; padding: 8px 10px;
-    font-size: 12px; font-weight: 500; line-height: 1.35; color: var(--ink);
-    background: #f4f4f5;
+  .expert.agent .mono { border-radius: 12px; }
+  .expert .nm { display: block; margin-top: 14px; font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+  .expert .role { display: block; margin-top: 4px; font-size: 12px; line-height: 1.4; color: var(--muted); }
+  .expert .field {
+    display: inline-flex; margin-top: 10px; align-self: flex-start;
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: #3c7a94; background: rgba(60,122,148,.1); border-radius: 8px; padding: 5px 8px;
   }
-  .about-line:hover { background: #ececee; }
+  .expert .chat {
+    margin-top: auto; padding-top: 16px;
+    width: 100%; border-radius: 999px; padding: 9px 12px;
+    font-size: 13px; font-weight: 500; color: #fff; background: var(--ink);
+  }
+  .expert .chat:hover { background: var(--green-dark); }
+
+  .quote-wrap { position: relative; }
+  .dynamics {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  }
+  .dynamics .qcard {
+    width: auto; min-height: 220px; flex: none;
+  }
+
+  .build-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .build-card {
+    text-align: left; border-radius: 18px; padding: 18px 16px;
+    background: #fff; border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 8px; min-height: 148px;
+  }
+  .build-card .app {
+    font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #3c7a94;
+  }
+  .build-card b { font-size: 16px; font-weight: 600; letter-spacing: -.02em; }
+  .build-card p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--muted); flex: 1; }
+  .build-card .connect {
+    align-self: flex-start; border-radius: 999px; padding: 7px 12px;
+    font-size: 13px; font-weight: 500;
+    background: var(--surface); color: var(--ink); border: 1px solid transparent;
+  }
+  .build-card .connect:hover { background: var(--green-tint); }
+  .build-card .connect[aria-pressed="true"] {
+    background: var(--ink); color: #fff;
+  }
+  .build-card.is-soon .connect { opacity: .55; cursor: default; }
   .frost {
     flex: 1; text-align: center; border-radius: 999px; padding: 7px 8px;
     font-size: 13px; font-weight: 500; color: var(--ink);
@@ -576,7 +586,8 @@
     .stage { min-height: 0; padding: 28px 0 8px; }
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
-    .lived, .quick, .answer { grid-template-columns: 1fr; }
+    .lived, .quick, .answer, .dynamics, .build-grid { grid-template-columns: 1fr; }
+    .experts { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -616,7 +627,7 @@
         <span style="--x:90%;--y:74%;--r:-5deg;--d:15.4s;--delay:-4.2s"><b>Planetary health</b></span>
       </div>
       <h1>Ask anything</h1>
-      <p class="lede">People it concerns will answer. Continue with whoever you want.</p>
+      <p class="lede">Related twins answer. Pick the reply you want and keep chatting.</p>
       <form class="composer" id="home-form">
         <div class="ask-row">
           <textarea id="home-draft" rows="2" placeholder="Ask anything" aria-label="Ask anything"></textarea>
@@ -627,40 +638,45 @@
       </form>
     </div>
 
-    <div class="sec-hd">
-      <h2>Ask someone who has the work</h2>
-    </div>
-    <div class="lived-topics" id="lived-topics" role="toolbar" aria-label="Topics"></div>
-    <div class="lived" id="lived"></div>
-
-    <div class="sec-hd">
-      <h2>A short question</h2>
-    </div>
-    <div class="quick" id="quick"></div>
-
-    <div class="filters" id="filters" role="toolbar" aria-label="Filter"></div>
-
-    <div class="sec-hd">
-      <h2>Talk with them</h2>
-      <span class="count" id="people-count"></span>
-    </div>
-    <div class="rail-wrap">
-      <button type="button" class="nudge prev" data-nudge="-240" aria-label="Previous people" hidden>
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.25 5.25 8 10 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="portraits" id="people" data-scroll></div>
-      <button type="button" class="nudge next" data-nudge="240" aria-label="Next people" hidden>
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.25 10.75 8 6 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
+    <div class="home-block" id="block-questions">
+      <div class="sec-hd">
+        <h2>Browse questions</h2>
+      </div>
+      <p class="sec-lede">Pick a topic, then a recommended question. Same path as Ask anything — twins answer, you choose who to continue with.</p>
+      <div class="topic-bar" id="topic-bar" role="toolbar" aria-label="Question topics"></div>
+      <div class="lived" id="lived"></div>
+      <div class="sec-hd" style="margin-top:28px">
+        <h2>Recommended</h2>
+        <span class="count" id="quick-count"></span>
+      </div>
+      <div class="quick" id="quick"></div>
     </div>
 
-    <div class="sec-hd">
-      <h2>From your Cosmos</h2>
-      <span class="count" id="post-count"></span>
+    <div class="home-block" id="block-experts">
+      <div class="sec-hd">
+        <h2>Consult experts</h2>
+        <span class="count" id="people-count"></span>
+      </div>
+      <p class="sec-lede">Twins and coaches by field. Open a chat with anyone.</p>
+      <div class="expert-bar" id="expert-bar" role="toolbar" aria-label="Expert fields"></div>
+      <div class="experts" id="people"></div>
     </div>
-    <p class="feed-note">Same posts as on the <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
-    <div class="quote-wrap">
-      <div class="quotes" id="posts"></div>
+
+    <div class="home-block" id="block-dynamics">
+      <div class="sec-hd">
+        <h2>Dynamics</h2>
+        <span class="count" id="post-count"></span>
+      </div>
+      <p class="sec-lede">Posts from twins — open one like a note. Same feed shows on your <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
+      <div class="dynamics" id="posts"></div>
+    </div>
+
+    <div class="home-block" id="block-build">
+      <div class="sec-hd">
+        <h2>Build your Cosmo</h2>
+      </div>
+      <p class="sec-lede">Connect apps that feed your twin. You can start here in Cosmo, or finish the same links later in Symbion.</p>
+      <div class="build-grid" id="build"></div>
     </div>
   </section>
 
@@ -703,16 +719,22 @@
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-const FILTERS = [
+const EXPERT_FILTERS = [
+  { id: "for-you", label: "For you", star: true },
   { id: "all", label: "All" },
-  { id: "domain", label: "Has a domain" },
-  { id: "course", label: "In your courses" },
-  { id: "talk", label: "Talk only" }
+  { id: "heavy-ion", label: "Heavy-ion" },
+  { id: "cosmology", label: "Cosmology" },
+  { id: "live", label: "Live" },
+  { id: "materials", label: "Materials" },
+  { id: "climate", label: "Climate" },
+  { id: "decisions", label: "Decisions" },
+  { id: "lab", label: "Lab" },
+  { id: "health", label: "Health" }
 ];
 
 const PEOPLE = [
   {
-    id: "roland", initials: "GR", name: "Prof. Roland", tone: "#14382e", kind: "twin", course: true,
+    id: "roland", initials: "GR", name: "Prof. Roland", tone: "#14382e", kind: "twin", course: true, field: "heavy-ion", fieldLabel: "Heavy-ion",
     role: "Heavy-ion physics · your course",
     domain: { name: "Heavy-ion physics", about: "The slides, the reading report, and the course live here. You read the posts and the files. You talk with the twin." },
     files: [
@@ -723,7 +745,7 @@ const PEOPLE = [
     follow: "Stay on that sentence. The next one is yours to write."
   },
   {
-    id: "pajer", initials: "EP", name: "Prof. Pajer", tone: "#1e3358", kind: "twin", course: true,
+    id: "pajer", initials: "EP", name: "Prof. Pajer", tone: "#1e3358", kind: "twin", course: true, field: "cosmology", fieldLabel: "Cosmology",
     role: "Cosmology · Cornell",
     domain: { name: "Cosmology", about: "The problem set and the line from class live in this domain. The twin only touches the line you point to." },
     files: [{ name: "Problem set 2", where: "Doc" }],
@@ -731,7 +753,7 @@ const PEOPLE = [
     follow: "Still just this line."
   },
   {
-    id: "luo", initials: "王", name: "骆王宇", tone: "#3d4450", kind: "twin", course: false,
+    id: "luo", initials: "王", name: "骆王宇", tone: "#3d4450", kind: "twin", course: false, field: "live", fieldLabel: "Live",
     role: "Live at 3:10 · the twin keeps the recap",
     domain: { name: "骆王宇", about: "The live is the person. This domain belongs to the twin: the recap, and the question you did not ask, become posts." },
     files: [],
@@ -739,7 +761,7 @@ const PEOPLE = [
     follow: "If you want the recap, say which part you missed."
   },
   {
-    id: "greer", initials: "JG", name: "Julia R. Greer", tone: "#24362c", kind: "twin", course: false,
+    id: "greer", initials: "JG", name: "Julia R. Greer", tone: "#24362c", kind: "twin", course: false, field: "materials", fieldLabel: "Materials",
     role: "Materials · Caltech",
     domain: { name: "Materials", about: "Posts about scale, the sample, and the lattice live here. The twin speaks from the sentence in the post." },
     files: [{ name: "Lattice note", where: "Doc" }],
@@ -747,7 +769,7 @@ const PEOPLE = [
     follow: "Send the two scales."
   },
   {
-    id: "anastasia", initials: "AR", name: "Anastasia Romanou", tone: "#1a3330", kind: "twin", course: false,
+    id: "anastasia", initials: "AR", name: "Anastasia Romanou", tone: "#1a3330", kind: "twin", course: false, field: "climate", fieldLabel: "Climate",
     role: "Climate mathematics · Columbia",
     domain: { name: "Climate mathematics", about: "The notebook and the figure you are about to draw live here. A post names the axes before it names a trend." },
     files: [{ name: "Climate notebook", where: "Code" }],
@@ -755,7 +777,7 @@ const PEOPLE = [
     follow: "Tell me which axis you changed."
   },
   {
-    id: "xu", initials: "HX", name: "Prof. Xu", tone: "#3d2c14", kind: "twin", course: false,
+    id: "xu", initials: "HX", name: "Prof. Xu", tone: "#3d2c14", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions",
     role: "AI and decisions · data and pricing",
     domain: null,
     files: [],
@@ -763,7 +785,7 @@ const PEOPLE = [
     follow: "Send the row count and the sentence you want to write."
   },
   {
-    id: "lab", initials: "LR", name: "Lab Report Coach", tone: "#6a4a12", kind: "agent", course: true,
+    id: "lab", initials: "LR", name: "Lab Report Coach", tone: "#6a4a12", kind: "agent", course: true, field: "lab", fieldLabel: "Lab",
     role: "Drafts the lab report in Doc",
     domain: null,
     files: [],
@@ -771,13 +793,22 @@ const PEOPLE = [
     follow: "Point to the section you do not trust. It is usually Method."
   },
   {
-    id: "smith", initials: "KS", name: "Katherine F. Smith", tone: "#243044", kind: "twin", course: false,
+    id: "smith", initials: "KS", name: "Katherine F. Smith", tone: "#243044", kind: "twin", course: false, field: "health", fieldLabel: "Health",
     role: "Planetary health · Brown",
     domain: { name: "Planetary health", about: "A health number and the people it counted are posted here. A sentence with no people does not stay." },
     files: [],
     reply: "A health number needs the people it counted. If you cannot name them, do not send the sentence yet.",
     follow: "Send the number and the people together."
   }
+];
+
+const BUILD_APPS = [
+  { id: "desk", app: "Desk", title: "Symbion Desk", blurb: "Pull courses, reminders, and files you already use on the desk.", soon: false },
+  { id: "notion", app: "Notion", title: "Notion", blurb: "Sync notes and pages your twin can cite when you ask.", soon: false },
+  { id: "drive", app: "Drive", title: "Google Drive", blurb: "Attach decks and docs from shared folders.", soon: false },
+  { id: "calendar", app: "Calendar", title: "Calendar", blurb: "Let the twin see live times and office hours.", soon: true },
+  { id: "slack", app: "Slack", title: "Slack", blurb: "Bring thread context into Cosmo chats.", soon: true },
+  { id: "files", app: "Files", title: "Local files", blurb: "Upload readings the twin should stay inside.", soon: false }
 ];
 
 const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
@@ -806,12 +837,14 @@ const LIVED_TOPICS = [
 const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
 
 const QUICK = [
-  { q: "Temperature is which axis on lecture 5?", tag: "Heavy-ion" },
-  { q: "Is the 3:10 live the twin?", tag: "Live" },
-  { q: "Paste the cosmology line I am stuck on.", tag: "Cosmology" },
-  { q: "How many rows are in the pricing sample?", tag: "Decisions" },
-  { q: "I changed an axis in the climate notebook.", tag: "Climate" },
-  { q: "I do not trust the method section.", tag: "Lab report" }
+  { q: "Temperature is which axis on lecture 5?", tag: "Heavy-ion", topic: "heavy-ion" },
+  { q: "Is the 3:10 live the twin?", tag: "Live", topic: "live" },
+  { q: "Paste the cosmology line I am stuck on.", tag: "Cosmology", topic: "cosmology" },
+  { q: "How many rows are in the pricing sample?", tag: "Decisions", topic: "decisions" },
+  { q: "I changed an axis in the climate notebook.", tag: "Climate", topic: "climate" },
+  { q: "I do not trust the method section.", tag: "Lab report", topic: "lab" },
+  { q: "Name the two scales in the lattice note.", tag: "Materials", topic: "all" },
+  { q: "Who did this health number count?", tag: "Health", topic: "all" }
 ];
 
 const ASK = {
@@ -893,7 +926,7 @@ const POSTS = [
 
 const state = {
   view: "home",
-  filter: "all",
+  expertFilter: "for-you",
   livedTopic: "for-you",
   query: "",
   who: null,
@@ -905,6 +938,7 @@ const state = {
   question: "",
   threads: {},
   read: new Set(),
+  connected: new Set(["desk"]),
   typing: false
 };
 
@@ -932,16 +966,13 @@ function personMatches(p) {
 }
 function visiblePeople() {
   return PEOPLE.filter((p) => {
-    if (state.filter === "domain" && !p.domain) return false;
-    if (state.filter === "course" && !p.course) return false;
-    if (state.filter === "talk" && p.domain) return false;
+    if (state.expertFilter === "for-you" && !p.course) return false;
+    if (state.expertFilter !== "all" && state.expertFilter !== "for-you" && p.field !== state.expertFilter) return false;
     return personMatches(p);
   });
 }
 function visiblePosts() {
-  const ids = new Set(visiblePeople().map((p) => p.id));
   return POSTS.filter((item) => {
-    if (!ids.has(item.author)) return false;
     const p = person(item.author);
     return matches(`${item.title} ${item.meta} ${item.action} ${item.paragraphs.join(" ")} ${p.name} ${p.domain ? p.domain.name : ""}`);
   });
@@ -952,28 +983,26 @@ function av(p, size) {
   return `<span class="av${cls}${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">${esc(p.initials)}</span>`;
 }
 
-function renderFilters() {
-  $("filters").innerHTML = FILTERS.map((f) =>
-    `<button type="button" class="chip" data-filter="${f.id}" aria-pressed="${f.id === state.filter}">${esc(f.label)}</button>`
-  ).join("");
+function renderExpertBar() {
+  const parts = [];
+  EXPERT_FILTERS.forEach((t, i) => {
+    if (i === 1) parts.push(`<span class="sep" aria-hidden="true"></span>`);
+    const star = t.star ? STAR_CHIP : "";
+    parts.push(`<button type="button" class="chip" data-expert-filter="${t.id}" aria-pressed="${t.id === state.expertFilter}">${star}${esc(t.label)}</button>`);
+  });
+  $("expert-bar").innerHTML = parts.join("");
 }
 function renderPeople() {
+  renderExpertBar();
   const people = visiblePeople();
-  $("people-count").textContent = people.length === 1 ? "1 person" : `${people.length} people`;
-  $("people").innerHTML = people.length ? people.map((p) => {
-    const place = p.domain ? "" : `<span class="place">No domain</span>`;
-    return `<article class="portrait${p.kind === "agent" ? " agent" : ""}" style="--tone:${p.tone}">
+  $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
+  $("people").innerHTML = people.length ? people.map((p) => `<article class="expert${p.kind === "agent" ? " agent" : ""}">
       <div class="mono">${esc(p.initials)}</div>
-      <div class="shade"></div>
-      <div class="foot">
-        <span class="nm">${esc(p.name)}</span>
-        <span class="role">${esc(p.role)}</span>
-        ${place}
-        <button type="button" class="about-line" data-ask="${esc(ASK[p.id][1])}">${esc(ASK[p.id][0])}</button>
-      </div>
-    </article>`;
-  }).join("") : `<div class="empty">No one matches.</div>`;
-  requestAnimationFrame(updateScroller);
+      <span class="nm">${esc(p.name)}</span>
+      <span class="role">${esc(p.role)}</span>
+      <span class="field">${esc(p.fieldLabel)}</span>
+      <button type="button" class="chat" data-talk="${p.id}">Chat</button>
+    </article>`).join("") : `<div class="empty">No experts match.</div>`;
 }
 function actRow(item, from) {
   const p = person(item.author);
@@ -994,10 +1023,7 @@ function renderPosts() {
   count.textContent = unread ? `${unread} new` : "";
   count.classList.toggle("is-new", unread > 0);
   if (!rows.length) {
-    const reason = state.filter === "talk"
-      ? "Nothing from them in From your Cosmos. Talk with them directly."
-      : "No posts match.";
-    $("posts").innerHTML = `<div class="empty">${esc(reason)}</div>`;
+    $("posts").innerHTML = `<div class="empty">No posts match.</div>`;
     return;
   }
   $("posts").innerHTML = rows.map((item) => {
@@ -1008,33 +1034,36 @@ function renderPosts() {
       <span class="qghost" aria-hidden="true"><b class="soft">${esc(p.name)}</b><b>${esc(p.name)}</b></span>
       <span class="qmark" aria-hidden="true">“</span>
       <span class="qt">${esc(item.title)}</span>
-      <span class="qmeta"><span class="qpill">${esc(where)}</span><span class="qpill go">${esc(item.action)}</span></span>
+      <span class="qmeta"><span class="qpill">${esc(p.name)}</span><span class="qpill">${esc(where)}</span><span class="qpill go">${esc(item.action)}</span></span>
       <span class="qchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </button>`;
   }).join("");
 }
-function livedVisible(item, shown) {
-  if (!shown.some((p) => p.id === item.id)) return false;
-  const topic = state.livedTopic;
+function topicMatches(topic, itemTopic) {
   if (topic === "all") return true;
-  if (topic === "for-you") return !!person(item.id).course;
-  return item.topic === topic;
+  if (topic === "for-you") return itemTopic === "heavy-ion" || itemTopic === "cosmology" || itemTopic === "lab";
+  return itemTopic === topic;
+}
+function livedVisible(item) {
+  const p = person(item.id);
+  if (!p || !personMatches(p)) return false;
+  if (state.livedTopic === "for-you") return !!p.course;
+  return topicMatches(state.livedTopic, item.topic);
 }
 
-function renderLivedTopics() {
+function renderTopicBar() {
   const parts = [];
   LIVED_TOPICS.forEach((t, i) => {
     if (i === 1) parts.push(`<span class="sep" aria-hidden="true"></span>`);
     const star = t.star ? STAR_CHIP : "";
     parts.push(`<button type="button" class="chip" data-lived-topic="${t.id}" aria-pressed="${t.id === state.livedTopic}">${star}${esc(t.label)}</button>`);
   });
-  $("lived-topics").innerHTML = parts.join("");
+  $("topic-bar").innerHTML = parts.join("");
 }
 
 function renderLived() {
-  renderLivedTopics();
-  const shown = visiblePeople();
-  const cards = LIVED.filter((item) => livedVisible(item, shown));
+  renderTopicBar();
+  const cards = LIVED.filter((item) => livedVisible(item));
   $("lived").innerHTML = cards.length ? cards.map((item) => {
     const p = person(item.id);
     const where = p.domain ? p.domain.name : "No domain";
@@ -1043,24 +1072,39 @@ function renderLived() {
       <p class="lead">${esc(item.lead)} <span class="accent">${esc(item.accent)}</span></p>
       <span class="tags"><span class="tag">${esc(where)}</span>${p.course ? `<span class="tag">Your course</span>` : ""}</span>
     </button>`;
-  }).join("") : `<div class="empty">No one matches.</div>`;
+  }).join("") : `<div class="empty">No prompts in this topic.</div>`;
 }
 
 function renderQuick() {
-  const shown = new Set(visiblePeople().map((p) => p.id));
-  const cards = QUICK.map((item) => ({ item, people: relatedPeople(item.q).filter((p) => shown.has(p.id)) })).filter((row) => row.people.length);
+  const cards = QUICK.filter((item) => topicMatches(state.livedTopic, item.topic) && matches(`${item.q} ${item.tag}`))
+    .map((item) => ({ item, people: relatedPeople(item.q) }))
+    .filter((row) => row.people.length);
+  $("quick-count").textContent = cards.length ? `${cards.length}` : "";
   $("quick").innerHTML = cards.length ? cards.map(({ item, people }) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
       <span class="line">${esc(item.q)}</span>
       <span class="foot"><span class="tag">${esc(item.tag)}</span><span class="faces">${people.map((p) => av(p, "sm")).join("")}</span></span>
-    </button>`).join("") : `<div class="empty">No question matches.</div>`;
+    </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
+}
+
+function renderBuild() {
+  $("build").innerHTML = BUILD_APPS.map((app) => {
+    const on = state.connected.has(app.id);
+    const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
+    return `<article class="build-card${app.soon ? " is-soon" : ""}">
+      <span class="app">${esc(app.app)}</span>
+      <b>${esc(app.title)}</b>
+      <p>${esc(app.blurb)}</p>
+      <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
+    </article>`;
+  }).join("");
 }
 
 function renderHome() {
   renderLived();
   renderQuick();
-  renderFilters();
   renderPeople();
   renderPosts();
+  renderBuild();
 }
 
 const TOPICS = {
@@ -1121,15 +1165,15 @@ function openAnswers(text) {
     return;
   }
   $("ask-lede").textContent = people.length === 1
-    ? "This person can take it. Continue if you want to keep going."
-    : "People this concerns. Continue with anyone.";
+    ? "One twin can take this. Continue if you want to keep chatting."
+    : "Related twins answered. Continue with the one you care about.";
   $("ask-cards").innerHTML = people.map((p) => `<article class="answer">
     <div>
       <div class="who-line">${av(p)}<div><b>${esc(p.name)}</b><div class="meta">${esc(p.role)}</div></div></div>
       <p class="say">${esc(p.reply)}</p>
       <p class="disc">A synthetic digital human, not the person.</p>
     </div>
-    <button type="button" class="btn primary" data-continue="${p.id}">Continue</button>
+    <button type="button" class="btn primary" data-continue="${p.id}">Continue chatting</button>
   </article>`).join("");
 }
 
@@ -1275,39 +1319,32 @@ function openPost(id, from) {
   `;
 }
 
-function updateScroller() {
-  const el = $("people");
-  if (!el) return;
-  const wrap = el.parentElement;
-  const prev = wrap.querySelector(".prev");
-  const next = wrap.querySelector(".next");
-  const max = el.scrollWidth - el.clientWidth;
-  const overflow = max > 8;
-  prev.hidden = !overflow || el.scrollLeft < 8;
-  next.hidden = !overflow || el.scrollLeft > max - 8;
-}
-
 document.addEventListener("mousedown", (e) => {
-  if (e.target.closest("[data-nudge], .portrait button, .qcard, .qask, .lived-card")) e.preventDefault();
+  if (e.target.closest(".qcard, .qask, .lived-card, .expert .chat, .build-card .connect")) e.preventDefault();
 });
 document.addEventListener("click", (e) => {
-  const nudge = e.target.closest("[data-nudge]");
-  if (nudge) {
-    e.preventDefault();
-    $("people").scrollBy({ left: Number(nudge.dataset.nudge), behavior: "smooth" });
-    return;
-  }
   const livedTopic = e.target.closest("[data-lived-topic]");
   if (livedTopic) {
     state.livedTopic = livedTopic.dataset.livedTopic;
     renderLived();
+    renderQuick();
     return;
   }
-  const filter = e.target.closest("[data-filter]");
-  if (filter) {
-    state.filter = filter.dataset.filter;
+  const expertFilter = e.target.closest("[data-expert-filter]");
+  if (expertFilter) {
+    state.expertFilter = expertFilter.dataset.expertFilter;
     if (state.who && !visiblePeople().some((p) => p.id === state.who)) state.who = null;
-    renderHome();
+    renderPeople();
+    renderPosts();
+    return;
+  }
+  const connect = e.target.closest("[data-connect]");
+  if (connect && !connect.disabled) {
+    const id = connect.dataset.connect;
+    if (state.connected.has(id)) state.connected.delete(id);
+    else state.connected.add(id);
+    renderBuild();
+    toast(state.connected.has(id) ? "Connected in Cosmo — you can mirror this in Symbion later" : "Disconnected");
     return;
   }
   const talk = e.target.closest("[data-talk]");
@@ -1332,6 +1369,23 @@ document.addEventListener("click", (e) => {
   }
   const keep = e.target.closest("[data-continue]");
   if (keep) continueWith(keep.dataset.continue);
+  const orbit = e.target.closest(".orbit span");
+  if (orbit) {
+    const label = orbit.textContent.trim().toLowerCase();
+    const map = {
+      "heavy-ion physics": "heavy-ion",
+      cosmology: "cosmology",
+      "climate mathematics": "climate",
+      "planetary health": "all"
+    };
+    const topic = map[label];
+    if (topic) {
+      state.livedTopic = topic;
+      renderLived();
+      renderQuick();
+      $("block-questions").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
 });
 
 $("home-form").addEventListener("submit", (e) => {
@@ -1373,12 +1427,12 @@ $("q").addEventListener("input", () => {
   state.query = $("q").value;
   if (state.who && !visiblePeople().some((p) => p.id === state.who)) state.who = null;
   if (state.view === "home") {
+    renderLived();
+    renderQuick();
     renderPeople();
     renderPosts();
   }
 });
-$("people").addEventListener("scroll", updateScroller, { passive: true });
-addEventListener("resize", updateScroller);
 addEventListener("scroll", () => {
   $("top").classList.toggle("is-stuck", scrollY > 4);
 }, { passive: true });

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027151910">
+  <meta name="cosmo-build" content="20261027152100">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -347,8 +347,8 @@
   .faces .av { margin-left: -8px; box-shadow: 0 0 0 2px #fff; }
   .faces .av:first-child { margin-left: 0; }
 
-  .expert-rail { position: relative; }
-  .expert-rail::after {
+  .expert-rail, .dynamics-rail { position: relative; }
+  .expert-rail::after, .dynamics-rail::after {
     content: "";
     position: absolute; top: 0; right: 0; bottom: 18px; width: 140px;
     pointer-events: none; z-index: 1;
@@ -367,23 +367,23 @@
     opacity: 1;
     transition: opacity .2s ease;
   }
-  .expert-rail.is-end::after { opacity: 0; }
-  .experts {
+  .expert-rail.is-end::after, .dynamics-rail.is-end::after { opacity: 0; }
+  .experts, .dynamics {
     display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
     overscroll-behavior: contain;
     padding: 6px 2px 18px; scrollbar-width: none;
   }
-  .experts::-webkit-scrollbar { display: none; }
-  .expert-nudge {
+  .experts::-webkit-scrollbar, .dynamics::-webkit-scrollbar { display: none; }
+  .expert-nudge, .rail-nudge {
     position: absolute; top: 42%; z-index: 2; transform: translateY(-50%);
     width: 34px; height: 34px; border-radius: 17px;
     background: #fff; border: 1px solid var(--line);
     box-shadow: 0 8px 18px var(--shadow);
     color: var(--ink); display: inline-flex; align-items: center; justify-content: center;
   }
-  .expert-nudge.prev { left: 8px; }
-  .expert-nudge.next { right: 8px; }
-  .expert-nudge:hover { background: var(--green-wash); }
+  .expert-nudge.prev, .rail-nudge.prev { left: 8px; }
+  .expert-nudge.next, .rail-nudge.next { right: 8px; }
+  .expert-nudge:hover, .rail-nudge:hover { background: var(--green-wash); }
 
   .expert {
     position: relative; flex: none; width: 260px; height: 360px;
@@ -437,11 +437,8 @@
   .expert .ask-about:hover { background: rgba(9,9,11,.55); }
 
   .quote-wrap { position: relative; }
-  .dynamics {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-  }
   .dynamics .qcard {
-    width: auto; min-height: 220px; flex: none;
+    width: min(420px, 78vw); min-height: 220px; flex: none; scroll-snap-align: start;
   }
 
   .build-grid {
@@ -703,7 +700,7 @@
     .stage { min-height: 0; padding: 28px 0 8px; }
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
-    .lived, .quick, .answer, .dynamics, .build-grid { grid-template-columns: 1fr; }
+    .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
     .expert { width: 220px; height: 320px; }
     .expert-rail::after { width: 48px; }
   }
@@ -799,10 +796,17 @@
       <div class="sec-hd">
         <h2>Dynamics</h2>
         <span class="count" id="post-count"></span>
-        <button type="button" class="shuffle" data-shuffle="posts" aria-label="Shuffle posts"></button>
       </div>
       <p class="sec-lede">Posts from twins — open one like a note. Same feed shows on your <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
-      <div class="dynamics" id="posts"></div>
+      <div class="dynamics-rail">
+        <button type="button" class="rail-nudge prev" data-rail-nudge="-320" data-rail="posts" aria-label="Previous posts" hidden>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.25 5.25 8 10 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dynamics" id="posts"></div>
+        <button type="button" class="rail-nudge next" data-rail-nudge="320" data-rail="posts" aria-label="Next posts" hidden>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.25 10.75 8 6 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
 
     <div class="home-block" id="block-build">
@@ -1228,7 +1232,7 @@ const state = {
   read: new Set(),
   connected: new Set(["desk"]),
   typing: false,
-  shuffleSeed: { lived: 1, quick: 1, experts: 1, posts: 1 }
+  shuffleSeed: { lived: 1, quick: 1, experts: 1 }
 };
 
 const $ = (id) => document.getElementById(id);
@@ -1327,13 +1331,14 @@ function actRow(item, from) {
   </button>`;
 }
 function renderPosts() {
-  const rows = shuffleCopy(visiblePosts(), state.shuffleSeed.posts);
+  const rows = visiblePosts();
   const unread = rows.filter((item) => !state.read.has(item.id)).length;
   const count = $("post-count");
   count.textContent = unread ? `${unread} new` : "";
   count.classList.toggle("is-new", unread > 0);
   if (!rows.length) {
     $("posts").innerHTML = `<div class="empty">No posts match.</div>`;
+    requestAnimationFrame(updateDynamicsScroller);
     return;
   }
   $("posts").innerHTML = rows.map((item) => {
@@ -1348,6 +1353,22 @@ function renderPosts() {
       <span class="qchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </button>`;
   }).join("");
+  requestAnimationFrame(updateDynamicsScroller);
+}
+function updateDynamicsScroller() {
+  const el = $("posts");
+  if (!el) return;
+  const wrap = el.parentElement;
+  if (!wrap || !wrap.classList.contains("dynamics-rail")) return;
+  const prev = wrap.querySelector(".prev");
+  const next = wrap.querySelector(".next");
+  if (!prev || !next) return;
+  const max = el.scrollWidth - el.clientWidth;
+  const overflow = max > 8;
+  const atEnd = !overflow || el.scrollLeft > max - 8;
+  prev.hidden = !overflow || el.scrollLeft < 8;
+  next.hidden = atEnd;
+  wrap.classList.toggle("is-end", atEnd);
 }
 function livedVisible(item) {
   const p = person(item.id);
@@ -1630,13 +1651,20 @@ function openPost(id, from) {
 }
 
 document.addEventListener("mousedown", (e) => {
-  if (e.target.closest(".qcard, .qask, .lived-card, .expert .ask-about, .build-card .connect, [data-expert-nudge]")) e.preventDefault();
+  if (e.target.closest(".qcard, .qask, .lived-card, .expert .ask-about, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
 });
 document.addEventListener("click", (e) => {
   const expertNudge = e.target.closest("[data-expert-nudge]");
   if (expertNudge) {
     e.preventDefault();
     $("people").scrollBy({ left: Number(expertNudge.dataset.expertNudge), behavior: "smooth" });
+    return;
+  }
+  const railNudge = e.target.closest("[data-rail-nudge]");
+  if (railNudge) {
+    e.preventDefault();
+    const rail = $(railNudge.dataset.rail);
+    if (rail) rail.scrollBy({ left: Number(railNudge.dataset.railNudge), behavior: "smooth" });
     return;
   }
   const shuffleBtn = e.target.closest("[data-shuffle]");
@@ -1647,7 +1675,6 @@ document.addEventListener("click", (e) => {
     if (key === "lived") renderLived();
     else if (key === "quick") renderQuick();
     else if (key === "experts") renderPeople();
-    else if (key === "posts") renderPosts();
     return;
   }
   const livedTopic = e.target.closest("[data-lived-topic]");
@@ -1763,7 +1790,8 @@ $("q").addEventListener("input", () => {
   }
 });
 $("people").addEventListener("scroll", updateExpertScroller, { passive: true });
-addEventListener("resize", updateExpertScroller);
+$("posts").addEventListener("scroll", updateDynamicsScroller, { passive: true });
+addEventListener("resize", () => { updateExpertScroller(); updateDynamicsScroller(); });
 addEventListener("scroll", () => {
   $("top").classList.toggle("is-stuck", scrollY > 4);
 }, { passive: true });

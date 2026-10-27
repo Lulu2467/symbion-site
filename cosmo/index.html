@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027172040">
+  <meta name="cosmo-build" content="20261027172130">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -493,15 +493,6 @@
     max-width: 720px;
     margin: 0 auto 40px;
   }
-  #block-build .build-intro .eyebrow {
-    margin: 0 0 28px;
-    font-size: 14px; font-weight: 500; color: var(--muted);
-    letter-spacing: 0;
-    text-transform: none;
-  }
-  #block-build .build-intro .eyebrow .count {
-    margin-left: 8px; color: var(--faint); font-size: 13px;
-  }
   #block-build .build-intro h2 {
     margin: 0;
     font-size: clamp(32px, 4.2vw, 48px);
@@ -906,7 +897,6 @@
     .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
     #block-build { margin-top: 56px; padding-top: 48px; }
     #block-build .build-intro { margin-bottom: 28px; }
-    #block-build .build-intro .eyebrow { margin-bottom: 18px; }
     #block-build .build-intro h2 { font-size: 30px; }
     .build-panel { grid-template-columns: 1fr; padding: 26px 20px 24px; min-height: 0; gap: 22px; }
     .build-viz { min-height: 220px; order: -1; }
@@ -1028,7 +1018,6 @@
 
     <div class="home-block" id="block-build">
       <div class="build-intro">
-        <p class="eyebrow">Build your Cosmo<span class="count" id="build-status"></span></p>
         <h2>What one mind knows should help another.</h2>
         <p class="lede">Shape what your twin knows — three steps, then connect the apps that feed it.</p>
       </div>
@@ -1803,8 +1792,6 @@ function renderBuild() {
     </article>`;
     }).join("");
   }
-  const status = $("build-status");
-  if (status) status.textContent = n ? `${n} linked` : "";
   const stepLink = $("build-step-link");
   if (stepLink) {
     stepLink.textContent = n <= 1

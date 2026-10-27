@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027164820">
+  <meta name="cosmo-build" content="20261027172040">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -458,14 +458,14 @@
   .expert::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg,
-      transparent 36%,
-      rgba(0,0,0,.22) 54%,
-      rgba(0,0,0,.72) 76%,
-      rgba(0,0,0,.9) 100%);
+      transparent 48%,
+      rgba(0,0,0,.18) 68%,
+      rgba(0,0,0,.62) 88%,
+      rgba(0,0,0,.78) 100%);
   }
   .expert .foot {
-    position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 2;
-    display: flex; flex-direction: column; gap: 4px;
+    position: absolute; left: 16px; right: 16px; bottom: 18px; z-index: 2;
+    display: flex; flex-direction: column; gap: 5px;
   }
   .expert .nm {
     display: flex; align-items: center; gap: 6px;
@@ -477,20 +477,7 @@
   .expert .role {
     font-size: 13.5px; line-height: 1.35; color: rgba(255,255,255,.92);
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-    margin-bottom: 2px;
   }
-  .expert .ask-about {
-    margin-top: 8px;
-    width: 100%; text-align: left;
-    border-radius: 999px; padding: 11px 14px;
-    font-size: 13px; font-weight: 500; line-height: 1.3;
-    color: #fff;
-    background: rgba(40,44,52,.55);
-    border: 1px solid rgba(255,255,255,.32);
-    backdrop-filter: blur(16px) saturate(1.15);
-    -webkit-backdrop-filter: blur(16px) saturate(1.15);
-  }
-  .expert .ask-about:hover { background: rgba(55,60,70,.68); }
 
   .quote-wrap { position: relative; }
   .dynamics .qcard {
@@ -931,7 +918,6 @@
     .expert { width: 260px; height: 344px; }
     .expert .nm { font-size: 18px; }
     .expert .role { font-size: 12.5px; }
-    .expert .ask-about { font-size: 12px; padding: 10px 12px; }
     .rail-fade { width: 96px; }
   }
 </style>
@@ -1637,7 +1623,6 @@ function renderPeople() {
   $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
-    const ask = ASK[p.id] || ["Ask about their work", "Tell me what you work on."];
     const shot = faceUrl(p.id, 640, 960);
     const media = shot
       ? `<div class="shot"><span class="shot-fallback" aria-hidden="true">${esc(p.initials)}</span><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${IMG_MISS}"></div>`
@@ -1647,7 +1632,6 @@ function renderPeople() {
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(p.role)}</span>
-        <button type="button" class="ask-about" data-ask="${esc(ask[1])}">${esc(ask[0])}</button>
       </div>
     </article>`;
   }).join("") : `<div class="empty">No experts match.</div>`;
@@ -2074,7 +2058,7 @@ function openPost(id, from) {
 }
 
 document.addEventListener("mousedown", (e) => {
-  if (e.target.closest(".qcard, .qask, .lived-card, .expert .ask-about, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
+  if (e.target.closest(".qcard, .qask, .lived-card, .build-card .connect, [data-expert-nudge], [data-rail-nudge]")) e.preventDefault();
 });
 document.addEventListener("click", (e) => {
   const expertNudge = e.target.closest("[data-expert-nudge]");

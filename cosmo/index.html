@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027151540">
+  <meta name="cosmo-build" content="20261027151730">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -206,9 +206,14 @@
   .chip[aria-pressed="true"] { border-color: var(--green); }
   .chip[aria-pressed="true"] { background: var(--green); color: #fff; }
 
+  .filter-row {
+    display: flex; align-items: center; gap: 10px;
+    margin: -2px 0 14px;
+  }
   .topic-bar, .expert-bar {
     display: flex; align-items: center; gap: 8px;
-    margin: -2px 0 14px; overflow: auto; scrollbar-width: none;
+    flex: 1; min-width: 0;
+    margin: 0; overflow: auto; scrollbar-width: none;
   }
   .topic-bar::-webkit-scrollbar, .expert-bar::-webkit-scrollbar { display: none; }
   .topic-bar .sep, .expert-bar .sep {
@@ -257,15 +262,16 @@
   .sec-hd { display: flex; align-items: center; gap: 10px; margin: 48px 0 10px; }
   .sec-hd h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.025em; line-height: 1.4; color: var(--ink); }
   .sec-hd .count { font-size: 12px; color: var(--faint); font-weight: 500; }
-  .sec-hd .shuffle {
-    margin-left: auto; flex: none;
+  .sec-hd .shuffle { margin-left: auto; }
+  .shuffle {
+    flex: none;
     width: 28px; height: 28px; padding: 0;
     border: 0; background: transparent; color: #515151;
     display: inline-flex; align-items: center; justify-content: center;
   }
-  .sec-hd .shuffle:hover { color: var(--ink); }
-  .sec-hd .shuffle:active { transform: rotate(-12deg); }
-  .sec-hd .shuffle svg { width: 18px; height: 18px; display: block; }
+  .shuffle:hover { color: var(--ink); }
+  .shuffle:active { transform: rotate(-12deg); }
+  .shuffle svg { width: 18px; height: 18px; display: block; }
   .sec-lede { margin: 0 0 14px; max-width: 560px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
   .home-block { scroll-margin-top: 88px; }
@@ -739,10 +745,12 @@
     <div class="home-block" id="block-questions">
       <div class="sec-hd">
         <h2>Browse questions</h2>
-        <button type="button" class="shuffle" data-shuffle="lived" aria-label="Shuffle questions"></button>
       </div>
       <p class="sec-lede">Pick a topic, then a recommended question. Same path as Ask anything — twins answer, you choose who to continue with.</p>
-      <div class="topic-bar" id="topic-bar" role="toolbar" aria-label="Question topics"></div>
+      <div class="filter-row">
+        <div class="topic-bar" id="topic-bar" role="toolbar" aria-label="Question topics"></div>
+        <button type="button" class="shuffle" data-shuffle="lived" aria-label="Shuffle questions"></button>
+      </div>
       <div class="lived" id="lived"></div>
       <div class="sec-hd" style="margin-top:28px">
         <h2>Recommended</h2>
@@ -756,10 +764,12 @@
       <div class="sec-hd">
         <h2>Consult experts</h2>
         <span class="count" id="people-count"></span>
-        <button type="button" class="shuffle" data-shuffle="experts" aria-label="Shuffle experts"></button>
       </div>
       <p class="sec-lede">Twins and coaches by field. Ask about their work, then keep chatting.</p>
-      <div class="expert-bar" id="expert-bar" role="toolbar" aria-label="Expert fields"></div>
+      <div class="filter-row">
+        <div class="expert-bar" id="expert-bar" role="toolbar" aria-label="Expert fields"></div>
+        <button type="button" class="shuffle" data-shuffle="experts" aria-label="Shuffle experts"></button>
+      </div>
       <div class="expert-rail">
         <button type="button" class="expert-nudge prev" data-expert-nudge="-280" aria-label="Previous experts" hidden>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.25 5.25 8 10 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>

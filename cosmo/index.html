@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027160100">
+  <meta name="cosmo-build" content="20261027160320">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -518,11 +518,45 @@
     text-align: center;
   }
   .build-panel {
-    display: flex; flex-direction: column; gap: 28px;
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px 36px;
+    align-items: stretch;
     background: #fff; border: 1px solid var(--line); border-radius: 28px;
-    padding: 36px 40px 34px;
-    min-height: 420px;
+    padding: 36px 36px 34px;
+    min-height: 440px;
   }
+  .build-main {
+    display: flex; flex-direction: column; gap: 28px; min-width: 0;
+  }
+  .build-viz {
+    position: relative; border-radius: 22px; overflow: hidden;
+    background:
+      radial-gradient(90% 80% at 70% 20%, #dceef7 0%, transparent 55%),
+      linear-gradient(165deg, #eef5f8 0%, #f7fafb 45%, #e8f1f6 100%);
+    min-height: 360px;
+  }
+  .build-viz .viz-photo {
+    position: absolute; overflow: hidden; border-radius: 16px;
+    box-shadow: 0 14px 32px rgba(40, 80, 110, .12);
+    background: #d7e6ef;
+  }
+  .build-viz .viz-photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .build-viz .p1 { width: 46%; height: 54%; left: 10%; top: 12%; transform: rotate(-4deg); }
+  .build-viz .p2 { width: 42%; height: 48%; right: 8%; top: 22%; transform: rotate(5deg); z-index: 1; }
+  .build-viz .p3 { width: 52%; height: 36%; left: 22%; bottom: 10%; transform: rotate(-2deg); z-index: 2; }
+  .build-viz .chip {
+    position: absolute; z-index: 3;
+    border-radius: 999px; padding: 8px 12px;
+    font-size: 12px; font-weight: 600; color: var(--ink);
+    background: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 8px 18px rgba(40, 80, 110, .08);
+    backdrop-filter: blur(8px);
+  }
+  .build-viz .chip.a { left: 12%; top: 8%; }
+  .build-viz .chip.b { right: 10%; top: 14%; }
+  .build-viz .chip.c { left: 18%; bottom: 14%; }
   .build-steps {
     margin: 0; padding: 0; list-style: none;
     display: flex; flex-direction: column; gap: 0;
@@ -827,7 +861,8 @@
     #block-build .build-intro { margin-bottom: 28px; }
     #block-build .build-intro .eyebrow { margin-bottom: 18px; }
     #block-build .build-intro h2 { font-size: 30px; }
-    .build-panel { padding: 26px 20px 24px; min-height: 0; gap: 22px; }
+    .build-panel { grid-template-columns: 1fr; padding: 26px 20px 24px; min-height: 0; gap: 22px; }
+    .build-viz { min-height: 220px; order: -1; }
     .build-steps li { padding: 18px 0; gap: 12px 14px; grid-template-columns: 34px 1fr; }
     .build-steps .n { width: 34px; height: 34px; border-radius: 17px; font-size: 14px; }
     .build-steps .t { font-size: 18px; }
@@ -950,15 +985,25 @@
         <p class="lede">Shape what your twin knows — three steps, then connect the apps that feed it.</p>
       </div>
       <div class="build-panel">
-        <ol class="build-steps" id="build-steps">
-          <li><span class="n">1</span><span class="t">Pick sources</span><span class="d">Courses, notes, and files the twin should learn from.</span></li>
-          <li><span class="n">2</span><span class="t">Connect apps</span><span class="d" id="build-step-link">Desk is linked. Add Notion, Drive, or files when ready.</span></li>
-          <li><span class="n">3</span><span class="t">Ask with context</span><span class="d">Cosmo uses those links when you ask — same links work in Symbion.</span></li>
-        </ol>
-        <div class="build-cta">
-          <button type="button" class="go" data-open-build>Customize your Cosmo</button>
-          <p class="hint" id="build-hint">Open the full list of apps and connections.</p>
+        <div class="build-main">
+          <ol class="build-steps" id="build-steps">
+            <li><span class="n">1</span><span class="t">Pick sources</span><span class="d">Courses, notes, and files the twin should learn from.</span></li>
+            <li><span class="n">2</span><span class="t">Connect apps</span><span class="d" id="build-step-link">Desk is linked. Add Notion, Drive, or files when ready.</span></li>
+            <li><span class="n">3</span><span class="t">Ask with context</span><span class="d">Cosmo uses those links when you ask — same links work in Symbion.</span></li>
+          </ol>
+          <div class="build-cta">
+            <button type="button" class="go" data-open-build>Customize your Cosmo</button>
+            <p class="hint" id="build-hint">Open the full list of apps and connections.</p>
+          </div>
         </div>
+        <aside class="build-viz" aria-hidden="true">
+          <span class="chip a">Desk</span>
+          <span class="chip b">Notion</span>
+          <span class="chip c">Drive · files</span>
+          <div class="viz-photo p1"><img src="https://images.unsplash.com/photo-1456513080080-7e9e7be56143?auto=format&fit=crop&w=480&h=560&q=80" alt="" loading="lazy"></div>
+          <div class="viz-photo p2"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=440&h=520&q=80" alt="" loading="lazy"></div>
+          <div class="viz-photo p3"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=560&h=360&q=80" alt="" loading="lazy"></div>
+        </aside>
       </div>
     </div>
   </section>

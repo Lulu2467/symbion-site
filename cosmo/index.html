@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027151730">
+  <meta name="cosmo-build" content="20261027151910">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -350,10 +350,24 @@
   .expert-rail { position: relative; }
   .expert-rail::after {
     content: "";
-    position: absolute; top: 0; right: 0; bottom: 0; width: 96px;
+    position: absolute; top: 0; right: 0; bottom: 18px; width: 140px;
     pointer-events: none; z-index: 1;
-    background: linear-gradient(90deg, rgba(250,250,250,0) 0%, rgba(250,250,250,.75) 55%, #fafafa 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(250, 250, 250, 0) 0%,
+      rgba(250, 250, 250, .12) 28%,
+      rgba(250, 250, 250, .4) 58%,
+      rgba(250, 250, 250, .78) 82%,
+      #fafafa 100%
+    );
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 32%, #000 72%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.35) 32%, #000 72%, #000 100%);
+    opacity: 1;
+    transition: opacity .2s ease;
   }
+  .expert-rail.is-end::after { opacity: 0; }
   .experts {
     display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
     overscroll-behavior: contain;
@@ -1295,8 +1309,10 @@ function updateExpertScroller() {
   if (!prev || !next) return;
   const max = el.scrollWidth - el.clientWidth;
   const overflow = max > 8;
+  const atEnd = !overflow || el.scrollLeft > max - 8;
   prev.hidden = !overflow || el.scrollLeft < 8;
-  next.hidden = !overflow || el.scrollLeft > max - 8;
+  next.hidden = atEnd;
+  wrap.classList.toggle("is-end", atEnd);
 }
 function actRow(item, from) {
   const p = person(item.author);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027150650">
+  <meta name="cosmo-build" content="20261027150740">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1067,16 +1067,17 @@ const LIVED_TOPICS = [
 
 const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
 
-const QUICK = [
-  { q: "Temperature is which axis on lecture 5?", tag: "Heavy-ion", topic: "heavy-ion" },
-  { q: "Is the 3:10 live the twin?", tag: "Live", topic: "live" },
-  { q: "Paste the cosmology line I am stuck on.", tag: "Cosmology", topic: "cosmology" },
-  { q: "How many rows are in the pricing sample?", tag: "Decisions", topic: "decisions" },
-  { q: "I changed an axis in the climate notebook.", tag: "Climate", topic: "climate" },
-  { q: "I do not trust the method section.", tag: "Lab report", topic: "lab" },
-  { q: "Name the two scales in the lattice note.", tag: "Materials", topic: "all" },
-  { q: "Who did this health number count?", tag: "Health", topic: "all" }
-];
+/* Recommended mirrors the six lived prompts for the active topic */
+const QUICK_TAG = {
+  "for-you": "For you",
+  all: "All",
+  "heavy-ion": "Heavy-ion",
+  cosmology: "Cosmology",
+  live: "Live",
+  climate: "Climate",
+  decisions: "Decisions",
+  lab: "Lab report"
+};
 
 const ASK = {
   roland: ["Ask about the lecture 5 diagram", "Which axis is temperature on the lecture 5 diagram?"],
@@ -1289,11 +1290,6 @@ function renderPosts() {
     </button>`;
   }).join("");
 }
-function topicMatches(topic, itemTopic) {
-  if (topic === "all") return true;
-  if (topic === "for-you") return itemTopic === "heavy-ion" || itemTopic === "cosmology" || itemTopic === "lab" || itemTopic === "all";
-  return itemTopic === topic || itemTopic === "all";
-}
 function livedVisible(item) {
   const p = person(item.id);
   if (!p || !personMatches(p)) return false;
@@ -1327,13 +1323,17 @@ function renderLived() {
 }
 
 function renderQuick() {
-  const cards = QUICK.filter((item) => topicMatches(state.livedTopic, item.topic) && matches(`${item.q} ${item.tag}`))
-    .map((item) => ({ item, people: relatedPeople(item.q) }))
-    .filter((row) => row.people.length);
+  const tag = QUICK_TAG[state.livedTopic] || "All";
+  const cards = LIVED.filter((item) => livedVisible(item)).slice(0, 6).map((item) => {
+    const p = person(item.id);
+    let people = relatedPeople(item.q);
+    if (!people.length && p) people = [p];
+    return { q: item.q, tag: p && p.fieldLabel ? p.fieldLabel : tag, people };
+  }).filter((row) => row.people.length);
   $("quick-count").textContent = cards.length ? `${cards.length}` : "";
-  $("quick").innerHTML = cards.length ? cards.map(({ item, people }) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
+  $("quick").innerHTML = cards.length ? cards.map((item) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
       <span class="line">${esc(item.q)}</span>
-      <span class="foot"><span class="tag">${esc(item.tag)}</span><span class="faces">${people.map((p) => av(p, "sm")).join("")}</span></span>
+      <span class="foot"><span class="tag">${esc(item.tag)}</span><span class="faces">${item.people.map((p) => av(p, "sm")).join("")}</span></span>
     </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
 }
 

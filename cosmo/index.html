@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027150740">
+  <meta name="cosmo-build" content="20261027151220">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -254,9 +254,18 @@
     width: 12px; height: 12px; display: block; flex: none;
   }
 
-  .sec-hd { display: flex; align-items: baseline; gap: 10px; margin: 48px 0 10px; }
+  .sec-hd { display: flex; align-items: center; gap: 10px; margin: 48px 0 10px; }
   .sec-hd h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.025em; line-height: 1.4; color: var(--ink); }
   .sec-hd .count { font-size: 12px; color: var(--faint); font-weight: 500; }
+  .sec-hd .shuffle {
+    margin-left: auto; flex: none;
+    width: 32px; height: 32px; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; color: #515151;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .sec-hd .shuffle:hover { background: var(--green-tint); color: var(--ink); border-color: #c5d7e4; }
+  .sec-hd .shuffle:active { transform: rotate(-12deg); }
+  .sec-hd .shuffle svg { width: 16px; height: 16px; display: block; }
   .sec-lede { margin: 0 0 14px; max-width: 560px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
   .home-block { scroll-margin-top: 88px; }
@@ -730,6 +739,7 @@
     <div class="home-block" id="block-questions">
       <div class="sec-hd">
         <h2>Browse questions</h2>
+        <button type="button" class="shuffle" data-shuffle="lived" aria-label="Shuffle questions"></button>
       </div>
       <p class="sec-lede">Pick a topic, then a recommended question. Same path as Ask anything — twins answer, you choose who to continue with.</p>
       <div class="topic-bar" id="topic-bar" role="toolbar" aria-label="Question topics"></div>
@@ -737,6 +747,7 @@
       <div class="sec-hd" style="margin-top:28px">
         <h2>Recommended</h2>
         <span class="count" id="quick-count"></span>
+        <button type="button" class="shuffle" data-shuffle="quick" aria-label="Shuffle recommended"></button>
       </div>
       <div class="quick" id="quick"></div>
     </div>
@@ -745,6 +756,7 @@
       <div class="sec-hd">
         <h2>Consult experts</h2>
         <span class="count" id="people-count"></span>
+        <button type="button" class="shuffle" data-shuffle="experts" aria-label="Shuffle experts"></button>
       </div>
       <p class="sec-lede">Twins and coaches by field. Ask about their work, then keep chatting.</p>
       <div class="expert-bar" id="expert-bar" role="toolbar" aria-label="Expert fields"></div>
@@ -763,6 +775,7 @@
       <div class="sec-hd">
         <h2>Dynamics</h2>
         <span class="count" id="post-count"></span>
+        <button type="button" class="shuffle" data-shuffle="posts" aria-label="Shuffle posts"></button>
       </div>
       <p class="sec-lede">Posts from twins — open one like a note. Same feed shows on your <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
       <div class="dynamics" id="posts"></div>
@@ -771,6 +784,7 @@
     <div class="home-block" id="block-build">
       <div class="sec-hd">
         <h2>Build your Cosmo</h2>
+        <button type="button" class="shuffle" data-shuffle="build" aria-label="Shuffle apps"></button>
       </div>
       <p class="sec-lede">Connect apps that feed your twin. You can start here in Cosmo, or finish the same links later in Symbion.</p>
       <div class="build-grid" id="build"></div>
@@ -922,6 +936,25 @@ const BUILD_APPS = [
 ];
 
 const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
+const SHUFFLE_ICON = `<svg viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M924.928 222.784l-82.368-82.304a42.688 42.688 0 1 0-60.288 60.352l12.48 12.48H711.04c-43.072 0-82.56 11.968-118.4 35.84-35.84 23.936-61.952 55.68-78.528 95.488l-125.824 301.952c-9.92 23.808-25.6 42.88-47.168 57.216a125.312 125.312 0 0 1-71.04 21.504H128a42.624 42.624 0 1 0 0 85.376h142.208c43.072 0 82.56-11.968 118.4-35.84 35.84-23.936 61.952-55.68 78.528-95.488l125.824-301.952c9.92-23.808 25.6-42.88 47.104-57.216a125.312 125.312 0 0 1 71.04-21.504h83.648l-12.48 12.48a42.624 42.624 0 1 0 60.352 60.352l82.368-82.368A45.056 45.056 0 0 0 938.688 256a45.12 45.12 0 0 0-13.76-33.216zM128 213.312H218.24c45.952 0 87.488 13.44 124.736 40.32 37.248 26.88 63.168 62.08 77.632 105.6l3.776 11.264a42.688 42.688 0 1 1-80.96 27.008l-3.712-11.328a125.056 125.056 0 0 0-46.592-63.36 125.056 125.056 0 0 0-74.88-24.128H128a42.688 42.688 0 0 1 0-85.376z m666.752 597.376h-31.744c-45.888 0-87.488-13.44-124.8-40.32a208.192 208.192 0 0 1-77.632-105.6l-3.712-11.264a42.688 42.688 0 1 1 80.896-27.008l3.84 11.328c8.704 26.112 24.192 47.232 46.592 63.36 22.272 16.128 47.232 24.128 74.816 24.128h31.744l-12.48-12.48a42.624 42.624 0 1 1 60.352-60.352l82.368 82.368a45.056 45.056 0 0 1 13.696 33.152 45.12 45.12 0 0 1-13.76 33.216l-82.304 82.304a42.56 42.56 0 0 1-70.208-13.504 42.624 42.624 0 0 1 9.856-46.848l12.48-12.48z"/></svg>`;
+function shuffleCopy(list, seed) {
+  let s = seed >>> 0 || 1;
+  const rand = () => {
+    s = (s + 0x6D2B79F5) >>> 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    const tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
+  }
+  return a;
+}
 
 /* Per-topic cool palettes (pre–rain-bed). Size/grid unchanged. */
 const TOPIC_LOOKS = {
@@ -1171,7 +1204,8 @@ const state = {
   threads: {},
   read: new Set(),
   connected: new Set(["desk"]),
-  typing: false
+  typing: false,
+  shuffleSeed: { lived: 1, quick: 1, experts: 1, posts: 1, build: 1 }
 };
 
 const $ = (id) => document.getElementById(id);
@@ -1227,7 +1261,7 @@ function renderExpertBar() {
 }
 function renderPeople() {
   renderExpertBar();
-  const people = visiblePeople();
+  const people = shuffleCopy(visiblePeople(), state.shuffleSeed.experts);
   $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
@@ -1268,7 +1302,7 @@ function actRow(item, from) {
   </button>`;
 }
 function renderPosts() {
-  const rows = visiblePosts();
+  const rows = shuffleCopy(visiblePosts(), state.shuffleSeed.posts);
   const unread = rows.filter((item) => !state.read.has(item.id)).length;
   const count = $("post-count");
   count.textContent = unread ? `${unread} new` : "";
@@ -1310,7 +1344,7 @@ function renderTopicBar() {
 
 function renderLived() {
   renderTopicBar();
-  const cards = LIVED.filter((item) => livedVisible(item));
+  const cards = shuffleCopy(LIVED.filter((item) => livedVisible(item)), state.shuffleSeed.lived);
   $("lived").innerHTML = cards.length ? cards.map((item) => {
     const p = person(item.id);
     const where = p.domain ? p.domain.name : "No domain";
@@ -1324,7 +1358,7 @@ function renderLived() {
 
 function renderQuick() {
   const tag = QUICK_TAG[state.livedTopic] || "All";
-  const cards = LIVED.filter((item) => livedVisible(item)).slice(0, 6).map((item) => {
+  const cards = shuffleCopy(LIVED.filter((item) => livedVisible(item)).slice(0, 6), state.shuffleSeed.quick).map((item) => {
     const p = person(item.id);
     let people = relatedPeople(item.q);
     if (!people.length && p) people = [p];
@@ -1338,7 +1372,7 @@ function renderQuick() {
 }
 
 function renderBuild() {
-  $("build").innerHTML = BUILD_APPS.map((app) => {
+  $("build").innerHTML = shuffleCopy(BUILD_APPS, state.shuffleSeed.build).map((app) => {
     const on = state.connected.has(app.id);
     const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
     return `<article class="build-card${app.soon ? " is-soon" : ""}">
@@ -1580,9 +1614,23 @@ document.addEventListener("click", (e) => {
     $("people").scrollBy({ left: Number(expertNudge.dataset.expertNudge), behavior: "smooth" });
     return;
   }
+  const shuffleBtn = e.target.closest("[data-shuffle]");
+  if (shuffleBtn) {
+    e.preventDefault();
+    const key = shuffleBtn.dataset.shuffle;
+    state.shuffleSeed[key] = (state.shuffleSeed[key] || 1) + 1 + (Date.now() % 997);
+    if (key === "lived") renderLived();
+    else if (key === "quick") renderQuick();
+    else if (key === "experts") renderPeople();
+    else if (key === "posts") renderPosts();
+    else if (key === "build") renderBuild();
+    return;
+  }
   const livedTopic = e.target.closest("[data-lived-topic]");
   if (livedTopic) {
     state.livedTopic = livedTopic.dataset.livedTopic;
+    state.shuffleSeed.lived += 1;
+    state.shuffleSeed.quick += 1;
     renderLived();
     renderQuick();
     return;
@@ -1590,6 +1638,7 @@ document.addEventListener("click", (e) => {
   const expertFilter = e.target.closest("[data-expert-filter]");
   if (expertFilter) {
     state.expertFilter = expertFilter.dataset.expertFilter;
+    state.shuffleSeed.experts += 1;
     if (state.who && !visiblePeople().some((p) => p.id === state.who)) state.who = null;
     renderPeople();
     return;
@@ -1695,6 +1744,7 @@ addEventListener("scroll", () => {
   $("top").classList.toggle("is-stuck", scrollY > 4);
 }, { passive: true });
 
+document.querySelectorAll("[data-shuffle]").forEach((btn) => { btn.innerHTML = SHUFFLE_ICON; });
 renderHome();
 </script>
 </body>

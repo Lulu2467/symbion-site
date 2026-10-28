@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028152000">
+  <meta name="cosmo-build" content="20261028152500">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2033,12 +2033,12 @@ const EXPERT_LOOK = {
 const CHECK = `<svg class="check" viewBox="0 0 1024 1024" aria-hidden="true"><path d="M956.672 459.776L862.72 397.568c-16.64-11.008-24.832-30.976-20.992-50.688l22.272-110.592c4.096-20.736-2.304-42.24-17.152-57.344-15.104-15.104-36.352-21.504-57.344-17.152l-110.592 22.272c-19.712 4.096-39.424-4.352-50.688-20.992L565.76 69.12c-11.776-17.664-31.488-28.16-52.736-28.16s-40.96 10.496-52.736 28.16l-62.464 93.952c-11.008 16.64-30.976 24.832-50.688 20.992l-110.592-22.272c-20.736-4.096-42.24 2.304-57.344 17.152-15.104 15.104-21.504 36.352-17.152 57.344l22.272 110.592c3.84 19.712-4.352 39.424-20.992 50.688l-93.952 62.464c-17.664 11.776-28.16 31.488-28.16 52.736s10.496 40.96 28.16 52.736l93.952 62.464c16.64 11.008 24.832 30.976 20.992 50.688l-22.272 110.592c-4.096 20.736 2.304 42.24 17.152 57.344 15.104 15.104 36.352 21.504 57.344 17.152l110.592-22.272c19.712-4.096 39.424 4.352 50.688 20.992l62.464 93.952c11.776 17.664 31.488 28.16 52.736 28.16s40.96-10.496 52.736-28.16l62.464-93.952c11.008-16.64 30.976-24.832 50.688-20.992l110.592 22.272c20.736 4.096 42.24-2.304 57.344-17.152 15.104-15.104 21.504-36.352 17.152-57.344l-22.272-110.592c-3.84-19.712 4.352-39.424 20.992-50.688l93.952-62.464c17.664-11.776 28.16-31.488 28.16-52.736s-10.496-41.216-28.16-52.992z m-249.344-22.016l-211.456 215.04c-5.888 6.144-13.824 9.216-22.016 9.216-7.168 0-14.592-2.56-20.224-7.68l-138.24-122.112c-12.8-11.264-13.824-30.72-2.816-43.264 11.264-12.8 30.72-13.824 43.264-2.816l116.48 102.912 190.976-194.304c11.776-12.032 31.232-12.288 43.52-0.256 12.288 11.52 12.288 30.976 0.512 43.264z" fill="#3c7a94"></path></svg>`;
 
 const BUILD_APPS = [
-  { id: "desk", app: "Desk", title: "Symbion Desk", blurb: "Pull courses, reminders, and files you already use on the desk.", soon: false },
-  { id: "notion", app: "Notion", title: "Notion", blurb: "Sync notes and pages your twin can cite when you ask.", soon: false },
-  { id: "drive", app: "Drive", title: "Google Drive", blurb: "Attach decks and docs from shared folders.", soon: false },
-  { id: "calendar", app: "Calendar", title: "Calendar", blurb: "Let the twin see live times and office hours.", soon: true },
-  { id: "slack", app: "Slack", title: "Slack", blurb: "Bring thread context into Cosmo chats.", soon: true },
-  { id: "files", app: "Files", title: "Local files", blurb: "Upload readings the twin should stay inside.", soon: false }
+  { id: "desk", app: "Desk", appZh: "工作台", title: "Symbion Desk", titleZh: "Symbion 工作台", blurb: "Pull courses, reminders, and files you already use on the desk.", blurbZh: "拉取你在工作台上已在用的课程、提醒和文件。", soon: false },
+  { id: "notion", app: "Notion", appZh: "Notion", title: "Notion", titleZh: "Notion", blurb: "Sync notes and pages your twin can cite when you ask.", blurbZh: "同步笔记与页面，提问时数字人可以引用。", soon: false },
+  { id: "drive", app: "Drive", appZh: "云盘", title: "Google Drive", titleZh: "Google 云端硬盘", blurb: "Attach decks and docs from shared folders.", blurbZh: "挂上共享文件夹里的幻灯片和文档。", soon: false },
+  { id: "calendar", app: "Calendar", appZh: "日历", title: "Calendar", titleZh: "日历", blurb: "Let the twin see live times and office hours.", blurbZh: "让数字人看到直播时间与答疑时段。", soon: true },
+  { id: "slack", app: "Slack", appZh: "Slack", title: "Slack", titleZh: "Slack", blurb: "Bring thread context into Cosmo chats.", blurbZh: "把讨论串上下文带进 Cosmo 对话。", soon: true },
+  { id: "files", app: "Files", appZh: "文件", title: "Local files", titleZh: "本地文件", blurb: "Upload readings the twin should stay inside.", blurbZh: "上传希望数字人只在范围内读的材料。", soon: false }
 ];
 
 const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
@@ -3386,10 +3386,14 @@ function renderBuild() {
     body.innerHTML = BUILD_APPS.map((app) => {
       const on = state.connected.has(app.id);
       const label = app.soon ? t("comingSoon") : (on ? t("connected") : t("connect"));
+      const zh = state.lang === "zh";
+      const appName = zh && app.appZh ? app.appZh : app.app;
+      const title = zh && app.titleZh ? app.titleZh : app.title;
+      const blurb = zh && app.blurbZh ? app.blurbZh : app.blurb;
       return `<article class="build-card${app.soon ? " is-soon" : ""}">
-      <span class="app">${esc(app.app)}</span>
-      <b>${esc(app.title)}</b>
-      <p>${esc(app.blurb)}</p>
+      <span class="app">${esc(appName)}</span>
+      <b>${esc(title)}</b>
+      <p>${esc(blurb)}</p>
       <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
     </article>`;
     }).join("");

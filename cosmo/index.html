@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028152500">
+  <meta name="cosmo-build" content="20261028153000">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2310,30 +2310,84 @@ const LIVED_ZH = {
 };
 
 const PERSON_ZH = {
-  roland: { fieldLabel: "重离子", role: "重离子物理 · 你的课 · 第 5 讲已在工作台" },
-  pajer: { fieldLabel: "宇宙学", role: "宇宙学 · Cornell · 能指认的习题" },
-  luo: { fieldLabel: "直播", role: "3:10 开播 · 台上是本人 · 数字人留复盘" },
-  greer: { fieldLabel: "材料", role: "材料 · Caltech · 晶格与样品尺度" },
-  anastasia: { fieldLabel: "气候", role: "气候数学 · Columbia · 先定坐标再谈趋势" },
+  roland: { fieldLabel: "重离子", role: "重离子物理 · 你的课 · 第 5 讲已在工作台", domainName: "重离子物理" },
+  pajer: { fieldLabel: "宇宙学", role: "宇宙学 · Cornell · 能指认的习题", domainName: "宇宙学" },
+  luo: { fieldLabel: "直播", role: "3:10 开播 · 台上是本人 · 数字人留复盘", domainName: "骆王宇" },
+  greer: { fieldLabel: "材料", role: "材料 · Caltech · 晶格与样品尺度", domainName: "材料" },
+  anastasia: { fieldLabel: "气候", role: "气候数学 · Columbia · 先定坐标再谈趋势", domainName: "气候数学" },
   xu: { fieldLabel: "决策", role: "AI 与决策 · 定价样本在工作台" },
   lab: { fieldLabel: "实验", role: "实验报告教练 · 目标·方法·结果写进文档" },
-  smith: { fieldLabel: "健康", role: "行星健康 · Brown · 数字要对应到人" },
-  chen: { fieldLabel: "重离子", role: "重离子 · 探测器笔记 · 束流时间在工作台" },
-  oka: { fieldLabel: "重离子", role: "QCD 物质 · RIKEN · 晶格对照第 5 讲" },
-  nova: { fieldLabel: "宇宙学", role: "早期宇宙 · 笔记 · 先定视界再放自由参" },
-  kim: { fieldLabel: "宇宙学", role: "宇宙学习题课 · 能直接粘贴的句子" },
-  maya: { fieldLabel: "直播", role: "答疑时段 · 数字人片段 · 直播之后" },
-  river: { fieldLabel: "直播", role: "研讨主持 · 数字人 FAQ · 不是直播流" },
-  park: { fieldLabel: "材料", role: "材料实验室 · 样品本 · 先样品后晶格" },
-  lin: { fieldLabel: "材料", role: "纳米力学 · 笔记 · 缺陷落在两尺度之间" },
-  reef: { fieldLabel: "气候", role: "海洋气候 · 图 · 先轴与单位" },
-  moss: { fieldLabel: "气候", role: "气候实验 · 时间步 · 对齐图" },
+  smith: { fieldLabel: "健康", role: "行星健康 · Brown · 数字要对应到人", domainName: "行星健康" },
+  chen: { fieldLabel: "重离子", role: "重离子 · 探测器笔记 · 束流时间在工作台", domainName: "重离子物理" },
+  oka: { fieldLabel: "重离子", role: "QCD 物质 · RIKEN · 晶格对照第 5 讲", domainName: "重离子物理" },
+  nova: { fieldLabel: "宇宙学", role: "早期宇宙 · 笔记 · 先定视界再放自由参", domainName: "宇宙学" },
+  kim: { fieldLabel: "宇宙学", role: "宇宙学习题课 · 能直接粘贴的句子", domainName: "宇宙学" },
+  maya: { fieldLabel: "直播", role: "答疑时段 · 数字人片段 · 直播之后", domainName: "答疑时段" },
+  river: { fieldLabel: "直播", role: "研讨主持 · 数字人 FAQ · 不是直播流", domainName: "研讨" },
+  park: { fieldLabel: "材料", role: "材料实验室 · 样品本 · 先样品后晶格", domainName: "材料" },
+  lin: { fieldLabel: "材料", role: "纳米力学 · 笔记 · 缺陷落在两尺度之间", domainName: "材料" },
+  reef: { fieldLabel: "气候", role: "海洋气候 · 图 · 先轴与单位", domainName: "气候数学" },
+  moss: { fieldLabel: "气候", role: "气候实验 · 时间步 · 对齐图", domainName: "气候数学" },
   vale: { fieldLabel: "决策", role: "产品决策 · 样本 · 决定 + 行数" },
   brook: { fieldLabel: "决策", role: "定价台 · 数字人 · 句子背后的行数" },
   draft: { fieldLabel: "实验", role: "写清实验目标 · 方法仍归你" },
   meter: { fieldLabel: "实验", role: "标出薄弱方法句 · 只点软肋" },
-  hale: { fieldLabel: "健康", role: "人群健康 · 计数 · 数过谁" },
-  quill: { fieldLabel: "健康", role: "健康写作 · 数字人 · 人要留在句里" }
+  hale: { fieldLabel: "健康", role: "人群健康 · 计数 · 数过谁", domainName: "行星健康" },
+  quill: { fieldLabel: "健康", role: "健康写作 · 数字人 · 人要留在句里", domainName: "行星健康" }
+};
+
+const POST_ZH = {
+  l5: {
+    title: "Roland 教授的数字人发布了第 5 讲幻灯片",
+    meta: "重离子物理 · 1 小时前",
+    action: "变成学习笔记",
+    paragraphs: [
+      "数字人发布了第 5 讲幻灯片。它们在重离子物理私域里，同一条也会出现在你的工作台。",
+      "温度是纵轴，重子化学势是横轴。第 5 讲沿着 crossover，不是尖锐的一阶线。",
+      "这是数字人发的。上课的人仍是本人。"
+    ],
+    reply: "如果你已经能叫出纵轴，我们就停在 crossover。把你还叫不出的那个轴发给我。"
+  },
+  live: {
+    title: "骆王宇即将开播（真人本人）",
+    meta: "3:10 开播 · 数字人已备好复盘",
+    action: "设提醒",
+    paragraphs: [
+      "3:10 的直播是骆王宇本人。数字人不是直播。",
+      "结束后复盘会落在这个私域。同一条通知也会出现在你的工作台。"
+    ],
+    reply: "我是数字人，不是 3:10 的直播。直播结束后这里会落下三点复盘：主张、例子、未决问题。若你漏了一段，报时间——我留复盘，不上台。"
+  },
+  eq: {
+    title: "你的 #宇宙学 帖收到 2 条回复",
+    meta: "Pajer 教授的数字人 + @maya_k",
+    action: "打开讨论",
+    paragraphs: [
+      "两条回复已到。数字人只点你卡住的那一行。@maya_k 也在同一串里回了。",
+      "把那一行写成三格：已知、未知、课上怎么叫。这条串也在你的工作台。"
+    ],
+    reply: "把那一行贴过来。说清已知、未知、课上怎么叫。我只点那一行——后面的题先别开。"
+  },
+  pricing: {
+    title: "Xu 教授的数字人：定价数据有新洞见",
+    meta: "AI 与决策 · 今天",
+    action: "查看洞见",
+    paragraphs: [
+      "Xu 教授没有私域。这条洞见仍是帖子，也会出现在你的工作台。",
+      "说出你要做的决定，以及样本里有多少行。"
+    ],
+    reply: "把行数和你希望洞见支撑的那句话发来。背后没有行数的决定，仍是猜测。"
+  },
+  axis: {
+    title: "Anastasia 的数字人分享了气候数学笔记本",
+    meta: "物理与空间 · 3 小时前",
+    action: "在代码里打开",
+    paragraphs: [
+      "笔记本在气候数学私域里，分享也会出现在你的工作台。",
+      "轴、单位、时间步。这三个名字要写在图前面。"
+    ],
+    reply: "你改了哪根轴？若趋势只在改轴后才出现，把句子留在笔记本里——先别收成结论。"
+  }
 };
 
 function tagLabel(tag) {
@@ -2366,6 +2420,20 @@ function personDomainName(p) {
   if (state.lang !== "zh") return p.domain.name;
   const z = PERSON_ZH[p.id];
   return (z && z.domainName) || p.domain.name;
+}
+function postCopy(item) {
+  if (!item) return item;
+  if (state.lang !== "zh") {
+    return { title: item.title, meta: item.meta, action: item.action, paragraphs: item.paragraphs, reply: item.reply };
+  }
+  const z = POST_ZH[item.id] || {};
+  return {
+    title: z.title || item.title,
+    meta: z.meta || item.meta,
+    action: z.action || item.action,
+    paragraphs: z.paragraphs || item.paragraphs,
+    reply: z.reply || item.reply
+  };
 }
 
 const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
@@ -2534,7 +2602,8 @@ function visiblePeople() {
 function visiblePosts() {
   return POSTS.filter((item) => {
     const p = person(item.author);
-    return matches(`${item.title} ${item.meta} ${item.action} ${item.paragraphs.join(" ")} ${p.name} ${p.domain ? p.domain.name : ""}`);
+    const copy = postCopy(item);
+    return matches(`${item.title} ${item.meta} ${item.action} ${item.paragraphs.join(" ")} ${copy.title} ${copy.meta} ${copy.action} ${copy.paragraphs.join(" ")} ${p.name} ${p.domain ? personDomainName(p) : ""}`);
   });
 }
 
@@ -2590,13 +2659,14 @@ function updateExpertScroller() {
 }
 function actRow(item, from) {
   const p = person(item.author);
+  const copy = postCopy(item);
   const fromAttr = from ? ` data-from="${from}"` : "";
   return `<button type="button" class="act" data-post="${item.id}"${fromAttr}>
     <span class="aav${p.kind === "agent" ? " agent" : ""}">${esc(p.initials)}</span>
     <span class="tx">
-      <span class="t">${esc(item.title)}</span>
-      <small>${esc(item.meta)}</small>
-      <span class="go">${esc(item.action)}${NE}</span>
+      <span class="t">${esc(copy.title)}</span>
+      <small>${esc(copy.meta)}</small>
+      <span class="go">${esc(copy.action)}${NE}</span>
     </span>
   </button>`;
 }
@@ -2613,13 +2683,14 @@ function renderPosts() {
   }
   $("posts").innerHTML = rows.map((item) => {
     const p = person(item.author);
+    const copy = postCopy(item);
     const where = p.domain ? personDomainName(p) : t("noDomain");
     const tint = item.tint || { ink: "#18181b", wash: "#e7edf4", line: "#d4d4d8" };
     return `<button type="button" class="qcard" data-post="${item.id}" style="--pill-ink:${tint.ink};--pill-wash:${tint.wash};--pill-line:${tint.line}">
       <span class="qghost" aria-hidden="true"><b class="soft">${esc(p.name)}</b><b>${esc(p.name)}</b></span>
       <span class="qmark" aria-hidden="true">“</span>
-      <span class="qt">${esc(item.title)}</span>
-      <span class="qmeta"><span class="qpill">${esc(p.name)}</span><span class="qpill">${esc(where)}</span><span class="qpill go">${esc(item.action)}</span></span>
+      <span class="qt">${esc(copy.title)}</span>
+      <span class="qmeta"><span class="qpill">${esc(p.name)}</span><span class="qpill">${esc(where)}</span><span class="qpill go">${esc(copy.action)}</span></span>
       <span class="qchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </button>`;
   }).join("");
@@ -3587,7 +3658,8 @@ function paintLog() {
   const id = state.talkId;
   const p = person(id);
   const item = state.about ? post(state.about) : null;
-  const ctx = item ? `<div class="context">${esc(t("reading", { title: item.title }))}</div>` : "";
+  const aboutCopy = item ? postCopy(item) : null;
+  const ctx = aboutCopy ? `<div class="context">${esc(t("reading", { title: aboutCopy.title }))}</div>` : "";
   const msgs = (state.threads[id] || []).map((m) => {
     if (m.role === "user") {
       const about = m.about ? `<span class="about">${esc(t("aboutAbout", { title: m.about }))}</span>` : "";
@@ -3607,12 +3679,13 @@ function sendTalk(text) {
   const msg = (text || "").trim();
   if (!p || !msg) return;
   const aboutPost = state.about ? post(state.about) : null;
-  state.threads[id].push({ role: "user", text: msg, about: aboutPost ? aboutPost.title : "" });
+  const aboutCopy = aboutPost ? postCopy(aboutPost) : null;
+  state.threads[id].push({ role: "user", text: msg, about: aboutCopy ? aboutCopy.title : "" });
   state.typing = true;
   $("talk-draft").value = "";
   paintLog();
   const prior = state.threads[id].filter((m) => m.role === "twin").length;
-  const reply = prior === 0 && aboutPost ? aboutPost.reply : (prior === 0 ? p.reply : p.follow);
+  const reply = prior === 0 && aboutCopy ? aboutCopy.reply : (prior === 0 ? p.reply : p.follow);
   setTimeout(() => {
     if (state.talkId !== id) return;
     state.typing = false;
@@ -3640,7 +3713,7 @@ function openDomain(id) {
     <header class="domain-hero" style="--tone:${p.tone}">
       <div>
         <p class="eyebrow" style="color:rgba(255,255,255,.7)">${esc(t("privateDomain"))}</p>
-        <h1>${esc(p.domain.name)}</h1>
+        <h1>${esc(personDomainName(p))}</h1>
         <p class="meta">${esc(p.domain.about)}</p>
         <div class="who-line">${av(p, "sm")} ${esc(p.name)}</div>
         <p class="disc">${esc(t("twinDisc"))}</p>
@@ -3667,6 +3740,7 @@ function openPost(id, from) {
   const item = post(id);
   if (!item) return;
   const p = person(item.author);
+  const copy = postCopy(item);
   state.postId = id;
   state.postBack = from || (state.view === "domain" ? "domain" : "home");
   state.read.add(id);
@@ -3674,20 +3748,20 @@ function openPost(id, from) {
   $("post-media").style.setProperty("--tone", look.base);
   $("post-media").innerHTML = `
     <div class="cover-face">${av(p, "lg")}</div>
-    <p class="cover-kicker">${esc(p.domain ? p.domain.name : (p.fieldLabel || "Cosmo"))}</p>
-    <h2 class="cover-title">${esc(item.title)}</h2>
+    <p class="cover-kicker">${esc(p.domain ? personDomainName(p) : (personField(p) || "Cosmo"))}</p>
+    <h2 class="cover-title">${esc(copy.title)}</h2>
   `;
   $("post-hd").innerHTML = `
     ${av(p)}
-    <div class="who"><div class="nm">${esc(p.name)}</div><div class="meta">${esc(item.meta)}</div></div>
+    <div class="who"><div class="nm">${esc(p.name)}</div><div class="meta">${esc(copy.meta)}</div></div>
     <button type="button" class="follow" data-follow="${p.id}">${esc(t("follow"))}</button>
   `;
   const stay = p.domain
     ? `<button type="button" class="btn ghost" data-domain="${p.id}">${esc(t("openDomainBtn"))}</button>`
     : "";
   $("post-body").innerHTML = `
-    <h1>${esc(item.title)}</h1>
-    <div class="body">${item.paragraphs.map((para) => `<p>${esc(para)}</p>`).join("")}</div>
+    <h1>${esc(copy.title)}</h1>
+    <div class="body">${copy.paragraphs.map((para) => `<p>${esc(para)}</p>`).join("")}</div>
     <p class="disc">${esc(t("postDisc"))}</p>
     <div class="actions">
       <button type="button" class="btn primary" data-talk="${p.id}" data-about="${item.id}">${esc(t("talkAbout"))}</button>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028110620">
+  <meta name="cosmo-build" content="20261028110740">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -741,10 +741,8 @@
   }
   .qcard .qmark {
     position: relative; z-index: 1;
-    width: 22px; height: 22px; color: var(--ink);
-    display: block;
+    font-size: 34px; line-height: .8; color: var(--ink); font-weight: 500;
   }
-  .qcard .qmark svg { width: 100%; height: 100%; display: block; }
   .qcard .qt {
     position: relative; z-index: 1;
     margin-top: 14px; max-width: 92%;
@@ -867,13 +865,12 @@
     padding: 18px 20px 18px 20px;
   }
   .persp-quote .qmark {
-    display: block;
-    width: 22px; height: 22px; margin: 0 0 10px;
-    color: #3c7a94;
+    position: absolute; left: 18px; top: 8px;
+    font-size: 34px; line-height: .8; color: #3c7a94; font-weight: 500;
+    pointer-events: none;
   }
-  .persp-quote .qmark svg { width: 100%; height: 100%; display: block; }
   .persp-quote p {
-    margin: 0;
+    margin: 0; padding-top: 28px;
     font-family: var(--font);
     font-size: 16px; line-height: 1.55; color: var(--ink); font-weight: 400;
   }
@@ -1528,8 +1525,6 @@ const BUILD_APPS = [
 ];
 
 const MARK = `<svg class="mark" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
-/* Dynamics quote bars — same mark used on feed cards and perspective quotes */
-const DYN_MARK = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3.2" y="2.5" width="5.2" height="16.5" rx="1.4" transform="rotate(14 5.8 10.75)"/><rect x="13.2" y="2.5" width="5.2" height="16.5" rx="1.4" transform="rotate(14 15.8 10.75)"/></svg>`;
 const SHUFFLE_ICON = `<svg viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M924.928 222.784l-82.368-82.304a42.688 42.688 0 1 0-60.288 60.352l12.48 12.48H711.04c-43.072 0-82.56 11.968-118.4 35.84-35.84 23.936-61.952 55.68-78.528 95.488l-125.824 301.952c-9.92 23.808-25.6 42.88-47.168 57.216a125.312 125.312 0 0 1-71.04 21.504H128a42.624 42.624 0 1 0 0 85.376h142.208c43.072 0 82.56-11.968 118.4-35.84 35.84-23.936 61.952-55.68 78.528-95.488l125.824-301.952c9.92-23.808 25.6-42.88 47.104-57.216a125.312 125.312 0 0 1 71.04-21.504h83.648l-12.48 12.48a42.624 42.624 0 1 0 60.352 60.352l82.368-82.368A45.056 45.056 0 0 0 938.688 256a45.12 45.12 0 0 0-13.76-33.216zM128 213.312H218.24c45.952 0 87.488 13.44 124.736 40.32 37.248 26.88 63.168 62.08 77.632 105.6l3.776 11.264a42.688 42.688 0 1 1-80.96 27.008l-3.712-11.328a125.056 125.056 0 0 0-46.592-63.36 125.056 125.056 0 0 0-74.88-24.128H128a42.688 42.688 0 0 1 0-85.376z m666.752 597.376h-31.744c-45.888 0-87.488-13.44-124.8-40.32a208.192 208.192 0 0 1-77.632-105.6l-3.712-11.264a42.688 42.688 0 1 1 80.896-27.008l3.84 11.328c8.704 26.112 24.192 47.232 46.592 63.36 22.272 16.128 47.232 24.128 74.816 24.128h31.744l-12.48-12.48a42.624 42.624 0 1 1 60.352-60.352l82.368 82.368a45.056 45.056 0 0 1 13.696 33.152 45.12 45.12 0 0 1-13.76 33.216l-82.304 82.304a42.56 42.56 0 0 1-70.208-13.504 42.624 42.624 0 0 1 9.856-46.848l12.48-12.48z"/></svg>`;
 function shuffleCopy(list, seed) {
   let s = seed >>> 0 || 1;
@@ -1949,7 +1944,7 @@ function renderPosts() {
     const tint = item.tint || { ink: "#18181b", wash: "#e7edf4", line: "#d4d4d8" };
     return `<button type="button" class="qcard" data-post="${item.id}" style="--pill-ink:${tint.ink};--pill-wash:${tint.wash};--pill-line:${tint.line}">
       <span class="qghost" aria-hidden="true"><b class="soft">${esc(p.name)}</b><b>${esc(p.name)}</b></span>
-      <span class="qmark" aria-hidden="true">${DYN_MARK}</span>
+      <span class="qmark" aria-hidden="true">“</span>
       <span class="qt">${esc(item.title)}</span>
       <span class="qmeta"><span class="qpill">${esc(p.name)}</span><span class="qpill">${esc(where)}</span><span class="qpill go">${esc(item.action)}</span></span>
       <span class="qchev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -2191,7 +2186,7 @@ function openAnswers(text) {
     return `<article class="persp">
       <div class="persp-who">${av(p)}<div><div class="nm">${esc(p.name)}${CHECK}</div><div class="role">${esc(p.role)}</div></div></div>
       <div class="persp-tags">${tags}</div>
-      <div class="persp-quote"><span class="qmark" aria-hidden="true">${DYN_MARK}</span><p>${esc(p.reply)}</p></div>
+      <div class="persp-quote"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div>
       <div class="persp-foot">
         <button type="button" class="save" data-save="${p.id}">${SAVE_ICON}Save</button>
         <button type="button" class="expand" data-continue="${p.id}">Expand →</button>

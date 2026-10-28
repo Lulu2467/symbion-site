@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028143640">
+  <meta name="cosmo-build" content="20261028150000">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1610,29 +1610,29 @@
   </a>
   <div class="top-kicker">Cosmo</div>
   <div class="sp"></div>
-  <input class="search" id="q" type="search" placeholder="Search people or posts" aria-label="Search people or posts" autocomplete="off">
-  <button type="button" class="token-chip" id="token-chip" data-open-tokens aria-label="Token balance">
+  <input class="search" id="q" type="search" placeholder="Search people or posts" aria-label="Search people or posts" data-i18n-placeholder="searchPh" data-i18n-aria="searchAria" autocomplete="off">
+  <button type="button" class="token-chip" id="token-chip" data-open-tokens aria-label="Token balance" data-i18n-aria="tokenAria">
     <span class="dot" aria-hidden="true"></span>
     <span id="token-chip-label">12 Tokens</span>
   </button>
-  <a class="desk-link" href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">Desk</a>
+  <a class="desk-link" href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome" data-i18n="desk">Desk</a>
 </header>
 
 <main class="wrap">
   <section id="home">
     <div class="stage">
       <div class="orbit" aria-hidden="true">
-        <span style="--x:27%;--y:17%;--r:-7deg;--d:13.6s;--delay:-2.4s"><b>Heavy-ion physics</b></span>
-        <span style="--x:83%;--y:11%;--r:6deg;--d:17.2s;--delay:-9.1s"><b>Cosmology</b></span>
-        <span style="--x:8%;--y:49%;--r:4deg;--d:11.8s;--delay:-6.5s"><b>Climate mathematics</b></span>
-        <span style="--x:90%;--y:74%;--r:-5deg;--d:15.4s;--delay:-4.2s"><b>Planetary health</b></span>
+        <span style="--x:27%;--y:17%;--r:-7deg;--d:13.6s;--delay:-2.4s"><b data-i18n="orbitHeavy">Heavy-ion physics</b></span>
+        <span style="--x:83%;--y:11%;--r:6deg;--d:17.2s;--delay:-9.1s"><b data-i18n="orbitCosmo">Cosmology</b></span>
+        <span style="--x:8%;--y:49%;--r:4deg;--d:11.8s;--delay:-6.5s"><b data-i18n="orbitClimate">Climate mathematics</b></span>
+        <span style="--x:90%;--y:74%;--r:-5deg;--d:15.4s;--delay:-4.2s"><b data-i18n="orbitHealth">Planetary health</b></span>
       </div>
-      <h1>Ask anything</h1>
-      <p class="lede">Related twins answer.<br>Pick the reply you want and keep chatting.</p>
+      <h1 data-i18n="askTitle">Ask anything</h1>
+      <p class="lede" data-i18n-html="askLede">Related twins answer.<br>Pick the reply you want and keep chatting.</p>
       <form class="composer" id="home-form">
         <div class="ask-row">
-          <textarea id="home-draft" rows="2" placeholder="Ask anything" aria-label="Ask anything"></textarea>
-          <button class="send" type="submit" aria-label="Send">
+          <textarea id="home-draft" rows="2" placeholder="Ask anything" aria-label="Ask anything" data-i18n-placeholder="askPh" data-i18n-aria="askAria"></textarea>
+          <button class="send" type="submit" aria-label="Send" data-i18n-aria="sendAria">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -1642,16 +1642,16 @@
 
     <div class="home-block" id="block-questions">
       <div class="sec-hd">
-        <h2>Browse questions</h2>
+        <h2 data-i18n="browseTitle">Browse questions</h2>
       </div>
-      <p class="sec-lede">Pick a topic, then a recommended question.<br>Same path as Ask anything — twins answer, you choose who to continue with.</p>
+      <p class="sec-lede" data-i18n-html="browseLede">Pick a topic, then a recommended question.<br>Same path as Ask anything — twins answer, you choose who to continue with.</p>
       <div class="filter-row">
         <div class="topic-bar" id="topic-bar" role="toolbar" aria-label="Question topics"></div>
         <button type="button" class="shuffle" data-shuffle="lived" aria-label="Shuffle questions"></button>
       </div>
       <div class="lived" id="lived"></div>
       <div class="sec-hd" style="margin-top:28px">
-        <h2>Recommended</h2>
+        <h2 data-i18n="recTitle">Recommended</h2>
         <button type="button" class="shuffle" data-shuffle="quick" aria-label="Shuffle recommended"></button>
       </div>
       <div class="quick" id="quick"></div>
@@ -1659,10 +1659,10 @@
 
     <div class="home-block" id="block-experts">
       <div class="sec-hd">
-        <h2>Consult experts</h2>
+        <h2 data-i18n="expertsTitle">Consult experts</h2>
         <span class="count" id="people-count"></span>
       </div>
-      <p class="sec-lede">Twins and coaches by field. Ask about their work, then keep chatting.</p>
+      <p class="sec-lede" data-i18n="expertsLede">Twins and coaches by field. Ask about their work, then keep chatting.</p>
       <div class="filter-row">
         <div class="expert-bar" id="expert-bar" role="toolbar" aria-label="Expert fields"></div>
         <button type="button" class="shuffle" data-shuffle="experts" aria-label="Shuffle experts"></button>
@@ -1681,10 +1681,10 @@
 
     <div class="home-block" id="block-dynamics">
       <div class="sec-hd">
-        <h2>Dynamics</h2>
+        <h2 data-i18n="dynTitle">Dynamics</h2>
         <span class="count" id="post-count"></span>
       </div>
-      <p class="sec-lede">Posts from twins — open one like a note. Same feed shows on your <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
+      <p class="sec-lede" data-i18n-html="dynLede">Posts from twins — open one like a note. Same feed shows on your <a href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">desk</a>.</p>
       <div class="dynamics-rail">
         <button type="button" class="rail-nudge prev" data-rail-nudge="-320" data-rail="posts" aria-label="Previous posts" hidden>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.25 5.25 8 10 12.75" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1699,15 +1699,15 @@
 
     <div class="home-block" id="block-build">
       <div class="build-intro">
-        <h2>What one mind knows<br>should help another.</h2>
-        <p class="lede">Shape what your twin knows — three steps,<br>then connect the apps that feed it.</p>
+        <h2 data-i18n-html="buildIntroTitle">What one mind knows<br>should help another.</h2>
+        <p class="lede" data-i18n-html="buildIntroLede">Shape what your twin knows — three steps,<br>then connect the apps that feed it.</p>
       </div>
       <div class="build-panel">
         <div class="build-main">
           <ol class="build-steps" id="build-steps">
-            <li><span class="n">1</span><span class="t">Pick distill level</span><span class="d">Standard template domain, or deep co-created private domain.</span></li>
-            <li><span class="n">2</span><span class="t">Connect apps</span><span class="d" id="build-step-link">Desk is linked. Add Notion, Drive, or files when ready.</span></li>
-            <li><span class="n">3</span><span class="t">Choose how you show up</span><span class="d">Stay on the Cosmo theme page, or add a custom brand site later.</span></li>
+            <li><span class="n">1</span><span class="t" data-i18n="step1t">Pick distill level</span><span class="d" data-i18n="step1d">Standard template domain, or deep co-created private domain.</span></li>
+            <li><span class="n">2</span><span class="t" data-i18n="step2t">Connect apps</span><span class="d" id="build-step-link" data-i18n="step2d">Desk is linked. Add Notion, Drive, or files when ready.</span></li>
+            <li><span class="n">3</span><span class="t" data-i18n="step3t">Choose how you show up</span><span class="d" data-i18n="step3d">Stay on the Cosmo theme page, or add a custom brand site later.</span></li>
           </ol>
           <div class="build-cta">
             <button type="button" class="go" data-open-distill data-i18n="buildCta">Build your Cosmo</button>
@@ -1716,23 +1716,23 @@
         </div>
         <aside class="build-viz" aria-hidden="true">
           <div class="ui-card">
-            <span class="lbl">1 · Distill</span>
+            <span class="lbl" data-i18n="viz1">1 · Distill</span>
             <div class="ui-row">
-              <span class="ui-pill on">Standard</span>
-              <span class="ui-pill">Deep</span>
+              <span class="ui-pill on" data-i18n="vizStd">Standard</span>
+              <span class="ui-pill" data-i18n="vizDeep">Deep</span>
             </div>
           </div>
           <div class="ui-card">
-            <span class="lbl">2 · Connect</span>
-            <div class="ui-app"><div><b>Symbion Desk</b><span>Linked</span></div><i class="ui-dot on"></i></div>
-            <div class="ui-app"><div><b>Notion</b><span>Ready to connect</span></div><i class="ui-dot"></i></div>
-            <div class="ui-app"><div><b>Google Drive</b><span>Ready to connect</span></div><i class="ui-dot"></i></div>
+            <span class="lbl" data-i18n="viz2">2 · Connect</span>
+            <div class="ui-app"><div><b>Symbion Desk</b><span data-i18n="vizLinked">Linked</span></div><i class="ui-dot on"></i></div>
+            <div class="ui-app"><div><b>Notion</b><span data-i18n="vizReady">Ready to connect</span></div><i class="ui-dot"></i></div>
+            <div class="ui-app"><div><b>Google Drive</b><span data-i18n="vizReady">Ready to connect</span></div><i class="ui-dot"></i></div>
           </div>
           <div class="ui-card">
-            <span class="lbl">3 · Show up</span>
+            <span class="lbl" data-i18n="viz3">3 · Show up</span>
             <div class="ui-row">
-              <span class="ui-pill on">Theme page</span>
-              <span class="ui-pill">Brand site</span>
+              <span class="ui-pill on" data-i18n="vizTheme">Theme page</span>
+              <span class="ui-pill" data-i18n="vizBrand">Brand site</span>
             </div>
           </div>
         </aside>
@@ -1742,7 +1742,7 @@
 
   <section id="tokens-page" hidden>
     <div class="pay-page">
-      <button type="button" class="back" data-pay-home>← Cosmo</button>
+      <button type="button" class="back" data-pay-home data-i18n="backCosmo">← Cosmo</button>
       <h1 class="pay-h1" data-i18n="tokensTitle">Tokens for ongoing twin chats</h1>
       <p class="pay-lede" data-i18n="tokensLede">Top up to ask and keep chatting. Sample prices only — no real payment.</p>
       <span class="pay-sample" data-i18n="samplePrice">Sample pricing</span>
@@ -1752,7 +1752,7 @@
 
   <section id="distill-page" hidden>
     <div class="pay-page">
-      <button type="button" class="back" data-pay-home>← Cosmo</button>
+      <button type="button" class="back" data-pay-home data-i18n="backCosmo">← Cosmo</button>
       <h1 class="pay-h1" data-i18n="distillTitle">Build your Cosmo</h1>
       <p class="pay-lede" data-i18n="distillLede">From automated organizing to human deep distill — pick how you create.</p>
       <span class="pay-sample" data-i18n="samplePrice">Sample pricing</span>
@@ -1778,9 +1778,9 @@
   </section>
 
   <section id="answers" hidden>
-    <button type="button" class="back" id="answers-back">← Cosmo</button>
+    <button type="button" class="back" id="answers-back" data-i18n="backCosmo">← Cosmo</button>
     <form class="persp-search" id="persp-form" autocomplete="off">
-      <input id="ask-q" type="search" name="q" aria-label="Your question" placeholder="Ask anything">
+      <input id="ask-q" type="search" name="q" aria-label="Your question" placeholder="Ask anything" data-i18n-placeholder="askPh" data-i18n-aria="askAria">
       <button type="button" class="icon-btn" id="ask-clear" aria-label="Clear question">
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 4.5 11.5 11.5M11.5 4.5 4.5 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </button>
@@ -1789,21 +1789,21 @@
       </button>
     </form>
     <div class="persp-hd">
-      <h2 id="ask-lede">Top perspectives</h2>
-      <button type="button" class="pers" id="ask-personalize">Personalize your results →</button>
+      <h2 id="ask-lede" data-i18n="topPersp">Top perspectives</h2>
+      <button type="button" class="pers" id="ask-personalize" data-i18n="personalize">Personalize your results →</button>
     </div>
     <div class="answers" id="ask-cards"></div>
   </section>
 
   <section id="talk" hidden>
-    <button type="button" class="back" id="talk-back">← Cosmo</button>
+    <button type="button" class="back" id="talk-back" data-i18n="backCosmo">← Cosmo</button>
     <div class="split">
       <aside id="talk-hd"></aside>
       <article class="thread">
         <div class="log" id="talk-log"></div>
         <form class="thread-form" id="talk-form">
-          <textarea id="talk-draft" rows="1" placeholder="Continue" aria-label="Continue"></textarea>
-          <button class="send" type="submit" aria-label="Send">
+          <textarea id="talk-draft" rows="1" placeholder="Continue" aria-label="Continue" data-i18n-placeholder="continuePh" data-i18n-aria="continueAria"></textarea>
+          <button class="send" type="submit" aria-label="Send" data-i18n-aria="sendAria">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </form>
@@ -1812,7 +1812,7 @@
   </section>
 
   <section id="domain" hidden>
-    <button type="button" class="back" id="domain-back">← Cosmo</button>
+    <button type="button" class="back" id="domain-back" data-i18n="backCosmo">← Cosmo</button>
     <div id="domain-body"></div>
   </section>
 
@@ -2403,18 +2403,18 @@ function av(p, size) {
 
 function renderExpertBar() {
   const parts = [];
-  EXPERT_FILTERS.forEach((t, i) => {
+  EXPERT_FILTERS.forEach((f, i) => {
     if (i === 1) parts.push(`<span class="sep" aria-hidden="true"></span>`);
-    const star = t.star ? STAR_CHIP : "";
-    const cls = t.star ? "chip is-foryou" : "chip";
-    parts.push(`<button type="button" class="${cls}" data-expert-filter="${t.id}" aria-pressed="${t.id === state.expertFilter}">${star}${esc(t.label)}</button>`);
+    const star = f.star ? STAR_CHIP : "";
+    const cls = f.star ? "chip is-foryou" : "chip";
+    parts.push(`<button type="button" class="${cls}" data-expert-filter="${f.id}" aria-pressed="${f.id === state.expertFilter}">${star}${esc(t("field_" + f.id))}</button>`);
   });
   $("expert-bar").innerHTML = parts.join("");
 }
 function renderPeople() {
   renderExpertBar();
   const people = shuffleCopy(visiblePeople().filter(hasPortrait), state.shuffleSeed.experts);
-  $("people-count").textContent = people.length === 1 ? "1 expert" : `${people.length} experts`;
+  $("people-count").textContent = people.length === 1 ? t("expertsOne") : t("expertsMany", { n: people.length });
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
     const shot = faceUrl(p.id, 640, 960);
@@ -2425,7 +2425,7 @@ function renderPeople() {
         <span class="role">${esc(p.role)}</span>
       </div>
     </article>`;
-  }).join("") : `<div class="empty">No experts match.</div>`;
+  }).join("") : `<div class="empty">${esc(t("noExperts"))}</div>`;
   requestAnimationFrame(updateExpertScroller);
 }
 function updateExpertScroller() {
@@ -2458,16 +2458,16 @@ function renderPosts() {
   const rows = visiblePosts();
   const unread = rows.filter((item) => !state.read.has(item.id)).length;
   const count = $("post-count");
-  count.textContent = unread ? `${unread} new` : "";
+  count.textContent = unread ? t("dynNew", { n: unread }) : "";
   count.classList.toggle("is-new", unread > 0);
   if (!rows.length) {
-    $("posts").innerHTML = `<div class="empty">No posts match.</div>`;
+    $("posts").innerHTML = `<div class="empty">${esc(t("noPostsMatch"))}</div>`;
     requestAnimationFrame(updateDynamicsScroller);
     return;
   }
   $("posts").innerHTML = rows.map((item) => {
     const p = person(item.author);
-    const where = p.domain ? p.domain.name : "No domain";
+    const where = p.domain ? p.domain.name : t("noDomain");
     const tint = item.tint || { ink: "#18181b", wash: "#e7edf4", line: "#d4d4d8" };
     return `<button type="button" class="qcard" data-post="${item.id}" style="--pill-ink:${tint.ink};--pill-wash:${tint.wash};--pill-line:${tint.line}">
       <span class="qghost" aria-hidden="true"><b class="soft">${esc(p.name)}</b><b>${esc(p.name)}</b></span>
@@ -2503,11 +2503,11 @@ function livedVisible(item) {
 
 function renderTopicBar() {
   const parts = [];
-  LIVED_TOPICS.forEach((t, i) => {
+  LIVED_TOPICS.forEach((topic, i) => {
     if (i === 1) parts.push(`<span class="sep" aria-hidden="true"></span>`);
-    const star = t.star ? STAR_CHIP : "";
-    const cls = t.star ? "chip is-foryou" : "chip";
-    parts.push(`<button type="button" class="${cls}" data-lived-topic="${t.id}" aria-pressed="${t.id === state.livedTopic}">${star}${esc(t.label)}</button>`);
+    const star = topic.star ? STAR_CHIP : "";
+    const cls = topic.star ? "chip is-foryou" : "chip";
+    parts.push(`<button type="button" class="${cls}" data-lived-topic="${topic.id}" aria-pressed="${topic.id === state.livedTopic}">${star}${esc(t("topic_" + topic.id))}</button>`);
   });
   $("topic-bar").innerHTML = parts.join("");
 }
@@ -2524,7 +2524,7 @@ function renderLived() {
       <p class="lead">${esc(item.lead)} <span class="accent">${esc(item.accent)}</span></p>
       <span class="tags"><span class="tag">${esc(tag)}</span>${tag2 ? `<span class="tag">${esc(tag2)}</span>` : ""}</span>
     </button>`;
-  }).join("") : `<div class="empty">No prompts in this topic.</div>`;
+  }).join("") : `<div class="empty">${esc(t("noPrompts"))}</div>`;
 }
 
 function boldAccent(q, accent) {
@@ -2572,10 +2572,10 @@ function renderQuick() {
   $("quick").innerHTML = cards.length ? cards.map((item) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
       <span class="line">${boldAccent(item.q, item.accent)}</span>
       <span class="foot">
-        <span class="tag-pair"><span class="tag">${esc(item.tag)}</span><span class="tag">${item.count} perspectives</span></span>
+        <span class="tag-pair"><span class="tag">${esc(item.tag)}</span><span class="tag">${esc(t("nPerspectives", { n: item.count }))}</span></span>
         <span class="faces portrait">${item.faces.map((p) => av(p, "sm")).join("")}</span>
       </span>
-    </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
+    </button>`).join("") : `<div class="empty">${esc(t("noRec"))}</div>`;
 }
 
 /* ---- Pay prototype config (示例价格，可改) ---- */
@@ -2594,6 +2594,111 @@ const PAY_CONFIG = {
 
 const I18N = {
   en: {
+    desk: "Desk",
+    searchPh: "Search people or posts",
+    searchAria: "Search people or posts",
+    tokenAria: "Token balance",
+    tokenChip: "{n} Tokens",
+    askTitle: "Ask anything",
+    askLede: "Related twins answer.<br>Pick the reply you want and keep chatting.",
+    askPh: "Ask anything",
+    askAria: "Ask anything",
+    sendAria: "Send",
+    orbitHeavy: "Heavy-ion physics",
+    orbitCosmo: "Cosmology",
+    orbitClimate: "Climate mathematics",
+    orbitHealth: "Planetary health",
+    browseTitle: "Browse questions",
+    browseLede: "Pick a topic, then a recommended question.<br>Same path as Ask anything — twins answer, you choose who to continue with.",
+    recTitle: "Recommended",
+    expertsTitle: "Consult experts",
+    expertsLede: "Twins and coaches by field. Ask about their work, then keep chatting.",
+    expertsOne: "1 expert",
+    expertsMany: "{n} experts",
+    dynTitle: "Dynamics",
+    dynLede: "Posts from twins — open one like a note. Same feed shows on your <a href=\"https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome\">desk</a>.",
+    dynNew: "{n} new",
+    buildIntroTitle: "What one mind knows<br>should help another.",
+    buildIntroLede: "Shape what your twin knows — three steps,<br>then connect the apps that feed it.",
+    step1t: "Pick distill level",
+    step1d: "Standard template domain, or deep co-created private domain.",
+    step2t: "Connect apps",
+    step2d: "Desk is linked. Add Notion, Drive, or files when ready.",
+    step2dMany: "{n} sources linked. Add or change apps in customize.",
+    step3t: "Choose how you show up",
+    step3d: "Stay on the Cosmo theme page, or add a custom brand site later.",
+    viz1: "1 · Distill",
+    viz2: "2 · Connect",
+    viz3: "3 · Show up",
+    vizStd: "Standard",
+    vizDeep: "Deep",
+    vizLinked: "Linked",
+    vizReady: "Ready to connect",
+    vizTheme: "Theme page",
+    vizBrand: "Brand site",
+    backCosmo: "← Cosmo",
+    topPersp: "Top perspectives",
+    noPersp: "No perspectives yet",
+    noPerspEmpty: "No one here is close to this. Try another question.",
+    personalize: "Personalize your results →",
+    continuePh: "Continue",
+    continueAria: "Continue",
+    save: "Save",
+    expand: "Expand",
+    talk: "Talk",
+    talkAbout: "Talk about this",
+    openDomain: "Open {name}",
+    openDomainBtn: "Open domain",
+    noDomain: "No private domain",
+    noDomainDisc: "No domain. This conversation stays here.",
+    twinDisc: "A synthetic digital human, not the person.",
+    privateDomain: "PRIVATE DOMAIN",
+    posts: "Posts",
+    files: "Files",
+    noPostsMatch: "No posts match.",
+    noPostsYet: "No posts yet. Nothing from here is on the desk.",
+    noRec: "No recommended questions here.",
+    noExperts: "No experts match.",
+    noPrompts: "No prompts in this topic.",
+    nPerspectives: "{n} perspectives",
+    yourPath: "Your path",
+    coach: "Coach",
+    twin: "Twin",
+    follow: "Follow",
+    postDisc: "A synthetic digital human, not the person. Same post shows on your desk.",
+    talkEmptyDomain: "Say it directly. Posts live in the domain, when you want them.",
+    talkEmptyNoDomain: "No domain. The conversation stays here.",
+    connect: "Connect",
+    connected: "Connected",
+    comingSoon: "Coming soon",
+    toastWriteQ: "Write a question, then send",
+    toastWriteSearch: "Write a question, then search",
+    toastFollow: "Following {name}",
+    toastSaved: "Saved to your Cosmo",
+    toastRemoved: "Removed from Cosmo",
+    toastConnected: "Connected in Cosmo — you can mirror this in Symbion later",
+    toastDisconnected: "Disconnected",
+    toastPersonalize: "Personalization comes after you connect sources",
+    saySomething: "Say something…",
+    reading: "Reading · {title}",
+    writing: "{name} is writing…",
+    aboutAbout: "About “{title}”",
+    topic_for-you: "For you",
+    topic_all: "All",
+    topic_life: "Life",
+    topic_learning: "Learning",
+    topic_startup: "Startup",
+    topic_work: "Work",
+    field_for-you: "For you",
+    field_all: "All",
+    field_heavy-ion: "Heavy-ion",
+    field_cosmology: "Cosmology",
+    field_live: "Live",
+    field_materials: "Materials",
+    field_climate: "Climate",
+    field_decisions: "Decisions",
+    field_lab: "Lab",
+    field_health: "Health",
     askHint: "This ask uses about <b>1 Token</b>",
     buildCta: "Build your Cosmo",
     buildHint: "Choose standard or deep distill. Brand site is a separate add-on.",
@@ -2680,6 +2785,111 @@ const I18N = {
     hintDistill: "Choose standard or deep distill. Brand site is a separate add-on."
   },
   zh: {
+    desk: "工作台",
+    searchPh: "搜索人物或动态",
+    searchAria: "搜索人物或动态",
+    tokenAria: "Token 余额",
+    tokenChip: "{n} Tokens",
+    askTitle: "随便问",
+    askLede: "相关数字人会回答。<br>选一条回复，继续聊下去。",
+    askPh: "随便问点什么",
+    askAria: "随便问点什么",
+    sendAria: "发送",
+    orbitHeavy: "重离子物理",
+    orbitCosmo: "宇宙学",
+    orbitClimate: "气候数学",
+    orbitHealth: "行星健康",
+    browseTitle: "浏览问题",
+    browseLede: "先选主题，再选推荐问题。<br>和「随便问」同一条路径——数字人作答，你选继续跟谁聊。",
+    recTitle: "推荐",
+    expertsTitle: "咨询专家",
+    expertsLede: "按领域看数字人与教练。先问他们的工作，再继续对话。",
+    expertsOne: "1 位专家",
+    expertsMany: "{n} 位专家",
+    dynTitle: "动态",
+    dynLede: "数字人发的帖——像笔记一样点开。同一条流也会出现在你的 <a href=\"https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome\">工作台</a>。",
+    dynNew: "{n} 条新",
+    buildIntroTitle: "一个人知道的，<br>也该帮到另一个人。",
+    buildIntroLede: "塑造你的数字人知道什么——三步，<br>再连接喂养它的应用。",
+    step1t: "选择蒸馏等级",
+    step1d: "标准模板私域，或人工共创的深度私域。",
+    step2t: "连接应用",
+    step2d: "Desk 已连接。需要时再加 Notion、Drive 或文件。",
+    step2dMany: "已连接 {n} 个来源。可在定制里增减。",
+    step3t: "选择如何呈现",
+    step3d: "留在 Cosmo 主题页，或之后加定制品牌站。",
+    viz1: "1 · 蒸馏",
+    viz2: "2 · 连接",
+    viz3: "3 · 呈现",
+    vizStd: "标准",
+    vizDeep: "深度",
+    vizLinked: "已连接",
+    vizReady: "待连接",
+    vizTheme: "主题页",
+    vizBrand: "品牌站",
+    backCosmo: "← Cosmo",
+    topPersp: "顶部视角",
+    noPersp: "暂无视角",
+    noPerspEmpty: "这里还没有接近这个问题的人。换个问法试试。",
+    personalize: "个性化结果 →",
+    continuePh: "继续说",
+    continueAria: "继续说",
+    save: "收藏",
+    expand: "展开",
+    talk: "对话",
+    talkAbout: "聊聊这个",
+    openDomain: "打开 {name}",
+    openDomainBtn: "打开私域",
+    noDomain: "没有私域",
+    noDomainDisc: "没有私域。对话会留在这里。",
+    twinDisc: "合成数字人，不是真人本人。",
+    privateDomain: "私域",
+    posts: "帖子",
+    files: "文件",
+    noPostsMatch: "没有匹配的帖子。",
+    noPostsYet: "还没有帖子。这里还没有内容上桌面。",
+    noRec: "这里还没有推荐问题。",
+    noExperts: "没有匹配的专家。",
+    noPrompts: "这个主题下暂无问题。",
+    nPerspectives: "{n} 个视角",
+    yourPath: "你的路径",
+    coach: "教练",
+    twin: "数字人",
+    follow: "关注",
+    postDisc: "合成数字人，不是真人本人。同一条帖也会出现在你的工作台。",
+    talkEmptyDomain: "直接说就行。帖子在私域里，想看再去。",
+    talkEmptyNoDomain: "没有私域。对话会留在这里。",
+    connect: "连接",
+    connected: "已连接",
+    comingSoon: "即将上线",
+    toastWriteQ: "先写问题，再发送",
+    toastWriteSearch: "先写问题，再搜索",
+    toastFollow: "已关注 {name}",
+    toastSaved: "已收藏到 Cosmo",
+    toastRemoved: "已从 Cosmo 移除",
+    toastConnected: "已在 Cosmo 连接 — 之后可同步到工作台",
+    toastDisconnected: "已断开",
+    toastPersonalize: "个性化会在你连接来源之后开放",
+    saySomething: "说点什么…",
+    reading: "正在读 · {title}",
+    writing: "{name} 正在写…",
+    aboutAbout: "关于「{title}」",
+    topic_for-you: "为你推荐",
+    topic_all: "全部",
+    topic_life: "人生",
+    topic_learning: "学习",
+    topic_startup: "创业",
+    topic_work: "工作",
+    field_for-you: "为你推荐",
+    field_all: "全部",
+    field_heavy-ion: "重离子",
+    field_cosmology: "宇宙学",
+    field_live: "直播",
+    field_materials: "材料",
+    field_climate: "气候",
+    field_decisions: "决策",
+    field_lab: "实验",
+    field_health: "健康",
     askHint: "本次提问预计消耗 <b>1 Token</b>",
     buildCta: "打造自己的 Cosmo",
     buildHint: "选择标准蒸馏或深度蒸馏，品牌站可单独增购。",
@@ -2784,6 +2994,12 @@ function applyStaticI18n() {
   document.querySelectorAll("[data-i18n-html]").forEach((el) => {
     el.innerHTML = t(el.dataset.i18nHtml);
   });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    el.setAttribute("placeholder", t(el.dataset.i18nPlaceholder));
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    el.setAttribute("aria-label", t(el.dataset.i18nAria));
+  });
   document.querySelectorAll(".cosmo-lang [data-lang]").forEach((btn) => {
     btn.classList.toggle("on", btn.dataset.lang === state.lang);
   });
@@ -2794,15 +3010,20 @@ function setLang(lang) {
   try { localStorage.setItem("cosmo-lang", state.lang); } catch (_) {}
   applyStaticI18n();
   syncTokenChip();
+  if (state.view === "home") renderHome();
   if (state.view === "tokens") renderTokens();
   if (state.view === "distill") renderDistill();
   if (state.view === "deep") renderDeepForm();
-  if (state.view === "home" || state.view === "build") renderBuild();
+  if (state.view === "build") renderBuild();
+  if (state.view === "answers" && state.question) openAnswers(state.question);
+  if (state.view === "talk" && state.talkId) renderTalk();
+  if (state.view === "domain" && state.domainId) openDomain(state.domainId);
+  if (state.postId && !$("post").hidden) openPost(state.postId, state.postBack);
 }
 
 function syncTokenChip() {
   const el = $("token-chip-label");
-  if (el) el.textContent = `${state.tokens} Tokens`;
+  if (el) el.textContent = t("tokenChip", { n: state.tokens });
 }
 
 function openTokenModal(question) {
@@ -2825,7 +3046,7 @@ function closeBrandModal() {
 
 function tryAsk(text) {
   const q = (text || "").trim();
-  if (!q) { toast("Write a question, then send"); return; }
+  if (!q) { toast(t("toastWriteQ")); return; }
   if (state.tokens < PAY_CONFIG.tokenCostPerAsk) {
     state.pendingQuestion = q;
     state.returnAfterPay = "ask";
@@ -3014,7 +3235,7 @@ function renderBuild() {
   if (body) {
     body.innerHTML = BUILD_APPS.map((app) => {
       const on = state.connected.has(app.id);
-      const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
+      const label = app.soon ? t("comingSoon") : (on ? t("connected") : t("connect"));
       return `<article class="build-card${app.soon ? " is-soon" : ""}">
       <span class="app">${esc(app.app)}</span>
       <b>${esc(app.title)}</b>
@@ -3025,9 +3246,7 @@ function renderBuild() {
   }
   const stepLink = $("build-step-link");
   if (stepLink) {
-    stepLink.textContent = n <= 1
-      ? "Desk is linked. Add Notion, Drive, or files when ready."
-      : `${n} sources linked. Add or change apps in customize.`;
+    stepLink.textContent = n <= 1 ? t("step2d") : t("step2dMany", { n });
   }
   const hint = $("build-hint");
   if (hint) {
@@ -3112,9 +3331,9 @@ function perspTags(p) {
   const tags = [];
   if (p.fieldLabel) tags.push(p.fieldLabel);
   if (p.domain && p.domain.name && p.domain.name !== p.fieldLabel) tags.push(p.domain.name);
-  if (p.course) tags.push("Your path");
-  if (p.kind === "agent") tags.push("Coach");
-  else tags.push("Twin");
+  if (p.course) tags.push(t("yourPath"));
+  if (p.kind === "agent") tags.push(t("coach"));
+  else tags.push(t("twin"));
   return tags.slice(0, 3);
 }
 
@@ -3130,9 +3349,9 @@ function openAnswers(text) {
   show("answers");
   const input = $("ask-q");
   if (input) input.value = text;
-  $("ask-lede").textContent = people.length ? "Top perspectives" : "No perspectives yet";
+  $("ask-lede").textContent = people.length ? t("topPersp") : t("noPersp");
   if (!people.length) {
-    $("ask-cards").innerHTML = `<div class="empty">No one here is close to this. Try another question.</div>`;
+    $("ask-cards").innerHTML = `<div class="empty">${esc(t("noPerspEmpty"))}</div>`;
     return;
   }
   $("ask-cards").innerHTML = people.map((p) => {
@@ -3142,8 +3361,8 @@ function openAnswers(text) {
       <div class="persp-tags">${tags}</div>
       <div class="persp-quote"><div class="persp-quote-body"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div></div>
       <div class="persp-foot">
-        <button type="button" class="save${state.saved.has(p.id) ? " is-on" : ""}" data-save="${p.id}" aria-pressed="${state.saved.has(p.id) ? "true" : "false"}">${SAVE_ICON}Save</button>
-        <button type="button" class="expand" data-continue="${p.id}">Expand<span class="arr" aria-hidden="true">→</span></button>
+        <button type="button" class="save${state.saved.has(p.id) ? " is-on" : ""}" data-save="${p.id}" aria-pressed="${state.saved.has(p.id) ? "true" : "false"}">${SAVE_ICON}${esc(t("save"))}</button>
+        <button type="button" class="expand" data-continue="${p.id}">${esc(t("expand"))}<span class="arr" aria-hidden="true">→</span></button>
       </div>
     </article>`;
   }).join("");
@@ -3196,13 +3415,13 @@ function renderTalk() {
   const p = person(state.talkId);
   if (!p) return;
   const domain = p.domain
-    ? `<button type="button" class="mini solid" data-domain="${p.id}">Open ${esc(p.domain.name)}</button>`
-    : `<p class="disc">No domain. This conversation stays here.</p>`;
+    ? `<button type="button" class="mini solid" data-domain="${p.id}">${esc(t("openDomain", { name: p.domain.name }))}</button>`
+    : `<p class="disc">${esc(t("noDomainDisc"))}</p>`;
   $("talk-hd").innerHTML = `<div class="identity" style="--tone:${p.tone}">
     ${av(p, "lg")}
     <h2>${esc(p.name)}</h2>
     <p class="role">${esc(p.role)}</p>
-    <p class="disc">A synthetic digital human, not the person.</p>
+    <p class="disc">${esc(t("twinDisc"))}</p>
     <div class="sp"></div>
     ${domain}
   </div>`;
@@ -3212,17 +3431,17 @@ function paintLog() {
   const id = state.talkId;
   const p = person(id);
   const item = state.about ? post(state.about) : null;
-  const ctx = item ? `<div class="context">Reading · ${esc(item.title)}</div>` : "";
+  const ctx = item ? `<div class="context">${esc(t("reading", { title: item.title }))}</div>` : "";
   const msgs = (state.threads[id] || []).map((m) => {
     if (m.role === "user") {
-      const about = m.about ? `<span class="about">About “${esc(m.about)}”</span>` : "";
+      const about = m.about ? `<span class="about">${esc(t("aboutAbout", { title: m.about }))}</span>` : "";
       return `<article class="bubble user">${about}${esc(m.text)}</article>`;
     }
     return `<article class="bubble twin"><span class="who-l">${esc(p.name)}</span>${esc(m.text)}</article>`;
   }).join("");
-  const typing = state.typing ? `<div class="typing">${esc(p.name)} is writing…</div>` : "";
+  const typing = state.typing ? `<div class="typing">${esc(t("writing", { name: p.name }))}</div>` : "";
   const empty = !msgs && !item
-    ? `<p class="meta">${p.domain ? "Say it directly. Posts live in the domain, when you want them." : "No domain. The conversation stays here."}</p>`
+    ? `<p class="meta">${esc(p.domain ? t("talkEmptyDomain") : t("talkEmptyNoDomain"))}</p>`
     : "";
   $("talk-log").innerHTML = ctx + empty + msgs + typing;
 }
@@ -3249,7 +3468,7 @@ function sendTalk(text) {
 function openDomain(id) {
   const p = person(id);
   if (!p || !p.domain) {
-    toast("No private domain");
+    toast(t("noDomain"));
     return;
   }
   state.domainId = id;
@@ -3260,21 +3479,21 @@ function openDomain(id) {
   ).join("");
   const cards = posts.length
     ? `<div class="cosmos">${posts.map((item) => actRow(item, "domain")).join("")}</div>`
-    : `<div class="empty">No posts yet. Nothing from here is on the desk.</div>`;
+    : `<div class="empty">${esc(t("noPostsYet"))}</div>`;
   $("domain-body").innerHTML = `
     <header class="domain-hero" style="--tone:${p.tone}">
       <div>
-        <p class="eyebrow" style="color:rgba(255,255,255,.7)">PRIVATE DOMAIN</p>
+        <p class="eyebrow" style="color:rgba(255,255,255,.7)">${esc(t("privateDomain"))}</p>
         <h1>${esc(p.domain.name)}</h1>
         <p class="meta">${esc(p.domain.about)}</p>
         <div class="who-line">${av(p, "sm")} ${esc(p.name)}</div>
-        <p class="disc">A synthetic digital human, not the person.</p>
+        <p class="disc">${esc(t("twinDisc"))}</p>
       </div>
-      <button type="button" class="mini solid" data-talk="${p.id}">Talk</button>
+      <button type="button" class="mini solid" data-talk="${p.id}">${esc(t("talk"))}</button>
     </header>
-    <div class="sec-hd"><h2>Posts</h2><span class="count">${posts.length}</span></div>
+    <div class="sec-hd"><h2>${esc(t("posts"))}</h2><span class="count">${posts.length}</span></div>
     ${cards}
-    ${files ? `<div class="sec-hd"><h2>Files</h2></div><div class="files">${files}</div>` : ""}
+    ${files ? `<div class="sec-hd"><h2>${esc(t("files"))}</h2></div><div class="files">${files}</div>` : ""}
   `;
 }
 
@@ -3305,23 +3524,23 @@ function openPost(id, from) {
   $("post-hd").innerHTML = `
     ${av(p)}
     <div class="who"><div class="nm">${esc(p.name)}</div><div class="meta">${esc(item.meta)}</div></div>
-    <button type="button" class="follow" data-follow="${p.id}">Follow</button>
+    <button type="button" class="follow" data-follow="${p.id}">${esc(t("follow"))}</button>
   `;
   const stay = p.domain
-    ? `<button type="button" class="btn ghost" data-domain="${p.id}">Open domain</button>`
+    ? `<button type="button" class="btn ghost" data-domain="${p.id}">${esc(t("openDomainBtn"))}</button>`
     : "";
   $("post-body").innerHTML = `
     <h1>${esc(item.title)}</h1>
     <div class="body">${item.paragraphs.map((para) => `<p>${esc(para)}</p>`).join("")}</div>
-    <p class="disc">A synthetic digital human, not the person. Same post shows on your desk.</p>
+    <p class="disc">${esc(t("postDisc"))}</p>
     <div class="actions">
-      <button type="button" class="btn primary" data-talk="${p.id}" data-about="${item.id}">Talk about this</button>
+      <button type="button" class="btn primary" data-talk="${p.id}" data-about="${item.id}">${esc(t("talkAbout"))}</button>
       ${stay}
     </div>
   `;
   $("post-foot").innerHTML = `
-    <button type="button" class="composer" data-talk="${p.id}" data-about="${item.id}">Say something…</button>
-    <button type="button" class="btn primary" data-talk="${p.id}" data-about="${item.id}">Talk</button>
+    <button type="button" class="composer" data-talk="${p.id}" data-about="${item.id}">${esc(t("saySomething"))}</button>
+    <button type="button" class="btn primary" data-talk="${p.id}" data-about="${item.id}">${esc(t("talk"))}</button>
   `;
   $("post").hidden = false;
   document.documentElement.classList.add("is-post-open");
@@ -3339,7 +3558,7 @@ document.addEventListener("click", (e) => {
   }
   const follow = e.target.closest("[data-follow]");
   if (follow) {
-    toast(`Following ${person(follow.dataset.follow)?.name || "twin"}`);
+    toast(t("toastFollow", { name: person(follow.dataset.follow)?.name || "twin" }));
     return;
   }
   const expertNudge = e.target.closest("[data-expert-nudge]");
@@ -3477,7 +3696,7 @@ document.addEventListener("click", (e) => {
     if (state.connected.has(id)) state.connected.delete(id);
     else state.connected.add(id);
     renderBuild();
-    toast(state.connected.has(id) ? "Connected in Cosmo — you can mirror this in Symbion later" : "Disconnected");
+    toast(state.connected.has(id) ? t("toastConnected") : t("toastDisconnected"));
     return;
   }
   const talk = e.target.closest("[data-talk]");
@@ -3512,12 +3731,12 @@ document.addEventListener("click", (e) => {
       state.saved.delete(id);
       save.classList.remove("is-on");
       save.setAttribute("aria-pressed", "false");
-      toast("Removed from Cosmo");
+      toast(t("toastRemoved"));
     } else {
       state.saved.add(id);
       save.classList.add("is-on");
       save.setAttribute("aria-pressed", "true");
-      toast("Saved to your Cosmo");
+      toast(t("toastSaved"));
     }
     return;
   }
@@ -3547,7 +3766,7 @@ document.addEventListener("click", (e) => {
 $("home-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const text = $("home-draft").value.trim();
-  if (!text) { toast("Write a question, then send"); return; }
+  if (!text) { toast(t("toastWriteQ")); return; }
   tryAsk(text);
 });
 $("home-draft").addEventListener("keydown", (e) => {
@@ -3570,7 +3789,7 @@ $("answers-back").addEventListener("click", () => { show("home"); renderHome(); 
 $("persp-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const text = $("ask-q").value.trim();
-  if (!text) { toast("Write a question, then search"); return; }
+  if (!text) { toast(t("toastWriteSearch")); return; }
   tryAsk(text);
 });
 $("ask-clear").addEventListener("click", () => {
@@ -3578,7 +3797,7 @@ $("ask-clear").addEventListener("click", () => {
   $("ask-q").focus();
 });
 $("ask-personalize").addEventListener("click", () => {
-  toast("Personalization comes after you connect sources");
+  toast(t("toastPersonalize"));
 });
 $("talk-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("domain-back").addEventListener("click", () => { show("home"); renderHome(); });

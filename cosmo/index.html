@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261027172850">
+  <meta name="cosmo-build" content="20261028092030">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -268,10 +268,58 @@
     width: 28px; height: 28px; padding: 0;
     border: 0; background: transparent; color: #515151;
     display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    transition: color .15s ease, background .15s ease;
   }
-  .shuffle:hover { color: var(--ink); }
-  .shuffle:active { transform: rotate(-12deg); }
-  .shuffle svg { width: 18px; height: 18px; display: block; }
+  .shuffle:hover { color: var(--ink); background: rgba(9,9,11,.04); }
+  .shuffle:active { color: var(--ink); }
+  .shuffle svg { width: 18px; height: 18px; display: block; transform-origin: 50% 50%; }
+  .shuffle.is-spinning svg {
+    animation: shuffle-spin .58s cubic-bezier(.4, 0, .2, 1);
+  }
+  @keyframes shuffle-spin {
+    0% { transform: rotate(0deg) scale(1); }
+    45% { transform: rotate(200deg) scale(1.08); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+  .shuffle-out > * {
+    animation: shuffle-card-out .2s ease forwards;
+    pointer-events: none;
+  }
+  .shuffle-in > * {
+    animation: shuffle-card-in .48s cubic-bezier(.22, 1, .36, 1) both;
+  }
+  .shuffle-in > *:nth-child(1) { animation-delay: 0ms; }
+  .shuffle-in > *:nth-child(2) { animation-delay: 45ms; }
+  .shuffle-in > *:nth-child(3) { animation-delay: 90ms; }
+  .shuffle-in > *:nth-child(4) { animation-delay: 135ms; }
+  .shuffle-in > *:nth-child(5) { animation-delay: 180ms; }
+  .shuffle-in > *:nth-child(6) { animation-delay: 225ms; }
+  .shuffle-in > *:nth-child(n+7) { animation-delay: 260ms; }
+  @keyframes shuffle-card-out {
+    to {
+      opacity: 0;
+      transform: translateY(10px) scale(.97);
+      filter: blur(2px);
+    }
+  }
+  @keyframes shuffle-card-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(.96);
+      filter: blur(3px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shuffle.is-spinning svg,
+    .shuffle-out > *,
+    .shuffle-in > * { animation: none !important; }
+  }
   .sec-lede { margin: 0 0 14px; max-width: 560px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 
   .home-block { scroll-margin-top: 88px; }
@@ -1305,6 +1353,44 @@ function shuffleCopy(list, seed) {
   return a;
 }
 
+const SHUFFLE_TARGETS = {
+  lived: { id: "lived", render: () => renderLived() },
+  quick: { id: "quick", render: () => renderQuick() },
+  experts: { id: "people", render: () => renderPeople() }
+};
+function playShuffle(btn, key) {
+  if (!btn || btn.dataset.busy === "1") return;
+  const target = SHUFFLE_TARGETS[key];
+  if (!target) return;
+  state.shuffleSeed[key] = (state.shuffleSeed[key] || 1) + 1 + (Date.now() % 997);
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const box = $(target.id);
+  btn.dataset.busy = "1";
+  btn.classList.add("is-spinning");
+  const finishSpin = () => {
+    btn.classList.remove("is-spinning");
+    btn.dataset.busy = "0";
+  };
+  if (reduced || !box || !box.children.length) {
+    target.render();
+    window.setTimeout(finishSpin, 200);
+    return;
+  }
+  box.classList.remove("shuffle-in");
+  box.classList.add("shuffle-out");
+  window.setTimeout(() => {
+    target.render();
+    const next = $(target.id);
+    if (!next) { finishSpin(); return; }
+    next.classList.remove("shuffle-out");
+    next.classList.add("shuffle-in");
+    window.setTimeout(() => {
+      next.classList.remove("shuffle-in");
+      finishSpin();
+    }, 560);
+  }, 200);
+}
+
 /* Per-topic cool palettes (pre–rain-bed). Size/grid unchanged. */
 const TOPIC_LOOKS = {
   "for-you": [
@@ -2072,10 +2158,7 @@ document.addEventListener("click", (e) => {
   if (shuffleBtn) {
     e.preventDefault();
     const key = shuffleBtn.dataset.shuffle;
-    state.shuffleSeed[key] = (state.shuffleSeed[key] || 1) + 1 + (Date.now() % 997);
-    if (key === "lived") renderLived();
-    else if (key === "quick") renderQuick();
-    else if (key === "experts") renderPeople();
+    playShuffle(shuffleBtn, key);
     return;
   }
   const livedTopic = e.target.closest("[data-lived-topic]");

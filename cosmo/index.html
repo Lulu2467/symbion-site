@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028111340">
+  <meta name="cosmo-build" content="20261028111450">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -871,22 +871,23 @@
   }
   .persp-quote {
     position: relative;
+    min-height: 148px;
     background:
       linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
-    border-radius: 16px;
+    border-radius: 18px;
     border: 1px solid rgba(60, 122, 148, .1);
-    padding: 16px 18px 18px;
+    padding: 22px 22px 24px;
   }
   .persp-quote .qmark {
     display: inline; float: left;
-    margin: -.12em .18em 0 0;
-    font-size: 28px; line-height: 1; color: #3c7a94; font-weight: 500;
+    margin: -.08em .2em 0 0;
+    font-size: 32px; line-height: 1; color: #3c7a94; font-weight: 500;
     vertical-align: top;
   }
   .persp-quote p {
     margin: 0;
     font-family: var(--font);
-    font-size: 16px; line-height: 1.55; color: var(--ink); font-weight: 400;
+    font-size: 16px; line-height: 1.6; color: var(--ink); font-weight: 400;
   }
   .persp-quote::after { content: ""; display: table; clear: both; }
   .persp-foot {
@@ -1451,7 +1452,7 @@ const PEOPLE = [
       { name: "Lecture 5 slides", where: "Deck" },
       { name: "Lecture 4 summary", where: "Doc" }
     ],
-    reply: "Say which sentence you are stuck on. If it is the phase diagram, tell me which axis you can name.",
+    reply: "Say which sentence you are stuck on. If it is the phase diagram, tell me which axis you can already name, and which one is still fog. We stay on that sentence until the next line is yours to write—not mine.",
     follow: "Stay on that sentence. The next one is yours to write."
   },
   {
@@ -1459,7 +1460,7 @@ const PEOPLE = [
     role: "Cosmology · Cornell • Problem sets you can point at",
     domain: { name: "Cosmology", about: "The problem set and the line from class live in this domain. The twin only touches the line you point to." },
     files: [{ name: "Problem set 2", where: "Doc" }],
-    reply: "Send the line you are stuck on. What is known, what is not, and what class calls it.",
+    reply: "Send the line you are stuck on. Say what is known, what is not, and what class calls it. I will only touch that line—later problems stay closed until you open them.",
     follow: "Still just this line."
   },
   {
@@ -1467,7 +1468,7 @@ const PEOPLE = [
     role: "Live at 3:10 · person on stage • Twin keeps the recap",
     domain: { name: "骆王宇", about: "The live is the person. This domain belongs to the twin: the recap, and the question you did not ask, become posts." },
     files: [],
-    reply: "I am the twin, not the 3:10 live. After the live, a three-point recap is posted here.",
+    reply: "I am the twin, not the 3:10 live. After the live ends, a three-point recap lands here: the claim, the example, and the open question. If you missed a stretch, name the time—I keep the recap, not the stage.",
     follow: "If you want the recap, say which part you missed."
   },
   {
@@ -1475,7 +1476,7 @@ const PEOPLE = [
     role: "Materials · Caltech • Lattice vs sample scale",
     domain: { name: "Materials", about: "Posts about scale, the sample, and the lattice live here. The twin speaks from the sentence in the post." },
     files: [{ name: "Lattice note", where: "Doc" }],
-    reply: "Write the scale the lattice can see, and the scale the sample can see. The mismatch usually sits between those two lines.",
+    reply: "Write the scale the lattice can see, and the scale the sample can see. The mismatch usually sits between those two lines. Until both are named, do not close the defect into a single answer.",
     follow: "Send the two scales."
   },
   {
@@ -1483,7 +1484,7 @@ const PEOPLE = [
     role: "Climate mathematics · Columbia • Axes before trends",
     domain: { name: "Climate mathematics", about: "The notebook and the figure you are about to draw live here. A post names the axes before it names a trend." },
     files: [{ name: "Climate notebook", where: "Code" }],
-    reply: "Write the axis, the unit, and the time step first. If the trend only appears after you change an axis, do not close it into a result yet.",
+    reply: "Write the axis, the unit, and the time step first. If the trend only appears after you change an axis, leave it in the notebook—do not close it into a result yet. Tell me which axis moved.",
     follow: "Tell me which axis you changed."
   },
   {
@@ -1491,7 +1492,7 @@ const PEOPLE = [
     role: "AI and decisions · pricing samples on your desk",
     domain: null,
     files: [],
-    reply: "I have no private domain. The pricing insight is already on your desk. Say the decision, and how many rows are in the sample.",
+    reply: "I have no private domain. The pricing insight is already on your desk. Say the decision you want to make, how many rows sit in the sample, and the one sentence you hope those rows will support.",
     follow: "Send the row count and the sentence you want to write."
   },
   {
@@ -1499,7 +1500,7 @@ const PEOPLE = [
     role: "Lab report coach · Aim Method Result in Doc",
     domain: null,
     files: [],
-    reply: "I draft the report. I have no domain of my own. The numbers stay in your notebook. I only arrange Aim, Method, Result, and Uncertainty.",
+    reply: "I draft the report. I have no domain of my own. The numbers stay in your notebook; I only arrange Aim, Method, Result, and Uncertainty. Point to the section you do not trust—it is usually Method.",
     follow: "Point to the section you do not trust. It is usually Method."
   },
   {
@@ -1507,25 +1508,25 @@ const PEOPLE = [
     role: "Planetary health · Brown • Numbers need the people counted",
     domain: { name: "Planetary health", about: "A health number and the people it counted are posted here. A sentence with no people does not stay." },
     files: [],
-    reply: "A health number needs the people it counted. If you cannot name them, do not send the sentence yet.",
+    reply: "A health number needs the people it counted. If you cannot name them, do not send the sentence yet. Put the number and the people in the same line before you ask me to hold it.",
     follow: "Send the number and the people together."
   },
-  { id: "chen", initials: "MC", name: "Prof. Chen", tone: "#1a3a48", kind: "twin", course: true, field: "heavy-ion", fieldLabel: "Heavy-ion", role: "Heavy-ion · detector notes • Beam times on the desk", domain: { name: "Heavy-ion physics", about: "Detector notes and beam times live here." }, files: [], reply: "Name the detector cut you are unsure about.", follow: "Stay on that cut." },
-  { id: "oka", initials: "TO", name: "Dr. Oka", tone: "#2a4058", kind: "twin", course: false, field: "heavy-ion", fieldLabel: "Heavy-ion", featured: true, role: "QCD matter · RIKEN • Lattice vs lecture 5", domain: { name: "Heavy-ion physics", about: "Lattice checks against the phase diagram." }, files: [], reply: "Compare the lattice line to lecture 5 before you close.", follow: "Send both lines." },
-  { id: "nova", initials: "AN", name: "Ava Nova", tone: "#243050", kind: "twin", course: false, field: "cosmology", fieldLabel: "Cosmology", featured: true, role: "Early universe · notes • Horizon before the free parameter", domain: { name: "Cosmology", about: "Horizon and power-spectrum notes." }, files: [], reply: "Write what is fixed before the free parameter.", follow: "Keep one free parameter." },
-  { id: "kim", initials: "SK", name: "Prof. Kim", tone: "#1e3850", kind: "twin", course: true, field: "cosmology", fieldLabel: "Cosmology", role: "Cosmology recitation • Lines you can paste", domain: { name: "Cosmology", about: "Recitation lines you can paste." }, files: [], reply: "Paste the recitation line that broke.", follow: "Only that line." },
-  { id: "maya", initials: "MK", name: "Maya K.", tone: "#3a4850", kind: "twin", course: false, field: "live", fieldLabel: "Live", featured: true, role: "Office hours · twin clips • After the live", domain: { name: "Office hours", about: "Clips from office hours become posts." }, files: [], reply: "Say which clip you need after the live.", follow: "Time stamp helps." },
-  { id: "river", initials: "JR", name: "Jordan River", tone: "#354850", kind: "twin", course: false, field: "live", fieldLabel: "Live", role: "Seminar host · twin FAQ • Not the live stream", domain: { name: "Seminar", about: "FAQ after the seminar live." }, files: [], reply: "I keep the FAQ, not the live stream.", follow: "Ask the FAQ item." },
-  { id: "park", initials: "HP", name: "Prof. Park", tone: "#2c4038", kind: "twin", course: true, field: "materials", fieldLabel: "Materials", role: "Materials lab · sample book • Sample before lattice", domain: { name: "Materials", about: "Sample book and lattice posts." }, files: [], reply: "Name the sample before the lattice scale.", follow: "Sample first." },
-  { id: "lin", initials: "YL", name: "Dr. Lin", tone: "#334840", kind: "twin", course: false, field: "materials", fieldLabel: "Materials", featured: true, role: "Nanomechanics · notes • Defect between two scales", domain: { name: "Materials", about: "Defect notes from class." }, files: [], reply: "Where does the defect sit between the two scales?", follow: "Send both scales." },
-  { id: "reef", initials: "ER", name: "Elena Reef", tone: "#1a4040", kind: "twin", course: false, field: "climate", fieldLabel: "Climate", featured: true, role: "Ocean climate · figures • Axis and unit first", domain: { name: "Climate mathematics", about: "Figures before trends." }, files: [], reply: "Axis and unit before the trend sentence.", follow: "Which axis?" },
-  { id: "moss", initials: "DM", name: "Prof. Moss", tone: "#204038", kind: "twin", course: true, field: "climate", fieldLabel: "Climate", role: "Climate lab · time steps • Match the figure", domain: { name: "Climate mathematics", about: "Time-step checks." }, files: [], reply: "Does the time step match the figure?", follow: "Send the step." },
-  { id: "vale", initials: "NV", name: "Nora Vale", tone: "#3d3428", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", featured: true, role: "Product decisions · samples • Decision + row count", domain: null, files: [], reply: "Say the decision and the row count together.", follow: "Decision first." },
-  { id: "brook", initials: "TB", name: "Theo Brook", tone: "#403828", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", role: "Pricing desk · twin • Rows behind the sentence", domain: null, files: [], reply: "How many rows support the sentence you want?", follow: "Row count." },
-  { id: "draft", initials: "AD", name: "Aim Draft", tone: "#5a4820", kind: "agent", course: true, field: "lab", fieldLabel: "Lab", role: "Aims the lab report • Method stays yours", domain: null, files: [], reply: "I only shape Aim. Method stays yours.", follow: "Paste Aim." },
-  { id: "meter", initials: "UM", name: "Uncertainty Meter", tone: "#4a4030", kind: "agent", course: false, field: "lab", fieldLabel: "Lab", featured: true, role: "Flags weak Method lines • Soft spots only", domain: null, files: [], reply: "Point to the Method line that feels soft.", follow: "That line." },
-  { id: "hale", initials: "RH", name: "Dr. Hale", tone: "#283848", kind: "twin", course: true, field: "health", fieldLabel: "Health", role: "Population health · counts • Who was counted", domain: { name: "Planetary health", about: "Counts and who was counted." }, files: [], reply: "Who did the number count?", follow: "Name them." },
-  { id: "quill", initials: "SQ", name: "Sam Quill", tone: "#303c48", kind: "twin", course: false, field: "health", fieldLabel: "Health", featured: true, role: "Health writing · twin • People stay in the sentence", domain: { name: "Planetary health", about: "Sentences that keep the people in." }, files: [], reply: "Do not send a health sentence with no people.", follow: "People + number." }
+  { id: "chen", initials: "MC", name: "Prof. Chen", tone: "#1a3a48", kind: "twin", course: true, field: "heavy-ion", fieldLabel: "Heavy-ion", role: "Heavy-ion · detector notes • Beam times on the desk", domain: { name: "Heavy-ion physics", about: "Detector notes and beam times live here." }, files: [], reply: "Name the detector cut you are unsure about. Say what the beam time logged and what the note still leaves open—we stay on that cut.", follow: "Stay on that cut." },
+  { id: "oka", initials: "TO", name: "Dr. Oka", tone: "#2a4058", kind: "twin", course: false, field: "heavy-ion", fieldLabel: "Heavy-ion", featured: true, role: "QCD matter · RIKEN • Lattice vs lecture 5", domain: { name: "Heavy-ion physics", about: "Lattice checks against the phase diagram." }, files: [], reply: "Compare the lattice line to lecture 5 before you close. If they disagree, write both lines—do not pick one yet.", follow: "Send both lines." },
+  { id: "nova", initials: "AN", name: "Ava Nova", tone: "#243050", kind: "twin", course: false, field: "cosmology", fieldLabel: "Cosmology", featured: true, role: "Early universe · notes • Horizon before the free parameter", domain: { name: "Cosmology", about: "Horizon and power-spectrum notes." }, files: [], reply: "Write what is fixed before the free parameter. Keep one free parameter only—the rest should already be pinned in the note.", follow: "Keep one free parameter." },
+  { id: "kim", initials: "SK", name: "Prof. Kim", tone: "#1e3850", kind: "twin", course: true, field: "cosmology", fieldLabel: "Cosmology", role: "Cosmology recitation • Lines you can paste", domain: { name: "Cosmology", about: "Recitation lines you can paste." }, files: [], reply: "Paste the recitation line that broke. I will only work that line; leave the rest of the set closed until you ask.", follow: "Only that line." },
+  { id: "maya", initials: "MK", name: "Maya K.", tone: "#3a4850", kind: "twin", course: false, field: "live", fieldLabel: "Live", featured: true, role: "Office hours · twin clips • After the live", domain: { name: "Office hours", about: "Clips from office hours become posts." }, files: [], reply: "Say which clip you need after the live. A time stamp helps; I keep the clip, not the room itself.", follow: "Time stamp helps." },
+  { id: "river", initials: "JR", name: "Jordan River", tone: "#354850", kind: "twin", course: false, field: "live", fieldLabel: "Live", role: "Seminar host · twin FAQ • Not the live stream", domain: { name: "Seminar", about: "FAQ after the seminar live." }, files: [], reply: "I keep the FAQ, not the live stream. Ask the FAQ item by name—I will not re-stream the hour.", follow: "Ask the FAQ item." },
+  { id: "park", initials: "HP", name: "Prof. Park", tone: "#2c4038", kind: "twin", course: true, field: "materials", fieldLabel: "Materials", role: "Materials lab · sample book • Sample before lattice", domain: { name: "Materials", about: "Sample book and lattice posts." }, files: [], reply: "Name the sample before the lattice scale. Without the sample, the lattice line has nowhere to land.", follow: "Sample first." },
+  { id: "lin", initials: "YL", name: "Dr. Lin", tone: "#334840", kind: "twin", course: false, field: "materials", fieldLabel: "Materials", featured: true, role: "Nanomechanics · notes • Defect between two scales", domain: { name: "Materials", about: "Defect notes from class." }, files: [], reply: "Where does the defect sit between the two scales? Send both scales first—then we place the defect, not before.", follow: "Send both scales." },
+  { id: "reef", initials: "ER", name: "Elena Reef", tone: "#1a4040", kind: "twin", course: false, field: "climate", fieldLabel: "Climate", featured: true, role: "Ocean climate · figures • Axis and unit first", domain: { name: "Climate mathematics", about: "Figures before trends." }, files: [], reply: "Axis and unit before the trend sentence. If the trend only shows after an axis change, leave the sentence in the notebook.", follow: "Which axis?" },
+  { id: "moss", initials: "DM", name: "Prof. Moss", tone: "#204038", kind: "twin", course: true, field: "climate", fieldLabel: "Climate", role: "Climate lab · time steps • Match the figure", domain: { name: "Climate mathematics", about: "Time-step checks." }, files: [], reply: "Does the time step match the figure? Send the step you used—if it does not match, the trend is not ready.", follow: "Send the step." },
+  { id: "vale", initials: "NV", name: "Nora Vale", tone: "#3d3428", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", featured: true, role: "Product decisions · samples • Decision + row count", domain: null, files: [], reply: "Say the decision and the row count together. A decision with no rows behind it is still a guess—put both in one line.", follow: "Decision first." },
+  { id: "brook", initials: "TB", name: "Theo Brook", tone: "#403828", kind: "twin", course: false, field: "decisions", fieldLabel: "Decisions", role: "Pricing desk · twin • Rows behind the sentence", domain: null, files: [], reply: "How many rows support the sentence you want? Name the row count before you ask me to hold the pricing line.", follow: "Row count." },
+  { id: "draft", initials: "AD", name: "Aim Draft", tone: "#5a4820", kind: "agent", course: true, field: "lab", fieldLabel: "Lab", role: "Aims the lab report • Method stays yours", domain: null, files: [], reply: "I only shape Aim. Method stays yours—paste the Aim line you want tightened, and leave Method out of this turn.", follow: "Paste Aim." },
+  { id: "meter", initials: "UM", name: "Uncertainty Meter", tone: "#4a4030", kind: "agent", course: false, field: "lab", fieldLabel: "Lab", featured: true, role: "Flags weak Method lines • Soft spots only", domain: null, files: [], reply: "Point to the Method line that feels soft. I flag soft spots only—I will not rewrite Result for you.", follow: "That line." },
+  { id: "hale", initials: "RH", name: "Dr. Hale", tone: "#283848", kind: "twin", course: true, field: "health", fieldLabel: "Health", role: "Population health · counts • Who was counted", domain: { name: "Planetary health", about: "Counts and who was counted." }, files: [], reply: "Who did the number count? Name them before you send the count—a number with no people does not stay here.", follow: "Name them." },
+  { id: "quill", initials: "SQ", name: "Sam Quill", tone: "#303c48", kind: "twin", course: false, field: "health", fieldLabel: "Health", featured: true, role: "Health writing · twin • People stay in the sentence", domain: { name: "Planetary health", about: "Sentences that keep the people in." }, files: [], reply: "Do not send a health sentence with no people. Put people and the number in the same line, then ask me to hold it.", follow: "People + number." }
 ];
 
 const EXPERT_LOOK = {
@@ -1812,7 +1813,7 @@ const POSTS = [
       "The live at 3:10 is 骆王宇. The twin is not the live.",
       "A recap is ready in this domain for after it ends. The same notice is on your desk."
     ],
-    reply: "I am the twin, not the 3:10 live. If you missed a stretch, say the time. The recap stays in this domain."
+    reply: "I am the twin, not the 3:10 live. After the live ends, a three-point recap lands here: the claim, the example, and the open question. If you missed a stretch, name the time—I keep the recap, not the stage."
   },
   {
     id: "eq", author: "pajer",
@@ -1824,7 +1825,7 @@ const POSTS = [
       "Two replies are in. The twin only names the line you were stuck on. @maya_k replied in the same thread.",
       "Write that line as three cells: known, unknown, and what class calls it. This thread is also on your desk."
     ],
-    reply: "Paste the line. I will only give it a name. I will not touch the later problems."
+    reply: "Paste the line. Say what is known, what is not, and what class calls it. I will only name that line—later problems stay closed."
   },
   {
     id: "pricing", author: "xu",
@@ -1836,7 +1837,7 @@ const POSTS = [
       "Prof. Xu has no private domain. This insight is still a post, and it shows on your desk.",
       "Say the decision you need to make, and how many rows are in the sample."
     ],
-    reply: "Send the row count and the sentence you want the insight to support."
+    reply: "Send the row count and the sentence you want the insight to support. A decision with no rows behind it is still a guess."
   },
   {
     id: "axis", author: "anastasia",
@@ -1848,7 +1849,7 @@ const POSTS = [
       "The notebook is in the Climate mathematics domain, and the share is on your desk.",
       "Axis, unit, time step. Those three names go in front of the figure."
     ],
-    reply: "Which axis did you change? If the trend follows the axis, leave the sentence in the notebook."
+    reply: "Which axis did you change? If the trend only appears after an axis move, leave the sentence in the notebook—do not close it into a result yet."
   }
 ];
 

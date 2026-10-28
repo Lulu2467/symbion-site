@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028111840">
+  <meta name="cosmo-build" content="20261028111920">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -908,9 +908,13 @@
   .persp-foot .save:hover { color: var(--ink); }
   .persp-foot .save svg { width: 15px; height: 15px; display: block; }
   .persp-foot .expand {
-    border-radius: 999px; padding: 11px 18px;
-    font-size: 14px; font-weight: 600; letter-spacing: -.01em;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    border-radius: 999px; padding: 0 18px; height: 40px;
+    font-size: 14px; font-weight: 600; letter-spacing: -.01em; line-height: 1;
     background: var(--ink); color: #fff;
+  }
+  .persp-foot .expand .arr {
+    display: block; font-size: 15px; line-height: 1; transform: translateY(-0.5px);
   }
   .persp-foot .expand:hover { background: var(--green-dark); }
   #answers .back { max-width: 720px; margin-left: auto; margin-right: auto; }
@@ -2239,7 +2243,7 @@ function openAnswers(text) {
       <div class="persp-quote"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div>
       <div class="persp-foot">
         <button type="button" class="save" data-save="${p.id}">${SAVE_ICON}Save</button>
-        <button type="button" class="expand" data-continue="${p.id}">Expand →</button>
+        <button type="button" class="expand" data-continue="${p.id}">Expand<span class="arr" aria-hidden="true">→</span></button>
       </div>
     </article>`;
   }).join("");

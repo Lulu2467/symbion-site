@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028111450">
+  <meta name="cosmo-build" content="20261028111630">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -873,17 +873,25 @@
     position: relative;
     min-height: 148px;
     background:
-      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
+      linear-gradient(180deg, #f2f4f6 0%, #f4f4f5 22%, #f4f4f5 100%);
     border-radius: 18px;
-    border: 1px solid rgba(60, 122, 148, .1);
+    border: 1px solid rgba(9, 9, 11, .06);
     padding: 22px 22px 24px;
+    transition: background .22s ease, border-color .22s ease;
   }
   .persp-quote .qmark {
     display: inline; float: left;
     margin: -.08em .2em 0 0;
-    font-size: 32px; line-height: 1; color: #3c7a94; font-weight: 500;
+    font-size: 32px; line-height: 1; color: #a1a1aa; font-weight: 500;
     vertical-align: top;
+    transition: color .22s ease;
   }
+  .persp:hover .persp-quote {
+    background:
+      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
+    border-color: rgba(60, 122, 148, .1);
+  }
+  .persp:hover .persp-quote .qmark { color: #3c7a94; }
   .persp-quote p {
     margin: 0;
     font-family: var(--font);

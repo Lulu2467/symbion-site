@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028124040">
+  <meta name="cosmo-build" content="20261028133040">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -910,6 +910,8 @@
   }
   .persp-foot .save:hover { color: var(--ink); }
   .persp-foot .save svg { width: 15px; height: 15px; display: block; }
+  .persp-foot .save.is-on { color: var(--ink); }
+  .persp-foot .save.is-on svg path { fill: currentColor; }
   .persp-foot .expand {
     display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     border-radius: 999px; padding: 0 18px; height: 40px;
@@ -1881,6 +1883,7 @@ const state = {
   question: "",
   threads: {},
   read: new Set(),
+  saved: new Set(),
   connected: new Set(["desk"]),
   typing: false,
   shuffleSeed: { lived: 1, quick: 1, experts: 1 }
@@ -2245,7 +2248,7 @@ function openAnswers(text) {
       <div class="persp-tags">${tags}</div>
       <div class="persp-quote"><div class="persp-quote-body"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div></div>
       <div class="persp-foot">
-        <button type="button" class="save" data-save="${p.id}">${SAVE_ICON}Save</button>
+        <button type="button" class="save${state.saved.has(p.id) ? " is-on" : ""}" data-save="${p.id}" aria-pressed="${state.saved.has(p.id) ? "true" : "false"}">${SAVE_ICON}Save</button>
         <button type="button" class="expand" data-continue="${p.id}">Expand<span class="arr" aria-hidden="true">→</span></button>
       </div>
     </article>`;
@@ -2515,7 +2518,18 @@ document.addEventListener("click", (e) => {
   }
   const save = e.target.closest("[data-save]");
   if (save) {
-    toast("Saved to your Cosmo");
+    const id = save.dataset.save;
+    if (state.saved.has(id)) {
+      state.saved.delete(id);
+      save.classList.remove("is-on");
+      save.setAttribute("aria-pressed", "false");
+      toast("Removed from Cosmo");
+    } else {
+      state.saved.add(id);
+      save.classList.add("is-on");
+      save.setAttribute("aria-pressed", "true");
+      toast("Saved to your Cosmo");
+    }
     return;
   }
   const orbit = e.target.closest(".orbit span");

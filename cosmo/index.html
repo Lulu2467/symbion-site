@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028142840">
+  <meta name="cosmo-build" content="20261028143640">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1570,8 +1570,9 @@
   .cosmo-foot {
     width: min(var(--page), calc(100% - 64px));
     margin: 0 auto 40px;
-    display: flex; justify-content: flex-end; align-items: center;
+    display: none; justify-content: flex-end; align-items: center;
   }
+  body.is-home .cosmo-foot { display: flex; }
   .cosmo-lang {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 6px 12px; border-radius: 999px;
@@ -1587,7 +1588,7 @@
 
 </style>
 </head>
-<body>
+<body class="is-home">
 <div class="veil" aria-hidden="true">
   <i style="--b:6px;--mask:linear-gradient(#000 0%,#000 8.333%,transparent 18.333%)"></i>
   <i style="--b:5.45px;--mask:linear-gradient(transparent 0%,#000 8.333%,#000 16.667%,transparent 26.667%)"></i>
@@ -3163,6 +3164,7 @@ function continueWith(id) {
 
 function show(view) {
   state.view = view;
+  document.body.classList.toggle("is-home", view === "home");
   $("home").hidden = view !== "home";
   $("answers").hidden = view !== "answers";
   $("talk").hidden = view !== "talk";

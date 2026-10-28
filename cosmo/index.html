@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028140040">
+  <meta name="cosmo-build" content="20261028140340">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -702,108 +702,159 @@
   }
   .build-card.is-soon .connect { opacity: .55; cursor: default; }
 
-  .custom-stack { display: flex; flex-direction: column; gap: 36px; margin-top: 28px; }
-  .custom-sec { display: flex; flex-direction: column; gap: 14px; }
-  .custom-sec .sec-kicker {
-    margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: #3c7a94;
+  #build-page .price-hero {
+    text-align: center; max-width: 640px; margin: 8px auto 0;
   }
-  .custom-sec h2 {
+  #build-page .price-hero h1 {
+    margin: 0; font-size: clamp(32px, 4.5vw, 44px); font-weight: 600;
+    letter-spacing: -.03em; line-height: 1.15; color: var(--ink);
+  }
+  #build-page .price-hero .lede {
+    margin: 14px auto 0; max-width: 36em; text-align: center;
+    font-size: 15px; line-height: 1.5; color: var(--muted);
+  }
+  .price-tabs {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin: 22px auto 0; padding: 4px;
+    border-radius: 999px; background: rgba(9, 9, 11, .05);
+  }
+  .price-tabs button {
+    border-radius: 999px; padding: 9px 18px;
+    font-size: 14px; font-weight: 500; color: var(--muted);
+  }
+  .price-tabs button.is-on {
+    background: #fff; color: var(--ink);
+    box-shadow: 0 1px 3px rgba(9, 9, 11, .08);
+  }
+  .price-wrap { margin-top: 36px; }
+  .price-toolbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .price-toolbar h2 {
     margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.02em; color: var(--ink);
   }
-  .custom-sec .sec-lede {
-    margin: 0; max-width: 42em; font-size: 14px; line-height: 1.5; color: var(--muted);
+  .price-cycle {
+    display: inline-flex; align-items: center; gap: 4px; padding: 3px;
+    border-radius: 999px; background: rgba(9, 9, 11, .05);
   }
-  .custom-opts {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  }
-  .custom-opt {
-    text-align: left;
-    border-radius: 18px; padding: 18px 18px 16px;
-    border: 1px solid rgba(60, 122, 148, .08);
-    background:
-      linear-gradient(180deg, #eaf3f7 0%, #f1f5f7 28%, #f4f4f5 100%);
-    display: flex; flex-direction: column; gap: 10px; min-height: 188px;
-    transition: background .22s ease, border-color .22s ease, box-shadow .22s ease;
-  }
-  .custom-opt:hover {
-    background:
-      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
-    border-color: rgba(60, 122, 148, .14);
-  }
-  .custom-opt.is-on {
-    border-color: rgba(60, 122, 148, .28);
-    box-shadow: 0 0 0 1px rgba(60, 122, 148, .18), 0 10px 24px rgba(40, 80, 110, .06);
-    background:
-      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
-  }
-  .custom-opt .tier {
-    font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #3c7a94;
-  }
-  .custom-opt b {
-    font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); line-height: 1.25;
-  }
-  .custom-opt .meta {
-    margin: 0; display: flex; flex-direction: column; gap: 6px; flex: 1;
-  }
-  .custom-opt .meta span {
-    font-size: 13px; line-height: 1.45; color: var(--muted);
-  }
-  .custom-opt .meta strong {
-    font-weight: 600; color: var(--ink);
-  }
-  .custom-opt .pick {
-    align-self: flex-start; margin-top: 4px;
+  .price-cycle button {
     border-radius: 999px; padding: 7px 12px;
-    font-size: 13px; font-weight: 500;
-    background: #fff; color: var(--ink); border: 1px solid var(--line);
+    font-size: 13px; font-weight: 500; color: var(--muted);
   }
-  .custom-opt.is-on .pick {
-    background: var(--ink); color: #fff; border-color: var(--ink);
+  .price-cycle button.is-on {
+    background: #fff; color: var(--ink);
+    box-shadow: 0 1px 2px rgba(9, 9, 11, .08);
   }
-  .custom-bill {
-    width: 100%; border-collapse: collapse; background: #fff;
-    border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  .price-cycle .save-tag {
+    margin-left: 6px; font-size: 12px; font-weight: 600; color: #3c7a94;
   }
-  .custom-bill th, .custom-bill td {
-    padding: 12px 16px; text-align: left; font-size: 13px; line-height: 1.4;
+  .price-grid {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+  }
+  .price-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 20px;
+    padding: 22px 18px 18px;
+    display: flex; flex-direction: column; gap: 10px; min-height: 420px;
+    text-align: left;
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .price-card:hover {
+    border-color: rgba(60, 122, 148, .22);
+    box-shadow: 0 12px 28px rgba(40, 80, 110, .06);
+  }
+  .price-card.is-on {
+    border-color: rgba(60, 122, 148, .35);
+    box-shadow: 0 0 0 1px rgba(60, 122, 148, .18), 0 12px 28px rgba(40, 80, 110, .08);
+    background: linear-gradient(180deg, #eaf3f7 0%, #fff 42%);
+  }
+  .price-card .name {
+    margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -.03em; color: var(--ink);
+  }
+  .price-card .tag {
+    margin: 0; font-size: 13px; color: var(--muted); line-height: 1.35;
+  }
+  .price-card .amt {
+    margin: 8px 0 0; display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap;
+  }
+  .price-card .amt .cur { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .price-card .amt .num { font-size: 40px; font-weight: 600; letter-spacing: -.04em; color: var(--ink); line-height: 1; }
+  .price-card .amt .per { font-size: 13px; color: var(--muted); }
+  .price-card .amt .was {
+    margin-left: 6px; font-size: 13px; color: var(--faint); text-decoration: line-through;
+  }
+  .price-card .bill-note {
+    margin: 0; font-size: 12px; color: var(--faint); line-height: 1.4;
+  }
+  .price-card .cta {
+    width: 100%; margin-top: 6px; height: 42px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px; font-size: 14px; font-weight: 600;
+    background: var(--ink); color: #fff;
+  }
+  .price-card .cta:hover { background: #222; }
+  .price-card.is-on .cta { background: #3c7a94; }
+  .price-card.is-on .cta:hover { background: #32677e; }
+  .price-card .feats {
+    margin: 8px 0 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 8px; flex: 1;
+  }
+  .price-card .feats li {
+    display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: start;
+    font-size: 13px; line-height: 1.4; color: var(--muted);
+  }
+  .price-card .feats li::before {
+    content: ""; width: 14px; height: 14px; margin-top: 2px;
+    background: center / 14px 14px no-repeat
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2 6.4 11 12.5 4.8' stroke='%233c7a94' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .price-banner {
+    margin-top: 18px; border-radius: 20px; padding: 22px 24px;
+    background: #fff; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .price-banner h3 {
+    margin: 0 0 6px; font-size: 20px; font-weight: 600; letter-spacing: -.02em; color: var(--ink);
+  }
+  .price-banner p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 42em; }
+  .price-banner .mark {
+    flex: none; width: 48px; height: 48px; border-radius: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, #dceef7 0%, #eaf4f9 100%);
+    color: #3c7a94; font-size: 22px; font-weight: 600;
+  }
+  .price-compare { margin-top: 48px; }
+  .price-compare h2 {
+    margin: 0 0 18px; text-align: center;
+    font-size: 26px; font-weight: 600; letter-spacing: -.02em; color: var(--ink);
+  }
+  .price-table-wrap {
+    overflow-x: auto; border: 1px solid var(--line); border-radius: 18px; background: #fff;
+  }
+  .price-table {
+    width: 100%; border-collapse: collapse; min-width: 640px;
+  }
+  .price-table th, .price-table td {
+    padding: 14px 16px; text-align: left; font-size: 13px; line-height: 1.4;
     border-bottom: 1px solid var(--line); vertical-align: middle;
   }
-  .custom-bill th {
-    background: var(--surface); font-weight: 600; color: var(--ink); font-size: 12px;
-    letter-spacing: .04em; text-transform: uppercase;
+  .price-table th { background: var(--surface); font-weight: 600; color: var(--ink); }
+  .price-table th:not(:first-child), .price-table td:not(:first-child) {
+    text-align: center; color: var(--muted);
   }
-  .custom-bill td:last-child, .custom-bill th:last-child { color: var(--muted); }
-  .custom-bill tr:last-child td { border-bottom: 0; }
-  .custom-bill td:first-child { color: var(--ink); font-weight: 500; }
-  .custom-side {
-    display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 12px; align-items: stretch;
+  .price-table tr:last-child td { border-bottom: 0; }
+  .price-table td:first-child { color: var(--ink); font-weight: 500; }
+  .price-agree {
+    margin: 16px 0 0; text-align: center; font-size: 12px; color: var(--faint);
   }
-  .custom-pillars {
-    border-radius: 18px; padding: 16px 18px;
-    border: 1px solid var(--line); background: #fff;
-    display: flex; flex-direction: column; gap: 12px;
+  .price-sources .custom-apps-hd {
+    display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;
   }
-  .custom-pillars .lbl {
-    margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: #3c7a94;
+  .price-sources .custom-apps-hd h2 {
+    margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.02em;
   }
-  .custom-pillars ol {
-    margin: 0; padding: 0; list-style: none;
-    display: flex; flex-direction: column; gap: 10px;
-  }
-  .custom-pillars li {
-    display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: start;
-    font-size: 13px; line-height: 1.4; color: var(--ink);
-  }
-  .custom-pillars .n {
-    font-size: 12px; font-weight: 700; letter-spacing: .04em; color: #3c7a94;
-  }
-  .custom-note {
-    margin: 0; font-size: 12px; line-height: 1.5; color: var(--faint); max-width: 52em;
-  }
-  .custom-apps-hd {
-    display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px;
+  .price-sources .custom-apps-hd p {
+    margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 42em;
   }
   .frost {
     flex: 1; text-align: center; border-radius: 999px; padding: 7px 8px;
@@ -1279,7 +1330,10 @@
     .stage { min-height: 0; padding: 28px 0 8px; }
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
-    .lived, .quick, .answer, .build-grid, .custom-opts, .custom-side { grid-template-columns: 1fr; }
+    .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
+    .price-grid { grid-template-columns: 1fr 1fr; }
+    .price-card { min-height: 0; }
+    .price-banner { flex-direction: column; align-items: flex-start; }
     #block-build { margin-top: 56px; padding-top: 48px; }
     #block-build .build-intro { margin-bottom: 28px; }
     #block-build .build-intro h2 { font-size: 30px; }
@@ -1446,10 +1500,16 @@
 
   <section id="build-page" hidden>
     <button type="button" class="back" id="build-back">← Cosmo</button>
-    <p class="eyebrow">CUSTOMIZE</p>
-    <h1>Customize your Cosmo</h1>
-    <p class="lede" style="margin-left:0;text-align:left">Pick how deep the twin learns, how you show up, and which apps feed it. Deep distill is not a custom website — a private domain can still run on Cosmo.</p>
-    <div class="custom-stack" id="build-body"></div>
+    <div class="price-hero">
+      <p class="eyebrow" style="margin-bottom:12px">CUSTOMIZE</p>
+      <h1>Your Cosmo plan starts here</h1>
+      <p class="lede">Choose distill depth, brand surface, and the apps that feed your twin — then subscribe when you are ready.</p>
+      <div class="price-tabs" id="price-tabs" role="tablist" aria-label="Customize sections">
+        <button type="button" class="is-on" data-price-tab="plans" aria-selected="true">Plans</button>
+        <button type="button" data-price-tab="sources" aria-selected="false">Sources</button>
+      </div>
+    </div>
+    <div class="price-wrap" id="build-body"></div>
   </section>
 
   <section id="answers" hidden>
@@ -1990,6 +2050,9 @@ const state = {
   connected: new Set(["desk"]),
   distill: "standard",
   brand: "theme",
+  plan: "standard",
+  priceTab: "plans",
+  billingCycle: "annual",
   typing: false,
   shuffleSeed: { lived: 1, quick: 1, experts: 1 }
 };
@@ -2216,137 +2279,193 @@ function renderQuick() {
     </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
 }
 
-const DISTILL_OPTS = [
+const PRICE_PLANS = [
+  {
+    id: "free",
+    name: "Free",
+    tag: "Theme page · basic ask",
+    monthly: 0,
+    annual: 0,
+    wasMonthly: null,
+    wasAnnual: null,
+    noteMonthly: "Asks bill by token as you go",
+    noteAnnual: "Asks bill by token as you go",
+    cta: "Stay on Free",
+    distill: "standard",
+    brand: "theme",
+    feats: [
+      "Platform theme page included",
+      "Asks billed by token use",
+      "Twin-led deals · commission TBD",
+      "Connect Desk and file sources"
+    ]
+  },
   {
     id: "standard",
-    tier: "Standard distill",
-    title: "Standard distillation",
-    delivery: "Auto organize + template private domain",
-    create: "Self-serve",
-    bill: "Low barrier / subscription"
+    name: "Standard",
+    tag: "Self-serve distill",
+    monthly: 39,
+    annual: 29,
+    wasMonthly: 49,
+    wasAnnual: 39,
+    noteMonthly: "Billed monthly · cancel anytime",
+    noteAnnual: "Billed annually ¥348",
+    cta: "Subscribe",
+    distill: "standard",
+    brand: "theme",
+    feats: [
+      "Auto organize + template private domain",
+      "Self-serve creation",
+      "Low-barrier subscription",
+      "Everything in Free"
+    ]
   },
   {
     id: "deep",
-    tier: "Deep distill",
-    title: "Deep distillation",
-    delivery: "Co-created with the team + business private domain",
-    create: "Platform delivery with you",
-    bill: "Creation fee + ongoing service"
-  }
-];
-const BRAND_OPTS = [
-  {
-    id: "theme",
-    tier: "Included",
-    title: "Platform theme page",
-    delivery: "Default Cosmo entry on the shared platform",
-    create: "Ready out of the box",
-    bill: "Standard plan"
+    name: "Deep",
+    tag: "Co-created private domain",
+    monthly: 159,
+    annual: 129,
+    wasMonthly: 199,
+    wasAnnual: 159,
+    noteMonthly: "Creation fee billed once · then monthly",
+    noteAnnual: "Creation fee once · then ¥1,548 / year",
+    cta: "Subscribe",
+    distill: "deep",
+    brand: "theme",
+    feats: [
+      "Co-created + business private domain",
+      "Platform delivery with you",
+      "Creation fee + ongoing service",
+      "Still runs on Cosmo — not a custom site"
+    ]
   },
   {
-    id: "custom",
-    tier: "Add-on",
-    title: "Custom brand site",
-    delivery: "Independent brand surface, chosen when you need it",
-    create: "On demand",
-    bill: "Billed separately"
+    id: "brand",
+    name: "Brand",
+    tag: "Custom brand site add-on",
+    monthly: 99,
+    annual: 79,
+    wasMonthly: 129,
+    wasAnnual: 99,
+    noteMonthly: "Separate from distill · billed monthly",
+    noteAnnual: "Billed annually ¥948 · add-on only",
+    cta: "Add brand site",
+    distill: null,
+    brand: "custom",
+    feats: [
+      "Independent brand surface",
+      "Chosen on demand",
+      "Billed separately from distill",
+      "Stacks with Standard or Deep"
+    ]
   }
 ];
-const BILL_ROWS = [
-  ["Asks", "Token use"],
-  ["Twin-led deals", "Commission (rate TBD)"],
-  ["Standard distill", "Low barrier or subscription"],
-  ["Deep distill", "One-time creation fee"],
-  ["Ongoing distill & ops", "Subscription / ops fee"],
-  ["Custom brand site", "Separate fee"]
+
+const COMPARE_ROWS = [
+  ["Asks", "Token", "Token", "Token", "Token"],
+  ["Twin-led deals", "Commission TBD", "Commission TBD", "Commission TBD", "Commission TBD"],
+  ["Private domain", "Theme only", "Template", "Business", "—"],
+  ["Creation", "Self", "Self-serve", "Platform co-create", "On demand"],
+  ["Ongoing ops", "—", "Subscription", "Subscription / ops", "—"],
+  ["Brand site", "—", "—", "—", "Separate fee"]
 ];
+
+function currentPlanId() {
+  if (state.brand === "custom" && state.plan === "brand") return "brand";
+  if (state.distill === "deep") return "deep";
+  if (state.plan === "free") return "free";
+  return "standard";
+}
 
 function renderBuild() {
   const linked = [...state.connected].filter((id) => BUILD_APPS.some((a) => a.id === id && !a.soon));
   const n = linked.length;
   const body = $("build-body");
+  const annual = state.billingCycle === "annual";
+  const selected = currentPlanId();
+
+  document.querySelectorAll("[data-price-tab]").forEach((btn) => {
+    const on = btn.dataset.priceTab === state.priceTab;
+    btn.classList.toggle("is-on", on);
+    btn.setAttribute("aria-selected", on ? "true" : "false");
+  });
+
   if (body) {
-    const distillCards = DISTILL_OPTS.map((opt) => {
-      const on = state.distill === opt.id;
-      return `<button type="button" class="custom-opt${on ? " is-on" : ""}" data-distill="${opt.id}" aria-pressed="${on}">
-        <span class="tier">${esc(opt.tier)}</span>
-        <b>${esc(opt.title)}</b>
-        <p class="meta">
-          <span><strong>Delivers</strong> · ${esc(opt.delivery)}</span>
-          <span><strong>Creates</strong> · ${esc(opt.create)}</span>
-          <span><strong>Bills</strong> · ${esc(opt.bill)}</span>
-        </p>
-        <span class="pick">${on ? "Selected" : "Select"}</span>
-      </button>`;
-    }).join("");
-    const brandCards = BRAND_OPTS.map((opt) => {
-      const on = state.brand === opt.id;
-      return `<button type="button" class="custom-opt${on ? " is-on" : ""}" data-brand="${opt.id}" aria-pressed="${on}">
-        <span class="tier">${esc(opt.tier)}</span>
-        <b>${esc(opt.title)}</b>
-        <p class="meta">
-          <span><strong>Shows</strong> · ${esc(opt.delivery)}</span>
-          <span><strong>Setup</strong> · ${esc(opt.create)}</span>
-          <span><strong>Bills</strong> · ${esc(opt.bill)}</span>
-        </p>
-        <span class="pick">${on ? "Selected" : "Select"}</span>
-      </button>`;
-    }).join("");
-    const billRows = BILL_ROWS.map(([item, logic]) =>
-      `<tr><td>${esc(item)}</td><td>${esc(logic)}</td></tr>`
-    ).join("");
-    const apps = BUILD_APPS.map((app) => {
-      const on = state.connected.has(app.id);
-      const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
-      return `<article class="build-card${app.soon ? " is-soon" : ""}">
+    if (state.priceTab === "sources") {
+      const apps = BUILD_APPS.map((app) => {
+        const on = state.connected.has(app.id);
+        const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
+        return `<article class="build-card${app.soon ? " is-soon" : ""}">
       <span class="app">${esc(app.app)}</span>
       <b>${esc(app.title)}</b>
       <p>${esc(app.blurb)}</p>
       <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
     </article>`;
-    }).join("");
-    body.innerHTML = `
-      <section class="custom-sec">
-        <p class="sec-kicker">01 · Twin & private domain</p>
-        <h2>Distill your twin</h2>
-        <p class="sec-lede">Standard keeps you self-serve on a template domain. Deep is co-created with the platform — still on Cosmo, not a separate website.</p>
-        <div class="custom-opts">${distillCards}</div>
-        <p class="custom-note">Deep distill ≠ custom website. A personalized private domain can still run on the unified Cosmo platform.</p>
-      </section>
-      <section class="custom-sec">
-        <p class="sec-kicker">02 · Page & brand</p>
-        <h2>How you show up</h2>
-        <p class="sec-lede">Stay on the shared Cosmo theme page, or add a custom brand site when you want a separate surface.</p>
-        <div class="custom-opts">${brandCards}</div>
-      </section>
-      <section class="custom-sec">
-        <p class="sec-kicker">03 · Billing</p>
-        <h2>How Cosmo bills</h2>
-        <p class="sec-lede">Usage, deals, creation, and ongoing service — separate from the brand-site add-on.</p>
-        <div class="custom-side">
-          <table class="custom-bill">
-            <thead><tr><th>Item</th><th>Logic</th></tr></thead>
-            <tbody>${billRows}</tbody>
-          </table>
-          <aside class="custom-pillars">
-            <p class="lbl">Commercial line</p>
-            <ol>
-              <li><span class="n">01</span><span>Standard distill grows supply</span></li>
-              <li><span class="n">02</span><span>Deep distill raises order value</span></li>
-              <li><span class="n">03</span><span>Ongoing ops builds long-term revenue</span></li>
-            </ol>
-          </aside>
-        </div>
-      </section>
-      <section class="custom-sec">
+      }).join("");
+      body.innerHTML = `<div class="price-sources">
         <div class="custom-apps-hd">
-          <p class="sec-kicker">04 · Sources</p>
           <h2>Connect what feeds your twin</h2>
-          <p class="sec-lede">Start here in Cosmo, or finish the same links later in Symbion. Coming-soon apps stay listed but stay off.</p>
+          <p>Start here in Cosmo, or finish the same links later in Symbion. Coming-soon apps stay listed but stay off.</p>
         </div>
         <div class="build-grid">${apps}</div>
-      </section>`;
+      </div>`;
+    } else {
+      const cards = PRICE_PLANS.map((plan) => {
+        const on = selected === plan.id;
+        const price = annual ? plan.annual : plan.monthly;
+        const was = annual ? plan.wasAnnual : plan.wasMonthly;
+        const note = annual ? plan.noteAnnual : plan.noteMonthly;
+        const feats = plan.feats.map((f) => `<li>${esc(f)}</li>`).join("");
+        const wasHtml = was != null ? `<span class="was">¥${was}</span>` : "";
+        return `<article class="price-card${on ? " is-on" : ""}">
+          <h3 class="name">${esc(plan.name)}</h3>
+          <p class="tag">${esc(plan.tag)}</p>
+          <div class="amt">
+            <span class="cur">¥</span>
+            <span class="num">${price}</span>
+            <span class="per">/ month</span>
+            ${wasHtml}
+          </div>
+          <p class="bill-note">${esc(note)}</p>
+          <button type="button" class="cta" data-plan="${plan.id}">${on ? "Selected" : esc(plan.cta)}</button>
+          <ul class="feats">${feats}</ul>
+        </article>`;
+      }).join("");
+      const head = ["Plan", ...PRICE_PLANS.map((p) => p.name)].map((h) => `<th>${esc(h)}</th>`).join("");
+      const rows = COMPARE_ROWS.map((row) =>
+        `<tr>${row.map((cell, i) => `<td>${esc(cell)}</td>`).join("")}</tr>`
+      ).join("");
+      body.innerHTML = `
+        <div class="price-toolbar">
+          <h2>Unlock distill and brand at your pace</h2>
+          <div class="price-cycle" role="group" aria-label="Billing cycle">
+            <button type="button" data-cycle="monthly" class="${annual ? "" : "is-on"}">Monthly</button>
+            <button type="button" data-cycle="annual" class="${annual ? "is-on" : ""}">Annually</button>
+            <span class="save-tag">Save on annual</span>
+          </div>
+        </div>
+        <div class="price-grid">${cards}</div>
+        <div class="price-banner">
+          <div>
+            <h3>Deep distill is not a custom website</h3>
+            <p>A personalized private domain can still run on the unified Cosmo platform. Brand site is a separate add-on when you need an independent surface.</p>
+          </div>
+          <span class="mark" aria-hidden="true">“</span>
+        </div>
+        <div class="price-compare">
+          <h2>Find the right plan for you</h2>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr>${head}</tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
+          <p class="price-agree">Prototype pricing for Cosmo · by selecting a plan you preview subscribe flow.</p>
+        </div>`;
+    }
   }
+
   const stepLink = $("build-step-link");
   if (stepLink) {
     stepLink.textContent = n <= 1
@@ -2355,11 +2474,10 @@ function renderBuild() {
   }
   const hint = $("build-hint");
   if (hint) {
-    const distillLabel = state.distill === "deep" ? "Deep distill" : "Standard distill";
-    const brandLabel = state.brand === "custom" ? "brand site" : "theme page";
+    const plan = PRICE_PLANS.find((p) => p.id === selected) || PRICE_PLANS[1];
     hint.textContent = n <= 1
-      ? `${distillLabel} · ${brandLabel} — open to change.`
-      : `${distillLabel} · ${brandLabel} · ${n} sources linked.`;
+      ? `${plan.name} plan — open to subscribe or connect sources.`
+      : `${plan.name} plan · ${n} sources linked.`;
   }
 }
 
@@ -2704,18 +2822,27 @@ document.addEventListener("click", (e) => {
     renderPeople();
     return;
   }
-  const distill = e.target.closest("[data-distill]");
-  if (distill) {
-    state.distill = distill.dataset.distill;
+  const priceTab = e.target.closest("[data-price-tab]");
+  if (priceTab) {
+    state.priceTab = priceTab.dataset.priceTab;
     renderBuild();
-    toast(state.distill === "deep" ? "Deep distill selected" : "Standard distill selected");
     return;
   }
-  const brand = e.target.closest("[data-brand]");
-  if (brand) {
-    state.brand = brand.dataset.brand;
+  const cycle = e.target.closest("[data-cycle]");
+  if (cycle) {
+    state.billingCycle = cycle.dataset.cycle;
     renderBuild();
-    toast(state.brand === "custom" ? "Custom brand site selected" : "Platform theme page selected");
+    return;
+  }
+  const planBtn = e.target.closest("[data-plan]");
+  if (planBtn) {
+    const plan = PRICE_PLANS.find((p) => p.id === planBtn.dataset.plan);
+    if (!plan) return;
+    state.plan = plan.id;
+    if (plan.distill) state.distill = plan.distill;
+    if (plan.brand) state.brand = plan.brand;
+    renderBuild();
+    toast(plan.id === "free" ? "Staying on Free" : `${plan.name} selected`);
     return;
   }
   const connect = e.target.closest("[data-connect]");

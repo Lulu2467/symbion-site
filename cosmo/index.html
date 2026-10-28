@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028133040">
+  <meta name="cosmo-build" content="20261028140040">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -701,6 +701,110 @@
     background: var(--ink); color: #fff;
   }
   .build-card.is-soon .connect { opacity: .55; cursor: default; }
+
+  .custom-stack { display: flex; flex-direction: column; gap: 36px; margin-top: 28px; }
+  .custom-sec { display: flex; flex-direction: column; gap: 14px; }
+  .custom-sec .sec-kicker {
+    margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: #3c7a94;
+  }
+  .custom-sec h2 {
+    margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.02em; color: var(--ink);
+  }
+  .custom-sec .sec-lede {
+    margin: 0; max-width: 42em; font-size: 14px; line-height: 1.5; color: var(--muted);
+  }
+  .custom-opts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .custom-opt {
+    text-align: left;
+    border-radius: 18px; padding: 18px 18px 16px;
+    border: 1px solid rgba(60, 122, 148, .08);
+    background:
+      linear-gradient(180deg, #eaf3f7 0%, #f1f5f7 28%, #f4f4f5 100%);
+    display: flex; flex-direction: column; gap: 10px; min-height: 188px;
+    transition: background .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+  .custom-opt:hover {
+    background:
+      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
+    border-color: rgba(60, 122, 148, .14);
+  }
+  .custom-opt.is-on {
+    border-color: rgba(60, 122, 148, .28);
+    box-shadow: 0 0 0 1px rgba(60, 122, 148, .18), 0 10px 24px rgba(40, 80, 110, .06);
+    background:
+      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
+  }
+  .custom-opt .tier {
+    font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #3c7a94;
+  }
+  .custom-opt b {
+    font-size: 17px; font-weight: 600; letter-spacing: -.02em; color: var(--ink); line-height: 1.25;
+  }
+  .custom-opt .meta {
+    margin: 0; display: flex; flex-direction: column; gap: 6px; flex: 1;
+  }
+  .custom-opt .meta span {
+    font-size: 13px; line-height: 1.45; color: var(--muted);
+  }
+  .custom-opt .meta strong {
+    font-weight: 600; color: var(--ink);
+  }
+  .custom-opt .pick {
+    align-self: flex-start; margin-top: 4px;
+    border-radius: 999px; padding: 7px 12px;
+    font-size: 13px; font-weight: 500;
+    background: #fff; color: var(--ink); border: 1px solid var(--line);
+  }
+  .custom-opt.is-on .pick {
+    background: var(--ink); color: #fff; border-color: var(--ink);
+  }
+  .custom-bill {
+    width: 100%; border-collapse: collapse; background: #fff;
+    border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  }
+  .custom-bill th, .custom-bill td {
+    padding: 12px 16px; text-align: left; font-size: 13px; line-height: 1.4;
+    border-bottom: 1px solid var(--line); vertical-align: middle;
+  }
+  .custom-bill th {
+    background: var(--surface); font-weight: 600; color: var(--ink); font-size: 12px;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  .custom-bill td:last-child, .custom-bill th:last-child { color: var(--muted); }
+  .custom-bill tr:last-child td { border-bottom: 0; }
+  .custom-bill td:first-child { color: var(--ink); font-weight: 500; }
+  .custom-side {
+    display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 12px; align-items: stretch;
+  }
+  .custom-pillars {
+    border-radius: 18px; padding: 16px 18px;
+    border: 1px solid var(--line); background: #fff;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .custom-pillars .lbl {
+    margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: #3c7a94;
+  }
+  .custom-pillars ol {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .custom-pillars li {
+    display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: start;
+    font-size: 13px; line-height: 1.4; color: var(--ink);
+  }
+  .custom-pillars .n {
+    font-size: 12px; font-weight: 700; letter-spacing: .04em; color: #3c7a94;
+  }
+  .custom-note {
+    margin: 0; font-size: 12px; line-height: 1.5; color: var(--faint); max-width: 52em;
+  }
+  .custom-apps-hd {
+    display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px;
+  }
   .frost {
     flex: 1; text-align: center; border-radius: 999px; padding: 7px 8px;
     font-size: 13px; font-weight: 500; color: var(--ink);
@@ -1175,7 +1279,7 @@
     .stage { min-height: 0; padding: 28px 0 8px; }
     h1 { font-size: 40px; }
     .stage h1 { font-size: 40px; }
-    .lived, .quick, .answer, .build-grid { grid-template-columns: 1fr; }
+    .lived, .quick, .answer, .build-grid, .custom-opts, .custom-side { grid-template-columns: 1fr; }
     #block-build { margin-top: 56px; padding-top: 48px; }
     #block-build .build-intro { margin-bottom: 28px; }
     #block-build .build-intro h2 { font-size: 30px; }
@@ -1305,22 +1409,21 @@
       <div class="build-panel">
         <div class="build-main">
           <ol class="build-steps" id="build-steps">
-            <li><span class="n">1</span><span class="t">Pick sources</span><span class="d">Courses, notes, and files the twin should learn from.</span></li>
+            <li><span class="n">1</span><span class="t">Pick distill level</span><span class="d">Standard template domain, or deep co-created private domain.</span></li>
             <li><span class="n">2</span><span class="t">Connect apps</span><span class="d" id="build-step-link">Desk is linked. Add Notion, Drive, or files when ready.</span></li>
-            <li><span class="n">3</span><span class="t">Ask with context</span><span class="d">Cosmo uses those links when you ask — same links work in Symbion.</span></li>
+            <li><span class="n">3</span><span class="t">Choose how you show up</span><span class="d">Stay on the Cosmo theme page, or add a custom brand site later.</span></li>
           </ol>
           <div class="build-cta">
             <button type="button" class="go" data-open-build>Customize your Cosmo</button>
-            <p class="hint" id="build-hint">Open the full list of apps and connections.</p>
+            <p class="hint" id="build-hint">Open distill, brand, billing, and app connections.</p>
           </div>
         </div>
         <aside class="build-viz" aria-hidden="true">
           <div class="ui-card">
-            <span class="lbl">1 · Sources</span>
+            <span class="lbl">1 · Distill</span>
             <div class="ui-row">
-              <span class="ui-pill on">Courses</span>
-              <span class="ui-pill on">Notes</span>
-              <span class="ui-pill">Files</span>
+              <span class="ui-pill on">Standard</span>
+              <span class="ui-pill">Deep</span>
             </div>
           </div>
           <div class="ui-card">
@@ -1330,10 +1433,10 @@
             <div class="ui-app"><div><b>Google Drive</b><span>Ready to connect</span></div><i class="ui-dot"></i></div>
           </div>
           <div class="ui-card">
-            <span class="lbl">3 · Ask</span>
-            <div class="ui-ask">
-              <p>Ask with Desk notes already on…</p>
-              <i><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+            <span class="lbl">3 · Show up</span>
+            <div class="ui-row">
+              <span class="ui-pill on">Theme page</span>
+              <span class="ui-pill">Brand site</span>
             </div>
           </div>
         </aside>
@@ -1344,9 +1447,9 @@
   <section id="build-page" hidden>
     <button type="button" class="back" id="build-back">← Cosmo</button>
     <p class="eyebrow">CUSTOMIZE</p>
-    <h1>Connect what feeds your twin</h1>
-    <p class="lede" style="margin-left:0;text-align:left">Start here in Cosmo, or finish the same links later in Symbion. Coming-soon apps stay listed but stay off.</p>
-    <div class="build-grid" id="build" style="margin-top:28px"></div>
+    <h1>Customize your Cosmo</h1>
+    <p class="lede" style="margin-left:0;text-align:left">Pick how deep the twin learns, how you show up, and which apps feed it. Deep distill is not a custom website — a private domain can still run on Cosmo.</p>
+    <div class="custom-stack" id="build-body"></div>
   </section>
 
   <section id="answers" hidden>
@@ -1885,6 +1988,8 @@ const state = {
   read: new Set(),
   saved: new Set(),
   connected: new Set(["desk"]),
+  distill: "standard",
+  brand: "theme",
   typing: false,
   shuffleSeed: { lived: 1, quick: 1, experts: 1 }
 };
@@ -2111,12 +2216,86 @@ function renderQuick() {
     </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
 }
 
+const DISTILL_OPTS = [
+  {
+    id: "standard",
+    tier: "Standard distill",
+    title: "Standard distillation",
+    delivery: "Auto organize + template private domain",
+    create: "Self-serve",
+    bill: "Low barrier / subscription"
+  },
+  {
+    id: "deep",
+    tier: "Deep distill",
+    title: "Deep distillation",
+    delivery: "Co-created with the team + business private domain",
+    create: "Platform delivery with you",
+    bill: "Creation fee + ongoing service"
+  }
+];
+const BRAND_OPTS = [
+  {
+    id: "theme",
+    tier: "Included",
+    title: "Platform theme page",
+    delivery: "Default Cosmo entry on the shared platform",
+    create: "Ready out of the box",
+    bill: "Standard plan"
+  },
+  {
+    id: "custom",
+    tier: "Add-on",
+    title: "Custom brand site",
+    delivery: "Independent brand surface, chosen when you need it",
+    create: "On demand",
+    bill: "Billed separately"
+  }
+];
+const BILL_ROWS = [
+  ["Asks", "Token use"],
+  ["Twin-led deals", "Commission (rate TBD)"],
+  ["Standard distill", "Low barrier or subscription"],
+  ["Deep distill", "One-time creation fee"],
+  ["Ongoing distill & ops", "Subscription / ops fee"],
+  ["Custom brand site", "Separate fee"]
+];
+
 function renderBuild() {
   const linked = [...state.connected].filter((id) => BUILD_APPS.some((a) => a.id === id && !a.soon));
   const n = linked.length;
-  const detail = $("build");
-  if (detail) {
-    detail.innerHTML = BUILD_APPS.map((app) => {
+  const body = $("build-body");
+  if (body) {
+    const distillCards = DISTILL_OPTS.map((opt) => {
+      const on = state.distill === opt.id;
+      return `<button type="button" class="custom-opt${on ? " is-on" : ""}" data-distill="${opt.id}" aria-pressed="${on}">
+        <span class="tier">${esc(opt.tier)}</span>
+        <b>${esc(opt.title)}</b>
+        <p class="meta">
+          <span><strong>Delivers</strong> · ${esc(opt.delivery)}</span>
+          <span><strong>Creates</strong> · ${esc(opt.create)}</span>
+          <span><strong>Bills</strong> · ${esc(opt.bill)}</span>
+        </p>
+        <span class="pick">${on ? "Selected" : "Select"}</span>
+      </button>`;
+    }).join("");
+    const brandCards = BRAND_OPTS.map((opt) => {
+      const on = state.brand === opt.id;
+      return `<button type="button" class="custom-opt${on ? " is-on" : ""}" data-brand="${opt.id}" aria-pressed="${on}">
+        <span class="tier">${esc(opt.tier)}</span>
+        <b>${esc(opt.title)}</b>
+        <p class="meta">
+          <span><strong>Shows</strong> · ${esc(opt.delivery)}</span>
+          <span><strong>Setup</strong> · ${esc(opt.create)}</span>
+          <span><strong>Bills</strong> · ${esc(opt.bill)}</span>
+        </p>
+        <span class="pick">${on ? "Selected" : "Select"}</span>
+      </button>`;
+    }).join("");
+    const billRows = BILL_ROWS.map(([item, logic]) =>
+      `<tr><td>${esc(item)}</td><td>${esc(logic)}</td></tr>`
+    ).join("");
+    const apps = BUILD_APPS.map((app) => {
       const on = state.connected.has(app.id);
       const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
       return `<article class="build-card${app.soon ? " is-soon" : ""}">
@@ -2126,6 +2305,47 @@ function renderBuild() {
       <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
     </article>`;
     }).join("");
+    body.innerHTML = `
+      <section class="custom-sec">
+        <p class="sec-kicker">01 · Twin & private domain</p>
+        <h2>Distill your twin</h2>
+        <p class="sec-lede">Standard keeps you self-serve on a template domain. Deep is co-created with the platform — still on Cosmo, not a separate website.</p>
+        <div class="custom-opts">${distillCards}</div>
+        <p class="custom-note">Deep distill ≠ custom website. A personalized private domain can still run on the unified Cosmo platform.</p>
+      </section>
+      <section class="custom-sec">
+        <p class="sec-kicker">02 · Page & brand</p>
+        <h2>How you show up</h2>
+        <p class="sec-lede">Stay on the shared Cosmo theme page, or add a custom brand site when you want a separate surface.</p>
+        <div class="custom-opts">${brandCards}</div>
+      </section>
+      <section class="custom-sec">
+        <p class="sec-kicker">03 · Billing</p>
+        <h2>How Cosmo bills</h2>
+        <p class="sec-lede">Usage, deals, creation, and ongoing service — separate from the brand-site add-on.</p>
+        <div class="custom-side">
+          <table class="custom-bill">
+            <thead><tr><th>Item</th><th>Logic</th></tr></thead>
+            <tbody>${billRows}</tbody>
+          </table>
+          <aside class="custom-pillars">
+            <p class="lbl">Commercial line</p>
+            <ol>
+              <li><span class="n">01</span><span>Standard distill grows supply</span></li>
+              <li><span class="n">02</span><span>Deep distill raises order value</span></li>
+              <li><span class="n">03</span><span>Ongoing ops builds long-term revenue</span></li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+      <section class="custom-sec">
+        <div class="custom-apps-hd">
+          <p class="sec-kicker">04 · Sources</p>
+          <h2>Connect what feeds your twin</h2>
+          <p class="sec-lede">Start here in Cosmo, or finish the same links later in Symbion. Coming-soon apps stay listed but stay off.</p>
+        </div>
+        <div class="build-grid">${apps}</div>
+      </section>`;
   }
   const stepLink = $("build-step-link");
   if (stepLink) {
@@ -2135,9 +2355,11 @@ function renderBuild() {
   }
   const hint = $("build-hint");
   if (hint) {
+    const distillLabel = state.distill === "deep" ? "Deep distill" : "Standard distill";
+    const brandLabel = state.brand === "custom" ? "brand site" : "theme page";
     hint.textContent = n <= 1
-      ? "Open the full list of apps and connections."
-      : `${n} sources linked — open to manage them.`;
+      ? `${distillLabel} · ${brandLabel} — open to change.`
+      : `${distillLabel} · ${brandLabel} · ${n} sources linked.`;
   }
 }
 
@@ -2480,6 +2702,20 @@ document.addEventListener("click", (e) => {
     state.shuffleSeed.experts += 1;
     if (state.who && !visiblePeople().some((p) => p.id === state.who)) state.who = null;
     renderPeople();
+    return;
+  }
+  const distill = e.target.closest("[data-distill]");
+  if (distill) {
+    state.distill = distill.dataset.distill;
+    renderBuild();
+    toast(state.distill === "deep" ? "Deep distill selected" : "Standard distill selected");
+    return;
+  }
+  const brand = e.target.closest("[data-brand]");
+  if (brand) {
+    state.brand = brand.dataset.brand;
+    renderBuild();
+    toast(state.brand === "custom" ? "Custom brand site selected" : "Platform theme page selected");
     return;
   }
   const connect = e.target.closest("[data-connect]");

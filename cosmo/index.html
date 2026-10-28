@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028105020">
+  <meta name="cosmo-build" content="20261028105840">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -799,17 +799,96 @@
   .act:hover .go { color: var(--green); }
   .act .go svg { width: 11px; height: 11px; display: block; }
 
-  .answers { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
-  .answer {
-    background: #fff; border: 1px solid var(--line); border-radius: 18px;
-    padding: 16px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start;
+  /* Answers — Delphi “Top perspectives” */
+  .persp-search {
+    display: flex; align-items: center; gap: 8px;
+    width: 100%; max-width: 720px; margin: 0 auto 28px;
+    background: #fff; border-radius: 999px;
+    padding: 10px 12px 10px 20px;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, .08), 0 0 0 1px rgba(9,9,11,.04);
   }
-  .answer .who-line { display: flex; gap: 10px; align-items: center; }
-  .answer .who-line b { font-size: 16px; }
-  .answer .say { margin: 10px 0 0; font-size: 15px; line-height: 1.5; }
-  .answer .disc { margin: 8px 0 0; }
-  #ask-q { font-size: 32px; text-align: left; max-width: 18em; }
-  #ask-lede { margin: 8px 0 20px; text-align: left; max-width: 36em; }
+  .persp-search input {
+    flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+    font: inherit; font-size: 15px; color: var(--ink); line-height: 1.35;
+  }
+  .persp-search .icon-btn {
+    flex: none; width: 36px; height: 36px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--muted); background: transparent;
+  }
+  .persp-search .icon-btn:hover { background: rgba(9,9,11,.05); color: var(--ink); }
+  .persp-search .icon-btn svg { width: 16px; height: 16px; display: block; }
+  .persp-hd {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    max-width: 720px; margin: 0 auto 16px;
+  }
+  .persp-hd h2 {
+    margin: 0; font-size: 18px; font-weight: 500; color: var(--muted); letter-spacing: -.01em;
+  }
+  .persp-hd .pers {
+    border: 0; background: none; padding: 0;
+    font-size: 13px; font-weight: 500; color: var(--faint);
+  }
+  .persp-hd .pers:hover { color: var(--ink); }
+  .answers {
+    display: flex; flex-direction: column; gap: 18px;
+    max-width: 720px; margin: 0 auto;
+  }
+  .persp {
+    background: #fff; border: 1px solid rgba(9,9,11,.06); border-radius: 22px;
+    padding: 22px 22px 18px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .04);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .persp-who { display: flex; align-items: center; gap: 12px; }
+  .persp-who .av { width: 44px; height: 44px; border-radius: 50%; font-size: 13px; }
+  .persp-who .nm {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -.02em;
+  }
+  .persp-who .nm .check { width: 16px; height: 16px; flex: none; display: block; }
+  .persp-who .role {
+    margin-top: 2px; font-size: 13px; line-height: 1.35; color: var(--muted);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .persp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .persp-tags .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--muted); background: rgba(9,9,11,.05);
+    border-radius: 8px; padding: 6px 9px; line-height: 1;
+  }
+  .persp-quote {
+    position: relative;
+    background: #f4f4f5; border-radius: 16px;
+    padding: 22px 20px 20px 22px;
+  }
+  .persp-quote .qmark {
+    position: absolute; left: 18px; top: 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 42px; line-height: 1; color: rgba(9,9,11,.18); pointer-events: none;
+  }
+  .persp-quote p {
+    margin: 0; padding-left: 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px; line-height: 1.55; color: #2a2a2e;
+  }
+  .persp-foot {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding-top: 2px;
+  }
+  .persp-foot .save {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 500; color: var(--muted); padding: 8px 4px;
+  }
+  .persp-foot .save:hover { color: var(--ink); }
+  .persp-foot .save svg { width: 15px; height: 15px; display: block; }
+  .persp-foot .expand {
+    border-radius: 999px; padding: 11px 18px;
+    font-size: 14px; font-weight: 600; letter-spacing: -.01em;
+    background: #f97316; color: #fff;
+  }
+  .persp-foot .expand:hover { background: #ea6a0c; }
+  #answers .back { max-width: 720px; margin-left: auto; margin-right: auto; }
   .empty {
     grid-column: 1 / -1;
     background: #fff; border: 1px dashed var(--line); border-radius: 18px;
@@ -1118,9 +1197,19 @@
 
   <section id="answers" hidden>
     <button type="button" class="back" id="answers-back">← Cosmo</button>
-    <p class="eyebrow">YOUR QUESTION</p>
-    <h1 id="ask-q"></h1>
-    <p class="lede" id="ask-lede" style="margin-left:0;text-align:left">People this concerns. Continue with anyone.</p>
+    <form class="persp-search" id="persp-form" autocomplete="off">
+      <input id="ask-q" type="search" name="q" aria-label="Your question" placeholder="Ask anything">
+      <button type="button" class="icon-btn" id="ask-clear" aria-label="Clear question">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 4.5 11.5 11.5M11.5 4.5 4.5 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="icon-btn" aria-label="Voice input" tabindex="-1">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.5" y="1.5" width="5" height="8" rx="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+    <div class="persp-hd">
+      <h2 id="ask-lede">Top perspectives</h2>
+      <button type="button" class="pers" id="ask-personalize">Personalize your results →</button>
+    </div>
     <div class="answers" id="ask-cards"></div>
   </section>
 
@@ -1957,30 +2046,50 @@ function relatedPeople(text) {
       if (wordHit(blob, word)) score += 1;
     }
     return { p, score };
-  }).filter((row) => row.score > 0).sort((a, b) => b.score - a.score).slice(0, 3).map((row) => row.p);
+  }).filter((row) => row.score > 0).sort((a, b) => b.score - a.score).slice(0, 5).map((row) => row.p);
+}
+
+const SAVE_ICON = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 2.5h7A1.5 1.5 0 0 1 13 4v9.2L8 11.1 3 13.2V4A1.5 1.5 0 0 1 4.5 2.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+
+function perspTags(p) {
+  const tags = [];
+  if (p.fieldLabel) tags.push(p.fieldLabel);
+  if (p.domain && p.domain.name && p.domain.name !== p.fieldLabel) tags.push(p.domain.name);
+  if (p.course) tags.push("Your path");
+  if (p.kind === "agent") tags.push("Coach");
+  else tags.push("Twin");
+  return tags.slice(0, 3);
 }
 
 function openAnswers(text) {
   state.question = text;
-  const people = relatedPeople(text);
-  show("answers");
-  $("ask-q").textContent = text;
+  let people = relatedPeople(text).filter(hasPortrait);
   if (!people.length) {
-    $("ask-lede").textContent = "No one here is close to this. Ask about a course, a post, or a person.";
-    $("ask-cards").innerHTML = "";
+    people = relatedPeople(text);
+  }
+  if (!people.length) {
+    people = shuffleCopy(PEOPLE.filter(hasPortrait), state.shuffleSeed.quick || 1).slice(0, 3);
+  }
+  show("answers");
+  const input = $("ask-q");
+  if (input) input.value = text;
+  $("ask-lede").textContent = people.length ? "Top perspectives" : "No perspectives yet";
+  if (!people.length) {
+    $("ask-cards").innerHTML = `<div class="empty">No one here is close to this. Try another question.</div>`;
     return;
   }
-  $("ask-lede").textContent = people.length === 1
-    ? "One twin can take this. Continue if you want to keep chatting."
-    : "Related twins answered. Continue with the one you care about.";
-  $("ask-cards").innerHTML = people.map((p) => `<article class="answer">
-    <div>
-      <div class="who-line">${av(p)}<div><b>${esc(p.name)}</b><div class="meta">${esc(p.role)}</div></div></div>
-      <p class="say">${esc(p.reply)}</p>
-      <p class="disc">A synthetic digital human, not the person.</p>
-    </div>
-    <button type="button" class="btn primary" data-continue="${p.id}">Continue chatting</button>
-  </article>`).join("");
+  $("ask-cards").innerHTML = people.map((p) => {
+    const tags = perspTags(p).map((t) => `<span class="tag">${esc(t)}</span>`).join("");
+    return `<article class="persp">
+      <div class="persp-who">${av(p)}<div><div class="nm">${esc(p.name)}${CHECK}</div><div class="role">${esc(p.role)}</div></div></div>
+      <div class="persp-tags">${tags}</div>
+      <div class="persp-quote"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div>
+      <div class="persp-foot">
+        <button type="button" class="save" data-save="${p.id}">${SAVE_ICON}Save</button>
+        <button type="button" class="expand" data-continue="${p.id}">Expand →</button>
+      </div>
+    </article>`;
+  }).join("");
 }
 
 function continueWith(id) {
@@ -2204,7 +2313,15 @@ document.addEventListener("click", (e) => {
     return;
   }
   const keep = e.target.closest("[data-continue]");
-  if (keep) continueWith(keep.dataset.continue);
+  if (keep) {
+    continueWith(keep.dataset.continue);
+    return;
+  }
+  const save = e.target.closest("[data-save]");
+  if (save) {
+    toast("Saved to your Cosmo");
+    return;
+  }
   const orbit = e.target.closest(".orbit span");
   if (orbit) {
     const label = orbit.textContent.trim().toLowerCase();
@@ -2252,6 +2369,19 @@ $("talk-draft").addEventListener("keydown", (e) => {
   }
 });
 $("answers-back").addEventListener("click", () => { show("home"); renderHome(); });
+$("persp-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = $("ask-q").value.trim();
+  if (!text) { toast("Write a question, then search"); return; }
+  openAnswers(text);
+});
+$("ask-clear").addEventListener("click", () => {
+  $("ask-q").value = "";
+  $("ask-q").focus();
+});
+$("ask-personalize").addEventListener("click", () => {
+  toast("Personalization comes after you connect sources");
+});
 $("talk-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("domain-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("build-back").addEventListener("click", () => { show("home"); renderHome(); });

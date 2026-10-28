@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028140340">
+  <meta name="cosmo-build" content="20261028142040">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,6 +83,9 @@
   .wrap:has(#talk:not([hidden])),
   .wrap:has(#answers:not([hidden])),
   .wrap:has(#build-page:not([hidden])),
+  .wrap:has(#tokens-page:not([hidden])),
+  .wrap:has(#distill-page:not([hidden])),
+  .wrap:has(#deep-page:not([hidden])),
   .wrap:has(#domain:not([hidden])) {
     width: min(1480px, calc(100% - 48px));
   }
@@ -1112,6 +1115,9 @@
   .back:hover { text-decoration: underline; }
   /* Clear sticky top + veil blur so ← Cosmo is not covered */
   #build-page,
+  #tokens-page,
+  #distill-page,
+  #deep-page,
   #answers,
   #talk,
   #domain {
@@ -1349,6 +1355,211 @@
     .expert .role { font-size: 12.5px; }
     .rail-fade { width: 96px; }
   }
+
+  .token-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; font-size: 13px; font-weight: 600;
+    color: var(--ink); background: #fff; border: 1px solid var(--line);
+    border-radius: 999px; padding: 7px 12px;
+  }
+  .token-chip:hover { background: var(--green-wash); }
+  .token-chip .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #3c7a94;
+  }
+  .ask-token-hint {
+    margin: 10px 0 0; text-align: center;
+    font-size: 12px; color: var(--faint); line-height: 1.4;
+  }
+  .ask-token-hint b { color: var(--muted); font-weight: 600; }
+
+  .pay-page { max-width: 920px; margin: 0 auto; }
+  .pay-page > .back { display: inline-flex; margin-bottom: 18px; }
+  .pay-page .pay-h1 {
+    margin: 0; font-size: clamp(28px, 3.6vw, 40px); font-weight: 600;
+    letter-spacing: -.03em; line-height: 1.15; color: var(--ink);
+  }
+  .pay-page .pay-lede {
+    margin: 12px 0 0; max-width: 36em;
+    font-size: 15px; line-height: 1.5; color: var(--muted);
+  }
+  .pay-sample {
+    display: inline-flex; margin-top: 10px; padding: 4px 10px;
+    border-radius: 999px; background: var(--surface); border: 1px solid var(--line);
+    font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--muted);
+  }
+  .pay-balance {
+    margin-top: 28px; border-radius: 20px; padding: 22px 22px 20px;
+    background: #fff; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .pay-balance .k { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #3c7a94; }
+  .pay-balance .v { margin: 6px 0 0; font-size: 34px; font-weight: 600; letter-spacing: -.03em; }
+  .pay-balance .u { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+  .pay-note {
+    margin: 16px 0 0; padding: 14px 16px; border-radius: 14px;
+    background: var(--surface); border: 1px solid var(--line);
+    font-size: 13px; line-height: 1.5; color: var(--muted);
+  }
+  .pay-packs {
+    margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .pay-pack {
+    text-align: left; border-radius: 18px; padding: 18px 16px;
+    background: #fff; border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 6px; min-height: 148px;
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+  .pay-pack:hover { border-color: rgba(60,122,148,.22); }
+  .pay-pack.is-on {
+    border-color: rgba(60,122,148,.4);
+    box-shadow: 0 0 0 1px rgba(60,122,148,.2);
+    background: linear-gradient(180deg, #eaf3f7 0%, #fff 48%);
+  }
+  .pay-pack .tokens { font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+  .pay-pack .price { font-size: 15px; font-weight: 600; color: var(--ink); }
+  .pay-pack .sub { margin-top: auto; font-size: 12px; color: var(--faint); }
+  .pay-methods { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .pay-methods .lbl { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink); }
+  .pay-methods .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pay-method {
+    border-radius: 999px; padding: 9px 14px; font-size: 13px; font-weight: 500;
+    background: #fff; border: 1px solid var(--line); color: var(--muted);
+  }
+  .pay-method.is-on { color: var(--ink); border-color: var(--ink); background: var(--surface); }
+  .pay-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .pay-actions .primary {
+    border-radius: 999px; padding: 0 22px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600; background: var(--ink); color: #fff;
+  }
+  .pay-actions .primary:hover { background: #222; }
+  .pay-actions .ghost {
+    border-radius: 999px; padding: 0 16px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; color: var(--muted); border: 1px solid var(--line); background: #fff;
+  }
+  .pay-success {
+    margin-top: 18px; border-radius: 16px; padding: 14px 16px;
+    background: #eaf3f7; border: 1px solid rgba(60,122,148,.18);
+    font-size: 14px; color: var(--ink); display: none;
+  }
+  .pay-success.is-on { display: block; }
+
+  .distill-grid {
+    margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .distill-card {
+    text-align: left; border-radius: 22px; padding: 22px 20px 20px;
+    background: #fff; border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 12px; min-height: 360px;
+  }
+  .distill-card .badge {
+    align-self: flex-start; border-radius: 999px; padding: 5px 10px;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    background: var(--green-tint); color: #3c7a94;
+  }
+  .distill-card h2 {
+    margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.02em;
+  }
+  .distill-card ul {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 8px; flex: 1;
+  }
+  .distill-card li {
+    display: grid; grid-template-columns: 14px 1fr; gap: 8px;
+    font-size: 13px; line-height: 1.45; color: var(--muted);
+  }
+  .distill-card li::before {
+    content: ""; width: 14px; height: 14px; margin-top: 2px;
+    background: center / 14px no-repeat
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2 6.4 11 12.5 4.8' stroke='%233c7a94' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .distill-card .price {
+    margin: 0; font-size: 14px; font-weight: 600; color: var(--ink);
+  }
+  .distill-card .price span { display: block; margin-top: 4px; font-size: 12px; font-weight: 500; color: var(--faint); }
+  .distill-card .go {
+    margin-top: 4px; border-radius: 999px; height: 44px; padding: 0 18px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600; background: var(--ink); color: #fff;
+  }
+  .distill-card .go:hover { background: #222; }
+  .distill-card .go.ghost {
+    background: #fff; color: var(--ink); border: 1px solid var(--line);
+  }
+  .distill-card .go.ghost:hover { background: var(--surface); }
+  .distill-foot {
+    margin: 18px 0 0; font-size: 13px; line-height: 1.5; color: var(--faint); max-width: 46em;
+  }
+  .brand-add {
+    margin-top: 22px; border-radius: 20px; padding: 20px 22px;
+    background: #fff; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  }
+  .brand-add h3 { margin: 0 0 6px; font-size: 18px; font-weight: 600; letter-spacing: -.02em; }
+  .brand-add p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); max-width: 40em; }
+  .brand-add .go {
+    flex: none; border-radius: 999px; height: 40px; padding: 0 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+  }
+  .brand-add .go:hover { background: var(--green-tint); }
+
+  .deep-form {
+    margin-top: 24px; background: #fff; border: 1px solid var(--line);
+    border-radius: 20px; padding: 22px;
+    display: grid; gap: 14px;
+  }
+  .deep-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink); }
+  .deep-form input, .deep-form textarea, .deep-form select {
+    border-radius: 12px; border: 1px solid var(--line); background: #fff;
+    padding: 11px 12px; font-size: 14px; font-weight: 400; color: var(--ink); outline: none;
+  }
+  .deep-form textarea { min-height: 88px; resize: vertical; line-height: 1.45; }
+  .deep-form input:focus, .deep-form textarea:focus, .deep-form select:focus { border-color: #09090b; }
+  .deep-form .err { margin: 0; font-size: 12px; color: #b42318; display: none; }
+  .deep-form .err.is-on { display: block; }
+  .deep-form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .deep-success {
+    margin-top: 24px; border-radius: 20px; padding: 28px 24px;
+    background: #fff; border: 1px solid var(--line); text-align: center;
+  }
+  .deep-success h2 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.02em; }
+  .deep-success p { margin: 12px auto 0; max-width: 28em; font-size: 14px; line-height: 1.5; color: var(--muted); }
+
+  .pay-modal[hidden] { display: none !important; }
+  .pay-modal {
+    position: fixed; inset: 0; z-index: 80;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .pay-modal .scrim {
+    position: absolute; inset: 0; background: rgba(9,9,11,.4);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .pay-modal .sheet {
+    position: relative; z-index: 1; width: min(420px, 100%);
+    background: #fff; border-radius: 20px; padding: 24px 22px 20px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.22);
+  }
+  .pay-modal h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+  .pay-modal p { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+  .pay-modal .acts { margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .pay-modal .acts .primary {
+    border-radius: 999px; height: 40px; padding: 0 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 600; background: var(--ink); color: #fff;
+  }
+  .pay-modal .acts .ghost {
+    border-radius: 999px; height: 40px; padding: 0 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; background: #fff; color: var(--muted); border: 1px solid var(--line);
+  }
+
+  @media (max-width: 820px) {
+    .pay-packs, .distill-grid, .deep-form .row2 { grid-template-columns: 1fr; }
+    .brand-add { flex-direction: column; align-items: flex-start; }
+  }
+
 </style>
 </head>
 <body>
@@ -1374,6 +1585,10 @@
   <div class="top-kicker">Cosmo</div>
   <div class="sp"></div>
   <input class="search" id="q" type="search" placeholder="Search people or posts" aria-label="Search people or posts" autocomplete="off">
+  <button type="button" class="token-chip" id="token-chip" data-open-tokens aria-label="Token balance">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="token-chip-label">12 Tokens</span>
+  </button>
   <a class="desk-link" href="https://lulu2467.github.io/symbion-web/H2-B-switching-twin-prototype.html#screen=welcome">Desk</a>
 </header>
 
@@ -1395,6 +1610,7 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
+        <p class="ask-token-hint">本次提问预计消耗 <b>1 Token</b></p>
       </form>
     </div>
 
@@ -1468,8 +1684,8 @@
             <li><span class="n">3</span><span class="t">Choose how you show up</span><span class="d">Stay on the Cosmo theme page, or add a custom brand site later.</span></li>
           </ol>
           <div class="build-cta">
-            <button type="button" class="go" data-open-build>Customize your Cosmo</button>
-            <p class="hint" id="build-hint">Open distill, brand, billing, and app connections.</p>
+            <button type="button" class="go" data-open-distill>打造自己的 Cosmo</button>
+            <p class="hint" id="build-hint">选择标准蒸馏或深度蒸馏，品牌站可单独增购。</p>
           </div>
         </div>
         <aside class="build-viz" aria-hidden="true">
@@ -1498,18 +1714,41 @@
     </div>
   </section>
 
-  <section id="build-page" hidden>
-    <button type="button" class="back" id="build-back">← Cosmo</button>
-    <div class="price-hero">
-      <p class="eyebrow" style="margin-bottom:12px">CUSTOMIZE</p>
-      <h1>Your Cosmo plan starts here</h1>
-      <p class="lede">Choose distill depth, brand surface, and the apps that feed your twin — then subscribe when you are ready.</p>
-      <div class="price-tabs" id="price-tabs" role="tablist" aria-label="Customize sections">
-        <button type="button" class="is-on" data-price-tab="plans" aria-selected="true">Plans</button>
-        <button type="button" data-price-tab="sources" aria-selected="false">Sources</button>
-      </div>
+  <section id="tokens-page" hidden>
+    <div class="pay-page">
+      <button type="button" class="back" data-pay-home>← Cosmo</button>
+      <h1 class="pay-h1">Tokens，用于与数字人持续交流</h1>
+      <p class="pay-lede">充值后可发起提问与继续聊天。价格为原型示例，不接真实支付。</p>
+      <span class="pay-sample">示例价格</span>
+      <div id="tokens-body"></div>
     </div>
-    <div class="price-wrap" id="build-body"></div>
+  </section>
+
+  <section id="distill-page" hidden>
+    <div class="pay-page">
+      <button type="button" class="back" data-pay-home>← Cosmo</button>
+      <h1 class="pay-h1">打造自己的 Cosmo</h1>
+      <p class="pay-lede">从自动化数据整理到人工深度蒸馏，选择适合你的创建方式。</p>
+      <span class="pay-sample">示例价格</span>
+      <div id="distill-body"></div>
+    </div>
+  </section>
+
+  <section id="deep-page" hidden>
+    <div class="pay-page">
+      <button type="button" class="back" data-open-distill>← 蒸馏服务</button>
+      <h1 class="pay-h1">预约深度评估</h1>
+      <p class="pay-lede">告诉我们资料基础与希望提供的私域服务，我们会评估蒸馏方案。</p>
+      <div id="deep-body"></div>
+    </div>
+  </section>
+
+  <section id="build-page" hidden>
+    <button type="button" class="back" id="build-back">← 蒸馏服务</button>
+    <p class="eyebrow">SOURCES</p>
+    <h1>Connect what feeds your twin</h1>
+    <p class="lede" style="margin-left:0;text-align:left">标准蒸馏的下一步：连接已授权 App 与资料。Coming-soon 应用可看不可连。</p>
+    <div class="build-grid" id="build-body" style="margin-top:28px"></div>
   </section>
 
   <section id="answers" hidden>
@@ -1566,6 +1805,28 @@
     </div>
   </div>
 </section>
+<div class="pay-modal" id="token-modal" hidden>
+  <div class="scrim" data-close-token-modal></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="token-modal-title">
+    <h2 id="token-modal-title">Tokens 不足</h2>
+    <p>充值后即可继续提问，当前问题会为你保留。</p>
+    <div class="acts">
+      <button type="button" class="primary" data-go-recharge>去充值</button>
+      <button type="button" class="ghost" data-close-token-modal>暂时取消</button>
+    </div>
+  </div>
+</div>
+<div class="pay-modal" id="brand-modal" hidden>
+  <div class="scrim" data-close-brand-modal></div>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="brand-modal-title">
+    <h2 id="brand-modal-title">定制品牌站</h2>
+    <p>定制品牌站支持专属页面与品牌设计，按需评估、单独付费。它与深度蒸馏相互独立，不捆绑购买。</p>
+    <p style="margin-top:10px">本原型仅作说明，不发起付款。</p>
+    <div class="acts">
+      <button type="button" class="primary" data-close-brand-modal>知道了</button>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -2050,9 +2311,12 @@ const state = {
   connected: new Set(["desk"]),
   distill: "standard",
   brand: "theme",
-  plan: "standard",
-  priceTab: "plans",
-  billingCycle: "annual",
+  tokens: 12,
+  selectedPack: "t100",
+  payMethod: "wechat",
+  pendingQuestion: null,
+  returnAfterPay: null,
+  deepSubmitted: false,
   typing: false,
   shuffleSeed: { lived: 1, quick: 1, experts: 1 }
 };
@@ -2279,193 +2543,250 @@ function renderQuick() {
     </button>`).join("") : `<div class="empty">No recommended questions here.</div>`;
 }
 
-const PRICE_PLANS = [
-  {
-    id: "free",
-    name: "Free",
-    tag: "Theme page · basic ask",
-    monthly: 0,
-    annual: 0,
-    wasMonthly: null,
-    wasAnnual: null,
-    noteMonthly: "Asks bill by token as you go",
-    noteAnnual: "Asks bill by token as you go",
-    cta: "Stay on Free",
-    distill: "standard",
-    brand: "theme",
-    feats: [
-      "Platform theme page included",
-      "Asks billed by token use",
-      "Twin-led deals · commission TBD",
-      "Connect Desk and file sources"
-    ]
+/* ---- Pay prototype config (示例价格，可改) ---- */
+const PAY_CONFIG = {
+  tokenCostPerAsk: 1,
+  startingBalance: 12,
+  packs: [
+    { id: "t30", tokens: 30, priceYuan: 9.9, blurb: "轻度提问" },
+    { id: "t100", tokens: 100, priceYuan: 29.9, blurb: "日常交流" },
+    { id: "t300", tokens: 300, priceYuan: 79.9, blurb: "持续对话" }
+  ],
+  standard: {
+    priceLabel: "低门槛订阅／示例价格",
+    priceYuan: 39
   },
-  {
-    id: "standard",
-    name: "Standard",
-    tag: "Self-serve distill",
-    monthly: 39,
-    annual: 29,
-    wasMonthly: 49,
-    wasAnnual: 39,
-    noteMonthly: "Billed monthly · cancel anytime",
-    noteAnnual: "Billed annually ¥348",
-    cta: "Subscribe",
-    distill: "standard",
-    brand: "theme",
-    feats: [
-      "Auto organize + template private domain",
-      "Self-serve creation",
-      "Low-barrier subscription",
-      "Everything in Free"
-    ]
+  deep: {
+    priceLabel: "创建费＋持续服务费，评估后报价"
   },
-  {
-    id: "deep",
-    name: "Deep",
-    tag: "Co-created private domain",
-    monthly: 159,
-    annual: 129,
-    wasMonthly: 199,
-    wasAnnual: 159,
-    noteMonthly: "Creation fee billed once · then monthly",
-    noteAnnual: "Creation fee once · then ¥1,548 / year",
-    cta: "Subscribe",
-    distill: "deep",
-    brand: "theme",
-    feats: [
-      "Co-created + business private domain",
-      "Platform delivery with you",
-      "Creation fee + ongoing service",
-      "Still runs on Cosmo — not a custom site"
-    ]
-  },
-  {
-    id: "brand",
-    name: "Brand",
-    tag: "Custom brand site add-on",
-    monthly: 99,
-    annual: 79,
-    wasMonthly: 129,
-    wasAnnual: 99,
-    noteMonthly: "Separate from distill · billed monthly",
-    noteAnnual: "Billed annually ¥948 · add-on only",
-    cta: "Add brand site",
-    distill: null,
-    brand: "custom",
-    feats: [
-      "Independent brand surface",
-      "Chosen on demand",
-      "Billed separately from distill",
-      "Stacks with Standard or Deep"
-    ]
+  brand: {
+    priceLabel: "单独付费，按需评估"
   }
-];
+};
 
-const COMPARE_ROWS = [
-  ["Asks", "Token", "Token", "Token", "Token"],
-  ["Twin-led deals", "Commission TBD", "Commission TBD", "Commission TBD", "Commission TBD"],
-  ["Private domain", "Theme only", "Template", "Business", "—"],
-  ["Creation", "Self", "Self-serve", "Platform co-create", "On demand"],
-  ["Ongoing ops", "—", "Subscription", "Subscription / ops", "—"],
-  ["Brand site", "—", "—", "—", "Separate fee"]
-];
+function syncTokenChip() {
+  const el = $("token-chip-label");
+  if (el) el.textContent = `${state.tokens} Tokens`;
+}
 
-function currentPlanId() {
-  if (state.brand === "custom" && state.plan === "brand") return "brand";
-  if (state.distill === "deep") return "deep";
-  if (state.plan === "free") return "free";
-  return "standard";
+function openTokenModal(question) {
+  state.pendingQuestion = question || state.pendingQuestion || "";
+  const modal = $("token-modal");
+  if (modal) modal.hidden = false;
+}
+function closeTokenModal() {
+  const modal = $("token-modal");
+  if (modal) modal.hidden = true;
+}
+function openBrandModal() {
+  const modal = $("brand-modal");
+  if (modal) modal.hidden = false;
+}
+function closeBrandModal() {
+  const modal = $("brand-modal");
+  if (modal) modal.hidden = true;
+}
+
+function tryAsk(text) {
+  const q = (text || "").trim();
+  if (!q) { toast("Write a question, then send"); return; }
+  if (state.tokens < PAY_CONFIG.tokenCostPerAsk) {
+    state.pendingQuestion = q;
+    state.returnAfterPay = "ask";
+    const draft = $("home-draft");
+    if (draft && !draft.value.trim()) draft.value = q;
+    openTokenModal(q);
+    return;
+  }
+  state.tokens -= PAY_CONFIG.tokenCostPerAsk;
+  syncTokenChip();
+  state.pendingQuestion = null;
+  const draft = $("home-draft");
+  if (draft) draft.value = "";
+  openAnswers(q);
+}
+
+function trySendTalk(text) {
+  const msg = (text || "").trim();
+  if (!msg) return;
+  if (state.tokens < PAY_CONFIG.tokenCostPerAsk) {
+    state.pendingQuestion = msg;
+    state.returnAfterPay = "talk";
+    openTokenModal(msg);
+    return;
+  }
+  state.tokens -= PAY_CONFIG.tokenCostPerAsk;
+  syncTokenChip();
+  sendTalk(msg);
+}
+
+function renderTokens() {
+  const body = $("tokens-body");
+  if (!body) return;
+  const packs = PAY_CONFIG.packs.map((pack) => {
+    const on = state.selectedPack === pack.id;
+    return `<button type="button" class="pay-pack${on ? " is-on" : ""}" data-pack="${pack.id}" aria-pressed="${on}">
+      <span class="tokens">${pack.tokens} Tokens</span>
+      <span class="price">¥${pack.priceYuan}</span>
+      <span class="sub">${esc(pack.blurb)} · 示例价格</span>
+    </button>`;
+  }).join("");
+  const methods = [
+    ["wechat", "微信支付"],
+    ["alipay", "支付宝"]
+  ].map(([id, label]) =>
+    `<button type="button" class="pay-method${state.payMethod === id ? " is-on" : ""}" data-pay-method="${id}">${label}</button>`
+  ).join("");
+  body.innerHTML = `
+    <div class="pay-balance">
+      <div>
+        <p class="k">当前余额</p>
+        <p class="v">${state.tokens}</p>
+        <p class="u">Tokens</p>
+      </div>
+    </div>
+    <p class="pay-note">发起提问时消耗 Tokens，相关数字人的首轮回答包含在同一次提问中。</p>
+    <div class="pay-packs">${packs}</div>
+    <div class="pay-methods">
+      <p class="lbl">支付方式</p>
+      <div class="row">${methods}</div>
+    </div>
+    <div class="pay-actions">
+      <button type="button" class="primary" data-confirm-recharge>确认充值</button>
+      <button type="button" class="ghost" data-pay-home>返回 Cosmo 首页</button>
+    </div>
+    <div class="pay-success" id="pay-success">模拟支付成功，余额已更新。</div>`;
+}
+
+function renderDistill() {
+  const body = $("distill-body");
+  if (!body) return;
+  const s = PAY_CONFIG.standard;
+  body.innerHTML = `
+    <div class="distill-grid">
+      <article class="distill-card">
+        <span class="badge">快速创建</span>
+        <h2>标准蒸馏</h2>
+        <ul>
+          <li>连接已授权的 App</li>
+          <li>导入内容与资料</li>
+          <li>自动整理数据</li>
+          <li>通用私域模板</li>
+          <li>基础问答与动态能力</li>
+        </ul>
+        <p class="price">${esc(s.priceLabel)}<span>示例：¥${s.priceYuan} / 月</span></p>
+        <button type="button" class="go" data-start-standard>开始标准蒸馏</button>
+      </article>
+      <article class="distill-card">
+        <span class="badge">人工共创</span>
+        <h2>深度蒸馏</h2>
+        <ul>
+          <li>人工访谈与资料梳理</li>
+          <li>知识、表达与服务流程蒸馏</li>
+          <li>个性化私域功能设计</li>
+          <li>上线测试与人工校准</li>
+        </ul>
+        <p class="price">${esc(PAY_CONFIG.deep.priceLabel)}<span>示例价格 · 评估后报价</span></p>
+        <button type="button" class="go ghost" data-open-deep>预约深度评估</button>
+      </article>
+    </div>
+    <p class="distill-foot">深度蒸馏不等于定制网站，个性化私域仍可运行在统一 Cosmo 平台。</p>
+    <div class="brand-add">
+      <div>
+        <h3>需要更独立的品牌呈现？</h3>
+        <p>定制品牌站支持专属页面与品牌设计，按需评估、单独付费。与深度蒸馏相互独立。</p>
+      </div>
+      <button type="button" class="go" data-open-brand>了解品牌站定制</button>
+    </div>`;
+}
+
+function renderDeepForm() {
+  const body = $("deep-body");
+  if (!body) return;
+  if (state.deepSubmitted) {
+    body.innerHTML = `<div class="deep-success">
+      <h2>需求已记录</h2>
+      <p>需求已记录，我们会根据资料基础和私域复杂度评估蒸馏方案。</p>
+      <div class="pay-actions" style="justify-content:center;margin-top:20px">
+        <button type="button" class="primary" data-open-distill>返回蒸馏服务</button>
+        <button type="button" class="ghost" data-pay-home>回 Cosmo 首页</button>
+      </div>
+    </div>`;
+    return;
+  }
+  body.innerHTML = `<form class="deep-form" id="deep-form" novalidate>
+    <div class="row2">
+      <label>姓名／数字人名称 *
+        <input name="name" required placeholder="例如：骆王宇 Twin">
+      </label>
+      <label>所在领域 *
+        <input name="field" required placeholder="例如：护肤 / 科研 / 创业">
+      </label>
+    </div>
+    <label>当前拥有的内容与资料 *
+      <textarea name="assets" required placeholder="直播回放、文档、商品页、课程笔记…"></textarea>
+    </label>
+    <label>希望连接的 App *
+      <input name="apps" required placeholder="例如：抖音、微信、Notion、Desk">
+    </label>
+    <label>希望提供的私域服务 *
+      <textarea name="services" required placeholder="例如：连接抖音护肤品订单，提供肤质问答、护肤陪练和已购产品使用指导。"></textarea>
+    </label>
+    <div class="row2">
+      <label>是否需要人工持续运营 *
+        <select name="ops" required>
+          <option value="">请选择</option>
+          <option value="yes">需要</option>
+          <option value="no">暂不需要</option>
+          <option value="later">先评估再定</option>
+        </select>
+      </label>
+      <label>联系方式 *
+        <input name="contact" required placeholder="手机号 / 邮箱 / 微信">
+      </label>
+    </div>
+    <p class="err" id="deep-err">请完整填写必填项后再提交。</p>
+    <div class="pay-actions">
+      <button type="submit" class="primary">提交评估需求</button>
+      <button type="button" class="ghost" data-open-distill>返回</button>
+    </div>
+  </form>`;
+  const form = $("deep-form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const required = ["name", "field", "assets", "apps", "services", "ops", "contact"];
+      const ok = required.every((k) => String(fd.get(k) || "").trim());
+      const err = $("deep-err");
+      if (!ok) {
+        if (err) err.classList.add("is-on");
+        return;
+      }
+      if (err) err.classList.remove("is-on");
+      state.deepSubmitted = true;
+      renderDeepForm();
+      toast("评估需求已提交");
+    });
+  }
 }
 
 function renderBuild() {
   const linked = [...state.connected].filter((id) => BUILD_APPS.some((a) => a.id === id && !a.soon));
   const n = linked.length;
   const body = $("build-body");
-  const annual = state.billingCycle === "annual";
-  const selected = currentPlanId();
-
-  document.querySelectorAll("[data-price-tab]").forEach((btn) => {
-    const on = btn.dataset.priceTab === state.priceTab;
-    btn.classList.toggle("is-on", on);
-    btn.setAttribute("aria-selected", on ? "true" : "false");
-  });
-
   if (body) {
-    if (state.priceTab === "sources") {
-      const apps = BUILD_APPS.map((app) => {
-        const on = state.connected.has(app.id);
-        const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
-        return `<article class="build-card${app.soon ? " is-soon" : ""}">
+    body.innerHTML = BUILD_APPS.map((app) => {
+      const on = state.connected.has(app.id);
+      const label = app.soon ? "Coming soon" : (on ? "Connected" : "Connect");
+      return `<article class="build-card${app.soon ? " is-soon" : ""}">
       <span class="app">${esc(app.app)}</span>
       <b>${esc(app.title)}</b>
       <p>${esc(app.blurb)}</p>
       <button type="button" class="connect" data-connect="${app.id}" aria-pressed="${on}" ${app.soon ? "disabled" : ""}>${label}</button>
     </article>`;
-      }).join("");
-      body.innerHTML = `<div class="price-sources">
-        <div class="custom-apps-hd">
-          <h2>Connect what feeds your twin</h2>
-          <p>Start here in Cosmo, or finish the same links later in Symbion. Coming-soon apps stay listed but stay off.</p>
-        </div>
-        <div class="build-grid">${apps}</div>
-      </div>`;
-    } else {
-      const cards = PRICE_PLANS.map((plan) => {
-        const on = selected === plan.id;
-        const price = annual ? plan.annual : plan.monthly;
-        const was = annual ? plan.wasAnnual : plan.wasMonthly;
-        const note = annual ? plan.noteAnnual : plan.noteMonthly;
-        const feats = plan.feats.map((f) => `<li>${esc(f)}</li>`).join("");
-        const wasHtml = was != null ? `<span class="was">¥${was}</span>` : "";
-        return `<article class="price-card${on ? " is-on" : ""}">
-          <h3 class="name">${esc(plan.name)}</h3>
-          <p class="tag">${esc(plan.tag)}</p>
-          <div class="amt">
-            <span class="cur">¥</span>
-            <span class="num">${price}</span>
-            <span class="per">/ month</span>
-            ${wasHtml}
-          </div>
-          <p class="bill-note">${esc(note)}</p>
-          <button type="button" class="cta" data-plan="${plan.id}">${on ? "Selected" : esc(plan.cta)}</button>
-          <ul class="feats">${feats}</ul>
-        </article>`;
-      }).join("");
-      const head = ["Plan", ...PRICE_PLANS.map((p) => p.name)].map((h) => `<th>${esc(h)}</th>`).join("");
-      const rows = COMPARE_ROWS.map((row) =>
-        `<tr>${row.map((cell, i) => `<td>${esc(cell)}</td>`).join("")}</tr>`
-      ).join("");
-      body.innerHTML = `
-        <div class="price-toolbar">
-          <h2>Unlock distill and brand at your pace</h2>
-          <div class="price-cycle" role="group" aria-label="Billing cycle">
-            <button type="button" data-cycle="monthly" class="${annual ? "" : "is-on"}">Monthly</button>
-            <button type="button" data-cycle="annual" class="${annual ? "is-on" : ""}">Annually</button>
-            <span class="save-tag">Save on annual</span>
-          </div>
-        </div>
-        <div class="price-grid">${cards}</div>
-        <div class="price-banner">
-          <div>
-            <h3>Deep distill is not a custom website</h3>
-            <p>A personalized private domain can still run on the unified Cosmo platform. Brand site is a separate add-on when you need an independent surface.</p>
-          </div>
-          <span class="mark" aria-hidden="true">“</span>
-        </div>
-        <div class="price-compare">
-          <h2>Find the right plan for you</h2>
-          <div class="price-table-wrap">
-            <table class="price-table">
-              <thead><tr>${head}</tr></thead>
-              <tbody>${rows}</tbody>
-            </table>
-          </div>
-          <p class="price-agree">Prototype pricing for Cosmo · by selecting a plan you preview subscribe flow.</p>
-        </div>`;
-    }
+    }).join("");
   }
-
   const stepLink = $("build-step-link");
   if (stepLink) {
     stepLink.textContent = n <= 1
@@ -2474,10 +2795,7 @@ function renderBuild() {
   }
   const hint = $("build-hint");
   if (hint) {
-    const plan = PRICE_PLANS.find((p) => p.id === selected) || PRICE_PLANS[1];
-    hint.textContent = n <= 1
-      ? `${plan.name} plan — open to subscribe or connect sources.`
-      : `${plan.name} plan · ${n} sources linked.`;
+    hint.textContent = "选择标准蒸馏或深度蒸馏，品牌站可单独增购。";
   }
 }
 
@@ -2615,8 +2933,16 @@ function show(view) {
   $("talk").hidden = view !== "talk";
   $("domain").hidden = view !== "domain";
   $("build-page").hidden = view !== "build";
+  $("tokens-page").hidden = view !== "tokens";
+  $("distill-page").hidden = view !== "distill";
+  $("deep-page").hidden = view !== "deep";
   if (view === "build") renderBuild();
+  if (view === "tokens") renderTokens();
+  if (view === "distill") renderDistill();
+  if (view === "deep") renderDeepForm();
   closePost();
+  closeTokenModal();
+  if (view !== "distill") closeBrandModal();
   window.scrollTo(0, 0);
 }
 
@@ -2792,6 +3118,18 @@ document.addEventListener("click", (e) => {
     if (rail) rail.scrollBy({ left: Number(railNudge.dataset.railNudge), behavior: "smooth" });
     return;
   }
+  const openDistill = e.target.closest("[data-open-distill]");
+  if (openDistill) {
+    e.preventDefault();
+    show("distill");
+    return;
+  }
+  const openTokens = e.target.closest("[data-open-tokens]");
+  if (openTokens) {
+    e.preventDefault();
+    show("tokens");
+    return;
+  }
   const openBuild = e.target.closest("[data-open-build]");
   if (openBuild) {
     e.preventDefault();
@@ -2822,27 +3160,78 @@ document.addEventListener("click", (e) => {
     renderPeople();
     return;
   }
-  const priceTab = e.target.closest("[data-price-tab]");
-  if (priceTab) {
-    state.priceTab = priceTab.dataset.priceTab;
-    renderBuild();
+  const packBtn = e.target.closest("[data-pack]");
+  if (packBtn) {
+    state.selectedPack = packBtn.dataset.pack;
+    renderTokens();
     return;
   }
-  const cycle = e.target.closest("[data-cycle]");
-  if (cycle) {
-    state.billingCycle = cycle.dataset.cycle;
-    renderBuild();
+  const payMethod = e.target.closest("[data-pay-method]");
+  if (payMethod) {
+    state.payMethod = payMethod.dataset.payMethod;
+    renderTokens();
     return;
   }
-  const planBtn = e.target.closest("[data-plan]");
-  if (planBtn) {
-    const plan = PRICE_PLANS.find((p) => p.id === planBtn.dataset.plan);
-    if (!plan) return;
-    state.plan = plan.id;
-    if (plan.distill) state.distill = plan.distill;
-    if (plan.brand) state.brand = plan.brand;
-    renderBuild();
-    toast(plan.id === "free" ? "Staying on Free" : `${plan.name} selected`);
+  const confirmPay = e.target.closest("[data-confirm-recharge]");
+  if (confirmPay) {
+    const pack = PAY_CONFIG.packs.find((p) => p.id === state.selectedPack) || PAY_CONFIG.packs[1];
+    state.tokens += pack.tokens;
+    syncTokenChip();
+    renderTokens();
+    const ok = $("pay-success");
+    if (ok) ok.classList.add("is-on");
+    toast(`已充值 ${pack.tokens} Tokens`);
+    if (state.pendingQuestion) {
+      window.setTimeout(() => {
+        const q = state.pendingQuestion;
+        const back = state.returnAfterPay;
+        state.pendingQuestion = null;
+        state.returnAfterPay = null;
+        if (back === "talk") trySendTalk(q);
+        else tryAsk(q);
+      }, 600);
+    }
+    return;
+  }
+  const payHome = e.target.closest("[data-pay-home]");
+  if (payHome) {
+    show("home");
+    renderHome();
+    return;
+  }
+  const startStandard = e.target.closest("[data-start-standard]");
+  if (startStandard) {
+    state.distill = "standard";
+    toast("已开始标准蒸馏 · 接下来连接 App");
+    show("build");
+    return;
+  }
+  const openDeep = e.target.closest("[data-open-deep]");
+  if (openDeep) {
+    state.deepSubmitted = false;
+    show("deep");
+    return;
+  }
+  const openBrand = e.target.closest("[data-open-brand]");
+  if (openBrand) {
+    openBrandModal();
+    return;
+  }
+  const goRecharge = e.target.closest("[data-go-recharge]");
+  if (goRecharge) {
+    closeTokenModal();
+    state.returnAfterPay = state.view === "talk" ? "talk" : "ask";
+    show("tokens");
+    return;
+  }
+  const closeTok = e.target.closest("[data-close-token-modal]");
+  if (closeTok) {
+    closeTokenModal();
+    return;
+  }
+  const closeBrand = e.target.closest("[data-close-brand-modal]");
+  if (closeBrand) {
+    closeBrandModal();
     return;
   }
   const connect = e.target.closest("[data-connect]");
@@ -2871,7 +3260,7 @@ document.addEventListener("click", (e) => {
   }
   const ask = e.target.closest("[data-ask]");
   if (ask) {
-    openAnswers(ask.dataset.ask);
+    tryAsk(ask.dataset.ask);
     return;
   }
   const keep = e.target.closest("[data-continue]");
@@ -2922,8 +3311,7 @@ $("home-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const text = $("home-draft").value.trim();
   if (!text) { toast("Write a question, then send"); return; }
-  $("home-draft").value = "";
-  openAnswers(text);
+  tryAsk(text);
 });
 $("home-draft").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
@@ -2933,12 +3321,12 @@ $("home-draft").addEventListener("keydown", (e) => {
 });
 $("talk-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  sendTalk($("talk-draft").value);
+  trySendTalk($("talk-draft").value);
 });
 $("talk-draft").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
-    sendTalk($("talk-draft").value);
+    trySendTalk($("talk-draft").value);
   }
 });
 $("answers-back").addEventListener("click", () => { show("home"); renderHome(); });
@@ -2946,7 +3334,7 @@ $("persp-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const text = $("ask-q").value.trim();
   if (!text) { toast("Write a question, then search"); return; }
-  openAnswers(text);
+  tryAsk(text);
 });
 $("ask-clear").addEventListener("click", () => {
   $("ask-q").value = "";
@@ -2957,7 +3345,15 @@ $("ask-personalize").addEventListener("click", () => {
 });
 $("talk-back").addEventListener("click", () => { show("home"); renderHome(); });
 $("domain-back").addEventListener("click", () => { show("home"); renderHome(); });
-$("build-back").addEventListener("click", () => { show("home"); renderHome(); });
+$("build-back").addEventListener("click", () => { show("distill"); });
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  if (!$("token-modal").hidden) { closeTokenModal(); return; }
+  if (!$("brand-modal").hidden) { closeBrandModal(); }
+});
+syncTokenChip();
+if (typeof state.tokens === "number" && !state.tokens && state.tokens !== 0) state.tokens = PAY_CONFIG.startingBalance;
+syncTokenChip();
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !$("post").hidden) closePost({ returnToFeed: true });
 });

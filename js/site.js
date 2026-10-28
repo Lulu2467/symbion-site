@@ -112,6 +112,7 @@
       cosmoTitle: "每个人，<br>都可以拥有自己的 Cosmo。",
       cosmoLead: "Cosmo 不是头像。<br>它承载身份、知识与能力，知识仍由本人定义。",
       cosmoCaption: "Cosmo 影像",
+      cosmoFilmCap: "问一件事，选一个继续聊。",
       cosmoCapSuffix: " 影像",
       cosmoAnatomyTitle: "一个 Cosmo，由三层组成。",
       cosmoAnatomyLead: "身份让别人认出你，知识装着你的判断，能力让别人可以调用。",
@@ -282,6 +283,7 @@
       cosmoTitle: "Everyone can<br>have their own Cosmo.",
       cosmoLead: "Cosmo is not an avatar.<br>It carries identity, knowledge, and capability—and the knowledge stays yours to define.",
       cosmoCaption: "Cosmo",
+      cosmoFilmCap: "Ask one thing, then choose who to continue with.",
       cosmoCapSuffix: "",
       cosmoAnatomyTitle: "One Cosmo, three layers.",
       cosmoAnatomyLead: "Identity lets others recognize you. Knowledge holds your judgment. Capability lets others call on you.",
@@ -853,8 +855,9 @@
     const name = en ? en.textContent.trim() : "";
     if (layerTitle) layerTitle.textContent = name;
     if (layerNote) layerNote.textContent = current.dataset.note || "";
-    if (layerStage) layerStage.setAttribute("data-label", name);
-    if (layerCap) {
+    const hasFilm = Boolean(layerStage?.querySelector("video"));
+    if (layerStage && !hasFilm) layerStage.setAttribute("data-label", name);
+    if (layerCap && !hasFilm) {
       const suffix = copy(getLang()).cosmoCapSuffix || "";
       layerCap.textContent = name ? name + suffix : (copy(getLang()).cosmoCaption || "");
     }
@@ -910,6 +913,11 @@
   if (layers.length) {
     setLayer(0);
     playLayers();
+  }
+  const film = document.querySelector("[data-page='cosmo'] .media-slot-stage video");
+  if (film instanceof HTMLVideoElement && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    film.removeAttribute("autoplay");
+    film.pause();
   }
 
   if (page === "home" && !document.body.classList.contains("home-v2")) {

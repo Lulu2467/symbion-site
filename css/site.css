@@ -2884,6 +2884,16 @@ html[lang="en"] .who-list .k { display: none; }
   font-weight: 400;
   color: var(--muted);
 }
+.media-slot-stage:has(video)::after { content: none; }
+.media-slot-stage video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #f7f7f8;
+}
 .media-slot figcaption {
   margin: 0;
   padding: 16px 28px 20px;

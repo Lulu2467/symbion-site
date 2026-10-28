@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028142040">
+  <meta name="cosmo-build" content="20261028142840">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1418,12 +1418,18 @@
   .pay-pack .tokens { font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
   .pay-pack .price { font-size: 15px; font-weight: 600; color: var(--ink); }
   .pay-pack .sub { margin-top: auto; font-size: 12px; color: var(--faint); }
-  .pay-methods { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .pay-methods { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; overflow: visible; }
   .pay-methods .lbl { margin: 0; font-size: 13px; font-weight: 600; color: var(--ink); }
-  .pay-methods .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pay-methods .row {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    overflow: visible; padding: 2px 0 4px;
+  }
   .pay-method {
-    border-radius: 999px; padding: 9px 14px; font-size: 13px; font-weight: 500;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-sizing: border-box; height: 40px; padding: 0 16px;
+    border-radius: 999px; font-size: 13px; font-weight: 500; line-height: 1;
     background: #fff; border: 1px solid var(--line); color: var(--muted);
+    overflow: visible;
   }
   .pay-method.is-on { color: var(--ink); border-color: var(--ink); background: var(--surface); }
   .pay-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
@@ -1560,6 +1566,25 @@
     .brand-add { flex-direction: column; align-items: flex-start; }
   }
 
+
+  .cosmo-foot {
+    width: min(var(--page), calc(100% - 64px));
+    margin: 0 auto 40px;
+    display: flex; justify-content: flex-end; align-items: center;
+  }
+  .cosmo-lang {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 999px;
+    background: #fff; border: 1px solid var(--line);
+  }
+  .cosmo-lang button {
+    font-size: 13px; font-weight: 500; color: var(--faint); line-height: 1;
+    padding: 4px 2px;
+  }
+  .cosmo-lang button.on { color: var(--ink); font-weight: 600; }
+  .cosmo-lang button:hover:not(.on) { color: var(--muted); }
+  .cosmo-lang .sep { color: var(--line); font-size: 12px; user-select: none; }
+
 </style>
 </head>
 <body>
@@ -1610,7 +1635,7 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 12.5V3.5M4.5 6.5 8 3.5l3.5 3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <p class="ask-token-hint">本次提问预计消耗 <b>1 Token</b></p>
+        <p class="ask-token-hint" data-i18n-html="askHint">This ask uses about <b>1 Token</b></p>
       </form>
     </div>
 
@@ -1684,8 +1709,8 @@
             <li><span class="n">3</span><span class="t">Choose how you show up</span><span class="d">Stay on the Cosmo theme page, or add a custom brand site later.</span></li>
           </ol>
           <div class="build-cta">
-            <button type="button" class="go" data-open-distill>打造自己的 Cosmo</button>
-            <p class="hint" id="build-hint">选择标准蒸馏或深度蒸馏，品牌站可单独增购。</p>
+            <button type="button" class="go" data-open-distill data-i18n="buildCta">Build your Cosmo</button>
+            <p class="hint" id="build-hint" data-i18n="buildHint">Choose standard or deep distill. Brand site is a separate add-on.</p>
           </div>
         </div>
         <aside class="build-viz" aria-hidden="true">
@@ -1717,9 +1742,9 @@
   <section id="tokens-page" hidden>
     <div class="pay-page">
       <button type="button" class="back" data-pay-home>← Cosmo</button>
-      <h1 class="pay-h1">Tokens，用于与数字人持续交流</h1>
-      <p class="pay-lede">充值后可发起提问与继续聊天。价格为原型示例，不接真实支付。</p>
-      <span class="pay-sample">示例价格</span>
+      <h1 class="pay-h1" data-i18n="tokensTitle">Tokens for ongoing twin chats</h1>
+      <p class="pay-lede" data-i18n="tokensLede">Top up to ask and keep chatting. Sample prices only — no real payment.</p>
+      <span class="pay-sample" data-i18n="samplePrice">Sample pricing</span>
       <div id="tokens-body"></div>
     </div>
   </section>
@@ -1727,27 +1752,27 @@
   <section id="distill-page" hidden>
     <div class="pay-page">
       <button type="button" class="back" data-pay-home>← Cosmo</button>
-      <h1 class="pay-h1">打造自己的 Cosmo</h1>
-      <p class="pay-lede">从自动化数据整理到人工深度蒸馏，选择适合你的创建方式。</p>
-      <span class="pay-sample">示例价格</span>
+      <h1 class="pay-h1" data-i18n="distillTitle">Build your Cosmo</h1>
+      <p class="pay-lede" data-i18n="distillLede">From automated organizing to human deep distill — pick how you create.</p>
+      <span class="pay-sample" data-i18n="samplePrice">Sample pricing</span>
       <div id="distill-body"></div>
     </div>
   </section>
 
   <section id="deep-page" hidden>
     <div class="pay-page">
-      <button type="button" class="back" data-open-distill>← 蒸馏服务</button>
-      <h1 class="pay-h1">预约深度评估</h1>
-      <p class="pay-lede">告诉我们资料基础与希望提供的私域服务，我们会评估蒸馏方案。</p>
+      <button type="button" class="back" data-open-distill data-i18n="backDistill">← Distill services</button>
+      <h1 class="pay-h1" data-i18n="deepTitle">Book a deep distill review</h1>
+      <p class="pay-lede" data-i18n="deepLede">Tell us your materials and the private-domain services you want. We will scope a distill plan.</p>
       <div id="deep-body"></div>
     </div>
   </section>
 
   <section id="build-page" hidden>
-    <button type="button" class="back" id="build-back">← 蒸馏服务</button>
+    <button type="button" class="back" id="build-back" data-i18n="backDistill">← Distill services</button>
     <p class="eyebrow">SOURCES</p>
-    <h1>Connect what feeds your twin</h1>
-    <p class="lede" style="margin-left:0;text-align:left">标准蒸馏的下一步：连接已授权 App 与资料。Coming-soon 应用可看不可连。</p>
+    <h1 data-i18n="sourcesTitle">Connect what feeds your twin</h1>
+    <p class="lede" style="margin-left:0;text-align:left" data-i18n="sourcesLede">Next step for standard distill: connect authorized apps and files. Coming-soon apps stay listed but stay off.</p>
     <div class="build-grid" id="build-body" style="margin-top:28px"></div>
   </section>
 
@@ -1808,25 +1833,33 @@
 <div class="pay-modal" id="token-modal" hidden>
   <div class="scrim" data-close-token-modal></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="token-modal-title">
-    <h2 id="token-modal-title">Tokens 不足</h2>
-    <p>充值后即可继续提问，当前问题会为你保留。</p>
+    <h2 id="token-modal-title" data-i18n="tokenModalTitle">Not enough Tokens</h2>
+    <p data-i18n="tokenModalBody">Top up to keep asking. Your current question will be kept.</p>
     <div class="acts">
-      <button type="button" class="primary" data-go-recharge>去充值</button>
-      <button type="button" class="ghost" data-close-token-modal>暂时取消</button>
+      <button type="button" class="primary" data-go-recharge data-i18n="tokenModalGo">Top up</button>
+      <button type="button" class="ghost" data-close-token-modal data-i18n="tokenModalCancel">Not now</button>
     </div>
   </div>
 </div>
 <div class="pay-modal" id="brand-modal" hidden>
   <div class="scrim" data-close-brand-modal></div>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="brand-modal-title">
-    <h2 id="brand-modal-title">定制品牌站</h2>
-    <p>定制品牌站支持专属页面与品牌设计，按需评估、单独付费。它与深度蒸馏相互独立，不捆绑购买。</p>
-    <p style="margin-top:10px">本原型仅作说明，不发起付款。</p>
+    <h2 id="brand-modal-title" data-i18n="brandModalTitle">Custom brand site</h2>
+    <p data-i18n="brandModalBody">A custom brand site supports dedicated pages and brand design. Scoped on demand and billed separately. Independent from deep distill — not bundled.</p>
+    <p style="margin-top:10px" data-i18n="brandModalNote">This prototype is informational only. No payment is started.</p>
     <div class="acts">
-      <button type="button" class="primary" data-close-brand-modal>知道了</button>
+      <button type="button" class="primary" data-close-brand-modal data-i18n="brandModalOk">Got it</button>
     </div>
   </div>
 </div>
+
+<footer class="cosmo-foot" aria-label="Language">
+  <div class="cosmo-lang" role="group" aria-label="Language">
+    <button type="button" data-lang="zh">简体中文</button>
+    <span class="sep" aria-hidden="true">/</span>
+    <button type="button" data-lang="en" class="on">EN</button>
+  </div>
+</footer>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -2311,6 +2344,7 @@ const state = {
   connected: new Set(["desk"]),
   distill: "standard",
   brand: "theme",
+  lang: (function(){ try { return localStorage.getItem("cosmo-lang") === "zh" ? "zh" : "en"; } catch(_){ return "en"; } })(),
   tokens: 12,
   selectedPack: "t100",
   payMethod: "wechat",
@@ -2548,21 +2582,222 @@ const PAY_CONFIG = {
   tokenCostPerAsk: 1,
   startingBalance: 12,
   packs: [
-    { id: "t30", tokens: 30, priceYuan: 9.9, blurb: "轻度提问" },
-    { id: "t100", tokens: 100, priceYuan: 29.9, blurb: "日常交流" },
-    { id: "t300", tokens: 300, priceYuan: 79.9, blurb: "持续对话" }
+    { id: "t30", tokens: 30, priceYuan: 9.9, blurbKey: "packLight" },
+    { id: "t100", tokens: 100, priceYuan: 29.9, blurbKey: "packDaily" },
+    { id: "t300", tokens: 300, priceYuan: 79.9, blurbKey: "packHeavy" }
   ],
-  standard: {
-    priceLabel: "低门槛订阅／示例价格",
-    priceYuan: 39
+  standard: { priceYuan: 39 },
+  deep: {},
+  brand: {}
+};
+
+const I18N = {
+  en: {
+    askHint: "This ask uses about <b>1 Token</b>",
+    buildCta: "Build your Cosmo",
+    buildHint: "Choose standard or deep distill. Brand site is a separate add-on.",
+    tokensTitle: "Tokens for ongoing twin chats",
+    tokensLede: "Top up to ask and keep chatting. Sample prices only — no real payment.",
+    samplePrice: "Sample pricing",
+    distillTitle: "Build your Cosmo",
+    distillLede: "From automated organizing to human deep distill — pick how you create.",
+    backDistill: "← Distill services",
+    deepTitle: "Book a deep distill review",
+    deepLede: "Tell us your materials and the private-domain services you want. We will scope a distill plan.",
+    sourcesTitle: "Connect what feeds your twin",
+    sourcesLede: "Next step for standard distill: connect authorized apps and files. Coming-soon apps stay listed but stay off.",
+    tokenModalTitle: "Not enough Tokens",
+    tokenModalBody: "Top up to keep asking. Your current question will be kept.",
+    tokenModalGo: "Top up",
+    tokenModalCancel: "Not now",
+    brandModalTitle: "Custom brand site",
+    brandModalBody: "A custom brand site supports dedicated pages and brand design. Scoped on demand and billed separately. Independent from deep distill — not bundled.",
+    brandModalNote: "This prototype is informational only. No payment is started.",
+    brandModalOk: "Got it",
+    balance: "Current balance",
+    payNote: "Asking spends Tokens. First-round replies from related twins are included in that same ask.",
+    payMethod: "Payment method",
+    wechat: "WeChat Pay",
+    alipay: "Alipay",
+    confirmPay: "Confirm top-up",
+    backHome: "Back to Cosmo home",
+    paySuccess: "Simulated payment succeeded. Balance updated.",
+    packLight: "Light asking",
+    packDaily: "Everyday chats",
+    packHeavy: "Ongoing talks",
+    sampleShort: "Sample pricing",
+    stdBadge: "Fast create",
+    stdTitle: "Standard distill",
+    std1: "Connect authorized apps",
+    std2: "Import content and files",
+    std3: "Auto-organize data",
+    std4: "Shared private-domain template",
+    std5: "Basic Q&A and dynamics",
+    stdPrice: "Low-barrier subscription / sample price",
+    stdPriceSub: "Sample: ¥{n} / month",
+    stdCta: "Start standard distill",
+    deepBadge: "Human co-create",
+    deepCardTitle: "Deep distill",
+    deep1: "Human interview and material review",
+    deep2: "Distill knowledge, voice, and service flows",
+    deep3: "Personalized private-domain design",
+    deep4: "Launch testing and human calibration",
+    deepPrice: "Creation fee + ongoing service, quoted after review",
+    deepPriceSub: "Sample pricing · quoted after review",
+    deepCta: "Book deep review",
+    distillFoot: "Deep distill is not a custom website. A personalized private domain can still run on the shared Cosmo platform.",
+    brandAddTitle: "Need a more independent brand surface?",
+    brandAddBody: "Custom brand site supports dedicated pages and brand design. Scoped on demand, billed separately, independent from deep distill.",
+    brandAddCta: "Learn about brand sites",
+    deepOkTitle: "Request recorded",
+    deepOkBody: "Your request is recorded. We will scope a distill plan from your materials and private-domain complexity.",
+    deepBack: "Back to distill",
+    deepHome: "Cosmo home",
+    fName: "Name / twin name *",
+    fNamePh: "e.g. Luo Twin",
+    fField: "Field *",
+    fFieldPh: "e.g. skincare / research / startup",
+    fAssets: "Content and materials you have *",
+    fAssetsPh: "Live replays, docs, product pages, course notes…",
+    fApps: "Apps to connect *",
+    fAppsPh: "e.g. Douyin, WeChat, Notion, Desk",
+    fServices: "Private-domain services you want *",
+    fServicesPh: "e.g. connect Douyin skincare orders; skin Q&A, routine coaching, and guidance for purchased products.",
+    fOps: "Need ongoing human ops? *",
+    fOpsPick: "Select",
+    fOpsYes: "Yes",
+    fOpsNo: "Not now",
+    fOpsLater: "Decide after review",
+    fContact: "Contact *",
+    fContactPh: "Phone / email / WeChat",
+    deepErr: "Please complete required fields before submitting.",
+    deepSubmit: "Submit review request",
+    back: "Back",
+    toastRecharged: "Added {n} Tokens",
+    toastStandard: "Standard distill started · connect apps next",
+    toastDeep: "Review request submitted",
+    hintDistill: "Choose standard or deep distill. Brand site is a separate add-on."
   },
-  deep: {
-    priceLabel: "创建费＋持续服务费，评估后报价"
-  },
-  brand: {
-    priceLabel: "单独付费，按需评估"
+  zh: {
+    askHint: "本次提问预计消耗 <b>1 Token</b>",
+    buildCta: "打造自己的 Cosmo",
+    buildHint: "选择标准蒸馏或深度蒸馏，品牌站可单独增购。",
+    tokensTitle: "Tokens，用于与数字人持续交流",
+    tokensLede: "充值后可发起提问与继续聊天。价格为原型示例，不接真实支付。",
+    samplePrice: "示例价格",
+    distillTitle: "打造自己的 Cosmo",
+    distillLede: "从自动化数据整理到人工深度蒸馏，选择适合你的创建方式。",
+    backDistill: "← 蒸馏服务",
+    deepTitle: "预约深度评估",
+    deepLede: "告诉我们资料基础与希望提供的私域服务，我们会评估蒸馏方案。",
+    sourcesTitle: "连接喂养 Twin 的来源",
+    sourcesLede: "标准蒸馏的下一步：连接已授权 App 与资料。即将上线的应用可看不可连。",
+    tokenModalTitle: "Tokens 不足",
+    tokenModalBody: "充值后即可继续提问，当前问题会为你保留。",
+    tokenModalGo: "去充值",
+    tokenModalCancel: "暂时取消",
+    brandModalTitle: "定制品牌站",
+    brandModalBody: "定制品牌站支持专属页面与品牌设计，按需评估、单独付费。它与深度蒸馏相互独立，不捆绑购买。",
+    brandModalNote: "本原型仅作说明，不发起付款。",
+    brandModalOk: "知道了",
+    balance: "当前余额",
+    payNote: "发起提问时消耗 Tokens，相关数字人的首轮回答包含在同一次提问中。",
+    payMethod: "支付方式",
+    wechat: "微信支付",
+    alipay: "支付宝",
+    confirmPay: "确认充值",
+    backHome: "返回 Cosmo 首页",
+    paySuccess: "模拟支付成功，余额已更新。",
+    packLight: "轻度提问",
+    packDaily: "日常交流",
+    packHeavy: "持续对话",
+    sampleShort: "示例价格",
+    stdBadge: "快速创建",
+    stdTitle: "标准蒸馏",
+    std1: "连接已授权的 App",
+    std2: "导入内容与资料",
+    std3: "自动整理数据",
+    std4: "通用私域模板",
+    std5: "基础问答与动态能力",
+    stdPrice: "低门槛订阅／示例价格",
+    stdPriceSub: "示例：¥{n} / 月",
+    stdCta: "开始标准蒸馏",
+    deepBadge: "人工共创",
+    deepCardTitle: "深度蒸馏",
+    deep1: "人工访谈与资料梳理",
+    deep2: "知识、表达与服务流程蒸馏",
+    deep3: "个性化私域功能设计",
+    deep4: "上线测试与人工校准",
+    deepPrice: "创建费＋持续服务费，评估后报价",
+    deepPriceSub: "示例价格 · 评估后报价",
+    deepCta: "预约深度评估",
+    distillFoot: "深度蒸馏不等于定制网站，个性化私域仍可运行在统一 Cosmo 平台。",
+    brandAddTitle: "需要更独立的品牌呈现？",
+    brandAddBody: "定制品牌站支持专属页面与品牌设计，按需评估、单独付费。与深度蒸馏相互独立。",
+    brandAddCta: "了解品牌站定制",
+    deepOkTitle: "需求已记录",
+    deepOkBody: "需求已记录，我们会根据资料基础和私域复杂度评估蒸馏方案。",
+    deepBack: "返回蒸馏服务",
+    deepHome: "回 Cosmo 首页",
+    fName: "姓名／数字人名称 *",
+    fNamePh: "例如：骆王宇 Twin",
+    fField: "所在领域 *",
+    fFieldPh: "例如：护肤 / 科研 / 创业",
+    fAssets: "当前拥有的内容与资料 *",
+    fAssetsPh: "直播回放、文档、商品页、课程笔记…",
+    fApps: "希望连接的 App *",
+    fAppsPh: "例如：抖音、微信、Notion、Desk",
+    fServices: "希望提供的私域服务 *",
+    fServicesPh: "例如：连接抖音护肤品订单，提供肤质问答、护肤陪练和已购产品使用指导。",
+    fOps: "是否需要人工持续运营 *",
+    fOpsPick: "请选择",
+    fOpsYes: "需要",
+    fOpsNo: "暂不需要",
+    fOpsLater: "先评估再定",
+    fContact: "联系方式 *",
+    fContactPh: "手机号 / 邮箱 / 微信",
+    deepErr: "请完整填写必填项后再提交。",
+    deepSubmit: "提交评估需求",
+    back: "返回",
+    toastRecharged: "已充值 {n} Tokens",
+    toastStandard: "已开始标准蒸馏 · 接下来连接 App",
+    toastDeep: "评估需求已提交",
+    hintDistill: "选择标准蒸馏或深度蒸馏，品牌站可单独增购。"
   }
 };
+
+function t(key, vars) {
+  const pack = I18N[state.lang] || I18N.en;
+  let s = pack[key] ?? I18N.en[key] ?? key;
+  if (vars) {
+    Object.keys(vars).forEach((k) => { s = s.replace(`{${k}}`, String(vars[k])); });
+  }
+  return s;
+}
+
+function applyStaticI18n() {
+  document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+  document.querySelectorAll(".cosmo-lang [data-lang]").forEach((btn) => {
+    btn.classList.toggle("on", btn.dataset.lang === state.lang);
+  });
+}
+
+function setLang(lang) {
+  state.lang = lang === "zh" ? "zh" : "en";
+  try { localStorage.setItem("cosmo-lang", state.lang); } catch (_) {}
+  applyStaticI18n();
+  syncTokenChip();
+  if (state.view === "tokens") renderTokens();
+  if (state.view === "distill") renderDistill();
+  if (state.view === "deep") renderDeepForm();
+  if (state.view === "home" || state.view === "build") renderBuild();
+}
 
 function syncTokenChip() {
   const el = $("token-chip-label");
@@ -2628,34 +2863,34 @@ function renderTokens() {
     return `<button type="button" class="pay-pack${on ? " is-on" : ""}" data-pack="${pack.id}" aria-pressed="${on}">
       <span class="tokens">${pack.tokens} Tokens</span>
       <span class="price">¥${pack.priceYuan}</span>
-      <span class="sub">${esc(pack.blurb)} · 示例价格</span>
+      <span class="sub">${esc(t(pack.blurbKey))} · ${esc(t("sampleShort"))}</span>
     </button>`;
   }).join("");
   const methods = [
-    ["wechat", "微信支付"],
-    ["alipay", "支付宝"]
-  ].map(([id, label]) =>
-    `<button type="button" class="pay-method${state.payMethod === id ? " is-on" : ""}" data-pay-method="${id}">${label}</button>`
+    ["wechat", "wechat"],
+    ["alipay", "alipay"]
+  ].map(([id, key]) =>
+    `<button type="button" class="pay-method${state.payMethod === id ? " is-on" : ""}" data-pay-method="${id}">${esc(t(key))}</button>`
   ).join("");
   body.innerHTML = `
     <div class="pay-balance">
       <div>
-        <p class="k">当前余额</p>
+        <p class="k">${esc(t("balance"))}</p>
         <p class="v">${state.tokens}</p>
         <p class="u">Tokens</p>
       </div>
     </div>
-    <p class="pay-note">发起提问时消耗 Tokens，相关数字人的首轮回答包含在同一次提问中。</p>
+    <p class="pay-note">${esc(t("payNote"))}</p>
     <div class="pay-packs">${packs}</div>
     <div class="pay-methods">
-      <p class="lbl">支付方式</p>
+      <p class="lbl">${esc(t("payMethod"))}</p>
       <div class="row">${methods}</div>
     </div>
     <div class="pay-actions">
-      <button type="button" class="primary" data-confirm-recharge>确认充值</button>
-      <button type="button" class="ghost" data-pay-home>返回 Cosmo 首页</button>
+      <button type="button" class="primary" data-confirm-recharge>${esc(t("confirmPay"))}</button>
+      <button type="button" class="ghost" data-pay-home>${esc(t("backHome"))}</button>
     </div>
-    <div class="pay-success" id="pay-success">模拟支付成功，余额已更新。</div>`;
+    <div class="pay-success" id="pay-success">${esc(t("paySuccess"))}</div>`;
 }
 
 function renderDistill() {
@@ -2665,38 +2900,38 @@ function renderDistill() {
   body.innerHTML = `
     <div class="distill-grid">
       <article class="distill-card">
-        <span class="badge">快速创建</span>
-        <h2>标准蒸馏</h2>
+        <span class="badge">${esc(t("stdBadge"))}</span>
+        <h2>${esc(t("stdTitle"))}</h2>
         <ul>
-          <li>连接已授权的 App</li>
-          <li>导入内容与资料</li>
-          <li>自动整理数据</li>
-          <li>通用私域模板</li>
-          <li>基础问答与动态能力</li>
+          <li>${esc(t("std1"))}</li>
+          <li>${esc(t("std2"))}</li>
+          <li>${esc(t("std3"))}</li>
+          <li>${esc(t("std4"))}</li>
+          <li>${esc(t("std5"))}</li>
         </ul>
-        <p class="price">${esc(s.priceLabel)}<span>示例：¥${s.priceYuan} / 月</span></p>
-        <button type="button" class="go" data-start-standard>开始标准蒸馏</button>
+        <p class="price">${esc(t("stdPrice"))}<span>${esc(t("stdPriceSub", { n: s.priceYuan }))}</span></p>
+        <button type="button" class="go" data-start-standard>${esc(t("stdCta"))}</button>
       </article>
       <article class="distill-card">
-        <span class="badge">人工共创</span>
-        <h2>深度蒸馏</h2>
+        <span class="badge">${esc(t("deepBadge"))}</span>
+        <h2>${esc(t("deepCardTitle"))}</h2>
         <ul>
-          <li>人工访谈与资料梳理</li>
-          <li>知识、表达与服务流程蒸馏</li>
-          <li>个性化私域功能设计</li>
-          <li>上线测试与人工校准</li>
+          <li>${esc(t("deep1"))}</li>
+          <li>${esc(t("deep2"))}</li>
+          <li>${esc(t("deep3"))}</li>
+          <li>${esc(t("deep4"))}</li>
         </ul>
-        <p class="price">${esc(PAY_CONFIG.deep.priceLabel)}<span>示例价格 · 评估后报价</span></p>
-        <button type="button" class="go ghost" data-open-deep>预约深度评估</button>
+        <p class="price">${esc(t("deepPrice"))}<span>${esc(t("deepPriceSub"))}</span></p>
+        <button type="button" class="go ghost" data-open-deep>${esc(t("deepCta"))}</button>
       </article>
     </div>
-    <p class="distill-foot">深度蒸馏不等于定制网站，个性化私域仍可运行在统一 Cosmo 平台。</p>
+    <p class="distill-foot">${esc(t("distillFoot"))}</p>
     <div class="brand-add">
       <div>
-        <h3>需要更独立的品牌呈现？</h3>
-        <p>定制品牌站支持专属页面与品牌设计，按需评估、单独付费。与深度蒸馏相互独立。</p>
+        <h3>${esc(t("brandAddTitle"))}</h3>
+        <p>${esc(t("brandAddBody"))}</p>
       </div>
-      <button type="button" class="go" data-open-brand>了解品牌站定制</button>
+      <button type="button" class="go" data-open-brand>${esc(t("brandAddCta"))}</button>
     </div>`;
 }
 
@@ -2705,50 +2940,50 @@ function renderDeepForm() {
   if (!body) return;
   if (state.deepSubmitted) {
     body.innerHTML = `<div class="deep-success">
-      <h2>需求已记录</h2>
-      <p>需求已记录，我们会根据资料基础和私域复杂度评估蒸馏方案。</p>
+      <h2>${esc(t("deepOkTitle"))}</h2>
+      <p>${esc(t("deepOkBody"))}</p>
       <div class="pay-actions" style="justify-content:center;margin-top:20px">
-        <button type="button" class="primary" data-open-distill>返回蒸馏服务</button>
-        <button type="button" class="ghost" data-pay-home>回 Cosmo 首页</button>
+        <button type="button" class="primary" data-open-distill>${esc(t("deepBack"))}</button>
+        <button type="button" class="ghost" data-pay-home>${esc(t("deepHome"))}</button>
       </div>
     </div>`;
     return;
   }
   body.innerHTML = `<form class="deep-form" id="deep-form" novalidate>
     <div class="row2">
-      <label>姓名／数字人名称 *
-        <input name="name" required placeholder="例如：骆王宇 Twin">
+      <label>${esc(t("fName"))}
+        <input name="name" required placeholder="${esc(t("fNamePh"))}">
       </label>
-      <label>所在领域 *
-        <input name="field" required placeholder="例如：护肤 / 科研 / 创业">
+      <label>${esc(t("fField"))}
+        <input name="field" required placeholder="${esc(t("fFieldPh"))}">
       </label>
     </div>
-    <label>当前拥有的内容与资料 *
-      <textarea name="assets" required placeholder="直播回放、文档、商品页、课程笔记…"></textarea>
+    <label>${esc(t("fAssets"))}
+      <textarea name="assets" required placeholder="${esc(t("fAssetsPh"))}"></textarea>
     </label>
-    <label>希望连接的 App *
-      <input name="apps" required placeholder="例如：抖音、微信、Notion、Desk">
+    <label>${esc(t("fApps"))}
+      <input name="apps" required placeholder="${esc(t("fAppsPh"))}">
     </label>
-    <label>希望提供的私域服务 *
-      <textarea name="services" required placeholder="例如：连接抖音护肤品订单，提供肤质问答、护肤陪练和已购产品使用指导。"></textarea>
+    <label>${esc(t("fServices"))}
+      <textarea name="services" required placeholder="${esc(t("fServicesPh"))}"></textarea>
     </label>
     <div class="row2">
-      <label>是否需要人工持续运营 *
+      <label>${esc(t("fOps"))}
         <select name="ops" required>
-          <option value="">请选择</option>
-          <option value="yes">需要</option>
-          <option value="no">暂不需要</option>
-          <option value="later">先评估再定</option>
+          <option value="">${esc(t("fOpsPick"))}</option>
+          <option value="yes">${esc(t("fOpsYes"))}</option>
+          <option value="no">${esc(t("fOpsNo"))}</option>
+          <option value="later">${esc(t("fOpsLater"))}</option>
         </select>
       </label>
-      <label>联系方式 *
-        <input name="contact" required placeholder="手机号 / 邮箱 / 微信">
+      <label>${esc(t("fContact"))}
+        <input name="contact" required placeholder="${esc(t("fContactPh"))}">
       </label>
     </div>
-    <p class="err" id="deep-err">请完整填写必填项后再提交。</p>
+    <p class="err" id="deep-err">${esc(t("deepErr"))}</p>
     <div class="pay-actions">
-      <button type="submit" class="primary">提交评估需求</button>
-      <button type="button" class="ghost" data-open-distill>返回</button>
+      <button type="submit" class="primary">${esc(t("deepSubmit"))}</button>
+      <button type="button" class="ghost" data-open-distill>${esc(t("back"))}</button>
     </div>
   </form>`;
   const form = $("deep-form");
@@ -2766,7 +3001,7 @@ function renderDeepForm() {
       if (err) err.classList.remove("is-on");
       state.deepSubmitted = true;
       renderDeepForm();
-      toast("评估需求已提交");
+      toast(t("toastDeep"));
     });
   }
 }
@@ -2795,7 +3030,7 @@ function renderBuild() {
   }
   const hint = $("build-hint");
   if (hint) {
-    hint.textContent = "选择标准蒸馏或深度蒸馏，品牌站可单独增购。";
+    hint.textContent = t("hintDistill");
   }
 }
 
@@ -3180,7 +3415,7 @@ document.addEventListener("click", (e) => {
     renderTokens();
     const ok = $("pay-success");
     if (ok) ok.classList.add("is-on");
-    toast(`已充值 ${pack.tokens} Tokens`);
+    toast(t("toastRecharged", { n: pack.tokens }));
     if (state.pendingQuestion) {
       window.setTimeout(() => {
         const q = state.pendingQuestion;
@@ -3202,7 +3437,7 @@ document.addEventListener("click", (e) => {
   const startStandard = e.target.closest("[data-start-standard]");
   if (startStandard) {
     state.distill = "standard";
-    toast("已开始标准蒸馏 · 接下来连接 App");
+    toast(t("toastStandard"));
     show("build");
     return;
   }
@@ -3354,6 +3589,10 @@ document.addEventListener("keydown", (e) => {
 syncTokenChip();
 if (typeof state.tokens === "number" && !state.tokens && state.tokens !== 0) state.tokens = PAY_CONFIG.startingBalance;
 syncTokenChip();
+applyStaticI18n();
+document.querySelectorAll(".cosmo-lang [data-lang]").forEach((btn) => {
+  btn.addEventListener("click", () => setLang(btn.dataset.lang));
+});
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !$("post").hidden) closePost({ returnToFeed: true });
 });

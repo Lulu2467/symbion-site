@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028110740">
+  <meta name="cosmo-build" content="20261028110920">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -855,25 +855,29 @@
   .persp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .persp-tags .tag {
     font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-    color: #3c7a94; background: var(--green-tint);
+    color: #5a7080; background: #e8eef2;
     border-radius: 8px; padding: 6px 9px; line-height: 1;
   }
   .persp-quote {
     position: relative;
-    background: var(--green-wash); border-radius: 16px;
+    background:
+      linear-gradient(180deg, #dceef7 0%, #eaf4f9 34%, #f4f4f5 100%);
+    border-radius: 16px;
     border: 1px solid rgba(60, 122, 148, .1);
-    padding: 18px 20px 18px 20px;
+    padding: 16px 18px 18px;
   }
   .persp-quote .qmark {
-    position: absolute; left: 18px; top: 8px;
-    font-size: 34px; line-height: .8; color: #3c7a94; font-weight: 500;
-    pointer-events: none;
+    display: inline; float: left;
+    margin: -.12em .18em 0 0;
+    font-size: 28px; line-height: 1; color: #3c7a94; font-weight: 500;
+    vertical-align: top;
   }
   .persp-quote p {
-    margin: 0; padding-top: 28px;
+    margin: 0;
     font-family: var(--font);
     font-size: 16px; line-height: 1.55; color: var(--ink); font-weight: 400;
   }
+  .persp-quote::after { content: ""; display: table; clear: both; }
   .persp-foot {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     padding-top: 2px;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028110920">
+  <meta name="cosmo-build" content="20261028111100">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +80,17 @@
   .desk-link:hover { background: var(--green-wash); }
 
   .wrap { width: min(var(--page), calc(100% - 64px)); margin: 0 auto; padding: 8px 0 88px; }
+  .wrap:has(#talk:not([hidden])),
+  .wrap:has(#answers:not([hidden])),
+  .wrap:has(#build-page:not([hidden])),
+  .wrap:has(#domain:not([hidden])) {
+    width: min(1480px, calc(100% - 48px));
+  }
+  .wrap:has(#talk:not([hidden])) {
+    width: calc(100% - 40px);
+    max-width: none;
+    padding-bottom: 28px;
+  }
   .eyebrow {
     margin: 0 0 14px; font-size: 11px; font-weight: 600;
     letter-spacing: .16em; color: var(--muted);
@@ -936,6 +947,12 @@
   }
 
   .split { display: grid; grid-template-columns: 300px 1fr; gap: 22px; align-items: start; }
+  #talk .split {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: 20px;
+    align-items: stretch;
+    min-height: calc(100vh - 148px);
+  }
   .identity {
     position: sticky; top: 84px;
     border-radius: 28px; padding: 22px; color: #fff; min-height: 340px;
@@ -943,6 +960,11 @@
       radial-gradient(90% 60% at 50% 0%, rgba(255,255,255,.2), transparent 60%),
       var(--tone, #14382e);
     display: flex; flex-direction: column; gap: 10px;
+  }
+  #talk .identity {
+    position: sticky; top: 84px;
+    min-height: calc(100vh - 148px);
+    max-height: calc(100vh - 100px);
   }
   .identity h2 { margin: 10px 0 0; font-size: 28px; font-weight: 500; letter-spacing: -.4px; color: #fff; }
   .identity .role { margin: 0; font-size: 13px; color: rgba(255,255,255,.8); line-height: 1.4; }
@@ -956,8 +978,12 @@
     display: flex; flex-direction: column;
     box-shadow: 0 12px 32px rgba(90,120,110,.06);
   }
-  .log { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 6px 4px 16px; }
-  .bubble { max-width: min(78%, 460px); padding: 12px 14px; border-radius: 18px; font-size: 15px; line-height: 1.5; }
+  #talk .thread {
+    min-height: calc(100vh - 148px);
+    height: calc(100vh - 148px);
+  }
+  .log { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 6px 4px 16px; overflow: auto; min-height: 0; }
+  .bubble { max-width: min(72%, 720px); padding: 12px 14px; border-radius: 18px; font-size: 15px; line-height: 1.5; }
   .bubble.user { align-self: flex-end; background: #09090b; color: #fff; border-bottom-right-radius: 6px; }
   .bubble.twin { align-self: flex-start; background: #f4f4f5; border: 1px solid #ececee; border-bottom-left-radius: 6px; }
   .bubble .who-l { display: block; font-size: 11px; font-weight: 600; margin-bottom: 4px; color: var(--green-dark); }
@@ -1114,6 +1140,10 @@
     .hero, .split, .domain-hero { grid-template-columns: 1fr; }
     .identity { position: static; min-height: 0; }
     .wrap { width: min(var(--page), calc(100% - 32px)); }
+    .wrap:has(#talk:not([hidden])) { width: calc(100% - 24px); }
+    #talk .split { min-height: 0; }
+    #talk .identity { position: static; min-height: 0; max-height: none; }
+    #talk .thread { min-height: 60vh; height: auto; }
     .domain-hero h1, .reader h1 { font-size: 36px; }
     .search, .top-kicker, .orbit { display: none; }
     .stage::before { display: none; }

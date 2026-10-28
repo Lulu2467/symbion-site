@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028150500">
+  <meta name="cosmo-build" content="20261028152000">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2222,6 +2222,152 @@ const LIVED_TOPICS = [
   { id: "work", label: "Work" }
 ];
 
+
+const TAG_ZH = {
+  Life: "人生", Path: "路径", Learning: "学习", Skill: "技能", Startup: "创业", Build: "产品",
+  Work: "工作", Career: "职业", Funding: "融资", Practice: "练习", Health: "健康", Depth: "深度",
+  Pricing: "定价", Scope: "范围", Choice: "选择", Blocker: "卡点", Pace: "节奏", Network: "人脉",
+  Story: "故事", Balance: "平衡", Method: "方法", Course: "课程", Write: "写作", Focus: "切口",
+  Pitch: "路演", Team: "团队", Manager: "管理", Decision: "决策", Update: "同步", Ask: "提问"
+};
+
+const LIVED_ZH = {
+  "Should I stay in school or take the industry offer this year?": {
+    lead: "问 Nora：", accent: "未来五年", q: "今年该继续读书，还是接产业 offer？"
+  },
+  "Which skill should I deepen before the internship interview?": {
+    lead: "问 Pajer 教授：", accent: "接下来练什么", q: "实习面试前，该把哪项技能再挖深一点？"
+  },
+  "How do I know this problem is painful enough to build for?": {
+    lead: "问 Xu 教授：", accent: "第一个客户", q: "怎么判断这个问题够痛、值得去做产品？"
+  },
+  "How do I open the promotion conversation without sounding needy?": {
+    lead: "问 Maya：", accent: "晋升谈话", q: "怎么开口谈晋升，又不显得急切？"
+  },
+  "Do we raise this quarter or ship one more month first?": {
+    lead: "问 Theo：", accent: "现在融资", q: "这季度就融资，还是再交付一个月再说？"
+  },
+  "I keep rereading the same chapter — what should I practice instead?": {
+    lead: "问教练：", accent: "练还是再读", q: "同一章翻来覆去读——该改练什么？"
+  },
+  "Which early burnout signs should I treat as real, not drama?": {
+    lead: "问 Katherine：", accent: "倦怠信号", q: "哪些早期倦怠信号该当真，而不是矫情？"
+  },
+  "Should I go deep on one skill or stay broad this semester?": {
+    lead: "问 Julia：", accent: "一项深技能", q: "这学期该专深一项，还是继续铺广？"
+  },
+  "How should I price the first ten customers without guessing?": {
+    lead: "问 Xu 教授：", accent: "首次定价", q: "前十个客户怎么定价，才不是瞎猜？"
+  },
+  "How do I cut this project so it ships in two weeks?": {
+    lead: "问 Jordan：", accent: "两周范围", q: "怎么砍范围，让这个项目两周内能交？"
+  },
+  "How do I tell if this path is mine or just the safe one?": {
+    lead: "问 Nora：", accent: "安全还是我的", q: "怎么分辨这条路是我想要的，还是只是安全选项？"
+  },
+  "What do I say in standup when the blocker is me?": {
+    lead: "问 Maya：", accent: "站会", q: "卡住的人是我时，站会该怎么说？"
+  },
+  "Is this a rest week or a sign I should change direction?": {
+    lead: "问 Katherine：", accent: "休息还是转向", q: "这周该休息，还是说明方向该换了？"
+  },
+  "Who is worth one coffee this month for the path I want?": {
+    lead: "问骆王宇的数字人：", accent: "该见谁", q: "为了想走的路，这个月值得约一杯咖啡的是谁？"
+  },
+  "How do I write a short story of myself that is not a CV dump?": {
+    lead: "问 Sam：", accent: "人生故事", q: "怎么写一段短自我介绍，而不是简历堆砌？"
+  },
+  "How do I budget energy across study, work, and family this term?": {
+    lead: "问 Hale 博士：", accent: "精力预算", q: "这学期怎么在学习、工作和家庭之间分配精力？"
+  },
+  "What weekly learning loop keeps me from forgetting by Friday?": {
+    lead: "问 Anastasia：", accent: "每周闭环", q: "怎样的每周学习闭环，能让我周五前还不忘？"
+  },
+  "Which course should I finish before I apply for that role?": {
+    lead: "问 Kim 教授：", accent: "哪门课", q: "申请那个岗位前，该先修完哪门课？"
+  },
+  "How do I turn today’s notes into one page I can reuse later?": {
+    lead: "问 Aim Draft：", accent: "学习笔记", q: "怎么把今天的笔记收成一页，以后还能用？"
+  },
+  "What is the one wedge we should sell before the platform story?": {
+    lead: "问 Nora：", accent: "一个切口", q: "讲平台故事之前，该先卖的那一个切口是什么？"
+  },
+  "Which one sentence should stay in the pitch after we cut the rest?": {
+    lead: "问 Theo：", accent: "路演那句", q: "砍掉其余之后，路演里该留下哪一句？"
+  },
+  "What should our first hire own in the first 90 days?": {
+    lead: "问 Jordan：", accent: "第一个人", q: "第一个人入职后 90 天，该主责什么？"
+  },
+  "What three lines belong on my manager 1:1 agenda this week?": {
+    lead: "问 Nora：", accent: "1:1 议程", q: "这周和主管 1:1，议程上该有哪三行？"
+  },
+  "How do I make the hard call when both options look half-right?": {
+    lead: "问 Xu 教授：", accent: "艰难决定", q: "两边都半对时，怎么做那个艰难决定？"
+  },
+  "How do I write a status note that names risk without drama?": {
+    lead: "问 Sam：", accent: "进度同步", q: "怎么写进度同步，点出风险又不夸张？"
+  }
+};
+
+const PERSON_ZH = {
+  roland: { fieldLabel: "重离子", role: "重离子物理 · 你的课 · 第 5 讲已在工作台" },
+  pajer: { fieldLabel: "宇宙学", role: "宇宙学 · Cornell · 能指认的习题" },
+  luo: { fieldLabel: "直播", role: "3:10 开播 · 台上是本人 · 数字人留复盘" },
+  greer: { fieldLabel: "材料", role: "材料 · Caltech · 晶格与样品尺度" },
+  anastasia: { fieldLabel: "气候", role: "气候数学 · Columbia · 先定坐标再谈趋势" },
+  xu: { fieldLabel: "决策", role: "AI 与决策 · 定价样本在工作台" },
+  lab: { fieldLabel: "实验", role: "实验报告教练 · 目标·方法·结果写进文档" },
+  smith: { fieldLabel: "健康", role: "行星健康 · Brown · 数字要对应到人" },
+  chen: { fieldLabel: "重离子", role: "重离子 · 探测器笔记 · 束流时间在工作台" },
+  oka: { fieldLabel: "重离子", role: "QCD 物质 · RIKEN · 晶格对照第 5 讲" },
+  nova: { fieldLabel: "宇宙学", role: "早期宇宙 · 笔记 · 先定视界再放自由参" },
+  kim: { fieldLabel: "宇宙学", role: "宇宙学习题课 · 能直接粘贴的句子" },
+  maya: { fieldLabel: "直播", role: "答疑时段 · 数字人片段 · 直播之后" },
+  river: { fieldLabel: "直播", role: "研讨主持 · 数字人 FAQ · 不是直播流" },
+  park: { fieldLabel: "材料", role: "材料实验室 · 样品本 · 先样品后晶格" },
+  lin: { fieldLabel: "材料", role: "纳米力学 · 笔记 · 缺陷落在两尺度之间" },
+  reef: { fieldLabel: "气候", role: "海洋气候 · 图 · 先轴与单位" },
+  moss: { fieldLabel: "气候", role: "气候实验 · 时间步 · 对齐图" },
+  vale: { fieldLabel: "决策", role: "产品决策 · 样本 · 决定 + 行数" },
+  brook: { fieldLabel: "决策", role: "定价台 · 数字人 · 句子背后的行数" },
+  draft: { fieldLabel: "实验", role: "写清实验目标 · 方法仍归你" },
+  meter: { fieldLabel: "实验", role: "标出薄弱方法句 · 只点软肋" },
+  hale: { fieldLabel: "健康", role: "人群健康 · 计数 · 数过谁" },
+  quill: { fieldLabel: "健康", role: "健康写作 · 数字人 · 人要留在句里" }
+};
+
+function tagLabel(tag) {
+  if (!tag) return "";
+  return state.lang === "zh" ? (TAG_ZH[tag] || tag) : tag;
+}
+function livedCopy(item) {
+  if (state.lang !== "zh") {
+    return { lead: item.lead, accent: item.accent, q: item.q, tag: item.tag, tag2: item.tag2 };
+  }
+  const z = LIVED_ZH[item.q];
+  return {
+    lead: z ? z.lead : item.lead,
+    accent: z ? z.accent : item.accent,
+    q: z ? z.q : item.q,
+    tag: tagLabel(item.tag),
+    tag2: tagLabel(item.tag2)
+  };
+}
+function personRole(p) {
+  const z = state.lang === "zh" ? PERSON_ZH[p.id] : null;
+  return (z && z.role) || p.role;
+}
+function personField(p) {
+  const z = state.lang === "zh" ? PERSON_ZH[p.id] : null;
+  return (z && z.fieldLabel) || p.fieldLabel;
+}
+function personDomainName(p) {
+  if (!p.domain) return "";
+  if (state.lang !== "zh") return p.domain.name;
+  const z = PERSON_ZH[p.id];
+  return (z && z.domainName) || p.domain.name;
+}
+
 const STAR_CHIP = `<svg class="star" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M538.112 38.4c-15.36-44.544-39.936-44.544-55.296 0l-84.992 250.88c-14.848 44.544-64 93.184-108.032 108.544L40.448 482.816c-44.544 15.36-44.544 39.936 0 55.296l247.808 86.016c44.544 15.36 93.184 64.512 108.544 108.544l86.528 251.392c15.36 44.544 39.936 44.544 55.296 0l84.48-249.856c14.848-44.544 63.488-93.184 108.032-108.544l252.928-86.528c44.544-15.36 44.544-39.936 0-54.784l-248.832-83.968c-44.544-14.848-93.184-63.488-108.544-108.032-1.536-0.512-88.576-253.952-88.576-253.952z"/></svg>`;
 
 /* Recommended mirrors the six lived prompts for the active topic */
@@ -2422,7 +2568,7 @@ function renderPeople() {
       <div class="shot"><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${EXPERT_IMG_MISS}"></div>
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
-        <span class="role">${esc(p.role)}</span>
+        <span class="role">${esc(personRole(p))}</span>
       </div>
     </article>`;
   }).join("") : `<div class="empty">${esc(t("noExperts"))}</div>`;
@@ -2467,7 +2613,7 @@ function renderPosts() {
   }
   $("posts").innerHTML = rows.map((item) => {
     const p = person(item.author);
-    const where = p.domain ? p.domain.name : t("noDomain");
+    const where = p.domain ? personDomainName(p) : t("noDomain");
     const tint = item.tint || { ink: "#18181b", wash: "#e7edf4", line: "#d4d4d8" };
     return `<button type="button" class="qcard" data-post="${item.id}" style="--pill-ink:${tint.ink};--pill-wash:${tint.wash};--pill-line:${tint.line}">
       <span class="qghost" aria-hidden="true"><b class="soft">${esc(p.name)}</b><b>${esc(p.name)}</b></span>
@@ -2497,7 +2643,8 @@ function updateDynamicsScroller() {
 function livedVisible(item) {
   const p = person(item.id);
   if (!p || !personMatches(p)) return false;
-  if (!matches(`${item.lead} ${item.accent} ${item.q}`)) return false;
+  const copy = livedCopy(item);
+  if (!matches(`${item.lead} ${item.accent} ${item.q} ${copy.lead} ${copy.accent} ${copy.q}`)) return false;
   return item.topic === state.livedTopic;
 }
 
@@ -2517,11 +2664,12 @@ function renderLived() {
   const cards = shuffleCopy(LIVED.filter((item) => livedVisible(item)), state.shuffleSeed.lived);
   $("lived").innerHTML = cards.length ? cards.map((item) => {
     const p = person(item.id);
-    const tag = item.tag || (p.domain ? p.domain.name : "Ask");
-    const tag2 = item.tag2 || "";
+    const copy = livedCopy(item);
+    const tag = copy.tag || (p.domain ? personDomainName(p) : tagLabel("Ask"));
+    const tag2 = copy.tag2 || "";
     return `<button type="button" class="lived-card${item.light ? " light" : ""}" data-ask="${esc(item.q)}" style="--base:${item.base};--lift:${item.lift};--accent:${item.accentColor}">
       ${MARK}
-      <p class="lead">${esc(item.lead)} <span class="accent">${esc(item.accent)}</span></p>
+      <p class="lead">${esc(copy.lead)} <span class="accent">${esc(copy.accent)}</span></p>
       <span class="tags"><span class="tag">${esc(tag)}</span>${tag2 ? `<span class="tag">${esc(tag2)}</span>` : ""}</span>
     </button>`;
   }).join("") : `<div class="empty">${esc(t("noPrompts"))}</div>`;
@@ -2554,22 +2702,24 @@ function faceCountFor(item, relatedLen) {
   return Math.max(2, Math.min(5, Math.max(relatedLen || 1, varied)));
 }
 function renderQuick() {
-  const tag = QUICK_TAG[state.livedTopic] || "All";
+  const tag = t("topic_" + (state.livedTopic || "all")) || "All";
   const cards = shuffleCopy(LIVED.filter((item) => livedVisible(item)).slice(0, 6), state.shuffleSeed.quick).map((item) => {
     const p = person(item.id);
+    const copy = livedCopy(item);
     let people = relatedPeople(item.q);
     if (!people.length && p) people = [p];
     const count = faceCountFor(item, people.length);
     const faces = faceStack(people, p, count);
     return {
-      q: item.q,
-      accent: item.accent,
-      tag: item.tag || (p && p.fieldLabel ? p.fieldLabel : tag),
+      ask: item.q,
+      q: copy.q,
+      accent: copy.accent,
+      tag: copy.tag || (p ? personField(p) : tag),
       count: faces.length,
       faces
     };
   }).filter((row) => row.faces.length);
-  $("quick").innerHTML = cards.length ? cards.map((item) => `<button type="button" class="qask" data-ask="${esc(item.q)}">
+  $("quick").innerHTML = cards.length ? cards.map((item) => `<button type="button" class="qask" data-ask="${esc(item.ask)}">
       <span class="line">${boldAccent(item.q, item.accent)}</span>
       <span class="foot">
         <span class="tag-pair"><span class="tag">${esc(item.tag)}</span><span class="tag">${esc(t("nPerspectives", { n: item.count }))}</span></span>
@@ -3329,8 +3479,10 @@ const SAVE_ICON = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path
 
 function perspTags(p) {
   const tags = [];
-  if (p.fieldLabel) tags.push(p.fieldLabel);
-  if (p.domain && p.domain.name && p.domain.name !== p.fieldLabel) tags.push(p.domain.name);
+  const field = personField(p);
+  const dname = personDomainName(p);
+  if (field) tags.push(field);
+  if (dname && dname !== field) tags.push(dname);
   if (p.course) tags.push(t("yourPath"));
   if (p.kind === "agent") tags.push(t("coach"));
   else tags.push(t("twin"));
@@ -3357,7 +3509,7 @@ function openAnswers(text) {
   $("ask-cards").innerHTML = people.map((p) => {
     const tags = perspTags(p).map((t) => `<span class="tag">${esc(t)}</span>`).join("");
     return `<article class="persp">
-      <div class="persp-who">${av(p)}<div><div class="nm">${esc(p.name)}${CHECK}</div><div class="role">${esc(p.role)}</div></div></div>
+      <div class="persp-who">${av(p)}<div><div class="nm">${esc(p.name)}${CHECK}</div><div class="role">${esc(personRole(p))}</div></div></div>
       <div class="persp-tags">${tags}</div>
       <div class="persp-quote"><div class="persp-quote-body"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div></div>
       <div class="persp-foot">
@@ -3420,7 +3572,7 @@ function renderTalk() {
   $("talk-hd").innerHTML = `<div class="identity" style="--tone:${p.tone}">
     ${av(p, "lg")}
     <h2>${esc(p.name)}</h2>
-    <p class="role">${esc(p.role)}</p>
+    <p class="role">${esc(personRole(p))}</p>
     <p class="disc">${esc(t("twinDisc"))}</p>
     <div class="sp"></div>
     ${domain}

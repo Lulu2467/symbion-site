@@ -542,20 +542,23 @@
     margin: 0 auto 40px;
   }
   #block-build .build-intro h2 {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 14ch;
     font-size: clamp(32px, 4.2vw, 48px);
     font-weight: 600;
     letter-spacing: -.035em;
     line-height: 1.15;
     color: var(--ink);
+    text-wrap: balance;
   }
   #block-build .build-intro .lede {
     margin: 20px auto 0;
-    max-width: 34em;
+    max-width: 28em;
     font-size: 16px;
     line-height: 1.5;
     color: var(--muted);
     text-align: center;
+    text-wrap: balance;
   }
   .build-panel {
     display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px 36px;
@@ -1066,8 +1069,8 @@
 
     <div class="home-block" id="block-build">
       <div class="build-intro">
-        <h2>What one mind knows should help another.</h2>
-        <p class="lede">Shape what your twin knows — three steps, then connect the apps that feed it.</p>
+        <h2>What one mind knows<br>should help another.</h2>
+        <p class="lede">Shape what your twin knows — three steps,<br>then connect the apps that feed it.</p>
       </div>
       <div class="build-panel">
         <div class="build-main">

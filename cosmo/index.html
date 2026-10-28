@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028092450">
+  <meta name="cosmo-build" content="20261028105020">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -842,6 +842,14 @@
     color: var(--green-dark); font-size: 13px; font-weight: 600; margin-bottom: 18px;
   }
   .back:hover { text-decoration: underline; }
+  /* Clear sticky top + veil blur so ← Cosmo is not covered */
+  #build-page,
+  #answers,
+  #talk,
+  #domain,
+  #post {
+    padding-top: 36px;
+  }
 
   .split { display: grid; grid-template-columns: 300px 1fr; gap: 22px; align-items: start; }
   .identity {

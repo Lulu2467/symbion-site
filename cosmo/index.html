@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028153500">
+  <meta name="cosmo-build" content="20261028154000">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -475,9 +475,13 @@
     box-shadow: none;
     display: flex; flex-direction: column;
     transition: transform .18s ease;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
   }
   .expert.agent { border-radius: 26px; }
   .expert:hover { transform: translateY(-3px); }
+  .expert:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
   .expert .shot {
     position: absolute; inset: 0; z-index: 0;
     overflow: hidden;
@@ -2633,13 +2637,14 @@ function renderPeople() {
   $("people").innerHTML = people.length ? people.map((p) => {
     const look = EXPERT_LOOK[p.id] || { base: "#003153", lift: "#4682B4" };
     const shot = faceUrl(p.id, 640, 960);
-    return `<article class="expert" style="--base:${look.base};--lift:${look.lift}">
+    const ask = (ASK[p.id] && ASK[p.id][1]) || "";
+    return `<button type="button" class="expert${p.kind === "agent" ? " agent" : ""}" style="--base:${look.base};--lift:${look.lift}" data-ask="${esc(ask)}" data-expert="${p.id}" aria-label="${esc(p.name)}">
       <div class="shot"><img src="${shot}" alt="" loading="lazy" width="248" height="420" onerror="${EXPERT_IMG_MISS}"></div>
       <div class="foot">
         <span class="nm">${esc(p.name)}${CHECK}</span>
         <span class="role">${esc(personRole(p))}</span>
       </div>
-    </article>`;
+    </button>`;
   }).join("") : `<div class="empty">${esc(t("noExperts"))}</div>`;
   requestAnimationFrame(updateExpertScroller);
 }

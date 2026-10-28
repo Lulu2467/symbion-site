@@ -113,6 +113,25 @@
       cosmoLead: "Cosmo 不是头像。<br>它承载身份、知识与能力，知识仍由本人定义。",
       cosmoCaption: "Cosmo 影像",
       cosmoFilmCap: "问一件事，选一个继续聊。",
+      cosmoFilmAria: "下一拍",
+      cosmoBeat1: "随便问",
+      cosmoBeat2: "选一个继续",
+      cosmoBeat3: "先选主题",
+      cosmoBeat4: "三步建立",
+      cosmoBeatQ: "实习面试前，该把哪项技能再挖深一点？",
+      cosmoBeatF1: "学习",
+      cosmoBeatA1: "先做一道真题。",
+      cosmoBeatF2: "实验",
+      cosmoBeatA2: "把方法写下来。",
+      cosmoBeatF3: "决策",
+      cosmoBeatA3: "先定目标岗位。",
+      cosmoBeatGo: "继续聊",
+      cosmoChip1: "为你推荐",
+      cosmoChip2: "全部",
+      cosmoChip3: "人生",
+      cosmoChip4: "学习",
+      cosmoChip5: "创业",
+      cosmoChip6: "工作",
       cosmoCapSuffix: " 影像",
       cosmoAnatomyTitle: "一个 Cosmo，由三层组成。",
       cosmoAnatomyLead: "身份让别人认出你，知识装着你的判断，能力让别人可以调用。",
@@ -284,6 +303,25 @@
       cosmoLead: "Cosmo is not an avatar.<br>It carries identity, knowledge, and capability—and the knowledge stays yours to define.",
       cosmoCaption: "Cosmo",
       cosmoFilmCap: "Ask one thing, then choose who to continue with.",
+      cosmoFilmAria: "Next beat",
+      cosmoBeat1: "Ask anything",
+      cosmoBeat2: "Choose one",
+      cosmoBeat3: "Pick a topic",
+      cosmoBeat4: "Three steps",
+      cosmoBeatQ: "Which skill should I deepen before the interview?",
+      cosmoBeatF1: "Learning",
+      cosmoBeatA1: "Do one real problem.",
+      cosmoBeatF2: "Lab",
+      cosmoBeatA2: "Write it down.",
+      cosmoBeatF3: "Decisions",
+      cosmoBeatA3: "Name the role first.",
+      cosmoBeatGo: "Continue",
+      cosmoChip1: "For you",
+      cosmoChip2: "All",
+      cosmoChip3: "Life",
+      cosmoChip4: "Learning",
+      cosmoChip5: "Startup",
+      cosmoChip6: "Work",
       cosmoCapSuffix: "",
       cosmoAnatomyTitle: "One Cosmo, three layers.",
       cosmoAnatomyLead: "Identity lets others recognize you. Knowledge holds your judgment. Capability lets others call on you.",
@@ -855,7 +893,7 @@
     const name = en ? en.textContent.trim() : "";
     if (layerTitle) layerTitle.textContent = name;
     if (layerNote) layerNote.textContent = current.dataset.note || "";
-    const hasFilm = Boolean(layerStage?.querySelector("video"));
+    const hasFilm = Boolean(layerStage?.classList.contains("cosmo-film") || layerStage?.querySelector("video"));
     if (layerStage && !hasFilm) layerStage.setAttribute("data-label", name);
     if (layerCap && !hasFilm) {
       const suffix = copy(getLang()).cosmoCapSuffix || "";
@@ -914,10 +952,40 @@
     setLayer(0);
     playLayers();
   }
-  const film = document.querySelector("[data-page='cosmo'] .media-slot-stage video");
-  if (film instanceof HTMLVideoElement && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    film.removeAttribute("autoplay");
-    film.pause();
+  const film = document.querySelector("[data-page='cosmo'] .cosmo-film");
+  if (film) {
+    const beats = [...film.querySelectorAll(".cosmo-film-beat")];
+    let beat = 0;
+    let beatTimer = 0;
+    const beatReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const showBeat = (n) => {
+      beat = (n + beats.length) % beats.length;
+      beats.forEach((el, k) => el.classList.toggle("is-on", k === beat));
+      film.style.setProperty("--i", String(beat));
+      film.dataset.beat = String(beat);
+    };
+    const armBeat = () => {
+      window.clearTimeout(beatTimer);
+      if (beatReduce.matches) return;
+      beatTimer = window.setTimeout(() => {
+        showBeat(beat + 1);
+        armBeat();
+      }, 5600);
+    };
+    film.addEventListener("click", () => {
+      showBeat(beat + 1);
+      armBeat();
+    });
+    film.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      showBeat(beat + 1);
+      armBeat();
+    });
+    film.addEventListener("mouseenter", () => window.clearTimeout(beatTimer));
+    film.addEventListener("mouseleave", armBeat);
+    showBeat(0);
+    armBeat();
   }
 
   if (page === "home" && !document.body.classList.contains("home-v2")) {

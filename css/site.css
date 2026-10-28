@@ -2884,7 +2884,144 @@ html[lang="en"] .who-list .k { display: none; }
   font-weight: 400;
   color: var(--muted);
 }
-.media-slot-stage:has(video)::after { content: none; }
+.media-slot-stage:has(video)::after,
+.media-slot-stage.cosmo-film::after { content: none; }
+.cosmo-film {
+  cursor: pointer;
+  background:
+    radial-gradient(ellipse 70% 90% at 70% 46%, rgba(176, 212, 226, .55) 0%, rgba(198, 224, 234, .14) 42%, rgba(247, 247, 248, 0) 72%),
+    #f7f7f8;
+  color: #09090b;
+}
+.cosmo-film:focus-visible { outline: 2px solid #09090b; outline-offset: -2px; }
+.cosmo-film-beat {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(180px, .7fr) minmax(0, 1.2fr);
+  gap: 28px;
+  align-items: center;
+  padding: 36px 48px 46px;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+.cosmo-film-beat.is-on { opacity: 1; }
+.cosmo-film-beat > * { min-width: 0; }
+.cosmo-film .cf-chips,
+.cosmo-film .cf-topic { min-width: 0; }
+.cosmo-film-copy span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  color: #3c7a94;
+}
+.cosmo-film-copy b {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(28px, 3.1vw, 46px);
+  font-weight: 600;
+  letter-spacing: -.04em;
+  line-height: 1.05;
+}
+.cf-ask {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, .92);
+  border-radius: 22px;
+  padding: 16px 16px 16px 22px;
+  box-shadow: 0 16px 40px rgba(40, 80, 110, .1);
+}
+.cf-ask span { flex: 1; font-size: clamp(16px, 1.6vw, 22px); line-height: 1.35; }
+.cf-ask i {
+  width: 42px; height: 42px; border-radius: 21px; background: #09090b; color: #fff; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.cf-ask svg { display: block; }
+.cf-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; min-width: 0; }
+.cf-cards div {
+  min-width: 0;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  box-shadow: inset 0 0 0 1px #ececee, 0 10px 24px rgba(9, 9, 11, .05);
+  min-height: 132px;
+}
+.cf-cards .is-on { box-shadow: inset 0 0 0 1.5px #09090b, 0 10px 24px rgba(9, 9, 11, .06); }
+.cf-cards em {
+  display: inline-block;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: #52525b;
+  background: #f4f4f5;
+  border-radius: 7px;
+  padding: 4px 7px;
+}
+.cf-cards b {
+  display: block;
+  margin-top: 12px;
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.35;
+}
+.cf-cards small { display: block; margin-top: 10px; font-size: 13px; }
+.cf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.cosmo-film .cf-chips span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #52525b;
+  background: #f4f4f5;
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+.cosmo-film .cf-chips .is-on { background: #09090b; color: #fff; }
+.cf-q {
+  margin-top: 16px;
+  border-radius: 18px;
+  padding: 22px 22px;
+  color: #fff;
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.3;
+  background:
+    radial-gradient(120% 100% at 100% 100%, #576d93 0%, transparent 58%),
+    linear-gradient(155deg, #3d6288 0%, #183a65 72%);
+}
+.cf-steps { margin: 0; padding: 0; list-style: none; }
+.cf-steps li {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid #ececee;
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+}
+.cf-steps span { font-size: 14px; color: #09090b; }
+.cosmo-film-bar {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 16px;
+  height: 2px;
+  background: rgba(9, 9, 11, .08);
+}
+.cosmo-film-bar::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: calc((var(--i, 0) + 1) / 4 * 100%);
+  background: #09090b;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cosmo-film-beat { transition: none; }
+}
 .media-slot-stage video {
   position: absolute;
   inset: 0;

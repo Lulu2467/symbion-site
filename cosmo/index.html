@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028092240">
+  <meta name="cosmo-build" content="20261028092450">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -268,45 +268,35 @@
     width: 28px; height: 28px; padding: 0;
     border: 0; background: transparent; color: #515151;
     display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 8px;
-    transition: color .15s ease, background .15s ease;
   }
-  .shuffle:hover { color: var(--ink); background: rgba(9,9,11,.04); }
-  .shuffle:active { color: var(--ink); }
-  .shuffle svg { width: 18px; height: 18px; display: block; transform-origin: 50% 50%; }
-  .shuffle.is-spinning svg {
-    animation: shuffle-spin .58s cubic-bezier(.4, 0, .2, 1);
-  }
-  @keyframes shuffle-spin {
-    0% { transform: rotate(0deg) scale(1); }
-    45% { transform: rotate(200deg) scale(1.08); }
-    100% { transform: rotate(360deg) scale(1); }
-  }
+  .shuffle:hover { color: var(--ink); }
+  .shuffle:active { transform: rotate(-12deg); }
+  .shuffle svg { width: 18px; height: 18px; display: block; }
   .shuffle-out > * {
-    animation: shuffle-card-out .2s ease forwards;
+    animation: shuffle-card-out .22s ease forwards;
     pointer-events: none;
   }
   .shuffle-in > * {
-    animation: shuffle-card-in .48s cubic-bezier(.22, 1, .36, 1) both;
+    animation: shuffle-card-in .52s cubic-bezier(.22, 1, .36, 1) both;
   }
   .shuffle-in > *:nth-child(1) { animation-delay: 0ms; }
-  .shuffle-in > *:nth-child(2) { animation-delay: 45ms; }
-  .shuffle-in > *:nth-child(3) { animation-delay: 90ms; }
-  .shuffle-in > *:nth-child(4) { animation-delay: 135ms; }
-  .shuffle-in > *:nth-child(5) { animation-delay: 180ms; }
-  .shuffle-in > *:nth-child(6) { animation-delay: 225ms; }
-  .shuffle-in > *:nth-child(n+7) { animation-delay: 260ms; }
+  .shuffle-in > *:nth-child(2) { animation-delay: 50ms; }
+  .shuffle-in > *:nth-child(3) { animation-delay: 100ms; }
+  .shuffle-in > *:nth-child(4) { animation-delay: 150ms; }
+  .shuffle-in > *:nth-child(5) { animation-delay: 200ms; }
+  .shuffle-in > *:nth-child(6) { animation-delay: 250ms; }
+  .shuffle-in > *:nth-child(n+7) { animation-delay: 290ms; }
   @keyframes shuffle-card-out {
     to {
       opacity: 0;
-      transform: translateY(10px) scale(.97);
+      transform: translateY(12px) scale(.97);
       filter: blur(2px);
     }
   }
   @keyframes shuffle-card-in {
     from {
       opacity: 0;
-      transform: translateY(14px) scale(.96);
+      transform: translateY(18px) scale(.96);
       filter: blur(3px);
     }
     to {
@@ -316,7 +306,6 @@
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .shuffle.is-spinning svg,
     .shuffle-out > *,
     .shuffle-in > * { animation: none !important; }
   }
@@ -1369,14 +1358,10 @@ function playShuffle(btn, key) {
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const box = $(target.id);
   btn.dataset.busy = "1";
-  btn.classList.add("is-spinning");
-  const finishSpin = () => {
-    btn.classList.remove("is-spinning");
-    btn.dataset.busy = "0";
-  };
+  const unlock = () => { btn.dataset.busy = "0"; };
   if (reduced || !box || !box.children.length) {
     target.render();
-    window.setTimeout(finishSpin, 200);
+    unlock();
     return;
   }
   box.classList.remove("shuffle-in");
@@ -1384,14 +1369,14 @@ function playShuffle(btn, key) {
   window.setTimeout(() => {
     target.render();
     const next = $(target.id);
-    if (!next) { finishSpin(); return; }
+    if (!next) { unlock(); return; }
     next.classList.remove("shuffle-out");
     next.classList.add("shuffle-in");
     window.setTimeout(() => {
       next.classList.remove("shuffle-in");
-      finishSpin();
-    }, 560);
-  }, 200);
+      unlock();
+    }, 620);
+  }, 220);
 }
 
 /* Per-topic cool palettes (pre–rain-bed). Size/grid unchanged. */

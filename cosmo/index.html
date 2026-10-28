@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="cosmo-build" content="20261028111920">
+  <meta name="cosmo-build" content="20261028113140">
 <title>Cosmo · Symbion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -871,7 +871,7 @@
   .persp-quote {
     position: relative;
     min-height: 148px;
-    display: flex; align-items: center; gap: 2px;
+    display: flex; align-items: center;
     background:
       linear-gradient(180deg, #eaf3f7 0%, #f1f5f7 28%, #f4f4f5 100%);
     border-radius: 18px;
@@ -879,9 +879,10 @@
     padding: 22px 22px 24px;
     transition: background .22s ease, border-color .22s ease;
   }
+  .persp-quote-body { width: 100%; }
   .persp-quote .qmark {
-    flex: none;
-    margin: -.08em .12em 0 0;
+    display: inline; float: left;
+    margin: -.06em .14em 0 0;
     font-size: 32px; line-height: 1; color: #8aa8b6; font-weight: 500;
     transition: color .22s ease;
   }
@@ -892,11 +893,11 @@
   }
   .persp:hover .persp-quote .qmark { color: #3c7a94; }
   .persp-quote p {
-    margin: 0; flex: 1; min-width: 0;
+    margin: 0;
     font-family: var(--font);
     font-size: 16px; line-height: 1.6; color: var(--ink); font-weight: 400;
   }
-  .persp-quote::after { display: none; }
+  .persp-quote-body::after { content: ""; display: table; clear: both; }
   .persp-foot {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
     padding-top: 2px;
@@ -2240,7 +2241,7 @@ function openAnswers(text) {
     return `<article class="persp">
       <div class="persp-who">${av(p)}<div><div class="nm">${esc(p.name)}${CHECK}</div><div class="role">${esc(p.role)}</div></div></div>
       <div class="persp-tags">${tags}</div>
-      <div class="persp-quote"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div>
+      <div class="persp-quote"><div class="persp-quote-body"><span class="qmark" aria-hidden="true">“</span><p>${esc(p.reply)}</p></div></div>
       <div class="persp-foot">
         <button type="button" class="save" data-save="${p.id}">${SAVE_ICON}Save</button>
         <button type="button" class="expand" data-continue="${p.id}">Expand<span class="arr" aria-hidden="true">→</span></button>

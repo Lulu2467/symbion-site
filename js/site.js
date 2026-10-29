@@ -952,41 +952,6 @@
     setLayer(0);
     playLayers();
   }
-  const film = document.querySelector("[data-page='cosmo'] .cosmo-film");
-  if (film) {
-    const beats = [...film.querySelectorAll(".cosmo-film-beat")];
-    let beat = 0;
-    let beatTimer = 0;
-    const beatReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const showBeat = (n) => {
-      beat = (n + beats.length) % beats.length;
-      beats.forEach((el, k) => el.classList.toggle("is-on", k === beat));
-      film.style.setProperty("--i", String(beat));
-      film.dataset.beat = String(beat);
-    };
-    const armBeat = () => {
-      window.clearTimeout(beatTimer);
-      if (beatReduce.matches) return;
-      beatTimer = window.setTimeout(() => {
-        showBeat(beat + 1);
-        armBeat();
-      }, 5600);
-    };
-    film.addEventListener("click", () => {
-      showBeat(beat + 1);
-      armBeat();
-    });
-    film.addEventListener("keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") return;
-      e.preventDefault();
-      showBeat(beat + 1);
-      armBeat();
-    });
-    film.addEventListener("mouseenter", () => window.clearTimeout(beatTimer));
-    film.addEventListener("mouseleave", armBeat);
-    showBeat(0);
-    armBeat();
-  }
 
   if (page === "home" && !document.body.classList.contains("home-v2")) {
     document.body.classList.add("nav-dark");

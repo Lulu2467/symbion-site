@@ -2873,6 +2873,9 @@ html[lang="en"] .who-list .k { display: none; }
   aspect-ratio: 21 / 9;
   min-height: 240px;
 }
+body[data-page="cosmo"] .page .media-slot-stage {
+  aspect-ratio: 16 / 9;
+}
 .media-slot-stage::after {
   content: attr(data-label);
   position: absolute;

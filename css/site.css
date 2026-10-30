@@ -3881,7 +3881,7 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     letter-spacing: .01em;
   }
   .page { display: flex; flex-direction: column; }
-  .page > .media-slot { order: 8; }
+  .page > .media-slot { order: 0; }
   body:not([data-page="home"]) .page .product-frame {
     margin-top: 48px;
     background: transparent;
@@ -3907,7 +3907,6 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
     letter-spacing: -.045em;
     line-height: 1.25;
   }
-  .page > .media-slot { display: none; }
   .steps { padding: 4px 0 0; gap: 0; }
   .steps::before { display: none; }
   .step {

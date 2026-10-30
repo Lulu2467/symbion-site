@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/site.css?v=home307">
+  <link rel="stylesheet" href="css/site.css?v=home309">
   <script>
   try {
     var _lang = localStorage.getItem("symbion-lang");
@@ -44,16 +44,18 @@
       </div>
 
       <figure class="hp-stage">
-        <img
+        <video
           class="hp-shot"
-          src="assets/home-welcome.png?v=187"
-          width="1440"
-          height="900"
-          data-i18n-alt="hpShotAlt"
-          alt="Symbion 工作台：与 Citta 协作，继续未完成的文档、幻灯与实验"
-          decoding="async"
-          fetchpriority="high"
+          src="assets/home-use.mp4?v=home309"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Symbion"
         >
+          <track kind="captions" src="assets/home-use.vtt?v=home309" srclang="en" label="English">
+        </video>
       </figure>
     </section>
 

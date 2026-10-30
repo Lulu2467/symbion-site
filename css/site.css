@@ -62,6 +62,11 @@ html {
      gutter so the centered nav does not shift when switching between them. */
   scrollbar-gutter: stable;
 }
+/* Homepage centers on the visible plane. A reserved gutter with an overlay
+   scrollbar leaves a blank strip on the right and shifts the hero left. */
+html:has(body.home-v2[data-page="home"]) {
+  scrollbar-gutter: auto;
+}
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;

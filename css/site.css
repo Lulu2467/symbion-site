@@ -4206,11 +4206,13 @@ body[data-page="home"] .foot-card-cta:hover { background: #fff; }
 body.auth {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   background: #f4f6f8;
   color: var(--ink);
   display: grid;
   place-items: center;
-  padding: 48px 20px;
+  padding: 72px 20px;
+  box-sizing: border-box;
   overflow-x: hidden;
 }
 body.auth::before { display: none; }
@@ -4610,7 +4612,7 @@ body.auth .hero-flow-bg::after {
   .auth-glow i { animation: none; }
 }
 @media (max-width: 900px) {
-  body.auth { padding: 72px 16px 32px; }
+  body.auth { padding: 72px 16px; }
   .auth-frame {
     padding: 32px 22px 24px;
     width: min(400px, calc(100% - 32px - env(safe-area-inset-left) - env(safe-area-inset-right)));
@@ -4624,7 +4626,7 @@ body.auth .hero-flow-bg::after {
 }
 @media (max-height: 680px) {
   .auth-back { top: 12px; }
-  body.auth { padding-top: 56px; }
+  body.auth { padding: 64px 20px; }
 }
 
 .page-veil {

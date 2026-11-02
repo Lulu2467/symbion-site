@@ -5076,7 +5076,10 @@ html[lang="en"] .hp-title {
 .hp-stage video.hp-shot {
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  background: #f7f7f8;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 @media (max-width: 720px) {
   .hp-stage {

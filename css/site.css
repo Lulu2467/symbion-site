@@ -5076,9 +5076,9 @@ html[lang="en"] .hp-title {
 .hp-stage video.hp-shot {
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  background: transparent;
-  border: 0;
-  border-radius: 0;
+  background: #fbfcfb;
+  border: 1px solid rgba(9, 9, 11, .08);
+  border-radius: 28px;
   box-shadow: none;
 }
 @media (max-width: 720px) {
